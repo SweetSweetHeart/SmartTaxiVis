@@ -1,0 +1,31 @@
+Minutes of Meeting: Bob, Elif, Xiaoxiao, Wang.
+----------------------------------------------
+Date:       14 Mar 2017
+Start time: 13:00
+End time:   14:50
+
+Date and time of next meeting: 7 Apr 2017 13:00
+
+Topics discussed:
+    --  11 May 2017 - Final project specification
+
+    --  Project specification and design document
+
+
+
+Progress:
+    --  Initial presentations prepared and given
+    --  Bob {{not recognized}} initial presentations
+
+
+
+TODO:
+    --  Everyone: try to visulize data with exisiting tools - just like assignment 1 in DataVis module
+
+    --  Xiaoxiao: Read assignment 1 of DataVis module
+                  Read Majedah Alrehiely MSc thesis
+
+    --  Elif: Think about {{not recognized}} heor.co.uk
+              Choose some subsets to work with level 1 {{not recognized}}
+
+For {{not recognized}}, a scanned version for this meeting minutes can be found at (http://share.wangqiru.com/6EW1)

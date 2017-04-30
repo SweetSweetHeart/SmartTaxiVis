@@ -1,0 +1,798 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+AnyChart%
+}{%
+AnyChart%
+}{%
+{\protect \APACyear {2017}}%
+{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
+AnyChart2017a}
+\APACinsertmetastar {%
+AnyChart2017a}%
+\begin{APACrefauthors}%
+AnyChart.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017{\protect \BCnt {1}}}{}{}.
+\newblock
+\APACrefbtitle {{Bubble Christian Map | Bubble Maps | AnyMap Gallery |
+  AnyChart}.} {{Bubble Christian Map | Bubble Maps | AnyMap Gallery |
+  AnyChart}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-20}]\url{http://www.anychart.com/products/anymap/gallery/Maps{\_}Bubble/Bubble{\_}Christian{\_}Map.php}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+AnyChart%
+}{%
+AnyChart%
+}{%
+{\protect \APACyear {2017}}%
+{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
+AnyChart2017}
+\APACinsertmetastar {%
+AnyChart2017}%
+\begin{APACrefauthors}%
+AnyChart.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017{\protect \BCnt {2}}}{}{}.
+\newblock
+\APACrefbtitle {{Busiest Routes From Heathrow Airport | Connectors Maps |
+  AnyMap Gallery | AnyChart}.} {{Busiest Routes From Heathrow Airport |
+  Connectors Maps | AnyMap Gallery | AnyChart}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-20}]\url{http://www.anychart.com/products/anymap/gallery/Maps{\_}Connectors/Busiest{\_}Routes{\_}From{\_}Heathrow{\_}Airport.php}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+AnyChart%
+}{%
+AnyChart%
+}{%
+{\protect \APACyear {2017}}%
+{\protect \APACexlab {{\protect \BCnt {3}}}}}]{%
+AnyChart2017b}
+\APACinsertmetastar {%
+AnyChart2017b}%
+\begin{APACrefauthors}%
+AnyChart.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017{\protect \BCnt {3}}}{}{}.
+\newblock
+\APACrefbtitle {{World Governments Map | Choropleth Maps | AnyMap Gallery |
+  AnyChart}.} {{World Governments Map | Choropleth Maps | AnyMap Gallery |
+  AnyChart}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-20}]\url{http://www.anychart.com/products/anymap/gallery/Maps{\_}Choropleth/World{\_}Governments{\_}Map.php}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Arnuphaptrairong%
+}{%
+Arnuphaptrairong%
+}{%
+{\protect \APACyear {2011}}%
+}]{%
+Arnuphaptrairong2011}
+\APACinsertmetastar {%
+Arnuphaptrairong2011}%
+\begin{APACrefauthors}%
+Arnuphaptrairong, T.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Top Ten Lists of Software Project Risks: Evidence from
+  the Literature Survey}} {{Top Ten Lists of Software Project Risks: Evidence
+  from the Literature Survey}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Proceedings of the International MultiConference of
+  Engineers and Computer Scientists (IMECS2011)}{I}{}{}.
+\newblock
+\begin{APACrefURL}
+  \url{http://www.iaeng.org/publication/IMECS2011/IMECS2011{\_}pp732-737.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Bostock%
+}{%
+Bostock%
+}{%
+{\protect \APACyear {2017}}%
+}]{%
+Bostock2017}
+\APACinsertmetastar {%
+Bostock2017}%
+\begin{APACrefauthors}%
+Bostock, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+\APACrefbtitle {{Chord Diagram - bl.ocks.org}.} {{Chord Diagram -
+  bl.ocks.org}.}
+\newblock
+\begin{APACrefURL} [{2017-04-25}]\url{https://bl.ocks.org/mbostock/1046712}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Butler%
+\ \protect \BOthers {.}}{%
+Butler%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+GeoJSON}
+\APACinsertmetastar {%
+GeoJSON}%
+\begin{APACrefauthors}%
+Butler, H.%
+, Daly, M.%
+, Doyle, A.%
+, {S. Gillies}%
+, Hagen, S.%
+\BCBL {}\ \BBA {} Schaub, T.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+\APACrefbtitle {{The GeoJSON Format}.} {{The GeoJSON Format}.}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Caragliu%
+, {Del Bo}%
+\BCBL {}\ \BBA {} Nijkamp%
+}{%
+Caragliu%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2011}}%
+}]{%
+Caragliu2011}
+\APACinsertmetastar {%
+Caragliu2011}%
+\begin{APACrefauthors}%
+Caragliu, A.%
+, {Del Bo}, C.%
+\BCBL {}\ \BBA {} Nijkamp, P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Smart Cities in Europe}} {{Smart Cities in
+  Europe}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Urban Technology}{18}{2}{65--82}.
+\newblock
+\begin{APACrefDOI} \doi{10.1080/10630732.2011.601117} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Chourabi%
+\ \protect \BOthers {.}}{%
+Chourabi%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2011}}%
+}]{%
+Chourabi2011}
+\APACinsertmetastar {%
+Chourabi2011}%
+\begin{APACrefauthors}%
+Chourabi, H.%
+, Nam, T.%
+, Walker, S.%
+, Gil-Garcia, J\BPBI R.%
+, Mellouli, S.%
+, Nahon, K.%
+\BDBL {}Scholl, H\BPBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Understanding Smart Cities: An Integrative Framework}}
+  {{Understanding Smart Cities: An Integrative Framework}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Proceedings of the Annual Hawaii International
+  Conference on System Sciences}{}{}{2289--2297}.
+\newblock
+\begin{APACrefDOI} \doi{10.1109/HICSS.2012.615} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Crockford%
+}{%
+Crockford%
+}{%
+{\protect \APACyear {2006}}%
+}]{%
+JSON}
+\APACinsertmetastar {%
+JSON}%
+\begin{APACrefauthors}%
+Crockford, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+\APACrefbtitle {{The application/json Media Type for JavaScript Object
+  Notation}} {{The application/json Media Type for JavaScript Object
+  Notation}}\ (\BNUM\ July).
+\newblock
+\begin{APACrefDOI} \doi{10.17487/rfc4627} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Deakin%
+\ \BBA {} {Al Waer}%
+}{%
+Deakin%
+\ \BBA {} {Al Waer}%
+}{%
+{\protect \APACyear {2011}}%
+}]{%
+Deakin2011}
+\APACinsertmetastar {%
+Deakin2011}%
+\begin{APACrefauthors}%
+Deakin, M.%
+\BCBT {}\ \BBA {} {Al Waer}, H.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{From intelligent to smart cities}} {{From intelligent
+  to smart cities}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Intelligent Buildings International}{3}{3}{133--139}.
+\newblock
+\begin{APACrefDOI} \doi{10.1080/17508975.2011.586673} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Doxygen%
+}{%
+Doxygen%
+}{%
+{\protect \APACyear {{\protect \bibnodate {}}}}%
+}]{%
+Doxygen}
+\APACinsertmetastar {%
+Doxygen}%
+\begin{APACrefauthors}%
+Doxygen.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
+\newblock
+\APACrefbtitle {{Doxygen: Main Page}.} {{Doxygen: Main Page}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-29}]\url{http://www.stack.nl/{~}dimitri/doxygen/index.html
+  http://www.stack.nl/{~}dimitri/doxygen/} \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Elting%
+, Martin%
+, Cantor%
+\BCBL {}\ \BBA {} Rubenstein%
+}{%
+Elting%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1999}}%
+}]{%
+Elting1999}
+\APACinsertmetastar {%
+Elting1999}%
+\begin{APACrefauthors}%
+Elting, L\BPBI S.%
+, Martin, C\BPBI G.%
+, Cantor, S\BPBI B.%
+\BCBL {}\ \BBA {} Rubenstein, E\BPBI B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1999}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Influence of data display formats on physician
+  investigators' decisions to stop clinical trials: prospective trial with
+  repeated measures.}} {{Influence of data display formats on physician
+  investigators' decisions to stop clinical trials: prospective trial with
+  repeated measures.}}{\BBCQ}
+\newblock
+\APACjournalVolNumPages{BMJ (Clinical research ed.)}{318}{7197}{1527--1531}.
+\newblock
+\begin{APACrefDOI} \doi{10.1136/bmj.319.7216.1070} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Fang%
+}{%
+Fang%
+}{%
+{\protect \APACyear {{\protect \bibnodate {}}}}%
+}]{%
+Fang}
+\APACinsertmetastar {%
+Fang}%
+\begin{APACrefauthors}%
+Fang, Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
+\newblock
+\APACrefbtitle {{JSON-simple}.} {{JSON-simple}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-25}]\url{https://code.google.com/archive/p/json-simple/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Gross%
+, Lee%
+\BCBL {}\ \BBA {} Offenhuber%
+}{%
+Gross%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2012}}%
+}]{%
+Boston311}
+\APACinsertmetastar {%
+Boston311}%
+\begin{APACrefauthors}%
+Gross, B.%
+, Lee, J\BPBI K.%
+\BCBL {}\ \BBA {} Offenhuber, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+\APACrefbtitle {{Boston 3-1-1 Incident Reports}.} {{Boston 3-1-1 Incident
+  Reports}.}
+\newblock
+\begin{APACrefURL} [{2017-04-23}]\url{http://senseable.mit.edu/bos311/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Laramee%
+}{%
+Laramee%
+}{%
+{\protect \APACyear {2011}}%
+{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
+Laramee2011}
+\APACinsertmetastar {%
+Laramee2011}%
+\begin{APACrefauthors}%
+Laramee, R\BPBI S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011{\protect \BCnt {1}}}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Bob's Concise Introduction to Doxygen}} {{Bob's Concise
+  Introduction to Doxygen}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{}{}{}{1--6}.
+\newblock
+\begin{APACrefURL}
+  \url{http://cs.swan.ac.uk/{~}csbob/teaching/laramee07commentConvention.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Laramee%
+}{%
+Laramee%
+}{%
+{\protect \APACyear {2011}}%
+{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
+Laramee2011a}
+\APACinsertmetastar {%
+Laramee2011a}%
+\begin{APACrefauthors}%
+Laramee, R\BPBI S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011{\protect \BCnt {2}}}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Bob's project guidelines: Writing a dissertation for a
+  BSc. in computer science}} {{Bob's project guidelines: Writing a dissertation
+  for a BSc. in computer science}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ITALICS Innovations in Teaching and Learning in
+  Information and Computer Sciences}{10}{1}{43--54}.
+\newblock
+\begin{APACrefDOI} \doi{10.11120/ital.2011.10010043} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Lazaroiu%
+\ \BBA {} Roscia%
+}{%
+Lazaroiu%
+\ \BBA {} Roscia%
+}{%
+{\protect \APACyear {2012}}%
+}]{%
+Lazaroiu2012}
+\APACinsertmetastar {%
+Lazaroiu2012}%
+\begin{APACrefauthors}%
+Lazaroiu, G\BPBI C.%
+\BCBT {}\ \BBA {} Roscia, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Definition methodology for the smart cities model}}
+  {{Definition methodology for the smart cities model}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Energy}{47}{1}{326--332}.
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.energy.2012.09.028} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Liu%
+}{%
+Liu%
+}{%
+{\protect \APACyear {2017}}%
+}]{%
+Liu}
+\APACinsertmetastar {%
+Liu}%
+\begin{APACrefauthors}%
+Liu, Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+\APACrefbtitle {{Visualization of Multivariate Data}.} {{Visualization of
+  Multivariate Data}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-17}]\url{http://people.stat.sc.edu/hansont/stat730/MultivariateDataVisualization.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Mapbox%
+}{%
+Mapbox%
+}{%
+{\protect \APACyear {2017}}%
+}]{%
+Mapbox2017}
+\APACinsertmetastar {%
+Mapbox2017}%
+\begin{APACrefauthors}%
+Mapbox.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+\APACrefbtitle {{Mapbox Studio}.} {{Mapbox Studio}.}
+\newblock
+\begin{APACrefURL} [{2017-04-20}]\url{https://www.mapbox.com/studio/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Myers%
+, Thomas%
+\BCBL {}\ \BBA {} Sandler%
+}{%
+Myers%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2004}}%
+}]{%
+Myers2004a}
+\APACinsertmetastar {%
+Myers2004a}%
+\begin{APACrefauthors}%
+Myers, G\BPBI J.%
+, Thomas, T\BPBI M.%
+\BCBL {}\ \BBA {} Sandler, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2004}.
+\newblock
+\APACrefbtitle {{The Art of Software Testing}} {{The Art of Software Testing}}\
+  (\BVOL~1).
+\newblock
+\APACaddressPublisher{}{John Wiley {\&} Sons}.
+\newblock
+\begin{APACrefURL} \url{http://www.worldcat.org/oclc/65982801} \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1002/stvr.321} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+{NYC Taxi {\&} Limousine Commission}%
+}{%
+{NYC Taxi {\&} Limousine Commission}%
+}{%
+{\protect \APACyear {{\protect \bibnodate {}}}}%
+}]{%
+NYCTaxi&LimousineCommission}
+\APACinsertmetastar {%
+NYCTaxi&LimousineCommission}%
+\begin{APACrefauthors}%
+{NYC Taxi {\&} Limousine Commission}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
+\newblock
+\APACrefbtitle {{NYC Taxi {\&} Limousine Commission - Taxicab Passenger
+  Enhancements Project (TPEP) Archive}.} {{NYC Taxi {\&} Limousine Commission -
+  Taxicab Passenger Enhancements Project (TPEP) Archive}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-24}]\url{http://www.nyc.gov/html/tlc/html/industry/taxicab{\_}serv{\_}enh{\_}archive.shtml}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+{NYC Taxi {\&} Limousine Commission}%
+}{%
+{NYC Taxi {\&} Limousine Commission}%
+}{%
+{\protect \APACyear {2015}}%
+}]{%
+NYCTaxi&LimousineCommission2015}
+\APACinsertmetastar {%
+NYCTaxi&LimousineCommission2015}%
+\begin{APACrefauthors}%
+{NYC Taxi {\&} Limousine Commission}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{}{}.
+\newblock
+\APACrefbtitle {{Data Dictionary - SHL Trip Records}.} {{Data Dictionary - SHL
+  Trip Records}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-25}]\url{http://www.nyc.gov/html/tlc/html/about/trip{\_}record{\_}data.shtml.}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+{NYC Taxi {\&} Limousine Commission}%
+}{%
+{NYC Taxi {\&} Limousine Commission}%
+}{%
+{\protect \APACyear {2017}}%
+}]{%
+NYCTaxi&LimousineCommission2017}
+\APACinsertmetastar {%
+NYCTaxi&LimousineCommission2017}%
+\begin{APACrefauthors}%
+{NYC Taxi {\&} Limousine Commission}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+\APACrefbtitle {{NYC Taxi {\&} Limousine Commission - Trip Record Data}.} {{NYC
+  Taxi {\&} Limousine Commission - Trip Record Data}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-24}]\url{http://www.nyc.gov/html/tlc/html/about/trip{\_}record{\_}data.shtml}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+QUnit%
+}{%
+QUnit%
+}{%
+{\protect \APACyear {{\protect \bibnodate {}}}}%
+}]{%
+qunit}
+\APACinsertmetastar {%
+qunit}%
+\begin{APACrefauthors}%
+QUnit.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
+\newblock
+\APACrefbtitle {{QUnit: A JavaScript Unit Testing framework}.} {{QUnit: A
+  JavaScript Unit Testing framework}.}
+\newblock
+\begin{APACrefURL} [{2017-04-29}]\url{https://qunitjs.com/} \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Ratti%
+\ \protect \BOthers {.}}{%
+Ratti%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
+SenseableCityLab-Ewaste}
+\APACinsertmetastar {%
+SenseableCityLab-Ewaste}%
+\begin{APACrefauthors}%
+Ratti, C.%
+, Biderman, A.%
+, Yen, M.%
+, Teh, W\BPBI H.%
+, Puckett, J.%
+, Groark, C.%
+\BDBL {}Duarte, F.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016{\protect \BCnt {1}}}{}{}.
+\newblock
+\APACrefbtitle {{MONITOUR}.} {{MONITOUR}.}
+\newblock
+\begin{APACrefURL} [{2017-04-23}]\url{http://senseable.mit.edu/monitour-app/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Ratti%
+\ \protect \BOthers {.}}{%
+Ratti%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
+SenseableCityLab-Seattle}
+\APACinsertmetastar {%
+SenseableCityLab-Seattle}%
+\begin{APACrefauthors}%
+Ratti, C.%
+, Biderman, A.%
+, Yen, M.%
+, Teh, W\BPBI H.%
+, Puckett, J.%
+, Groark, C.%
+\BDBL {}Duarte, F.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016{\protect \BCnt {2}}}{}{}.
+\newblock
+\APACrefbtitle {{MONITOUR}.} {{MONITOUR}.}
+\newblock
+\begin{APACrefURL}
+  [{2017-04-23}]\url{http://senseable.mit.edu/monitour-app/{\#}wa551396}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Rodden%
+}{%
+Rodden%
+}{%
+{\protect \APACyear {2017}}%
+}]{%
+Rodden2017}
+\APACinsertmetastar {%
+Rodden2017}%
+\begin{APACrefauthors}%
+Rodden, K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+\APACrefbtitle {{Sequences sunburst - bl.ocks.org}.} {{Sequences sunburst -
+  bl.ocks.org}.}
+\newblock
+\begin{APACrefURL} [{2017-04-25}]\url{https://bl.ocks.org/kerryrodden/7090426}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Roubtsov%
+}{%
+Roubtsov%
+}{%
+{\protect \APACyear {2010}}%
+}]{%
+Roubtsov2010}
+\APACinsertmetastar {%
+Roubtsov2010}%
+\begin{APACrefauthors}%
+Roubtsov, V.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2010}{}{}.
+\newblock
+\APACrefbtitle {{EMMA: a free Java code coverage tool}.} {{EMMA: a free Java
+  code coverage tool}.}
+\newblock
+\begin{APACrefURL} [{2017-04-29}]\url{http://emma.sourceforge.net/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Vliet%
+}{%
+Vliet%
+}{%
+{\protect \APACyear {2007}}%
+}]{%
+Vliet2007}
+\APACinsertmetastar {%
+Vliet2007}%
+\begin{APACrefauthors}%
+Vliet, H\BPBI V.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2007}.
+\newblock
+\APACrefbtitle {{Software Engineering: Principles and Practice}} {{Software
+  Engineering: Principles and Practice}}.
+\newblock
+\APACaddressPublisher{}{Wiley}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Ward%
+, Grinstein%
+\BCBL {}\ \BBA {} Keim%
+}{%
+Ward%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2010}}%
+}]{%
+Ward2010}
+\APACinsertmetastar {%
+Ward2010}%
+\begin{APACrefauthors}%
+Ward, M.%
+, Grinstein, G.%
+\BCBL {}\ \BBA {} Keim, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2010}.
+\newblock
+\APACrefbtitle {{Interactive Data Visualization: Foundations, Techniques, and
+  Applications}} {{Interactive Data Visualization: Foundations, Techniques, and
+  Applications}}.
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

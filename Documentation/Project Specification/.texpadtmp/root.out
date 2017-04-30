@@ -1,0 +1,32 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Related Work}{section.2}% 3
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Understanding Smart Cities: An Integrative Framework}{subsection.2.1}% 4
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Interactive Data Visualization: Foundations, Techniques, and Applications}{subsection.2.1}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Existing Software API}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.2.1}{AnyMap.js}{subsection.2.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Mapbox Studio and Mapbox.js}{subsection.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{Similar Applications}{section.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.3.1}{MONiTOUR}{subsection.2.3}% 10
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Boston 311}{subsection.2.3}% 11
+\BOOKMARK [2][-]{subsection.2.4}{Limitation of Similar Applications}{section.2}% 12
+\BOOKMARK [3][-]{subsubsection.2.4.1}{MONiTOUR}{subsection.2.4}% 13
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Boston 311}{subsection.2.4}% 14
+\BOOKMARK [2][-]{subsection.2.5}{Data Characteristics}{section.2}% 15
+\BOOKMARK [3][-]{subsubsection.2.5.1}{Taxi Operational Data recorded by the New York City Taxi \046 Limousine Commission \(TLC\)}{subsection.2.5}% 16
+\BOOKMARK [1][-]{section.3}{Project Specification}{}% 17
+\BOOKMARK [2][-]{subsection.3.1}{Feature Specification}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.2}{Technology Choices}{section.3}% 19
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Data Pre-processing}{subsection.3.2}% 20
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Web Application Development}{subsection.3.2}% 21
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Others}{subsection.3.2}% 22
+\BOOKMARK [1][-]{section.4}{Project Plan and Timetable}{}% 23
+\BOOKMARK [2][-]{subsection.4.1}{Development Strategy}{section.4}% 24
+\BOOKMARK [2][-]{subsection.4.2}{Gantt Chart}{section.4}% 25
+\BOOKMARK [2][-]{subsection.4.3}{Risk Analysis}{section.4}% 26
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Risk Identification}{subsection.4.3}% 27
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Risk Mitigation}{subsection.4.3}% 28
+\BOOKMARK [1][-]{section.5}{Initial Implementation}{}% 29
+\BOOKMARK [2][-]{subsection.5.1}{Data Pre-processing}{section.5}% 30
+\BOOKMARK [2][-]{subsection.5.2}{Implementation}{section.5}% 31
+\BOOKMARK [1][-]{section.6}{References}{}% 32
