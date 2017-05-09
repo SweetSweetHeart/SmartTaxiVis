@@ -1,0 +1,26 @@
+Minutes of Meeting: Bob, Elif, Xiaoxiao, Wang.
+----------------------------------------------
+Date:       5 May 2017
+Start time: 13:30
+End time:   14:50
+
+Date and time of next meeting: 12 May 2017 13:00
+
+Topics discussed:
+    --  Draft of project specification
+
+
+
+Progress:
+    --  Wang: Draft of project specification
+    --  Elif: Draft of project specification
+    --  Xiaoxiao: Draft of project specification
+
+
+
+TODO:
+    --  Get your document proof-read by a native speaker
+    --  Check with Anton on Literature Review
+    --  Use Agile software development model
+
+A scanned version for this meeting minutes can be found at (http://share.wangqiru.com/BHobm)

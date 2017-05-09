@@ -1,798 +1,1328 @@
-\begin{thebibliography}{}
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem [\protect \citeauthoryear {%
-AnyChart%
-}{%
-AnyChart%
-}{%
-{\protect \APACyear {2017}}%
-{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
-AnyChart2017a}
-\APACinsertmetastar {%
-AnyChart2017a}%
-\begin{APACrefauthors}%
-AnyChart.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2017{\protect \BCnt {1}}}{}{}.
-\newblock
-\APACrefbtitle {{Bubble Christian Map | Bubble Maps | AnyMap Gallery |
-  AnyChart}.} {{Bubble Christian Map | Bubble Maps | AnyMap Gallery |
-  AnyChart}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-20}]\url{http://www.anychart.com/products/anymap/gallery/Maps{\_}Bubble/Bubble{\_}Christian{\_}Map.php}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
 
-\bibitem [\protect \citeauthoryear {%
-AnyChart%
-}{%
-AnyChart%
-}{%
-{\protect \APACyear {2017}}%
-{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
-AnyChart2017}
-\APACinsertmetastar {%
-AnyChart2017}%
-\begin{APACrefauthors}%
-AnyChart.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2017{\protect \BCnt {2}}}{}{}.
-\newblock
-\APACrefbtitle {{Busiest Routes From Heathrow Airport | Connectors Maps |
-  AnyMap Gallery | AnyChart}.} {{Busiest Routes From Heathrow Airport |
-  Connectors Maps | AnyMap Gallery | AnyChart}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-20}]\url{http://www.anychart.com/products/anymap/gallery/Maps{\_}Connectors/Busiest{\_}Routes{\_}From{\_}Heathrow{\_}Airport.php}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
+\refsection{0}
+  \sortlist[entry]{anyt/global/}
+    \entry{AnyChart2017a}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d4f61e4d3b52c66eb0d7ca5f358a7088}{%
+           family={AnyChart},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{fullhash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{authornamehash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{authorfullhash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \field{labelalpha}{Any17}
+      \field{sortinit}{A}
+      \field{sortinithash}{3248043b5fe8d0a34dab5ab6b8d4309b}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Bubble Christian Map | Bubble Maps | AnyMap Gallery | AnyChart}}
+      \field{urlday}{20}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://www.anychart.com/products/anymap/gallery/Maps%7B%5C_%7DBubble/Bubble%7B%5C_%7DChristian%7B%5C_%7DMap.php
+      \endverb
+    \endentry
+    \entry{AnyChart2017}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d4f61e4d3b52c66eb0d7ca5f358a7088}{%
+           family={AnyChart},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{fullhash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{authornamehash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{authorfullhash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \field{labelalpha}{Any17}
+      \field{sortinit}{A}
+      \field{sortinithash}{3248043b5fe8d0a34dab5ab6b8d4309b}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Busiest Routes From Heathrow Airport | Connectors Maps | AnyMap Gallery | AnyChart}}
+      \field{urlday}{20}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://www.anychart.com/products/anymap/gallery/Maps%7B%5C_%7DConnectors/Busiest%7B%5C_%7DRoutes%7B%5C_%7DFrom%7B%5C_%7DHeathrow%7B%5C_%7DAirport.php
+      \endverb
+    \endentry
+    \entry{AnyChart2017b}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d4f61e4d3b52c66eb0d7ca5f358a7088}{%
+           family={AnyChart},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{fullhash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{authornamehash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \strng{authorfullhash}{d4f61e4d3b52c66eb0d7ca5f358a7088}
+      \field{labelalpha}{Any17}
+      \field{sortinit}{A}
+      \field{sortinithash}{3248043b5fe8d0a34dab5ab6b8d4309b}
+      \field{extraalpha}{3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{World Governments Map | Choropleth Maps | AnyMap Gallery | AnyChart}}
+      \field{urlday}{20}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://www.anychart.com/products/anymap/gallery/Maps%7B%5C_%7DChoropleth/World%7B%5C_%7DGovernments%7B%5C_%7DMap.php
+      \endverb
+    \endentry
+    \entry{Arnuphaptrairong2011}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2e5ac194946e217bcba2031cfbeffd8b}{%
+           family={Arnuphaptrairong},
+           familyi={A\bibinitperiod},
+           given={Tharwon},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{2e5ac194946e217bcba2031cfbeffd8b}
+      \strng{fullhash}{2e5ac194946e217bcba2031cfbeffd8b}
+      \strng{authornamehash}{2e5ac194946e217bcba2031cfbeffd8b}
+      \strng{authorfullhash}{2e5ac194946e217bcba2031cfbeffd8b}
+      \field{labelalpha}{Arn11}
+      \field{sortinit}{A}
+      \field{sortinithash}{3248043b5fe8d0a34dab5ab6b8d4309b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Software project risk management is crucial for the software development projects. It is used for project planning and control purposes during the project execution. Risk management will help reduce project failure. To mange software project risks, the first step is to identify a list of risks for checklist. Researchers have tried to investigate common risk factors and proposed the top ten lists of software risks. However, a number of top ten lists were suggested in the literature. This article compiled a list of top ten software risk lists reviewed in the literature. The results from the analysis reveal that planning and control is the and most dimension of risks which mentioned misunderstanding of the requirement lack of management commitment and support are the most frequent mentioned software risks. However, project managers may benefit from applying these results but have to aware of the factors affecting these results}
+      \field{isbn}{9789881821034}
+      \field{journaltitle}{Proceedings of the International MultiConference of Engineers and Computer Scientists (IMECS2011)}
+      \field{title}{{Top Ten Lists of Software Project Risks: Evidence from the Literature Survey}}
+      \field{volume}{I}
+      \field{year}{2011}
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Arnuphaptrairong/Proceedings of the International MultiConference of Engineers and Computer Scientists (IMECS2011)/Arnuphaptrairong - 2011 - Top Ten Lists of Software Project Risks Evidence from the Literature Survey.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.iaeng.org/publication/IMECS2011/IMECS2011%7B%5C_%7Dpp732-737.pdf
+      \endverb
+      \keyw{software risk checklist,software risks,top ten software software risks}
+    \endentry
+    \entry{Bostock2017}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=3a56f801778dd81bf67b8f9cdccacb12}{%
+           family={Bostock},
+           familyi={B\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{3a56f801778dd81bf67b8f9cdccacb12}
+      \strng{fullhash}{3a56f801778dd81bf67b8f9cdccacb12}
+      \strng{authornamehash}{3a56f801778dd81bf67b8f9cdccacb12}
+      \strng{authorfullhash}{3a56f801778dd81bf67b8f9cdccacb12}
+      \field{labelalpha}{Bos17}
+      \field{sortinit}{B}
+      \field{sortinithash}{5f6fa000f686ee5b41be67ba6ff7962d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Chord Diagram - bl.ocks.org}}
+      \field{urlday}{25}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://bl.ocks.org/mbostock/1046712
+      \endverb
+    \endentry
+    \entry{GeoJSON}{misc}{}
+      \name{author}{6}{}{%
+        {{hash=0fe4f8ee288454f04966fbfa0fdf20c6}{%
+           family={Butler},
+           familyi={B\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=95c5608fadcf51cf6e76f7abdea27403}{%
+           family={Daly},
+           familyi={D\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=05c6df3917eb7b4757e523a2b58fb1f0}{%
+           family={Doyle},
+           familyi={D\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ca291c243a590f00d4ba5a8bda095845}{%
+           family={{S. Gillies}},
+           familyi={S\bibinitperiod}}}%
+        {{hash=6f5fb181104cc0c47a1a30becc399b0d}{%
+           family={Hagen},
+           familyi={H\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=942b641592218aec8b5ebff939ad3b6d}{%
+           family={Schaub},
+           familyi={S\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{bf8d714f8c8746c59f6eb7d570f45a36}
+      \strng{fullhash}{e960550e925ab594ecf3610a58774f01}
+      \strng{authornamehash}{bf8d714f8c8746c59f6eb7d570f45a36}
+      \strng{authorfullhash}{e960550e925ab594ecf3610a58774f01}
+      \field{labelalpha}{But+16}
+      \field{sortinit}{B}
+      \field{sortinithash}{5f6fa000f686ee5b41be67ba6ff7962d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{$\backslash$r$\backslash$nGeoJSON is a geospatial data interchange format based on JavaScript Object Notation (JSON). It defines several types of JSON objects and the manner in which they are combined to represent data about geographic features, their properties, and their spatial extents.$\backslash$r$\backslash$n$\backslash$r$\backslash$nGeoJSON uses a geographic coordinate reference system, World Geodetic System 1984, and units of decimal degrees.}
+      \field{booktitle}{Internet Engineering Task Force (IETF)}
+      \field{title}{{The GeoJSON Format}}
+      \field{year}{2016}
+      \field{pages}{28}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.17487/RFC7946
+      \endverb
+      \verb{url}
+      \verb https://tools.ietf.org/html/rfc7946
+      \endverb
+    \endentry
+    \entry{Caragliu2011}{article}{}
+      \name{author}{3}{}{%
+        {{hash=713e0ce1b0465ff27a4300c49c687d42}{%
+           family={Caragliu},
+           familyi={C\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=73f5f14cdbc86a9e95fc4682256f31b2}{%
+           family={{Del Bo}},
+           familyi={D\bibinitperiod},
+           given={Chiara},
+           giveni={C\bibinitperiod}}}%
+        {{hash=332293a58402e75553b69f4d8de5dbf6}{%
+           family={Nijkamp},
+           familyi={N\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{5c019809bcf86a46b88a9b371747ca50}
+      \strng{fullhash}{5c019809bcf86a46b88a9b371747ca50}
+      \strng{authornamehash}{5c019809bcf86a46b88a9b371747ca50}
+      \strng{authorfullhash}{5c019809bcf86a46b88a9b371747ca50}
+      \field{labelalpha}{CDN11}
+      \field{sortinit}{C}
+      \field{sortinithash}{095692fd22cc3c74d7fe223d02314dbd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Urban performance currently depends not only on a city's endowment of hard infrastructure (physical capital), but also, and increasingly so, on the availability and quality of knowledge communication and social infrastructure (human and social capital). The latter form of capital is decisive for urban competitiveness. Against this background, the concept of the "smart city" has recently been introduced as a strategic device to encompass modern urban production factors in a common framework and, in particular, to highlight the importance of Information and Communication Technologies (ICTs) in the last 20 years for enhancing the competitive profile of a city. The present paper aims to shed light on the often elusive definition of the concept of the "smart city." We provide a focused and operational definition of this construct and present consistent evidence on the geography of smart cities in the EU27. Our statistical and graphical analyses exploit in depth, for the first time to our knowledge, the most recent version of the Urban Audit data set in order to analyze the factors determining the performance of smart cities. We find that the presence of a creative class, the quality of and dedicated attention to the urban environment, the level of education, and the accessibility to and use of ICTs for public administration are all positively correlated with urban wealth. This result prompts the formulation of a new strategic agenda for European cities that will allow them to achieve sustainable urban development and a better urban landscape. {{$\copyright$}} 2011 by The Society of Urban Technology.}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{5568326614}
+      \field{issn}{1063-0732}
+      \field{journaltitle}{Journal of Urban Technology}
+      \field{number}{2}
+      \field{title}{{Smart Cities in Europe}}
+      \field{volume}{18}
+      \field{year}{2011}
+      \field{pages}{65\bibrangedash 82}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1080/10630732.2011.601117
+      \endverb
+      \verb{eprint}
+      \verb arXiv:1011.1669v3
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Caragliu, Del Bo, Nijkamp/Journal of Urban Technology/Caragliu, Del Bo, Nijkamp - 2011 - Smart Cities in Europe.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Chourabi2011}{article}{}
+      \name{author}{8}{}{%
+        {{hash=584397b4ea9cc2a2c17ce49c6361e580}{%
+           family={Chourabi},
+           familyi={C\bibinitperiod},
+           given={Hafedh},
+           giveni={H\bibinitperiod}}}%
+        {{hash=598cf5082589761b4ea1ce82dda64c10}{%
+           family={Nam},
+           familyi={N\bibinitperiod},
+           given={Taewoo},
+           giveni={T\bibinitperiod}}}%
+        {{hash=13f2ad907af5ad87e22451d1c1621ee6}{%
+           family={Walker},
+           familyi={W\bibinitperiod},
+           given={Shawn},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7dd410204af279a6338524bc3144de0f}{%
+           family={Gil-Garcia},
+           familyi={G\bibinithyphendelim G\bibinitperiod},
+           given={J.\bibnamedelimi Ramon},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=d7ca144ebab67b83318454cb7f7e9d48}{%
+           family={Mellouli},
+           familyi={M\bibinitperiod},
+           given={Sehl},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e545ad355d1db2715dbbc550e28b9ab8}{%
+           family={Nahon},
+           familyi={N\bibinitperiod},
+           given={Karine},
+           giveni={K\bibinitperiod}}}%
+        {{hash=71afcd29cfd0b8135982c97a57dd882d}{%
+           family={Pardo},
+           familyi={P\bibinitperiod},
+           given={Theresa\bibnamedelima A.},
+           giveni={T\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=1a39bc7ee00b67f9b24ecf08b27b4cd9}{%
+           family={Scholl},
+           familyi={S\bibinitperiod},
+           given={Hans\bibnamedelima Jochen},
+           giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{978a7c3bda4230f69f39fdd749c86aeb}
+      \strng{fullhash}{8e351c0f4529caade7bfd1df4127e91d}
+      \strng{authornamehash}{978a7c3bda4230f69f39fdd749c86aeb}
+      \strng{authorfullhash}{8e351c0f4529caade7bfd1df4127e91d}
+      \field{labelalpha}{Cho+11}
+      \field{sortinit}{C}
+      \field{sortinithash}{095692fd22cc3c74d7fe223d02314dbd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Making a city "smart" is emerging as a strategy to mitigate the problems generated by the urban population growth and rapid urbanization. Yet little academic research has sparingly discussed the phenomenon. To close the gap in the literature about smart cities and in response to the increasing use of the concept, this paper proposes a framework to understand the concept of smart cities. Based on the exploration of a wide and extensive array of literature from various disciplinary areas we identify eight critical factors of smart city initiatives: management and organization, technology, governance, policy context, people and communities, economy, built infrastructure, and natural environment. These factors form the basis of an integrative framework that can be used to examine how local governments are envisioning smart city initiatives. The framework suggests directions and agendas for smart city research and outlines practical implications for government professionals.}
+      \field{isbn}{9780769545257}
+      \field{issn}{15301605}
+      \field{journaltitle}{Proceedings of the Annual Hawaii International Conference on System Sciences}
+      \field{title}{{Understanding Smart Cities: An Integrative Framework}}
+      \field{year}{2011}
+      \field{pages}{2289\bibrangedash 2297}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1109/HICSS.2012.615
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Chourabi et al/Proceedings of the Annual Hawaii International Conference on System Sciences/Chourabi et al. - 2011 - Understanding Smart Cities An Integrative Framework.pdf:pdf
+      \endverb
+    \endentry
+    \entry{JSON}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=e289d8e4f4648ab33fb5d884998637aa}{%
+           family={Crockford},
+           familyi={C\bibinitperiod},
+           given={Douglas},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{e289d8e4f4648ab33fb5d884998637aa}
+      \strng{fullhash}{e289d8e4f4648ab33fb5d884998637aa}
+      \strng{authornamehash}{e289d8e4f4648ab33fb5d884998637aa}
+      \strng{authorfullhash}{e289d8e4f4648ab33fb5d884998637aa}
+      \field{labelalpha}{Cro06}
+      \field{sortinit}{C}
+      \field{sortinithash}{095692fd22cc3c74d7fe223d02314dbd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{JavaScript Object Notation (JSON) is a lightweight, text-based, language-independent data interchange format. It was derived from the ECMAScript Programming Language Standard. JSON defines a small set of formatting rules for the portable representation of structured data.}
+      \field{booktitle}{Network Working Group}
+      \field{issn}{2070-1721}
+      \field{number}{July}
+      \field{title}{{The application/json Media Type for JavaScript Object Notation}}
+      \field{urlday}{26}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2006}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 10}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.17487/rfc4627
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Crockford/Network Working Group/Crockford - 2006 - The applicationjson Media Type for JavaScript Object Notation.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Deakin2011}{article}{}
+      \name{author}{2}{}{%
+        {{hash=b424428dde901a6776ed9b2160f9b852}{%
+           family={Deakin},
+           familyi={D\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e779569b887c4929d624fcd7fc67355c}{%
+           family={{Al Waer}},
+           familyi={A\bibinitperiod},
+           given={Husam},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{0b3a0fcb980333e03ac71ed16b958cea}
+      \strng{fullhash}{0b3a0fcb980333e03ac71ed16b958cea}
+      \strng{authornamehash}{0b3a0fcb980333e03ac71ed16b958cea}
+      \strng{authorfullhash}{0b3a0fcb980333e03ac71ed16b958cea}
+      \field{labelalpha}{DA11}
+      \field{sortinit}{D}
+      \field{sortinithash}{d10b5413de1f3d197b20897dd0d565bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Taking Hollands' previous statement on the transition from intelligent to smart cities as its point of departure (\x{fffd}\x{fffd}\x{fffd}Will the real smart city stand up?' City 12(3), 302\x{fffd}\x{fffd}\x{fffd}320), this article reflects upon the anxieties currently surrounding such developments. In particular, it considers the suggestion that such developments have more to do with cities meeting the corporate needs of marketing campaigns than the social intelligence required for them to be smart. Focusing on the social intelligence of such developments, this article captures the information-rich and highly communicative qualities of the transition. In particular, it examines the methodological issues that smart communities pose cities and the critically insightful role which the networks of innovation and creative partnerships set up to embed such intelligence play in the learning, knowledge transfer and capacity-building exercises servicing this community-led transition to smart cities. This, the article suggests, is what existing representation...}
+      \field{isbn}{9781849713894}
+      \field{issn}{1750-8975}
+      \field{journaltitle}{Intelligent Buildings International}
+      \field{number}{3}
+      \field{title}{{From intelligent to smart cities}}
+      \field{volume}{3}
+      \field{year}{2011}
+      \field{pages}{133\bibrangedash 139}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1080/17508975.2011.586673
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Deakin, Al Waer/Intelligent Buildings International/Deakin, Al Waer - 2011 - From intelligent to smart cities.pdf:pdf
+      \endverb
+      \keyw{digitally inclusive regeneration,e-services,form-based design codes,from deakin and al,governance,innovation and creative partnerships,intelligent cities,knowledge trajectories,master plans,methodology,networks,reflects upon some of,smart cities,smart communities,the anxieties,the first paper,transition,waer}
+    \endentry
+    \entry{Doxygen}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=7f20b283fe8e6e7416c8090e0660c2fe}{%
+           family={Doxygen},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{7f20b283fe8e6e7416c8090e0660c2fe}
+      \strng{fullhash}{7f20b283fe8e6e7416c8090e0660c2fe}
+      \strng{authornamehash}{7f20b283fe8e6e7416c8090e0660c2fe}
+      \strng{authorfullhash}{7f20b283fe8e6e7416c8090e0660c2fe}
+      \field{labelalpha}{Dox}
+      \field{sortinit}{D}
+      \field{sortinithash}{d10b5413de1f3d197b20897dd0d565bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Generate documentation from source code.}
+      \field{title}{{Doxygen: Main Page}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://www.stack.nl/%7B~%7Ddimitri/doxygen/index.html%20http://www.stack.nl/%7B~%7Ddimitri/doxygen/
+      \endverb
+      \keyw{GPL,analysis,documentation,open source,source code,structure,tool}
+    \endentry
+    \entry{Elting1999}{article}{}
+      \name{author}{4}{}{%
+        {{hash=fb633779db1ba95011360397469dd7e5}{%
+           family={Elting},
+           familyi={E\bibinitperiod},
+           given={L\bibnamedelima S},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=4135f66ea06900b5a8d23fb0d938b961}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={C\bibnamedelima G},
+           giveni={C\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=47de2d5439c8cf54f64cd9d955c95301}{%
+           family={Cantor},
+           familyi={C\bibinitperiod},
+           given={S\bibnamedelima B},
+           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=134f2fa3a650b203058b9d28df2a80d4}{%
+           family={Rubenstein},
+           familyi={R\bibinitperiod},
+           given={E\bibnamedelima B},
+           giveni={E\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{8f76efe4fd2dc1fa44114a7f030f3879}
+      \strng{fullhash}{010f84cb2e43a24944bc99cede352210}
+      \strng{authornamehash}{8f76efe4fd2dc1fa44114a7f030f3879}
+      \strng{authorfullhash}{010f84cb2e43a24944bc99cede352210}
+      \field{labelalpha}{Elt+99}
+      \field{sortinit}{E}
+      \field{sortinithash}{07bbd5a529b5beaa311df5be05b874bc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{OBJECTIVE: To examine the effect of the method of data display on physician investigators' decisions to stop hypothetical clinical trials for an unplanned statistical analysis. DESIGN: Prospective, mixed model design with variables between subjects and within subjects (repeated measures). SETTING: Comprehensive cancer centre. Participants: 34 physicians, stratified by academic rank, who were conducting clinical trials. Interventions: Participants were shown tables, pie charts, bar graphs, and icon displays containing hypothetical data from a clinical trial and were asked to decide whether to continue the trial or stop for an unplanned statistical analysis. MAIN OUTCOME MEASURE: Percentage of accurate decisions with each type of display. RESULTS: Accuracy of decisions was affected by the type of data display and positive or negative framing of the data. More correct decisions were made with icon displays than with tables, pie charts, and bar graphs (82{\%} v 68{\%}, 56{\%}, and 43{\%}, respectively; P=0.03) and when data were negatively framed rather than positively framed in tables (93{\%} v 47{\%}; P=0.004). CONCLUSIONS: Clinical investigators' decisions can be affected by factors unrelated to the actual data. In the design of clinical trials information systems, careful consideration should be given to the method by which data are framed and displayed in order to reduce the impact of these extraneous factors.}
+      \field{isbn}{0959-535X}
+      \field{issn}{0959-8138}
+      \field{journaltitle}{BMJ (Clinical research ed.)}
+      \field{number}{7197}
+      \field{title}{{Influence of data display formats on physician investigators' decisions to stop clinical trials: prospective trial with repeated measures.}}
+      \field{volume}{318}
+      \field{year}{1999}
+      \field{pages}{1527\bibrangedash 1531}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1136/bmj.319.7216.1070
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Elting et al/BMJ (Clinical research ed.)/Elting et al. - 1999 - Influence of data display formats on physician investigators' decisions to stop clinical trials prospective trial.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Fang}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=5d06daa6fe24c9583058eab0f843fefc}{%
+           family={Fang},
+           familyi={F\bibinitperiod},
+           given={Yidong},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{5d06daa6fe24c9583058eab0f843fefc}
+      \strng{fullhash}{5d06daa6fe24c9583058eab0f843fefc}
+      \strng{authornamehash}{5d06daa6fe24c9583058eab0f843fefc}
+      \strng{authorfullhash}{5d06daa6fe24c9583058eab0f843fefc}
+      \field{labelalpha}{Fan}
+      \field{sortinit}{F}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{JSON-simple}}
+      \field{urlday}{25}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://code.google.com/archive/p/json-simple/
+      \endverb
+    \endentry
+    \entry{Boston311}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=60f2462bfb5b8f0c332ad154f97e0fca}{%
+           family={Gross},
+           familyi={G\bibinitperiod},
+           given={Benedikt},
+           giveni={B\bibinitperiod}}}%
+        {{hash=19a857c91a204de291b4a8e917ffd7a8}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Joseph\bibnamedelima K.},
+           giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=ca89ae7081f79436df6436a2440d2da1}{%
+           family={Offenhuber},
+           familyi={O\bibinitperiod},
+           given={Dietmar},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{d562d923e7ac868828091e7e793f6943}
+      \strng{fullhash}{d562d923e7ac868828091e7e793f6943}
+      \strng{authornamehash}{d562d923e7ac868828091e7e793f6943}
+      \strng{authorfullhash}{d562d923e7ac868828091e7e793f6943}
+      \field{labelalpha}{GLO12}
+      \field{sortinit}{G}
+      \field{sortinithash}{618d986594b7198ba52cf8b00d348f3f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Boston 3-1-1 Incident Reports}}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://senseable.mit.edu/bos311/
+      \endverb
+    \endentry
+    \entry{Harter2017}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=c663609391703714a4d24d93bc3aded7}{%
+           family={Harter},
+           familyi={H\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{c663609391703714a4d24d93bc3aded7}
+      \strng{fullhash}{c663609391703714a4d24d93bc3aded7}
+      \strng{authornamehash}{c663609391703714a4d24d93bc3aded7}
+      \strng{authorfullhash}{c663609391703714a4d24d93bc3aded7}
+      \field{labelalpha}{Har16}
+      \field{sortinit}{H}
+      \field{sortinithash}{2f664b453ec75da1fe3804ca92633405}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Ogre - ogr2ogr web client}}
+      \field{urlday}{1}
+      \field{urlmonth}{5}
+      \field{urlyear}{2017}
+      \field{year}{2016}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://github.com/wavded/ogre
+      \endverb
+    \endentry
+    \entry{Laramee2011}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b88800a7dd26a92ed16070fa1a334e9a}{%
+           family={Laramee},
+           familyi={L\bibinitperiod},
+           given={Robert\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{b88800a7dd26a92ed16070fa1a334e9a}
+      \strng{fullhash}{b88800a7dd26a92ed16070fa1a334e9a}
+      \strng{authornamehash}{b88800a7dd26a92ed16070fa1a334e9a}
+      \strng{authorfullhash}{b88800a7dd26a92ed16070fa1a334e9a}
+      \field{labelalpha}{Lar11}
+      \field{sortinit}{L}
+      \field{sortinithash}{7bba64db83423e3c29ad597f3b682cf3}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Bob's Concise Introduction to Doxygen}}
+      \field{year}{2011}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Laramee/Unknown/Laramee - 2011 - Bob's Concise Introduction to Doxygen.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://cs.swan.ac.uk/%7B~%7Dcsbob/teaching/laramee07commentConvention.pdf
+      \endverb
+    \endentry
+    \entry{Laramee2011a}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b88800a7dd26a92ed16070fa1a334e9a}{%
+           family={Laramee},
+           familyi={L\bibinitperiod},
+           given={Robert\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{b88800a7dd26a92ed16070fa1a334e9a}
+      \strng{fullhash}{b88800a7dd26a92ed16070fa1a334e9a}
+      \strng{authornamehash}{b88800a7dd26a92ed16070fa1a334e9a}
+      \strng{authorfullhash}{b88800a7dd26a92ed16070fa1a334e9a}
+      \field{labelalpha}{Lar11}
+      \field{sortinit}{L}
+      \field{sortinithash}{7bba64db83423e3c29ad597f3b682cf3}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract These detailed guidelines attempt to explain the mechanics of writing a third year project dissertation in Computer Science. They serve as a useful starting point for students (and new advisers) in their third or fourth year of study in the Computer Science Department of a UK-based university. Afterall, no one is born knowing how to write a dissertation. Yet, there are certain elements, a commonality, that can be found in virtually all good dissertations. We give our recommendations as to each section a good dissertation consists of as well as what each section contains. These guidelines are generic and can be customized to fit most projects. The guidelines are open and free to use at any university or institution without permission. We believe that the writing can start with the abstract, however, in practice writing usually starts with the background section. The abstract can be approximately 6\x{fffd}\x{fffd}\x{fffd}12 sentences. It is a difficult starting point, but it forces the author to write down a concise desc...}
+      \field{issn}{14737507}
+      \field{journaltitle}{ITALICS Innovations in Teaching and Learning in Information and Computer Sciences}
+      \field{number}{1}
+      \field{title}{{Bob's project guidelines: Writing a dissertation for a BSc. in computer science}}
+      \field{volume}{10}
+      \field{year}{2011}
+      \field{pages}{43\bibrangedash 54}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.11120/ital.2011.10010043
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Laramee/ITALICS Innovations in Teaching and Learning in Information and Computer Sciences/Laramee - 2011 - Bob's project guidelines Writing a dissertation for a BSc. in computer science.pdf:pdf
+      \endverb
+      \keyw{Computer science,Project guidelines}
+    \endentry
+    \entry{Liu}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=92f7474e36f4f2b59a14e85c0e738e40}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yan},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{92f7474e36f4f2b59a14e85c0e738e40}
+      \strng{fullhash}{92f7474e36f4f2b59a14e85c0e738e40}
+      \strng{authornamehash}{92f7474e36f4f2b59a14e85c0e738e40}
+      \strng{authorfullhash}{92f7474e36f4f2b59a14e85c0e738e40}
+      \field{labelalpha}{Liu17}
+      \field{sortinit}{L}
+      \field{sortinithash}{7bba64db83423e3c29ad597f3b682cf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Visualization of Multivariate Data}}
+      \field{urlday}{17}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Liu/Unknown/Liu - 2017 - Visualization of Multivariate Data.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://people.stat.sc.edu/hansont/stat730/MultivariateDataVisualization.pdf
+      \endverb
+    \endentry
+    \entry{Lazaroiu2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=c1a0ecc3e32c74bd8c21094215ff9dd4}{%
+           family={Lazaroiu},
+           familyi={L\bibinitperiod},
+           given={George\bibnamedelima Cristian},
+           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=4f4405c1a3e31732395f4f941a4209e9}{%
+           family={Roscia},
+           familyi={R\bibinitperiod},
+           given={Mariacristina},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{4089a7386908b8631c51e0f4fee565cd}
+      \strng{fullhash}{4089a7386908b8631c51e0f4fee565cd}
+      \strng{authornamehash}{4089a7386908b8631c51e0f4fee565cd}
+      \strng{authorfullhash}{4089a7386908b8631c51e0f4fee565cd}
+      \field{labelalpha}{LR12}
+      \field{sortinit}{L}
+      \field{sortinithash}{7bba64db83423e3c29ad597f3b682cf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Nowadays, the large and small districts are proposing a new city model, called " the smart city", which represents a community of average technology size, interconnected and sustainable, comfortable, attractive and secure. The landscape requirements and the solutions to local problems are the critical factors. The cities consume 75{\%} of worldwide energy production and generate 80{\%} of CO 2 emissions. Thus, a sustainable urban model, " the smart city", is sustained by the European Commission. In this paper, a model for computing " the smart city" indices is proposed. The chosen indicators are not homogeneous, and contain high amount of information. The paper deals with the computation of assigned weights for the considered indicators. The proposed approach uses a procedure based on fuzzy logic and defines a model that allows us to estimate " the smart city", in order to access European funding. The proposed innovative system results in a more extended comprehension and simple use. Thus, the model could help in policy making process as starting point of discussion between stakeholders, as well as citizens in final decision of adoption measures and best evaluated options. ?? 2012 Elsevier Ltd.}
+      \field{isbn}{0360-5442}
+      \field{issn}{03605442}
+      \field{journaltitle}{Energy}
+      \field{number}{1}
+      \field{title}{{Definition methodology for the smart cities model}}
+      \field{volume}{47}
+      \field{year}{2012}
+      \field{pages}{326\bibrangedash 332}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1016/j.energy.2012.09.028
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Lazaroiu, Roscia/Energy/Lazaroiu, Roscia - 2012 - Definition methodology for the smart cities model.pdf:pdf
+      \endverb
+      \keyw{Energy,Fuzzy logic,IEE project funding,Smart city model,Sustainability}
+    \endentry
+    \entry{Mapbox2017}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=8f4bbbe1c517b7913476f8a2ed96453e}{%
+           family={Mapbox},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{8f4bbbe1c517b7913476f8a2ed96453e}
+      \strng{fullhash}{8f4bbbe1c517b7913476f8a2ed96453e}
+      \strng{authornamehash}{8f4bbbe1c517b7913476f8a2ed96453e}
+      \strng{authorfullhash}{8f4bbbe1c517b7913476f8a2ed96453e}
+      \field{labelalpha}{Map17}
+      \field{sortinit}{M}
+      \field{sortinithash}{c26a05ef03e4429073ed5c825140fac3}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Mapbox Studio}}
+      \field{urlday}{20}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://www.mapbox.com/studio/
+      \endverb
+    \endentry
+    \entry{Mapbox2017b}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=8f4bbbe1c517b7913476f8a2ed96453e}{%
+           family={Mapbox},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{8f4bbbe1c517b7913476f8a2ed96453e}
+      \strng{fullhash}{8f4bbbe1c517b7913476f8a2ed96453e}
+      \strng{authornamehash}{8f4bbbe1c517b7913476f8a2ed96453e}
+      \strng{authorfullhash}{8f4bbbe1c517b7913476f8a2ed96453e}
+      \field{labelalpha}{Map17}
+      \field{sortinit}{M}
+      \field{sortinithash}{c26a05ef03e4429073ed5c825140fac3}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A Leaflet-friendly API for point in polygon operations, using substack's point in polygon library.}
+      \field{title}{{point in polygon for Leaflet}}
+      \field{urlday}{1}
+      \field{urlmonth}{5}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://github.com/mapbox/leaflet-pip
+      \endverb
+    \endentry
+    \entry{Myers2004a}{book}{}
+      \name{author}{3}{}{%
+        {{hash=eedb2024117491f2a1034eb7b0b8213d}{%
+           family={Myers},
+           familyi={M\bibinitperiod},
+           given={Glenford\bibnamedelima J.},
+           giveni={G\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=0a68d6465dd757800fa01ad9629d1758}{%
+           family={Thomas},
+           familyi={T\bibinitperiod},
+           given={Todd\bibnamedelima M},
+           giveni={T\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=6bedbc386e093a07f6c0696fa075b157}{%
+           family={Sandler},
+           familyi={S\bibinitperiod},
+           given={Corey},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley {\&} Sons}%
+      }
+      \strng{namehash}{a12c35c8d02ba80d28738a6ff5aa369c}
+      \strng{fullhash}{a12c35c8d02ba80d28738a6ff5aa369c}
+      \strng{authornamehash}{a12c35c8d02ba80d28738a6ff5aa369c}
+      \strng{authorfullhash}{a12c35c8d02ba80d28738a6ff5aa369c}
+      \field{labelalpha}{MTS04}
+      \field{sortinit}{M}
+      \field{sortinithash}{c26a05ef03e4429073ed5c825140fac3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The Art of Software Testing, Second Edition is a revision of the bestselling guide from a leading computer expert and author. It provides a practical discussion of the purpose and nature of software testing, offering the latest methodologies for the design of effective test cases.}
+      \field{booktitle}{Booksgooglecom}
+      \field{eprintclass}{arXiv:gr-qc}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{0471469122}
+      \field{issn}{0960-0833}
+      \field{title}{{The Art of Software Testing}}
+      \field{volume}{1}
+      \field{year}{2004}
+      \field{pages}{255}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1002/stvr.321
+      \endverb
+      \verb{eprint}
+      \verb 9809069v1
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Myers, Thomas, Sandler/Booksgooglecom/Myers, Thomas, Sandler - 2004 - The Art of Software Testing.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.worldcat.org/oclc/65982801
+      \endverb
+    \endentry
+    \entry{NYCTaxi&LimousineCommission}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d1431a441585dab678adc802c738fdb0}{%
+           family={{NYC Taxi {\&} Limousine Commission}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{d1431a441585dab678adc802c738fdb0}
+      \strng{fullhash}{d1431a441585dab678adc802c738fdb0}
+      \strng{authornamehash}{d1431a441585dab678adc802c738fdb0}
+      \strng{authorfullhash}{d1431a441585dab678adc802c738fdb0}
+      \field{labelalpha}{NYC}
+      \field{sortinit}{N}
+      \field{sortinithash}{1163c28585427c673ad5a010cbf82f52}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{NYC Taxi {\&} Limousine Commission - Taxicab Passenger Enhancements Project (TPEP) Archive}}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://www.nyc.gov/html/tlc/html/industry/taxicab%7B%5C_%7Dserv%7B%5C_%7Denh%7B%5C_%7Darchive.shtml
+      \endverb
+    \endentry
+    \entry{NYCTaxi&LimousineCommission2015}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d1431a441585dab678adc802c738fdb0}{%
+           family={{NYC Taxi {\&} Limousine Commission}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{d1431a441585dab678adc802c738fdb0}
+      \strng{fullhash}{d1431a441585dab678adc802c738fdb0}
+      \strng{authornamehash}{d1431a441585dab678adc802c738fdb0}
+      \strng{authorfullhash}{d1431a441585dab678adc802c738fdb0}
+      \field{labelalpha}{NYC15}
+      \field{sortinit}{N}
+      \field{sortinithash}{1163c28585427c673ad5a010cbf82f52}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Data Dictionary - SHL Trip Records}}
+      \field{urlday}{25}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2015}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/NYC Taxi {\&} Limousine Commission/Unknown/NYC Taxi {\&} Limousine Commission - 2015 - Data Dictionary - SHL Trip Records.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.nyc.gov/html/tlc/html/about/trip%7B%5C_%7Drecord%7B%5C_%7Ddata.shtml.
+      \endverb
+    \endentry
+    \entry{NYCTaxi&LimousineCommission2017}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=d1431a441585dab678adc802c738fdb0}{%
+           family={{NYC Taxi {\&} Limousine Commission}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{d1431a441585dab678adc802c738fdb0}
+      \strng{fullhash}{d1431a441585dab678adc802c738fdb0}
+      \strng{authornamehash}{d1431a441585dab678adc802c738fdb0}
+      \strng{authorfullhash}{d1431a441585dab678adc802c738fdb0}
+      \field{labelalpha}{NYC17}
+      \field{sortinit}{N}
+      \field{sortinithash}{1163c28585427c673ad5a010cbf82f52}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{NYC Taxi {\&} Limousine Commission - Trip Record Data}}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://www.nyc.gov/html/tlc/html/about/trip%7B%5C_%7Drecord%7B%5C_%7Ddata.shtml
+      \endverb
+    \endentry
+    \entry{qunit}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=45ca5339db4417d383023c848dba618c}{%
+           family={QUnit},
+           familyi={Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{45ca5339db4417d383023c848dba618c}
+      \strng{fullhash}{45ca5339db4417d383023c848dba618c}
+      \strng{authornamehash}{45ca5339db4417d383023c848dba618c}
+      \strng{authorfullhash}{45ca5339db4417d383023c848dba618c}
+      \field{labelalpha}{QUn}
+      \field{sortinit}{Q}
+      \field{sortinithash}{605f5784956f0b01c606746ceb816bf5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{QUnit: A JavaScript Unit Testing framework}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://qunitjs.com/
+      \endverb
+    \endentry
+    \entry{SenseableCityLab-Ewaste}{misc}{}
+      \name{author}{21}{}{%
+        {{hash=aeb05a80989b576d5948e4cbf97421cc}{%
+           family={Ratti},
+           familyi={R\bibinitperiod},
+           given={Carlo},
+           giveni={C\bibinitperiod}}}%
+        {{hash=3c20901ec5925fac157bc2e783fd01df}{%
+           family={Biderman},
+           familyi={B\bibinitperiod},
+           given={Assaf},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bd19a84a399fc11611c01014d7327b11}{%
+           family={Yen},
+           familyi={Y\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=00d2a3f49023893dc549226bf6f1340a}{%
+           family={Teh},
+           familyi={T\bibinitperiod},
+           given={Weng\bibnamedelima Hong},
+           giveni={W\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=832dd6ce636cae1ae6fea131e9092341}{%
+           family={Puckett},
+           familyi={P\bibinitperiod},
+           given={Jim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=31d87a911e884d3526f2a598e7885518}{%
+           family={Groark},
+           familyi={G\bibinitperiod},
+           given={Colin},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1af10a7df7c80635abf986644fe9359c}{%
+           family={Kaplan},
+           familyi={K\bibinitperiod},
+           given={Graham},
+           giveni={G\bibinitperiod}}}%
+        {{hash=35df0af0e3c80f25519c7a83b3646a32}{%
+           family={Godbey},
+           familyi={G\bibinitperiod},
+           given={Angelo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=49d823da7ae431ac7a418b984afd75a6}{%
+           family={Hopson},
+           familyi={H\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=3208da80c8a1318a0e8cf4920807057f}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Monica},
+           giveni={M\bibinitperiod}}}%
+        {{hash=56ed5029d2c9ab2ee4be6e20c073095e}{%
+           family={Shin},
+           familyi={S\bibinitperiod},
+           given={Youjin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=7230dd1cf6cec029dc990e73a92e5e67}{%
+           family={Bouisset},
+           familyi={B\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=cc9722b60b7e969d28065340aeb632c3}{%
+           family={Peng},
+           familyi={P\bibinitperiod},
+           given={Wenzhe},
+           giveni={W\bibinitperiod}}}%
+        {{hash=e3a9f3db39b8de886168051da8116c26}{%
+           family={Ahn},
+           familyi={A\bibinitperiod},
+           given={Chaewon},
+           giveni={C\bibinitperiod}}}%
+        {{hash=fee330aa685491e9e7c4844d2547abce}{%
+           family={So},
+           familyi={S\bibinitperiod},
+           given={Wonyoung},
+           giveni={W\bibinitperiod}}}%
+        {{hash=440fbf756e847de2e02df5fcec88eeea}{%
+           family={Perez},
+           familyi={P\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=b9f710a8ad8ab3f249244b7b1c4f149c}{%
+           family={Simard},
+           familyi={S\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=653c9639856bb34b33294f31e1ca665b}{%
+           family={Nadres},
+           familyi={N\bibinitperiod},
+           given={Brandon},
+           giveni={B\bibinitperiod}}}%
+        {{hash=ca89ae7081f79436df6436a2440d2da1}{%
+           family={Offenhuber},
+           familyi={O\bibinitperiod},
+           given={Dietmar},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d9efe8068249baa064a118ff31b028f5}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=5a0f730c1fde5fa8fe3349ede83c8000}{%
+           family={Duarte},
+           familyi={D\bibinitperiod},
+           given={F\'{a}bio},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{dcef133a5d94b083b772ef10721edc81}
+      \strng{fullhash}{34438e8212b3af0977b4170fcf78aab8}
+      \strng{authornamehash}{dcef133a5d94b083b772ef10721edc81}
+      \strng{authorfullhash}{34438e8212b3af0977b4170fcf78aab8}
+      \field{labelalpha}{Rat+16}
+      \field{sortinit}{R}
+      \field{sortinithash}{c15bc8eb6936bc6b3c8baa9e8575af53}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{MONITOUR}}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2016}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://senseable.mit.edu/monitour-app/
+      \endverb
+    \endentry
+    \entry{SenseableCityLab-Seattle}{misc}{}
+      \name{author}{21}{}{%
+        {{hash=aeb05a80989b576d5948e4cbf97421cc}{%
+           family={Ratti},
+           familyi={R\bibinitperiod},
+           given={Carlo},
+           giveni={C\bibinitperiod}}}%
+        {{hash=3c20901ec5925fac157bc2e783fd01df}{%
+           family={Biderman},
+           familyi={B\bibinitperiod},
+           given={Assaf},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bd19a84a399fc11611c01014d7327b11}{%
+           family={Yen},
+           familyi={Y\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=00d2a3f49023893dc549226bf6f1340a}{%
+           family={Teh},
+           familyi={T\bibinitperiod},
+           given={Weng\bibnamedelima Hong},
+           giveni={W\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=832dd6ce636cae1ae6fea131e9092341}{%
+           family={Puckett},
+           familyi={P\bibinitperiod},
+           given={Jim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=31d87a911e884d3526f2a598e7885518}{%
+           family={Groark},
+           familyi={G\bibinitperiod},
+           given={Colin},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1af10a7df7c80635abf986644fe9359c}{%
+           family={Kaplan},
+           familyi={K\bibinitperiod},
+           given={Graham},
+           giveni={G\bibinitperiod}}}%
+        {{hash=35df0af0e3c80f25519c7a83b3646a32}{%
+           family={Godbey},
+           familyi={G\bibinitperiod},
+           given={Angelo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=49d823da7ae431ac7a418b984afd75a6}{%
+           family={Hopson},
+           familyi={H\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=3208da80c8a1318a0e8cf4920807057f}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Monica},
+           giveni={M\bibinitperiod}}}%
+        {{hash=56ed5029d2c9ab2ee4be6e20c073095e}{%
+           family={Shin},
+           familyi={S\bibinitperiod},
+           given={Youjin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=7230dd1cf6cec029dc990e73a92e5e67}{%
+           family={Bouisset},
+           familyi={B\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=cc9722b60b7e969d28065340aeb632c3}{%
+           family={Peng},
+           familyi={P\bibinitperiod},
+           given={Wenzhe},
+           giveni={W\bibinitperiod}}}%
+        {{hash=e3a9f3db39b8de886168051da8116c26}{%
+           family={Ahn},
+           familyi={A\bibinitperiod},
+           given={Chaewon},
+           giveni={C\bibinitperiod}}}%
+        {{hash=fee330aa685491e9e7c4844d2547abce}{%
+           family={So},
+           familyi={S\bibinitperiod},
+           given={Wonyoung},
+           giveni={W\bibinitperiod}}}%
+        {{hash=440fbf756e847de2e02df5fcec88eeea}{%
+           family={Perez},
+           familyi={P\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=b9f710a8ad8ab3f249244b7b1c4f149c}{%
+           family={Simard},
+           familyi={S\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=653c9639856bb34b33294f31e1ca665b}{%
+           family={Nadres},
+           familyi={N\bibinitperiod},
+           given={Brandon},
+           giveni={B\bibinitperiod}}}%
+        {{hash=ca89ae7081f79436df6436a2440d2da1}{%
+           family={Offenhuber},
+           familyi={O\bibinitperiod},
+           given={Dietmar},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d9efe8068249baa064a118ff31b028f5}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=5a0f730c1fde5fa8fe3349ede83c8000}{%
+           family={Duarte},
+           familyi={D\bibinitperiod},
+           given={F\'{a}bio},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{dcef133a5d94b083b772ef10721edc81}
+      \strng{fullhash}{34438e8212b3af0977b4170fcf78aab8}
+      \strng{authornamehash}{dcef133a5d94b083b772ef10721edc81}
+      \strng{authorfullhash}{34438e8212b3af0977b4170fcf78aab8}
+      \field{labelalpha}{Rat+16}
+      \field{sortinit}{R}
+      \field{sortinithash}{c15bc8eb6936bc6b3c8baa9e8575af53}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{MONITOUR}}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2016}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://senseable.mit.edu/monitour-app/%7B%5C#%7Dwa551396
+      \endverb
+    \endentry
+    \entry{Rodden2017}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=a543575fb134f385738fa33762eaa9e7}{%
+           family={Rodden},
+           familyi={R\bibinitperiod},
+           given={Kerry},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{a543575fb134f385738fa33762eaa9e7}
+      \strng{fullhash}{a543575fb134f385738fa33762eaa9e7}
+      \strng{authornamehash}{a543575fb134f385738fa33762eaa9e7}
+      \strng{authorfullhash}{a543575fb134f385738fa33762eaa9e7}
+      \field{labelalpha}{Rod17}
+      \field{sortinit}{R}
+      \field{sortinithash}{c15bc8eb6936bc6b3c8baa9e8575af53}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Sequences sunburst - bl.ocks.org}}
+      \field{urlday}{25}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://bl.ocks.org/kerryrodden/7090426
+      \endverb
+    \endentry
+    \entry{Roubtsov2010}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=18f9c1d0ac085adb1c9eed5a9b256c71}{%
+           family={Roubtsov},
+           familyi={R\bibinitperiod},
+           given={Vlad},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{18f9c1d0ac085adb1c9eed5a9b256c71}
+      \strng{fullhash}{18f9c1d0ac085adb1c9eed5a9b256c71}
+      \strng{authornamehash}{18f9c1d0ac085adb1c9eed5a9b256c71}
+      \strng{authorfullhash}{18f9c1d0ac085adb1c9eed5a9b256c71}
+      \field{labelalpha}{Rou10}
+      \field{sortinit}{R}
+      \field{sortinithash}{c15bc8eb6936bc6b3c8baa9e8575af53}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{EMMA: a free Java code coverage tool}}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2017}
+      \field{year}{2010}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb http://emma.sourceforge.net/
+      \endverb
+    \endentry
+    \entry{UnitedNations2014}{report}{}
+      \name{author}{1}{}{%
+        {{hash=c83e2cb4b19bdb5f2a54316eafd22d27}{%
+           family={{United Nations, Department of Economic and Social Affairs}},
+           familyi={U\bibinitperiod},
+           given={Population\bibnamedelima Department},
+           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{c83e2cb4b19bdb5f2a54316eafd22d27}
+      \strng{fullhash}{c83e2cb4b19bdb5f2a54316eafd22d27}
+      \strng{authornamehash}{c83e2cb4b19bdb5f2a54316eafd22d27}
+      \strng{authorfullhash}{c83e2cb4b19bdb5f2a54316eafd22d27}
+      \field{labelalpha}{Uni14}
+      \field{sortinit}{U}
+      \field{sortinithash}{1554584e7f69d2b4fe0a645e73d50194}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Department of Economic {\&} Social Affairs}
+      \field{booktitle}{United Nations}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{9789211515176}
+      \field{issn}{1435-9871}
+      \field{number}{9}
+      \field{title}{{World Urbanization Prospects}}
+      \field{type}{techreport}
+      \field{year}{2014}
+      \field{pages}{32}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.4054/DemRes.2005.12.9
+      \endverb
+      \verb{eprint}
+      \verb arXiv:1011.1669v3
+      \endverb
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/United Nations, Department of Economic and Social Affairs/United Nations/United Nations, Department of Economic and Social Affairs - 2014 - World Urbanization Prospects.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb https://esa.un.org/unpd/wup/publications/files/wup2014-highlights.Pdf%20http://esa.un.org/unpd/wup/Highlights/WUP2014-Highlights.pdf
+      \endverb
+      \keyw{ision}
+    \endentry
+    \entry{Vliet2007}{book}{}
+      \name{author}{1}{}{%
+        {{hash=85b89b612dea95e65e65200359afb85d}{%
+           family={Vliet},
+           familyi={V\bibinitperiod},
+           given={Hans\bibnamedelima Van},
+           giveni={H\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{85b89b612dea95e65e65200359afb85d}
+      \strng{fullhash}{85b89b612dea95e65e65200359afb85d}
+      \strng{authornamehash}{85b89b612dea95e65e65200359afb85d}
+      \strng{authorfullhash}{85b89b612dea95e65e65200359afb85d}
+      \field{labelalpha}{Vli07}
+      \field{sortinit}{V}
+      \field{sortinithash}{555737dafdcf1396ebfeae5822e5bde2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Software Engineering: Principles and Practice}}
+      \field{year}{2007}
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Vliet/Unknown/Vliet - 2007 - Software Engineering Principles and Practice.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Ward2010}{book}{}
+      \name{author}{3}{}{%
+        {{hash=afd90b62d23ea22bd4662e0774549bac}{%
+           family={Ward},
+           familyi={W\bibinitperiod},
+           given={MO},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f94e1c47fbe1f8b7abff0f804cdd181c}{%
+           family={Grinstein},
+           familyi={G\bibinitperiod},
+           given={G},
+           giveni={G\bibinitperiod}}}%
+        {{hash=fb9da1ce5d8ceee08b4041dba674358e}{%
+           family={Keim},
+           familyi={K\bibinitperiod},
+           given={D},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{e5e7584405ca3192c4b87f9a94e4876f}
+      \strng{fullhash}{e5e7584405ca3192c4b87f9a94e4876f}
+      \strng{authornamehash}{e5e7584405ca3192c4b87f9a94e4876f}
+      \strng{authorfullhash}{e5e7584405ca3192c4b87f9a94e4876f}
+      \field{labelalpha}{WGK10}
+      \field{sortinit}{W}
+      \field{sortinithash}{6d25b3eefe5aa2147d1f339686808918}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This book provides the theory, practical details, and tools necessary for building visualizations or systems involving the visualization of data. The authors cover the spectrum of data visualizations, including mathematical and statistical graphs, cartography for displaying geographic information, two- and three-dimensional scientific displays, integrated analysis and visualization tools, and general information visualization techniques. Practitioners, developers, teachers and students as well as those interested in gaining some exposure to the field will get an in-depth understanding of visualization techniques and are provided with sufficient information, often with full source code, to complete an implementation; those with more modest aspirations can focus on the concepts, theory and high-level algorithm details.}
+      \field{booktitle}{CRC Press}
+      \field{isbn}{9781482257380}
+      \field{title}{{Interactive Data Visualization: Foundations, Techniques, and Applications}}
+      \field{year}{2010}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+      \verb{file}
+      \verb :Users/Qiru/Documents/Mendeley Desktop/Ward, Grinstein, Keim/CRC Press/Ward, Grinstein, Keim - 2010 - Interactive Data Visualization Foundations, Techniques, and Applications.pdf:pdf
+      \endverb
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
 
-\bibitem [\protect \citeauthoryear {%
-AnyChart%
-}{%
-AnyChart%
-}{%
-{\protect \APACyear {2017}}%
-{\protect \APACexlab {{\protect \BCnt {3}}}}}]{%
-AnyChart2017b}
-\APACinsertmetastar {%
-AnyChart2017b}%
-\begin{APACrefauthors}%
-AnyChart.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2017{\protect \BCnt {3}}}{}{}.
-\newblock
-\APACrefbtitle {{World Governments Map | Choropleth Maps | AnyMap Gallery |
-  AnyChart}.} {{World Governments Map | Choropleth Maps | AnyMap Gallery |
-  AnyChart}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-20}]\url{http://www.anychart.com/products/anymap/gallery/Maps{\_}Choropleth/World{\_}Governments{\_}Map.php}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Arnuphaptrairong%
-}{%
-Arnuphaptrairong%
-}{%
-{\protect \APACyear {2011}}%
-}]{%
-Arnuphaptrairong2011}
-\APACinsertmetastar {%
-Arnuphaptrairong2011}%
-\begin{APACrefauthors}%
-Arnuphaptrairong, T.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2011}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Top Ten Lists of Software Project Risks: Evidence from
-  the Literature Survey}} {{Top Ten Lists of Software Project Risks: Evidence
-  from the Literature Survey}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Proceedings of the International MultiConference of
-  Engineers and Computer Scientists (IMECS2011)}{I}{}{}.
-\newblock
-\begin{APACrefURL}
-  \url{http://www.iaeng.org/publication/IMECS2011/IMECS2011{\_}pp732-737.pdf}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Bostock%
-}{%
-Bostock%
-}{%
-{\protect \APACyear {2017}}%
-}]{%
-Bostock2017}
-\APACinsertmetastar {%
-Bostock2017}%
-\begin{APACrefauthors}%
-Bostock, M.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2017}{}{}.
-\newblock
-\APACrefbtitle {{Chord Diagram - bl.ocks.org}.} {{Chord Diagram -
-  bl.ocks.org}.}
-\newblock
-\begin{APACrefURL} [{2017-04-25}]\url{https://bl.ocks.org/mbostock/1046712}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Butler%
-\ \protect \BOthers {.}}{%
-Butler%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2016}}%
-}]{%
-GeoJSON}
-\APACinsertmetastar {%
-GeoJSON}%
-\begin{APACrefauthors}%
-Butler, H.%
-, Daly, M.%
-, Doyle, A.%
-, {S. Gillies}%
-, Hagen, S.%
-\BCBL {}\ \BBA {} Schaub, T.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2016}{}{}.
-\newblock
-\APACrefbtitle {{The GeoJSON Format}.} {{The GeoJSON Format}.}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Caragliu%
-, {Del Bo}%
-\BCBL {}\ \BBA {} Nijkamp%
-}{%
-Caragliu%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2011}}%
-}]{%
-Caragliu2011}
-\APACinsertmetastar {%
-Caragliu2011}%
-\begin{APACrefauthors}%
-Caragliu, A.%
-, {Del Bo}, C.%
-\BCBL {}\ \BBA {} Nijkamp, P.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2011}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Smart Cities in Europe}} {{Smart Cities in
-  Europe}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Journal of Urban Technology}{18}{2}{65--82}.
-\newblock
-\begin{APACrefDOI} \doi{10.1080/10630732.2011.601117} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Chourabi%
-\ \protect \BOthers {.}}{%
-Chourabi%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2011}}%
-}]{%
-Chourabi2011}
-\APACinsertmetastar {%
-Chourabi2011}%
-\begin{APACrefauthors}%
-Chourabi, H.%
-, Nam, T.%
-, Walker, S.%
-, Gil-Garcia, J\BPBI R.%
-, Mellouli, S.%
-, Nahon, K.%
-\BDBL {}Scholl, H\BPBI J.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2011}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Understanding Smart Cities: An Integrative Framework}}
-  {{Understanding Smart Cities: An Integrative Framework}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Proceedings of the Annual Hawaii International
-  Conference on System Sciences}{}{}{2289--2297}.
-\newblock
-\begin{APACrefDOI} \doi{10.1109/HICSS.2012.615} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Crockford%
-}{%
-Crockford%
-}{%
-{\protect \APACyear {2006}}%
-}]{%
-JSON}
-\APACinsertmetastar {%
-JSON}%
-\begin{APACrefauthors}%
-Crockford, D.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2006}{}{}.
-\newblock
-\APACrefbtitle {{The application/json Media Type for JavaScript Object
-  Notation}} {{The application/json Media Type for JavaScript Object
-  Notation}}\ (\BNUM\ July).
-\newblock
-\begin{APACrefDOI} \doi{10.17487/rfc4627} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Deakin%
-\ \BBA {} {Al Waer}%
-}{%
-Deakin%
-\ \BBA {} {Al Waer}%
-}{%
-{\protect \APACyear {2011}}%
-}]{%
-Deakin2011}
-\APACinsertmetastar {%
-Deakin2011}%
-\begin{APACrefauthors}%
-Deakin, M.%
-\BCBT {}\ \BBA {} {Al Waer}, H.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2011}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{From intelligent to smart cities}} {{From intelligent
-  to smart cities}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Intelligent Buildings International}{3}{3}{133--139}.
-\newblock
-\begin{APACrefDOI} \doi{10.1080/17508975.2011.586673} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Doxygen%
-}{%
-Doxygen%
-}{%
-{\protect \APACyear {{\protect \bibnodate {}}}}%
-}]{%
-Doxygen}
-\APACinsertmetastar {%
-Doxygen}%
-\begin{APACrefauthors}%
-Doxygen.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
-\newblock
-\APACrefbtitle {{Doxygen: Main Page}.} {{Doxygen: Main Page}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-29}]\url{http://www.stack.nl/{~}dimitri/doxygen/index.html
-  http://www.stack.nl/{~}dimitri/doxygen/} \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Elting%
-, Martin%
-, Cantor%
-\BCBL {}\ \BBA {} Rubenstein%
-}{%
-Elting%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {1999}}%
-}]{%
-Elting1999}
-\APACinsertmetastar {%
-Elting1999}%
-\begin{APACrefauthors}%
-Elting, L\BPBI S.%
-, Martin, C\BPBI G.%
-, Cantor, S\BPBI B.%
-\BCBL {}\ \BBA {} Rubenstein, E\BPBI B.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1999}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Influence of data display formats on physician
-  investigators' decisions to stop clinical trials: prospective trial with
-  repeated measures.}} {{Influence of data display formats on physician
-  investigators' decisions to stop clinical trials: prospective trial with
-  repeated measures.}}{\BBCQ}
-\newblock
-\APACjournalVolNumPages{BMJ (Clinical research ed.)}{318}{7197}{1527--1531}.
-\newblock
-\begin{APACrefDOI} \doi{10.1136/bmj.319.7216.1070} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Fang%
-}{%
-Fang%
-}{%
-{\protect \APACyear {{\protect \bibnodate {}}}}%
-}]{%
-Fang}
-\APACinsertmetastar {%
-Fang}%
-\begin{APACrefauthors}%
-Fang, Y.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
-\newblock
-\APACrefbtitle {{JSON-simple}.} {{JSON-simple}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-25}]\url{https://code.google.com/archive/p/json-simple/}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Gross%
-, Lee%
-\BCBL {}\ \BBA {} Offenhuber%
-}{%
-Gross%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2012}}%
-}]{%
-Boston311}
-\APACinsertmetastar {%
-Boston311}%
-\begin{APACrefauthors}%
-Gross, B.%
-, Lee, J\BPBI K.%
-\BCBL {}\ \BBA {} Offenhuber, D.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2012}{}{}.
-\newblock
-\APACrefbtitle {{Boston 3-1-1 Incident Reports}.} {{Boston 3-1-1 Incident
-  Reports}.}
-\newblock
-\begin{APACrefURL} [{2017-04-23}]\url{http://senseable.mit.edu/bos311/}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Laramee%
-}{%
-Laramee%
-}{%
-{\protect \APACyear {2011}}%
-{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
-Laramee2011}
-\APACinsertmetastar {%
-Laramee2011}%
-\begin{APACrefauthors}%
-Laramee, R\BPBI S.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2011{\protect \BCnt {1}}}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Bob's Concise Introduction to Doxygen}} {{Bob's Concise
-  Introduction to Doxygen}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{}{}{}{1--6}.
-\newblock
-\begin{APACrefURL}
-  \url{http://cs.swan.ac.uk/{~}csbob/teaching/laramee07commentConvention.pdf}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Laramee%
-}{%
-Laramee%
-}{%
-{\protect \APACyear {2011}}%
-{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
-Laramee2011a}
-\APACinsertmetastar {%
-Laramee2011a}%
-\begin{APACrefauthors}%
-Laramee, R\BPBI S.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2011{\protect \BCnt {2}}}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Bob's project guidelines: Writing a dissertation for a
-  BSc. in computer science}} {{Bob's project guidelines: Writing a dissertation
-  for a BSc. in computer science}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{ITALICS Innovations in Teaching and Learning in
-  Information and Computer Sciences}{10}{1}{43--54}.
-\newblock
-\begin{APACrefDOI} \doi{10.11120/ital.2011.10010043} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Lazaroiu%
-\ \BBA {} Roscia%
-}{%
-Lazaroiu%
-\ \BBA {} Roscia%
-}{%
-{\protect \APACyear {2012}}%
-}]{%
-Lazaroiu2012}
-\APACinsertmetastar {%
-Lazaroiu2012}%
-\begin{APACrefauthors}%
-Lazaroiu, G\BPBI C.%
-\BCBT {}\ \BBA {} Roscia, M.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2012}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Definition methodology for the smart cities model}}
-  {{Definition methodology for the smart cities model}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Energy}{47}{1}{326--332}.
-\newblock
-\begin{APACrefDOI} \doi{10.1016/j.energy.2012.09.028} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Liu%
-}{%
-Liu%
-}{%
-{\protect \APACyear {2017}}%
-}]{%
-Liu}
-\APACinsertmetastar {%
-Liu}%
-\begin{APACrefauthors}%
-Liu, Y.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2017}{}{}.
-\newblock
-\APACrefbtitle {{Visualization of Multivariate Data}.} {{Visualization of
-  Multivariate Data}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-17}]\url{http://people.stat.sc.edu/hansont/stat730/MultivariateDataVisualization.pdf}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Mapbox%
-}{%
-Mapbox%
-}{%
-{\protect \APACyear {2017}}%
-}]{%
-Mapbox2017}
-\APACinsertmetastar {%
-Mapbox2017}%
-\begin{APACrefauthors}%
-Mapbox.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2017}{}{}.
-\newblock
-\APACrefbtitle {{Mapbox Studio}.} {{Mapbox Studio}.}
-\newblock
-\begin{APACrefURL} [{2017-04-20}]\url{https://www.mapbox.com/studio/}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Myers%
-, Thomas%
-\BCBL {}\ \BBA {} Sandler%
-}{%
-Myers%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2004}}%
-}]{%
-Myers2004a}
-\APACinsertmetastar {%
-Myers2004a}%
-\begin{APACrefauthors}%
-Myers, G\BPBI J.%
-, Thomas, T\BPBI M.%
-\BCBL {}\ \BBA {} Sandler, C.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYear{2004}.
-\newblock
-\APACrefbtitle {{The Art of Software Testing}} {{The Art of Software Testing}}\
-  (\BVOL~1).
-\newblock
-\APACaddressPublisher{}{John Wiley {\&} Sons}.
-\newblock
-\begin{APACrefURL} \url{http://www.worldcat.org/oclc/65982801} \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.1002/stvr.321} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-{NYC Taxi {\&} Limousine Commission}%
-}{%
-{NYC Taxi {\&} Limousine Commission}%
-}{%
-{\protect \APACyear {{\protect \bibnodate {}}}}%
-}]{%
-NYCTaxi&LimousineCommission}
-\APACinsertmetastar {%
-NYCTaxi&LimousineCommission}%
-\begin{APACrefauthors}%
-{NYC Taxi {\&} Limousine Commission}.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
-\newblock
-\APACrefbtitle {{NYC Taxi {\&} Limousine Commission - Taxicab Passenger
-  Enhancements Project (TPEP) Archive}.} {{NYC Taxi {\&} Limousine Commission -
-  Taxicab Passenger Enhancements Project (TPEP) Archive}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-24}]\url{http://www.nyc.gov/html/tlc/html/industry/taxicab{\_}serv{\_}enh{\_}archive.shtml}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-{NYC Taxi {\&} Limousine Commission}%
-}{%
-{NYC Taxi {\&} Limousine Commission}%
-}{%
-{\protect \APACyear {2015}}%
-}]{%
-NYCTaxi&LimousineCommission2015}
-\APACinsertmetastar {%
-NYCTaxi&LimousineCommission2015}%
-\begin{APACrefauthors}%
-{NYC Taxi {\&} Limousine Commission}.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2015}{}{}.
-\newblock
-\APACrefbtitle {{Data Dictionary - SHL Trip Records}.} {{Data Dictionary - SHL
-  Trip Records}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-25}]\url{http://www.nyc.gov/html/tlc/html/about/trip{\_}record{\_}data.shtml.}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-{NYC Taxi {\&} Limousine Commission}%
-}{%
-{NYC Taxi {\&} Limousine Commission}%
-}{%
-{\protect \APACyear {2017}}%
-}]{%
-NYCTaxi&LimousineCommission2017}
-\APACinsertmetastar {%
-NYCTaxi&LimousineCommission2017}%
-\begin{APACrefauthors}%
-{NYC Taxi {\&} Limousine Commission}.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2017}{}{}.
-\newblock
-\APACrefbtitle {{NYC Taxi {\&} Limousine Commission - Trip Record Data}.} {{NYC
-  Taxi {\&} Limousine Commission - Trip Record Data}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-24}]\url{http://www.nyc.gov/html/tlc/html/about/trip{\_}record{\_}data.shtml}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-QUnit%
-}{%
-QUnit%
-}{%
-{\protect \APACyear {{\protect \bibnodate {}}}}%
-}]{%
-qunit}
-\APACinsertmetastar {%
-qunit}%
-\begin{APACrefauthors}%
-QUnit.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
-\newblock
-\APACrefbtitle {{QUnit: A JavaScript Unit Testing framework}.} {{QUnit: A
-  JavaScript Unit Testing framework}.}
-\newblock
-\begin{APACrefURL} [{2017-04-29}]\url{https://qunitjs.com/} \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Ratti%
-\ \protect \BOthers {.}}{%
-Ratti%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2016}}%
-{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
-SenseableCityLab-Ewaste}
-\APACinsertmetastar {%
-SenseableCityLab-Ewaste}%
-\begin{APACrefauthors}%
-Ratti, C.%
-, Biderman, A.%
-, Yen, M.%
-, Teh, W\BPBI H.%
-, Puckett, J.%
-, Groark, C.%
-\BDBL {}Duarte, F.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2016{\protect \BCnt {1}}}{}{}.
-\newblock
-\APACrefbtitle {{MONITOUR}.} {{MONITOUR}.}
-\newblock
-\begin{APACrefURL} [{2017-04-23}]\url{http://senseable.mit.edu/monitour-app/}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Ratti%
-\ \protect \BOthers {.}}{%
-Ratti%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2016}}%
-{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
-SenseableCityLab-Seattle}
-\APACinsertmetastar {%
-SenseableCityLab-Seattle}%
-\begin{APACrefauthors}%
-Ratti, C.%
-, Biderman, A.%
-, Yen, M.%
-, Teh, W\BPBI H.%
-, Puckett, J.%
-, Groark, C.%
-\BDBL {}Duarte, F.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2016{\protect \BCnt {2}}}{}{}.
-\newblock
-\APACrefbtitle {{MONITOUR}.} {{MONITOUR}.}
-\newblock
-\begin{APACrefURL}
-  [{2017-04-23}]\url{http://senseable.mit.edu/monitour-app/{\#}wa551396}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Rodden%
-}{%
-Rodden%
-}{%
-{\protect \APACyear {2017}}%
-}]{%
-Rodden2017}
-\APACinsertmetastar {%
-Rodden2017}%
-\begin{APACrefauthors}%
-Rodden, K.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2017}{}{}.
-\newblock
-\APACrefbtitle {{Sequences sunburst - bl.ocks.org}.} {{Sequences sunburst -
-  bl.ocks.org}.}
-\newblock
-\begin{APACrefURL} [{2017-04-25}]\url{https://bl.ocks.org/kerryrodden/7090426}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Roubtsov%
-}{%
-Roubtsov%
-}{%
-{\protect \APACyear {2010}}%
-}]{%
-Roubtsov2010}
-\APACinsertmetastar {%
-Roubtsov2010}%
-\begin{APACrefauthors}%
-Roubtsov, V.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2010}{}{}.
-\newblock
-\APACrefbtitle {{EMMA: a free Java code coverage tool}.} {{EMMA: a free Java
-  code coverage tool}.}
-\newblock
-\begin{APACrefURL} [{2017-04-29}]\url{http://emma.sourceforge.net/}
-  \end{APACrefURL}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Vliet%
-}{%
-Vliet%
-}{%
-{\protect \APACyear {2007}}%
-}]{%
-Vliet2007}
-\APACinsertmetastar {%
-Vliet2007}%
-\begin{APACrefauthors}%
-Vliet, H\BPBI V.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYear{2007}.
-\newblock
-\APACrefbtitle {{Software Engineering: Principles and Practice}} {{Software
-  Engineering: Principles and Practice}}.
-\newblock
-\APACaddressPublisher{}{Wiley}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Ward%
-, Grinstein%
-\BCBL {}\ \BBA {} Keim%
-}{%
-Ward%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2010}}%
-}]{%
-Ward2010}
-\APACinsertmetastar {%
-Ward2010}%
-\begin{APACrefauthors}%
-Ward, M.%
-, Grinstein, G.%
-\BCBL {}\ \BBA {} Keim, D.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYear{2010}.
-\newblock
-\APACrefbtitle {{Interactive Data Visualization: Foundations, Techniques, and
-  Applications}} {{Interactive Data Visualization: Foundations, Techniques, and
-  Applications}}.
-\PrintBackRefs{\CurrentBib}
-
-\end{thebibliography}
