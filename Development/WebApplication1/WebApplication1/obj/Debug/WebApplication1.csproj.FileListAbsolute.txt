@@ -87,3 +87,9 @@ C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplicati
 C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\bin\roslyn\System.Xml.XPath.dll
 C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\bin\roslyn\System.Xml.XPath.XDocument.dll
 C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\bin\EntityFramework.dll
+C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.dll
+C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\bin\MySql.Data.dll
+C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\bin\MySql.Data.Entity.EF6.dll
+C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\bin\EntityFramework.xml
+C:\Users\wang\documents\visual studio 2017\Projects\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.xml
