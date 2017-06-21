@@ -1,0 +1,161 @@
+﻿@model WebApplication1.Models.yellow_tripdata_2016_08
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>yellow_tripdata_2016_08</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.C_VendorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C_VendorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tpep_pickup_datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tpep_pickup_datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tpep_dropoff_datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tpep_dropoff_datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passenger_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passenger_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trip_distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trip_distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatecodeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatecodeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.store_and_fwd_flag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.store_and_fwd_flag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PULocationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PULocationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOLocationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOLocationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fare_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fare_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.extra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.extra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mta_tax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mta_tax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tip_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tip_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tolls_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tolls_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.improvement_surcharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.improvement_surcharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_amount)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

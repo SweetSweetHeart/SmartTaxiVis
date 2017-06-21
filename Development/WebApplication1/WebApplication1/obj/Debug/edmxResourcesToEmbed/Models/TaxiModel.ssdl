@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nyc_taxiModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="yellow_tripdata_2016-08">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="﻿VendorID" Type="int" />
+    <Property Name="tpep_pickup_datetime" Type="datetime" Precision="0" />
+    <Property Name="tpep_dropoff_datetime" Type="datetime" Precision="0" />
+    <Property Name="passenger_count" Type="int" />
+    <Property Name="trip_distance" Type="double" />
+    <Property Name="RatecodeID" Type="int" />
+    <Property Name="store_and_fwd_flag" Type="text" />
+    <Property Name="PULocationID" Type="int" />
+    <Property Name="DOLocationID" Type="int" />
+    <Property Name="payment_type" Type="int" />
+    <Property Name="fare_amount" Type="double" />
+    <Property Name="extra" Type="double" />
+    <Property Name="mta_tax" Type="double" />
+    <Property Name="tip_amount" Type="double" />
+    <Property Name="tolls_amount" Type="double" />
+    <Property Name="improvement_surcharge" Type="double" />
+    <Property Name="total_amount" Type="double" />
+  </EntityType>
+  <EntityContainer Name="nyc_taxiModelStoreContainer">
+    <EntitySet Name="yellow_tripdata_2016-08" EntityType="Self.yellow_tripdata_2016-08" Schema="nyc_taxi" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

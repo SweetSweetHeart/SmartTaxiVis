@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="nyc_taxiModelStoreContainer" CdmEntityContainer="TaxiEntities">
+    <EntitySetMapping Name="yellow_tripdata_2016_08">
+      <EntityTypeMapping TypeName="nyc_taxiModel.yellow_tripdata_2016_08">
+        <MappingFragment StoreEntitySet="yellow_tripdata_2016-08">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="C_VendorID" ColumnName="﻿VendorID" />
+          <ScalarProperty Name="tpep_pickup_datetime" ColumnName="tpep_pickup_datetime" />
+          <ScalarProperty Name="tpep_dropoff_datetime" ColumnName="tpep_dropoff_datetime" />
+          <ScalarProperty Name="passenger_count" ColumnName="passenger_count" />
+          <ScalarProperty Name="trip_distance" ColumnName="trip_distance" />
+          <ScalarProperty Name="RatecodeID" ColumnName="RatecodeID" />
+          <ScalarProperty Name="store_and_fwd_flag" ColumnName="store_and_fwd_flag" />
+          <ScalarProperty Name="PULocationID" ColumnName="PULocationID" />
+          <ScalarProperty Name="DOLocationID" ColumnName="DOLocationID" />
+          <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+          <ScalarProperty Name="fare_amount" ColumnName="fare_amount" />
+          <ScalarProperty Name="extra" ColumnName="extra" />
+          <ScalarProperty Name="mta_tax" ColumnName="mta_tax" />
+          <ScalarProperty Name="tip_amount" ColumnName="tip_amount" />
+          <ScalarProperty Name="tolls_amount" ColumnName="tolls_amount" />
+          <ScalarProperty Name="improvement_surcharge" ColumnName="improvement_surcharge" />
+          <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -21,16 +21,11 @@ namespace WebApplication1
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/metisMenu.js",
-                      "~/Scripts/font-awesome.js",
-                      "~/Scripts/sb-admin-2.js"));
+                      "~/Scripts/font-awesome.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-
-                      "~/Content/bootstrap.css",
-                      "~/Content/metisMenu.css",
-                      "~/Content/font-awesome.css",
-                      "~/Content/sb-admin-2.css"));
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/font-awesome.css"));
         }
     }
 }
