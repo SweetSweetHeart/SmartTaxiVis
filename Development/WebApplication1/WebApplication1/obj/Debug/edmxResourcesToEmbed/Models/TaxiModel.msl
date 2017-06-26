@@ -1,27 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="nyc_taxiModelStoreContainer" CdmEntityContainer="TaxiEntities">
-    <EntitySetMapping Name="yellow_tripdata_2016_08">
-      <EntityTypeMapping TypeName="nyc_taxiModel.yellow_tripdata_2016_08">
-        <MappingFragment StoreEntitySet="yellow_tripdata_2016-08">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="C_VendorID" ColumnName="﻿VendorID" />
-          <ScalarProperty Name="tpep_pickup_datetime" ColumnName="tpep_pickup_datetime" />
-          <ScalarProperty Name="tpep_dropoff_datetime" ColumnName="tpep_dropoff_datetime" />
-          <ScalarProperty Name="passenger_count" ColumnName="passenger_count" />
-          <ScalarProperty Name="trip_distance" ColumnName="trip_distance" />
-          <ScalarProperty Name="RatecodeID" ColumnName="RatecodeID" />
+  <EntityContainerMapping StorageEntityContainer="TaxiDataModelStoreContainer" CdmEntityContainer="TaxiDataEntities">
+    <EntitySetMapping Name="green_16_dec">
+      <EntityTypeMapping TypeName="TaxiDataModel.green_16_dec">
+        <MappingFragment StoreEntitySet="green_16_dec">
+          <ScalarProperty Name="entryID" ColumnName="entryID" />
+          <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+          <ScalarProperty Name="lpep_pickup_datetime" ColumnName="lpep_pickup_datetime" />
+          <ScalarProperty Name="lpep_dropoff_datetime" ColumnName="lpep_dropoff_datetime" />
           <ScalarProperty Name="store_and_fwd_flag" ColumnName="store_and_fwd_flag" />
+          <ScalarProperty Name="RatecodeID" ColumnName="RatecodeID" />
           <ScalarProperty Name="PULocationID" ColumnName="PULocationID" />
           <ScalarProperty Name="DOLocationID" ColumnName="DOLocationID" />
-          <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+          <ScalarProperty Name="passenger_count" ColumnName="passenger_count" />
+          <ScalarProperty Name="trip_distance" ColumnName="trip_distance" />
           <ScalarProperty Name="fare_amount" ColumnName="fare_amount" />
           <ScalarProperty Name="extra" ColumnName="extra" />
           <ScalarProperty Name="mta_tax" ColumnName="mta_tax" />
           <ScalarProperty Name="tip_amount" ColumnName="tip_amount" />
           <ScalarProperty Name="tolls_amount" ColumnName="tolls_amount" />
+          <ScalarProperty Name="ehail_fee" ColumnName="ehail_fee" />
           <ScalarProperty Name="improvement_surcharge" ColumnName="improvement_surcharge" />
           <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+          <ScalarProperty Name="trip_type" ColumnName="trip_type" />
+          <ScalarProperty Name="payment_type" ColumnName="payment_type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

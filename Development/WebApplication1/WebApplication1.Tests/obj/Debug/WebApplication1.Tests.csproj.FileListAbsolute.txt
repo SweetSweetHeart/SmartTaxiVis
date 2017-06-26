@@ -1,1 +1,2 @@
 C:\Git\CSCM10_SCV\Development\WebApplication1\WebApplication1.Tests\obj\Debug\WebApplication1.Tests.csprojResolveAssemblyReference.cache
+D:\Git\CSCM10_SCV\Development\WebApplication1\WebApplication1.Tests\obj\Debug\WebApplication1.Tests.csprojResolveAssemblyReference.cache

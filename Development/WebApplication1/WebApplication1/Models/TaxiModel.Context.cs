@@ -13,10 +13,10 @@ namespace WebApplication1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TaxiEntities : DbContext
+    public partial class TaxiDataEntities : DbContext
     {
-        public TaxiEntities()
-            : base("name=TaxiEntities")
+        public TaxiDataEntities()
+            : base("name=TaxiDataEntities")
         {
         }
     
@@ -25,6 +25,6 @@ namespace WebApplication1.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<yellow_tripdata_2016_08> yellow_tripdata_2016_08 { get; set; }
+        public virtual DbSet<green_16_dec> green_16_dec { get; set; }
     }
 }

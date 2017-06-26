@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.yellow_tripdata_2016_08
+﻿@model WebApplication1.Models.green_16_dec
 
 @{
     ViewBag.Title = "Details";
@@ -8,55 +8,31 @@
 <h2>Details</h2>
 
 <div>
-    <h4>yellow_tripdata_2016_08</h4>
+    <h4>green_16_dec</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.C_VendorID)
+            @Html.DisplayNameFor(model => model.VendorID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.C_VendorID)
+            @Html.DisplayFor(model => model.VendorID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tpep_pickup_datetime)
+            @Html.DisplayNameFor(model => model.lpep_pickup_datetime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tpep_pickup_datetime)
+            @Html.DisplayFor(model => model.lpep_pickup_datetime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tpep_dropoff_datetime)
+            @Html.DisplayNameFor(model => model.lpep_dropoff_datetime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tpep_dropoff_datetime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.passenger_count)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.passenger_count)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.trip_distance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.trip_distance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RatecodeID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RatecodeID)
+            @Html.DisplayFor(model => model.lpep_dropoff_datetime)
         </dd>
 
         <dt>
@@ -65,6 +41,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.store_and_fwd_flag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatecodeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatecodeID)
         </dd>
 
         <dt>
@@ -84,11 +68,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.payment_type)
+            @Html.DisplayNameFor(model => model.passenger_count)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.payment_type)
+            @Html.DisplayFor(model => model.passenger_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trip_distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trip_distance)
         </dd>
 
         <dt>
@@ -132,6 +124,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.ehail_fee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ehail_fee)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.improvement_surcharge)
         </dt>
 
@@ -147,9 +147,25 @@
             @Html.DisplayFor(model => model.total_amount)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.trip_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trip_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_type)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.entryID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

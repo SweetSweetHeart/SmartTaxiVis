@@ -1,18 +1,23 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Models;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Views
 {
     public class TaxiController : Controller
     {
-        private TaxiEntities db = new TaxiEntities();
+        private TaxiDataEntities db = new TaxiDataEntities();
 
         // GET: Taxi
         public ActionResult Index()
         {
-            return View(db.yellow_tripdata_2016_08.ToList().Take(100));
+            return View(db.green_16_dec.ToList().Take(100));
         }
 
         // GET: Taxi/Details/5
@@ -22,12 +27,12 @@ namespace WebApplication1.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            yellow_tripdata_2016_08 yellow_tripdata_2016_08 = db.yellow_tripdata_2016_08.Find(id);
-            if (yellow_tripdata_2016_08 == null)
+            green_16_dec green_16_dec = db.green_16_dec.Find(id);
+            if (green_16_dec == null)
             {
                 return HttpNotFound();
             }
-            return View(yellow_tripdata_2016_08);
+            return View(green_16_dec);
         }
 
         // GET: Taxi/Create
@@ -41,16 +46,16 @@ namespace WebApplication1.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,C_VendorID,tpep_pickup_datetime,tpep_dropoff_datetime,passenger_count,trip_distance,RatecodeID,store_and_fwd_flag,PULocationID,DOLocationID,payment_type,fare_amount,extra,mta_tax,tip_amount,tolls_amount,improvement_surcharge,total_amount")] yellow_tripdata_2016_08 yellow_tripdata_2016_08)
+        public ActionResult Create([Bind(Include = "entryID,VendorID,lpep_pickup_datetime,lpep_dropoff_datetime,store_and_fwd_flag,RatecodeID,PULocationID,DOLocationID,passenger_count,trip_distance,fare_amount,extra,mta_tax,tip_amount,tolls_amount,ehail_fee,improvement_surcharge,total_amount,trip_type,payment_type")] green_16_dec green_16_dec)
         {
             if (ModelState.IsValid)
             {
-                db.yellow_tripdata_2016_08.Add(yellow_tripdata_2016_08);
+                db.green_16_dec.Add(green_16_dec);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(yellow_tripdata_2016_08);
+            return View(green_16_dec);
         }
 
         // GET: Taxi/Edit/5
@@ -60,12 +65,12 @@ namespace WebApplication1.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            yellow_tripdata_2016_08 yellow_tripdata_2016_08 = db.yellow_tripdata_2016_08.Find(id);
-            if (yellow_tripdata_2016_08 == null)
+            green_16_dec green_16_dec = db.green_16_dec.Find(id);
+            if (green_16_dec == null)
             {
                 return HttpNotFound();
             }
-            return View(yellow_tripdata_2016_08);
+            return View(green_16_dec);
         }
 
         // POST: Taxi/Edit/5
@@ -73,15 +78,15 @@ namespace WebApplication1.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,C_VendorID,tpep_pickup_datetime,tpep_dropoff_datetime,passenger_count,trip_distance,RatecodeID,store_and_fwd_flag,PULocationID,DOLocationID,payment_type,fare_amount,extra,mta_tax,tip_amount,tolls_amount,improvement_surcharge,total_amount")] yellow_tripdata_2016_08 yellow_tripdata_2016_08)
+        public ActionResult Edit([Bind(Include = "entryID,VendorID,lpep_pickup_datetime,lpep_dropoff_datetime,store_and_fwd_flag,RatecodeID,PULocationID,DOLocationID,passenger_count,trip_distance,fare_amount,extra,mta_tax,tip_amount,tolls_amount,ehail_fee,improvement_surcharge,total_amount,trip_type,payment_type")] green_16_dec green_16_dec)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(yellow_tripdata_2016_08).State = EntityState.Modified;
+                db.Entry(green_16_dec).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(yellow_tripdata_2016_08);
+            return View(green_16_dec);
         }
 
         // GET: Taxi/Delete/5
@@ -91,12 +96,12 @@ namespace WebApplication1.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            yellow_tripdata_2016_08 yellow_tripdata_2016_08 = db.yellow_tripdata_2016_08.Find(id);
-            if (yellow_tripdata_2016_08 == null)
+            green_16_dec green_16_dec = db.green_16_dec.Find(id);
+            if (green_16_dec == null)
             {
                 return HttpNotFound();
             }
-            return View(yellow_tripdata_2016_08);
+            return View(green_16_dec);
         }
 
         // POST: Taxi/Delete/5
@@ -104,8 +109,8 @@ namespace WebApplication1.Models
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            yellow_tripdata_2016_08 yellow_tripdata_2016_08 = db.yellow_tripdata_2016_08.Find(id);
-            db.yellow_tripdata_2016_08.Remove(yellow_tripdata_2016_08);
+            green_16_dec green_16_dec = db.green_16_dec.Find(id);
+            db.green_16_dec.Remove(green_16_dec);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

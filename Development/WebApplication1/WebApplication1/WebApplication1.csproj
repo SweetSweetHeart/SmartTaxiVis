@@ -157,7 +157,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\TaxiController.cs" />
+    <Compile Include="Models\green_16_dec.cs">
+      <DependentUpon>TaxiModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TaxiModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,10 +175,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TaxiModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\yellow_tripdata_2016_08.cs">
-      <DependentUpon>TaxiModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\TaxiController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -198,13 +198,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <EntityDeploy Include="Models\TaxiModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TaxiModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TaxiModel.edmx.diagram">
-      <DependentUpon>TaxiModel.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -213,6 +206,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\TaxiModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TaxiModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TaxiModel.edmx.diagram">
+      <DependentUpon>TaxiModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Models\TaxiModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
