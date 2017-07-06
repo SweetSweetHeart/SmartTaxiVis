@@ -26,5 +26,7 @@ namespace WebApplication1.Models
         }
     
         public virtual DbSet<green_16_dec> green_16_dec { get; set; }
+        public virtual DbSet<TaxiZone> TaxiZone { get; set; }
+        public virtual DbSet<Stage_PUCount> Stage_PUCount { get; set; }
     }
 }

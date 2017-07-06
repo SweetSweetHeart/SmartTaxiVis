@@ -5,7 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="27c3de4f79a24520bea8f32a18a909b4" Name="Diagram1">
-        <EntityTypeShape EntityType="TaxiDataModel.green_16_dec" Width="4.375" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaxiDataModel.green_16_dec" Width="3" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaxiDataModel.TaxiZone" Width="1.5" PointX="5.75" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

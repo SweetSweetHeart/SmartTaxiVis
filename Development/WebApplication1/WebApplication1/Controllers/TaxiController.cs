@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,7 +18,10 @@ namespace WebApplication1.Views
         // GET: Taxi
         public ActionResult Index()
         {
-            return View(db.green_16_dec.ToList().Take(100));
+            var result = db.green_16_dec.ToList().Take(10);
+            StageData();
+
+            return View(result);
         }
 
         // GET: Taxi/Details/5
@@ -122,6 +126,24 @@ namespace WebApplication1.Views
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void StageData()
+        {
+
+            List<KeyValuePair<int, int>> pairList = new List<KeyValuePair<int, int>>();
+            var query = db.green_16_dec.GroupBy(c => c.PULocationID).OrderByDescending(c => c.Key).Take(10);
+            foreach (var item in query)
+            {
+                Debug.WriteLine(item.Key);
+            }
+
+            foreach (var zone in db.TaxiZone.ToList())
+            {
+                int count = db.green_16_dec.Count(t => t.PULocationID == zone.TaxiZoneID);
+                pairList.Add(new KeyValuePair<int, int>(zone.TaxiZoneID, count));
+            }
+
         }
     }
 }
