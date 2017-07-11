@@ -10,19 +10,31 @@
 }
 
 @Styles.Render("~/Content/nouislider")
-<!--<button id="PU">By Pickup</button>
-<button id="DO">By Dropoff</button>-->
-
-<div style="margin:auto;">
-    <div id="slider" style="margin:auto;width:400px;"></div>
-    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-    <div id="loading" style="margin:auto;">
-        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-        <span id="loading-message">Loading...</span>
+<div class="center-block">
+    <div id="diagram"></div>
+    <div class="control btn-group" role="group">
+        <button id="btn_PU" type="button" class="btn btn-danger">By Pickup</button>
+        <button id="btn_DO" type="button" class="btn btn-info">By Dropoff</button>
+        <button type="button" class="btn btn-success">Random</button>
     </div>
-    <div id="diagram" style="margin:auto;width:1000px;"></div>
-</div>
 
+    <div class="sliderDiv control">
+        <div id="zoneSlider"></div>
+    </div>
+
+    <div class="sliderDiv control">
+        <div id="timeSlider"></div>
+    </div>
+
+
+    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+    <div id="loading">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span>Loading...</span>
+    </div>
+
+</div>
+<pre id="zones" class="pre-scrollable"></pre>
 <script>
     // some default values to play with, before the server returns actual data
         var matrixJson = [
@@ -51,6 +63,7 @@
         function retrieve(limit, type) {
             $("#zones").html(JSON.stringify(zones, null, 2));
             $("#loading").show();
+            $(".control").hide();
             $.ajax({
                 type: 'POST',
                 url: "@Url.Action("AjaxRetrieveWithLimit", "Home")",
@@ -76,7 +89,7 @@
 
                     matrixJson = newMatrixJson;
                     updateChords(matrixJson);
-                    initSlider(limit);
+                    initSliders(limit);
                 },
                 error: function (emp) {
                     alert('Your Internet connection might be unstable, please refresh and try again.');
@@ -85,9 +98,10 @@
             $("#zones").html(JSON.stringify(zones, null, 2));
         }
 
-        function initSlider(max) {
-            var behaviourSlider = document.getElementById('slider');
-            noUiSlider.create(behaviourSlider, {
+        function initSliders(max) {
+            var zoneSlider = document.getElementById('zoneSlider');
+
+            noUiSlider.create(zoneSlider, {
                 start: [1, max],
                 step: 1,
                 behaviour: 'drag-tap',
@@ -98,7 +112,7 @@
                 }
             });
 
-            behaviourSlider.noUiSlider.on('change', function (values) {
+            zoneSlider.noUiSlider.on('change', function (values) {
                 values[0] = parseInt(values[0], 10);
                 values[1] = parseInt(values[1], 10);
 
@@ -120,6 +134,42 @@
                 $("#zones").html(JSON.stringify(zones, null, 2));
                 updateChords(trips);
             });
+
+            var timeSlider = document.getElementById('timeSlider');
+
+            noUiSlider.create(timeSlider, {
+                start: [7, 12],
+                step: 1,
+                behaviour: 'drag-tap',
+                connect: true,
+                range: {
+                    'min': 0,
+                    'max': 23
+                }
+            });
+
+            //timeSlider.noUiSlider.on('change', function (values) {
+            //    values[0] = parseInt(values[0], 10);
+            //    values[1] = parseInt(values[1], 10);
+
+                //$("#amount").val(values[0] + " - " + values[1]);
+
+                //var trips = $.extend(true, [], matrixJson);
+                //zones = $.extend(true, [], taxizones);
+                //zones.splice(0, values[0] - 1);
+                //zones.splice(values[1] - values[0] + 1, max - values[1]);
+
+                //trips.splice(0, values[0] - 1);
+
+                //trips.splice(values[1] - values[0], max - values[1]);
+                //trips.forEach(function (element, i) {
+                //    element.splice(0, values[0] - 1);
+                //    element.splice(values[1] - values[0], max - values[1]);
+                //}, this);
+
+                //$("#zones").html(JSON.stringify(zones, null, 2));
+                //updateChords(trips);
+            //});
         };
 
         $(function () {
@@ -322,6 +372,7 @@
 
 
             $("#loading").hide();
+            $(".control").show();
 
             last_layout = layout;
         }
@@ -398,4 +449,3 @@
             };
         }
 </script>
-<pre id="zones" class="pre-scrollable"></pre>
