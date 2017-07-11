@@ -9,8 +9,7 @@ namespace WebApplication1
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.1.1.slim.min.js",
-                        "~/Scripts/jquery-ui-1.12.1.min.js"));
+                        "~/Scripts/jquery-3.1.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -20,17 +19,20 @@ namespace WebApplication1
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/d3").Include(
-                      "~/Scripts/d3.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/nouislider").Include(
+                      "~/Scripts/nouislider.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/font-awesome.min.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/font-awesome.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/Site.css",
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/font-awesome.min.css"));
+                      "~/Content/bootstrap.css",
+                      "~/Content/font-awesome.css"));
+
+            bundles.Add(new StyleBundle("~/Content/nouislider").Include(
+                      "~/Content/nouislider.css"));
         }
     }
 }
