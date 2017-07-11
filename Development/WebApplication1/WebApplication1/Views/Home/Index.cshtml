@@ -24,13 +24,7 @@
 </div>
 
 <script>
-        var taxizones = [{ "name": "East Harlem North" }, { "name": "Central Harlem" }, { "name": "East Harlem South" }, { "name": "Astoria" }, { "name": "Morningside Heights" }, { "name": "Williamsburg (North Side)" }, { "name": "Elmhurst" }, { "name": "Park Slope" }, { "name": "Central Harlem North" }, { "name": "Fort Greene" }];
-    
-        //assign random colors to chords
-        jQuery.each(taxizones, function (i, val) {
-            val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
-        });
-        var zones = $.extend(true, [], taxizones);
+    // some default values to play with, before the server returns actual data
         var matrixJson = [
             [45, 49, 45, 74, 26, 18, 2, 4, 0, 9],
             [63, 16, 25, 51, 14, 4, 4, 7, 0, 22],
@@ -43,14 +37,24 @@
             [4, 12, 2, 2, 3, 14, 28, 0, 0, 4],
             [1, 12, 9, 2, 17, 14, 18, 0, 0, 2]
         ];
+        var taxizones = [{ "name": "East Harlem North" }, { "name": "Central Harlem" }, { "name": "East Harlem South" }, { "name": "Astoria" }, { "name": "Morningside Heights" }, { "name": "Williamsburg (North Side)" }, { "name": "Elmhurst" }, { "name": "Park Slope" }, { "name": "Central Harlem North" }, { "name": "Fort Greene" }];
 
-        function retrieve(limit) {
+        //assign random colors to chords
+        jQuery.each(taxizones, function (i, val) {
+            val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
+        });
+        var zones = $.extend(true, [], taxizones);
+
+
+        var type = "PU"; // the default order of TaxiZones is by pickup counts
+
+        function retrieve(limit, type) {
             $("#zones").html(JSON.stringify(zones, null, 2));
             $("#loading").show();
             $.ajax({
                 type: 'POST',
                 url: "@Url.Action("AjaxRetrieveWithLimit", "Home")",
-                data: { limit: limit },
+                data: { limit: limit, type:type },
                 success: function (res) {
                     taxizones = JSON.parse(res[0]);
 
@@ -59,7 +63,6 @@
                         val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
                     });
                     zones = $.extend(true, [], taxizones);
-
 
                     var newMatrixJson = [];
                     jQuery.each(JSON.parse(res[3]), function (i, val) {
@@ -106,13 +109,6 @@
                 zones.splice(0, values[0] - 1);
                 zones.splice(values[1] - values[0] + 1, max - values[1]);
 
-
-
-                console.log(values[0]);
-                console.log(values[1]);
-
-                console.log(zones);
-
                 trips.splice(0, values[0] - 1);
 
                 trips.splice(values[1] - values[0], max - values[1]);
@@ -120,7 +116,6 @@
                     element.splice(0, values[0] - 1);
                     element.splice(values[1] - values[0], max - values[1]);
                 }, this);
-
 
                 $("#zones").html(JSON.stringify(zones, null, 2));
                 updateChords(trips);
@@ -130,7 +125,7 @@
         $(function () {
             updateChords(matrixJson);
             var limit = 20;
-            retrieve(limit);
+            retrieve(limit, type);
         });
 
 </script>
@@ -402,6 +397,5 @@
                 };
             };
         }
-
 </script>
 <pre id="zones" class="pre-scrollable"></pre>
