@@ -1,1 +1,24 @@
-﻿
+﻿#chart {
+    font: 10px sans-serif;
+}
+
+#circle circle {
+    fill: none;
+    pointer-events: all;
+}
+
+path.chord {
+    stroke: #000;
+    stroke-width: .10px;
+    transition: opacity 0.3s;
+}
+
+#circle:hover path.fade {
+    opacity: 0;
+}
+
+svg {
+    font-size: 10px;
+    color: #999;
+    font-family: 'Exo 2', sans-serif;
+}

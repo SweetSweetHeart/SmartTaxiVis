@@ -9,7 +9,7 @@ namespace WebApplication1
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-3.1.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -19,18 +19,20 @@ namespace WebApplication1
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/nouislider").Include(
+                      "~/Scripts/nouislider.js"));
+            
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/metisMenu.js",
-                      "~/Scripts/font-awesome.js",
-                      "~/Scripts/sb-admin-2.js"));
+                      "~/Scripts/font-awesome.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-
+                      "~/Content/Site.css",
                       "~/Content/bootstrap.css",
-                      "~/Content/metisMenu.css",
-                      "~/Content/font-awesome.css",
-                      "~/Content/sb-admin-2.css"));
+                      "~/Content/font-awesome.css"));
+
+            bundles.Add(new StyleBundle("~/Content/nouislider").Include(
+                      "~/Content/nouislider.css"));
         }
     }
 }

@@ -1,0 +1,11 @@
+For Windows:
+Host: 45.76.131.144
+Port: 443
+SSH Tunnel
+Source port: 3309
+Destination: 45.76.131.144:3306
+
+
+
+For Linux/Mac:
+ssh -f root@45.76.131.144 -L 3309:45.76.131.144:3306 -N

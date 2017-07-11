@@ -1,0 +1,171 @@
+﻿@model WebApplication1.Models.green_16_dec
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>green_16_dec</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lpep_pickup_datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lpep_pickup_datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lpep_dropoff_datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lpep_dropoff_datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.store_and_fwd_flag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.store_and_fwd_flag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatecodeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatecodeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PULocationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PULocationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOLocationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOLocationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passenger_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passenger_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trip_distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trip_distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fare_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fare_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.extra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.extra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mta_tax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mta_tax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tip_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tip_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tolls_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tolls_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ehail_fee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ehail_fee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.improvement_surcharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.improvement_surcharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trip_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trip_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.entryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

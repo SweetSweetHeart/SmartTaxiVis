@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TaxiDataModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="green_16_dec">
+          <Key>
+            <PropertyRef Name="entryID" />
+          </Key>
+          <Property Name="entryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorID" Type="tinyint" />
+          <Property Name="lpep_pickup_datetime" Type="datetime" Precision="0" />
+          <Property Name="lpep_dropoff_datetime" Type="datetime" Precision="0" />
+          <Property Name="store_and_fwd_flag" Type="varchar" MaxLength="4" />
+          <Property Name="RatecodeID" Type="tinyint" />
+          <Property Name="PULocationID" Type="int" />
+          <Property Name="DOLocationID" Type="int" />
+          <Property Name="passenger_count" Type="tinyint" />
+          <Property Name="trip_distance" Type="double" />
+          <Property Name="fare_amount" Type="double" />
+          <Property Name="extra" Type="double" />
+          <Property Name="mta_tax" Type="double" />
+          <Property Name="tip_amount" Type="double" />
+          <Property Name="tolls_amount" Type="double" />
+          <Property Name="ehail_fee" Type="double" />
+          <Property Name="improvement_surcharge" Type="double" />
+          <Property Name="total_amount" Type="double" />
+          <Property Name="trip_type" Type="tinyint" />
+          <Property Name="payment_type" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Stage_PUCount">
+          <Key>
+            <PropertyRef Name="TaxiZone" />
+          </Key>
+          <Property Name="TaxiZone" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" />
+        </EntityType>
+        <EntityType Name="TaxiZone">
+          <Key>
+            <PropertyRef Name="TaxiZoneID" />
+          </Key>
+          <Property Name="TaxiZoneID" Type="int" Nullable="false" />
+          <Property Name="TaxiZoneName" Type="varchar" MaxLength="45" />
+          <Property Name="Borough" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <Association Name="Stage_PUCount_ID">
+          <End Role="TaxiZone" Type="Self.TaxiZone" Multiplicity="1" />
+          <End Role="Stage_PUCount" Type="Self.Stage_PUCount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TaxiZone">
+              <PropertyRef Name="TaxiZoneID" />
+            </Principal>
+            <Dependent Role="Stage_PUCount">
+              <PropertyRef Name="TaxiZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TaxiDataModelStoreContainer">
+          <EntitySet Name="green_16_dec" EntityType="Self.green_16_dec" Schema="TaxiData" store:Type="Tables" />
+          <EntitySet Name="Stage_PUCount" EntityType="Self.Stage_PUCount" Schema="TaxiData" store:Type="Tables" />
+          <EntitySet Name="TaxiZone" EntityType="Self.TaxiZone" Schema="TaxiData" store:Type="Tables" />
+          <AssociationSet Name="Stage_PUCount_ID" Association="Self.Stage_PUCount_ID">
+            <End Role="TaxiZone" EntitySet="TaxiZone" />
+            <End Role="Stage_PUCount" EntitySet="Stage_PUCount" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TaxiDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="green_16_dec">
+          <Key>
+            <PropertyRef Name="entryID" />
+          </Key>
+          <Property Name="entryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorID" Type="SByte" />
+          <Property Name="lpep_pickup_datetime" Type="DateTime" />
+          <Property Name="lpep_dropoff_datetime" Type="DateTime" />
+          <Property Name="store_and_fwd_flag" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="RatecodeID" Type="SByte" />
+          <Property Name="PULocationID" Type="Int32" />
+          <Property Name="DOLocationID" Type="Int32" />
+          <Property Name="passenger_count" Type="SByte" />
+          <Property Name="trip_distance" Type="Double" />
+          <Property Name="fare_amount" Type="Double" />
+          <Property Name="extra" Type="Double" />
+          <Property Name="mta_tax" Type="Double" />
+          <Property Name="tip_amount" Type="Double" />
+          <Property Name="tolls_amount" Type="Double" />
+          <Property Name="ehail_fee" Type="Double" />
+          <Property Name="improvement_surcharge" Type="Double" />
+          <Property Name="total_amount" Type="Double" />
+          <Property Name="trip_type" Type="SByte" />
+          <Property Name="payment_type" Type="SByte" />
+        </EntityType>
+        <EntityContainer Name="TaxiDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="green_16_dec" EntityType="Self.green_16_dec" />
+          <EntitySet Name="TaxiZone" EntityType="TaxiDataModel.TaxiZone" />
+          <EntitySet Name="Stage_PUCount" EntityType="TaxiDataModel.Stage_PUCount" />
+          <AssociationSet Name="Stage_PUCount_ID" Association="TaxiDataModel.Stage_PUCount_ID">
+            <End Role="TaxiZone" EntitySet="TaxiZone" />
+            <End Role="Stage_PUCount" EntitySet="Stage_PUCount" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TaxiZone">
+          <Key>
+            <PropertyRef Name="TaxiZoneID" />
+          </Key>
+          <Property Name="TaxiZoneID" Type="Int32" Nullable="false" />
+          <Property Name="TaxiZoneName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Borough" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Stage_PUCount" Relationship="TaxiDataModel.Stage_PUCount_ID" FromRole="TaxiZone" ToRole="Stage_PUCount" />
+        </EntityType>
+        <EntityType Name="Stage_PUCount">
+          <Key>
+            <PropertyRef Name="TaxiZone" />
+          </Key>
+          <Property Name="TaxiZone" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" />
+          <NavigationProperty Name="TaxiZone1" Relationship="TaxiDataModel.Stage_PUCount_ID" FromRole="Stage_PUCount" ToRole="TaxiZone" />
+        </EntityType>
+        <Association Name="Stage_PUCount_ID">
+          <End Type="TaxiDataModel.TaxiZone" Role="TaxiZone" Multiplicity="1" />
+          <End Type="TaxiDataModel.Stage_PUCount" Role="Stage_PUCount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TaxiZone">
+              <PropertyRef Name="TaxiZoneID" />
+            </Principal>
+            <Dependent Role="Stage_PUCount">
+              <PropertyRef Name="TaxiZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TaxiDataModelStoreContainer" CdmEntityContainer="TaxiDataEntities">
+          <EntitySetMapping Name="green_16_dec">
+            <EntityTypeMapping TypeName="TaxiDataModel.green_16_dec">
+              <MappingFragment StoreEntitySet="green_16_dec">
+                <ScalarProperty Name="entryID" ColumnName="entryID" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="lpep_pickup_datetime" ColumnName="lpep_pickup_datetime" />
+                <ScalarProperty Name="lpep_dropoff_datetime" ColumnName="lpep_dropoff_datetime" />
+                <ScalarProperty Name="store_and_fwd_flag" ColumnName="store_and_fwd_flag" />
+                <ScalarProperty Name="RatecodeID" ColumnName="RatecodeID" />
+                <ScalarProperty Name="PULocationID" ColumnName="PULocationID" />
+                <ScalarProperty Name="DOLocationID" ColumnName="DOLocationID" />
+                <ScalarProperty Name="passenger_count" ColumnName="passenger_count" />
+                <ScalarProperty Name="trip_distance" ColumnName="trip_distance" />
+                <ScalarProperty Name="fare_amount" ColumnName="fare_amount" />
+                <ScalarProperty Name="extra" ColumnName="extra" />
+                <ScalarProperty Name="mta_tax" ColumnName="mta_tax" />
+                <ScalarProperty Name="tip_amount" ColumnName="tip_amount" />
+                <ScalarProperty Name="tolls_amount" ColumnName="tolls_amount" />
+                <ScalarProperty Name="ehail_fee" ColumnName="ehail_fee" />
+                <ScalarProperty Name="improvement_surcharge" ColumnName="improvement_surcharge" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="trip_type" ColumnName="trip_type" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaxiZone">
+            <EntityTypeMapping TypeName="TaxiDataModel.TaxiZone">
+              <MappingFragment StoreEntitySet="TaxiZone">
+                <ScalarProperty Name="Borough" ColumnName="Borough" />
+                <ScalarProperty Name="TaxiZoneName" ColumnName="TaxiZoneName" />
+                <ScalarProperty Name="TaxiZoneID" ColumnName="TaxiZoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stage_PUCount">
+            <EntityTypeMapping TypeName="TaxiDataModel.Stage_PUCount">
+              <MappingFragment StoreEntitySet="Stage_PUCount">
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="TaxiZone" ColumnName="TaxiZone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

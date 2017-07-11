@@ -1,0 +1,142 @@
+﻿@model IEnumerable<WebApplication1.Models.green_16_dec>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lpep_pickup_datetime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lpep_dropoff_datetime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.store_and_fwd_flag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RatecodeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PULocationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOLocationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.passenger_count)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.trip_distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fare_amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.extra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mta_tax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tip_amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tolls_amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ehail_fee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.improvement_surcharge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.trip_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payment_type)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lpep_pickup_datetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lpep_dropoff_datetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.store_and_fwd_flag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RatecodeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PULocationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOLocationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.passenger_count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.trip_distance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fare_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.extra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mta_tax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tip_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tolls_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ehail_fee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.improvement_surcharge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.trip_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.payment_type)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.entryID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.entryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.entryID })
+        </td>
+    </tr>
+}
+
+</table>
