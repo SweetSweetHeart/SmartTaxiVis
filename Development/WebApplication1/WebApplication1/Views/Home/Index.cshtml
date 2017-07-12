@@ -27,7 +27,7 @@
     </div>
 
 
-    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+    <input type="text" id="zoneNumber" readonly style="border:0; color:#f6931f; font-weight:bold;">
     <div id="loading">
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
         <span>Loading...</span>
@@ -36,30 +36,6 @@
 </div>
 <pre id="zones" class="pre-scrollable"></pre>
 <script>
-    // some default values to play with, before the server returns actual data
-        var matrixJson = [
-            [45, 49, 45, 74, 26, 18, 2, 4, 0, 9],
-            [63, 16, 25, 51, 14, 4, 4, 7, 0, 22],
-            [61, 36, 44, 27, 34, 14, 5, 5, 0, 17],
-            [27, 24, 55, 9, 46, 20, 7, 2, 0, 5],
-            [18, 58, 12, 6, 15, 9, 9, 4, 0, 24],
-            [0, 0, 0, 0, 0, 0, 0, 6, 57, 0],
-            [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-            [4, 12, 2, 2, 3, 14, 28, 0, 0, 4],
-            [1, 12, 9, 2, 17, 14, 18, 0, 0, 2]
-        ];
-        var taxizones = [{ "name": "East Harlem North" }, { "name": "Central Harlem" }, { "name": "East Harlem South" }, { "name": "Astoria" }, { "name": "Morningside Heights" }, { "name": "Williamsburg (North Side)" }, { "name": "Elmhurst" }, { "name": "Park Slope" }, { "name": "Central Harlem North" }, { "name": "Fort Greene" }];
-
-        //assign random colors to chords
-        jQuery.each(taxizones, function (i, val) {
-            val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
-        });
-        var zones = $.extend(true, [], taxizones);
-
-
-        var type = "PU"; // the default order of TaxiZones is by pickup counts
-
         function retrieve(limit, type) {
             $("#zones").html(JSON.stringify(zones, null, 2));
             $("#loading").show();
@@ -98,6 +74,10 @@
             $("#zones").html(JSON.stringify(zones, null, 2));
         }
 
+
+
+       
+
         function initSliders(max) {
             var zoneSlider = document.getElementById('zoneSlider');
 
@@ -116,7 +96,38 @@
                 values[0] = parseInt(values[0], 10);
                 values[1] = parseInt(values[1], 10);
 
-                $("#amount").val(values[0] + " - " + values[1]);
+                zone1 = values[0];
+                zone2 = values[1];
+
+                console.log(zone1);
+                console.log(zone2);
+
+                $("#zoneNumber").val(values[0] + " - " + values[1]);
+
+                formatJSON(max);
+
+            });
+
+            var timeSlider = document.getElementById('timeSlider');
+
+            noUiSlider.create(timeSlider, {
+                start: [7, 12],
+                step: 1,
+                behaviour: 'drag-tap',
+                connect: true,
+                range: {
+                    'min': 0,
+                    'max': 23
+                }
+            });
+
+            timeSlider.noUiSlider.on('change', function (values) {
+                values[0] = parseInt(values[0], 10);
+                values[1] = parseInt(values[1], 10);
+
+                time1 = values[0];
+                time2 = values[1];
+                
 
                 var trips = $.extend(true, [], matrixJson);
                 zones = $.extend(true, [], taxizones);
@@ -134,47 +145,50 @@
                 $("#zones").html(JSON.stringify(zones, null, 2));
                 updateChords(trips);
             });
-
-            var timeSlider = document.getElementById('timeSlider');
-
-            noUiSlider.create(timeSlider, {
-                start: [7, 12],
-                step: 1,
-                behaviour: 'drag-tap',
-                connect: true,
-                range: {
-                    'min': 0,
-                    'max': 23
-                }
-            });
-
-            //timeSlider.noUiSlider.on('change', function (values) {
-            //    values[0] = parseInt(values[0], 10);
-            //    values[1] = parseInt(values[1], 10);
-
-                //$("#amount").val(values[0] + " - " + values[1]);
-
-                //var trips = $.extend(true, [], matrixJson);
-                //zones = $.extend(true, [], taxizones);
-                //zones.splice(0, values[0] - 1);
-                //zones.splice(values[1] - values[0] + 1, max - values[1]);
-
-                //trips.splice(0, values[0] - 1);
-
-                //trips.splice(values[1] - values[0], max - values[1]);
-                //trips.forEach(function (element, i) {
-                //    element.splice(0, values[0] - 1);
-                //    element.splice(values[1] - values[0], max - values[1]);
-                //}, this);
-
-                //$("#zones").html(JSON.stringify(zones, null, 2));
-                //updateChords(trips);
-            //});
         };
 
+
+        function formatJSON(max) {
+            var trips = $.extend(true, [], matrixJson);
+            zones = $.extend(true, [], taxizones);
+            zones.splice(0, zone1 - 1);
+            zones.splice(zone2 - zone1 + 1, max - zone2);
+            trips.splice(0, zone1 - 1);
+            trips.splice(zone2 - zone1, max - zone2);
+            trips.forEach(function (element, i) {
+                element.splice(0, zone1 - 1);
+                element.splice(zone2 - zone1, max - zone2);
+            }, this);
+
+            $("#zones").html(JSON.stringify(zones, null, 2));
+            updateChords(trips);
+        }
+
         $(function () {
+            // some default values to play with, before the server returns actual data
+            var matrixJson = [
+                [45, 49, 45, 74, 26, 18, 2, 4, 0, 9],
+                [63, 16, 25, 51, 14, 4, 4, 7, 0, 22],
+                [61, 36, 44, 27, 34, 14, 5, 5, 0, 17],
+                [27, 24, 55, 9, 46, 20, 7, 2, 0, 5],
+                [18, 58, 12, 6, 15, 9, 9, 4, 0, 24],
+                [0, 0, 0, 0, 0, 0, 0, 6, 57, 0],
+                [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+                [4, 12, 2, 2, 3, 14, 28, 0, 0, 4],
+                [1, 12, 9, 2, 17, 14, 18, 0, 0, 2]
+            ];
+            var taxizones = [{ "name": "East Harlem North" }, { "name": "Central Harlem" }, { "name": "East Harlem South" }, { "name": "Astoria" }, { "name": "Morningside Heights" }, { "name": "Williamsburg (North Side)" }, { "name": "Elmhurst" }, { "name": "Park Slope" }, { "name": "Central Harlem North" }, { "name": "Fort Greene" }];
+
+            //assign random colors to chords
+            jQuery.each(taxizones, function (i, val) {
+                val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
+            });
+            var zones = $.extend(true, [], taxizones);
+            var limit = 20, zone1 = 1, zone2 = 10, time1 = 0, time2 = 23; //some global variables needed.
+            var type = "PU";  // the default order of TaxiZones is by pickup [PU] counts
+
             updateChords(matrixJson);
-            var limit = 20;
             retrieve(limit, type);
         });
 
