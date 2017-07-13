@@ -29,7 +29,7 @@ svg {
 }
 
 .sliderDiv {
-    padding-top: 15px;
+    padding: 15px 0 5px 0;
 }
 
 #zoneSlider, #timeSlider {

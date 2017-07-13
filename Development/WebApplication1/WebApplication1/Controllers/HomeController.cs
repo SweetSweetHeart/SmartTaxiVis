@@ -32,15 +32,15 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public string[] RetrieveTopZones(int limit, string type)
+        public JsonResult RetrieveTopZones(int limit, string type, int time1, int time2)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             Thread.Sleep(500);
             string query;
             if (type.Equals("PU"))
-                query = "call first_cursor_PU(" + limit + ");";
+                query = "call first_cursor_PU_time(" + limit + "," + time1 + "," + time2 + ");";
             else if (type.Equals("DO"))
-                query = "call first_cursor_DO(" + limit + ");";
+                query = "call first_cursor_DO_time(" + limit + "," + time1 + "," + time2 + ");";
             else return null;
 
             MySqlCommand cmd = conn.CreateCommand();
@@ -68,19 +68,13 @@ namespace WebApplication1.Controllers
             stopwatch.Stop();
             Debug.WriteLine(stopwatch.ElapsedMilliseconds);
 
-            return jsonArray;
+            return Json(jsonArray);
         }
         //public JsonResult AjaxRetrieve()
         //{
         //    string[] jsonArray = RetrieveTopZones(10);
         //    return Json(jsonArray, JsonRequestBehavior.AllowGet);
         //}
-
-        public JsonResult AjaxRetrieveWithLimit(int limit, string type)
-        {
-            string[] jsonArray = RetrieveTopZones(limit, type);
-            return Json(jsonArray);
-        }
 
         public List<Record> SQLtoList(string query)
         {
