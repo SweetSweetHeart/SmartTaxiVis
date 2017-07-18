@@ -17,8 +17,8 @@ namespace WebApplication1.Controllers
         private TaxiDataEntities db = new TaxiDataEntities();
 
         //MySqlConnection conn = new MySqlConnection(@"server=Localhost;user id=root;password=root;persistsecurityinfo=True;database=TaxiData;allowuservariables=True")
+        //MySqlConnection conn = new MySqlConnection(@"server=45.76.131.144;user id=taxi;password=taxidb;persistsecurityinfo=True;database=TaxiData;allowuservariables=True;port=3306");
         MySqlConnection conn = new MySqlConnection(@"server=Localhost;user id=taxi;password=taxidb;persistsecurityinfo=True;database=TaxiData;allowuservariables=True;port=3309");
-
         public class Record
         {
             public int id { get; set; }
@@ -28,36 +28,39 @@ namespace WebApplication1.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.jsonArray = RetrieveTopZones(10);
+            //ViewBag.jsonArray = RetrieveTopZones(10);
             return View();
         }
 
-        public string[] RetrieveTopZones(int limit)
+        public JsonResult RetrieveTopZones(int limit, string type, int time1, int time2)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             Thread.Sleep(500);
-
-            string PUQuery = "call first_cursor("+ limit + ");";
-
+            string query;
+            if (type.Equals("PU"))
+                query = "call first_cursor_PU_time(" + limit + "," + time1 + "," + time2 + ");";
+            else if (type.Equals("DO"))
+                query = "call first_cursor_DO_time(" + limit + "," + time1 + "," + time2 + ");";
+            else return null;
 
             MySqlCommand cmd = conn.CreateCommand();
-            MySqlDataAdapter readPU = new MySqlDataAdapter(PUQuery, conn);
-            DataTable PUTable = new DataTable();
+            MySqlDataAdapter reader = new MySqlDataAdapter(query, conn);
+            DataTable table = new DataTable();
             conn.Open();
-            readPU.Fill(PUTable);
+            reader.Fill(table);
 
             var list = new List<JObject>();
-            long[] PUArray = new long[PUTable.Rows.Count];
-            long[] DOArray = new long[PUTable.Rows.Count];
-            string[] JSONArray = new string[PUTable.Rows.Count];
-            for (int i = 0; i < PUTable.Rows.Count; i++)
+            long[] PUArray = new long[table.Rows.Count];
+            long[] DOArray = new long[table.Rows.Count];
+            string[] JSONArray = new string[table.Rows.Count];
+            for (int i = 0; i < table.Rows.Count; i++)
             {
                 var pair = new JObject();
-                pair["name"] = PUTable.Rows[i][1].ToString();
+                pair["name"] = table.Rows[i][1].ToString();
                 list.Add(pair);
-                PUArray[i] = Convert.ToInt64(PUTable.Rows[i][2]);
-                DOArray[i] = Convert.ToInt64(PUTable.Rows[i][3]);
-                JSONArray[i] = PUTable.Rows[i][4].ToString();
+                PUArray[i] = Convert.ToInt64(table.Rows[i][2]);
+                DOArray[i] = Convert.ToInt64(table.Rows[i][3]);
+                JSONArray[i] = table.Rows[i][4].ToString();
             }
             conn.Close();
             //Debug.WriteLine(JsonConvert.SerializeObject(list));
@@ -65,19 +68,13 @@ namespace WebApplication1.Controllers
             stopwatch.Stop();
             Debug.WriteLine(stopwatch.ElapsedMilliseconds);
 
-            return jsonArray;
+            return Json(jsonArray);
         }
         //public JsonResult AjaxRetrieve()
         //{
         //    string[] jsonArray = RetrieveTopZones(10);
         //    return Json(jsonArray, JsonRequestBehavior.AllowGet);
         //}
-
-        public JsonResult AjaxRetrieveWithLimit(int limit)
-        {
-            string[] jsonArray = RetrieveTopZones(limit);
-            return Json(jsonArray);
-        }
 
         public List<Record> SQLtoList(string query)
         {
