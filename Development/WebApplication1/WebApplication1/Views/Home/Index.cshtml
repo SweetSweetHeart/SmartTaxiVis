@@ -20,14 +20,15 @@
     </div>
 
     <div class="sliderDiv control">
+        <label>Zone Slider:  <span id="zoneNumber" style="color:#f6931f;"></span></label>
         <div id="zoneSlider"></div>
     </div>
-    <span id="zoneNumber" style="color:#f6931f; font-weight:bold;"></span>
 
     <div class="sliderDiv control ">
+        <label>Time Slider:  <span id="hourNumber" style="color:#4285f4;"></span></label>
         <div id="timeSlider"></div>
     </div>
-    <span id="hourNumber" style="color:#4285f4; font-weight:bold;"></span>
+   
     
 
     <div id="loading" style="display:none;">
@@ -46,7 +47,7 @@
         limit = 20, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; //some global variables needed.
         type = "PU";  // the default order of TaxiZones is by pickup [PU] counts
 
-         zoneSlider = document.getElementById('zoneSlider');
+        zoneSlider = document.getElementById('zoneSlider');
         timeSlider = document.getElementById('timeSlider');
 
         // some default values to play with, before the server returns actual data
@@ -106,6 +107,8 @@
 
         $("#btn_local").click(function () {
             local();
+            zoneSlider.noUiSlider.set([1, limit]);
+            $("#zoneNumber").text("Showing Zone 1 to Zone 20");
             formatJSON();    
         });
     });
