@@ -4,32 +4,176 @@
     ViewBag.Title = "Home Page";
 }
 
-<script src="https://d3js.org/d3.v2.min.js?2.8.1"></script>
-@section Scripts {
-    @Scripts.Render("~/bundles/nouislider")
-}
-
+@Scripts.Render("~/bundles/d3")
+@Scripts.Render("~/bundles/nouislider")
+@Scripts.Render("~/bundles/anymap")
 @Styles.Render("~/Content/nouislider")
+@Styles.Render("~/Content/anymap")
 <div class="center-block">
-    <div id="diagram"></div>
+    <table>
+        <tr>
+            <td><div id="chordDiagram"></div></td>
+            <td>
+                <table>
+                    <tr align="left">
+                        <td></td>
+                        <td>
+                            Zone Slider
 
-    <div class="control btn-group" role="group">
-        <button id="btn_PU" type="button" class="btn btn-danger control-widget">By Pickup</button>
-        <button id="btn_DO" type="button" class="btn btn-info control-widget">By Dropoff</button>
-        <button id="btn_local" type="button" class="btn btn-success control-widget">Load local data</button>
-    </div>
+                            <br /><br />
+                        </td>
+                        <td>
+                            Time Slider
 
-    <div class="sliderDiv control">
-        <label>Zone Slider:  <span id="zoneNumber" style="color:#f6931f;"></span></label>
-        <div id="zoneSlider"></div>
-    </div>
+                            <br /><br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div id="zoneSlider" style="height:200px;"></div><br />
+                        </td>
+                        <td>
+                            <div id="timeSlider" style="height:200px;"></div><br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="btn_PU" type="button" class="btn btn-danger control-widget">By Pickup</button>
+                        </td>
+                        <td><button id="btn_DO" type="button" class="btn btn-info control-widget">By Dropoff</button></td>
+                        <td>
+                            <button id="btn_local" type="button" class="btn btn-success control-widget">Load local data</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td></tr>
+                    <tr align="left">
+                        <td></td>
+                        <td>
+                            Trips displayed:
+                        </td>
+                        <td id="tripCount" style="font-weight:bold;">89885</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
 
-    <div class="sliderDiv control ">
-        <label>Time Slider:  <span id="hourNumber" style="color:#4285f4;"></span></label>
-        <div id="timeSlider"></div>
-    </div>
-   
-    
+    <div id="anymap"></div>
+    <script type="text/javascript">
+        dataSet = anychart.data.set([{ 'name': 'East Harlem South', 'color': '#CBD6AF', 'Pickup': 3731, 'Dropoff': 1361, 'id': '75' }, { 'name': 'East Harlem North', 'color': '#6E0703', 'Pickup': 3564, 'Dropoff': 2092, 'id': '74' }, { 'name': 'Central Harlem', 'color': '#0EF6A9', 'Pickup': 3261, 'Dropoff': 1880, 'id': '41' }, { 'name': 'Morningside Heights', 'color': '#A8EB71', 'Pickup': 2831, 'Dropoff': 1338, 'id': '166' }, { 'name': 'Astoria', 'color': '#CCEBF5', 'Pickup': 2274, 'Dropoff': 1366, 'id': '7' }, { 'name': 'Central Harlem North', 'color': '#E0167F', 'Pickup': 2099, 'Dropoff': 1904, 'id': '42' }, { 'name': 'Elmhurst', 'color': '#C54890', 'Pickup': 2083, 'Dropoff': 950, 'id': '82' }, { 'name': 'Fort Greene', 'color': '#3E72AF', 'Pickup': 1807, 'Dropoff': 939, 'id': '97' }, { 'name': 'Washington Heights South', 'color': '#93874C', 'Pickup': 1673, 'Dropoff': 848, 'id': '244' }, { 'name': 'Park Slope', 'color': '#49D973', 'Pickup': 1669, 'Dropoff': 1266, 'id': '181' }, { 'name': 'Brooklyn Heights', 'color': '#E2E051', 'Pickup': 1413, 'Dropoff': 664, 'id': '33' }, { 'name': 'Boerum Hill', 'color': '#E633FC', 'Pickup': 1342, 'Dropoff': 719, 'id': '25' }, { 'name': 'Jackson Heights', 'color': '#955C05', 'Pickup': 1124, 'Dropoff': 1120, 'id': '129' }, { 'name': 'Downtown Brooklyn/MetroTech', 'color': '#82273A', 'Pickup': 1119, 'Dropoff': 490, 'id': '65' }, { 'name': 'DUMBO/Vinegar Hill', 'color': '#D98A12', 'Pickup': 1065, 'Dropoff': 381, 'id': '66' }, { 'name': 'Forest Hills', 'color': '#0FC505', 'Pickup': 1028, 'Dropoff': 638, 'id': '95' }, { 'name': 'Woodside', 'color': '#E5344A', 'Pickup': 918, 'Dropoff': 677, 'id': '260' }, { 'name': 'Hamilton Heights', 'color': '#BCC964', 'Pickup': 857, 'Dropoff': 812, 'id': '116' }, { 'name': 'Steinway', 'color': '#EE15C0', 'Pickup': 857, 'Dropoff': 787, 'id': '223' }, { 'name': 'Sunnyside', 'color': '#AA7B77', 'Pickup': 832, 'Dropoff': 747, 'id': '226' }]);
+
+        function rendersBubbleMap() {
+            // Creates map chart
+            map = anychart.map();
+            // Sets geodata using https://cdn.anychart.com/geodata/1.2.0/countries/australia/australia.js
+            map.geoData('anychart.maps.taxizone');
+            // Sets bubble min/max size settings
+            map.minBubbleSize(5)
+                .maxBubbleSize(50);
+            // Sets Chart Title
+            map.title()
+                .enabled(false);
+
+            var data1 = dataSet.mapAs(null, {
+                name: 'name',
+                id: 'id',
+                size: 'Pickup'
+            });
+            // Creates first bubble series
+            var series1 = map.bubble(data1);
+            series1.fill("#e74c3c");
+            series1.name('Trips originated')
+                .hoverFill(series1.fill())
+                .hoverStroke(series1.stroke())
+                .legendItem({
+                    iconType: 'circle',
+                    iconFill: '#e74c3c'
+                })
+                // Sets series geo id field settings
+                .geoIdField("LocationID");
+            series1.labels()
+                .anchor('leftTop')
+                .position('right')
+                .fontSize(14)
+                .fontColor('#212121');
+
+            var data2 = dataSet.mapAs(null, {
+                name: 'name',
+                id: 'id',
+                size: 'Dropoff'
+            });
+            // Creates second bubble series
+            var series2 = map.bubble(data2);
+            series2.fill("#3498db");
+            series2.name('Trips destinated')
+                .labels(false)
+                .hoverFill(series2.fill())
+                .hoverStroke(series2.stroke())
+                .legendItem({
+                    iconType: 'circle',
+                    iconFill: '#3498db'
+                })
+                // Sets series geo id field settings
+                .geoIdField("LocationID");
+
+            map.tooltip()
+                .useHtml(true)
+                .title({
+                    fontColor: '#7c868e'
+                })
+                .padding([8, 13, 10, 13])
+                .format(function () {
+                    var span_for_value =
+                        '<span style="color: #545f69; font-size: 12px; font-weight: bold">';
+                    var span_for_description =
+                        '<br/><span style="color: #7c868e; font-size: 12px; font-style: italic">';
+                    if (this.getData('Dropoff') > 0) {
+                        return span_for_value + this.getData('Pickup') +
+                            ' trips orginated</span></strong>' +
+                            span_for_description + this.getData(
+                                'Dropoff') +
+                            ' trips destinated</span>';
+                    } else {
+                        return span_for_value + this.getData('Pickup') +
+                            ' trips destinated</span></strong>';
+                    }
+                });
+            map.tooltip().background()
+                .enabled(true)
+                .fill('#fff')
+                .stroke('#c1c1c1')
+                .corners(3)
+                .cornerType('round');
+
+            // Sets legend
+            map.legend()
+                .enabled(true)
+                .position('top')
+                .align('center')
+                .itemsLayout('horizontal')
+                .padding(0, 0, 30, 0)
+                .paginator(false);
+            //map.interactivity().selectionMode(false);
+            var zoomController = anychart.ui.zoom();
+            zoomController.target(map);
+            zoomController.render();
+
+            map.contextMenu(false);
+            // Sets container id for the chart
+            map.container('anymap');
+            // Initiates chart drawing
+            map.draw();
+            //redraw the map after fr
+        }
+    </script>
+
+
 
     <div id="loading" style="display:none;">
         <span>
@@ -74,12 +218,149 @@
             [5, 7, 6, 70, 5, 763, 7, 45, 11, 58, 20, 32, 31, 21, 4, 38, 23, 27, 16, 874]
         ];
 
-        taxizones = [{ "name": "East Harlem North" }, { "name": "Central Harlem" }, { "name": "East Harlem South" },
-        { "name": "Astoria" }, { "name": "Morningside Heights" }, { "name": "Williamsburg (North Side)" }, { "name": "Elmhurst" },
-        { "name": "Park Slope" }, { "name": "Central Harlem North" }, { "name": "Fort Greene" }, { "name": "Jackson Heights" },
-        { "name": "Boerum Hill" }, { "name": "Brooklyn Heights" }, { "name": "Forest Hills" }, { "name": "Washington Heights South" },
-        { "name": "Woodside" }, { "name": "DUMBO/Vinegar Hill" }, { "name": "Steinway" }, { "name": "Downtown Brooklyn/MetroTech" },
-        { "name": "Greenpoint" }];
+        taxizones =
+            [
+                {
+                    'name': 'East Harlem South',
+                    'color': '#50D530',
+                    'Pickup': 6494,
+                    'Dropoff': 2364,
+                    'id': '2364'
+                },
+                {
+                    'name': 'East Harlem North',
+                    'color': '#539AE0',
+                    'Pickup': 6426,
+                    'Dropoff': 3701,
+                    'id': '3701'
+                },
+                {
+                    'name': 'Central Harlem',
+                    'color': '#826045',
+                    'Pickup': 5731,
+                    'Dropoff': 3325,
+                    'id': '3325'
+                },
+                {
+                    'name': 'Morningside Heights',
+                    'color': '#7D0DB7',
+                    'Pickup': 4962,
+                    'Dropoff': 2503,
+                    'id': '2503'
+                },
+                {
+                    'name': 'Astoria',
+                    'color': '#B255DA',
+                    'Pickup': 3991,
+                    'Dropoff': 2441,
+                    'id': '2441'
+                },
+                {
+                    'name': 'Central Harlem North',
+                    'color': '#71FA00',
+                    'Pickup': 3672,
+                    'Dropoff': 3364,
+                    'id': '3364'
+                },
+                {
+                    'name': 'Elmhurst',
+                    'color': '#8DC27C',
+                    'Pickup': 3436,
+                    'Dropoff': 1600,
+                    'id': '1600'
+                },
+                {
+                    'name': 'Fort Greene',
+                    'color': '#32DB7C',
+                    'Pickup': 3047,
+                    'Dropoff': 1628,
+                    'id': '1628'
+                },
+                {
+                    'name': 'Park Slope',
+                    'color': '#17D474',
+                    'Pickup': 2947,
+                    'Dropoff': 2210,
+                    'id': '2210'
+                },
+                {
+                    'name': 'Washington Heights South',
+                    'color': '#C4CA71',
+                    'Pickup': 2875,
+                    'Dropoff': 1550,
+                    'id': '1550'
+                },
+                {
+                    'name': 'Brooklyn Heights',
+                    'color': '#D42B29',
+                    'Pickup': 2540,
+                    'Dropoff': 1231,
+                    'id': '1231'
+                },
+                {
+                    'name': 'Boerum Hill',
+                    'color': '#04C1DF',
+                    'Pickup': 2295,
+                    'Dropoff': 1226,
+                    'id': '1226'
+                },
+                {
+                    'name': 'Downtown Brooklyn/MetroTech',
+                    'color': '#288600',
+                    'Pickup': 1994,
+                    'Dropoff': 913,
+                    'id': '913'
+                },
+                {
+                    'name': 'Jackson Heights',
+                    'color': '#4A6A3C',
+                    'Pickup': 1956,
+                    'Dropoff': 1861,
+                    'id': '1861'
+                },
+                {
+                    'name': 'DUMBO/Vinegar Hill',
+                    'color': '#7B0B73',
+                    'Pickup': 1918,
+                    'Dropoff': 713,
+                    'id': '713'
+                },
+                {
+                    'name': 'Forest Hills',
+                    'color': '#F7E432',
+                    'Pickup': 1769,
+                    'Dropoff': 1111,
+                    'id': '1111'
+                },
+                {
+                    'name': 'Woodside',
+                    'color': '#7D9222',
+                    'Pickup': 1647,
+                    'Dropoff': 1153,
+                    'id': '1153'
+                },
+                {
+                    'name': 'Hamilton Heights',
+                    'color': '#9EBBCD',
+                    'Pickup': 1540,
+                    'Dropoff': 1389,
+                    'id': '1389'
+                },
+                {
+                    'name': 'Steinway',
+                    'color': '#650CD5',
+                    'Pickup': 1532,
+                    'Dropoff': 1341,
+                    'id': '1341'
+                },
+                {
+                    'name': 'Williamsburg (North Side)',
+                    'color': '#7C8E45',
+                    'Pickup': 1448,
+                    'Dropoff': 829,
+                    'id': '829'
+                }
+            ];
 
         //assign random colors to chords
         jQuery.each(taxizones, function (i, val) {
@@ -90,10 +371,12 @@
 
     $(function () {
         local();
-        updateChords(matrixJson);        
+        updateChords(matrixJson);
         initSliders();
-        $("#zoneNumber").text("Showing Zone " + zone1 + " to Zone " + zone2);
-        $("#hourNumber").text("Showing hours from " + time1 + " to " + time2);
+        rendersBubbleMap();
+        $("#zones").html(JSON.stringify(zones, null, 2));
+        //$("#zoneNumber").text("Showing Zone " + zone1 + " to Zone " + zone2);
+        //$("#hourNumber").text("Showing hours from " + time1 + " to " + time2);
 
         $("#btn_PU").click(function () {
             type = "PU";
@@ -102,20 +385,23 @@
 
         $("#btn_DO").click(function () {
             type = "DO";
-            retrieve(limit, DO, time1, time2);
+            retrieve(limit, type, time1, time2);
         });
 
         $("#btn_local").click(function () {
             local();
             zoneSlider.noUiSlider.set([1, limit]);
-            $("#zoneNumber").text("Showing Zone 1 to Zone 20");
-            formatJSON();    
+            //$("#zoneNumber").text("Showing Zone 1 to Zone 20");
+            $('#anymap').html("");
+            dataSet = anychart.data.set([{ 'name': 'East Harlem South', 'color': '#CBD6AF', 'Pickup': 731, 'Dropoff': 3361, 'id': '75' }, { 'name': 'East Harlem North', 'color': '#6E0703', 'Pickup': 3564, 'Dropoff': 2092, 'id': '74' }, { 'name': 'Central Harlem', 'color': '#0EF6A9', 'Pickup': 3261, 'Dropoff': 1880, 'id': '41' }, { 'name': 'Morningside Heights', 'color': '#A8EB71', 'Pickup': 2831, 'Dropoff': 1338, 'id': '166' }, { 'name': 'Astoria', 'color': '#CCEBF5', 'Pickup': 2274, 'Dropoff': 1366, 'id': '7' }, { 'name': 'Central Harlem North', 'color': '#E0167F', 'Pickup': 2099, 'Dropoff': 1904, 'id': '42' }, { 'name': 'Elmhurst', 'color': '#C54890', 'Pickup': 2083, 'Dropoff': 950, 'id': '82' }, { 'name': 'Fort Greene', 'color': '#3E72AF', 'Pickup': 1807, 'Dropoff': 939, 'id': '97' }, { 'name': 'Washington Heights South', 'color': '#93874C', 'Pickup': 1673, 'Dropoff': 848, 'id': '244' }, { 'name': 'Park Slope', 'color': '#49D973', 'Pickup': 1669, 'Dropoff': 1266, 'id': '181' }, { 'name': 'Brooklyn Heights', 'color': '#E2E051', 'Pickup': 1413, 'Dropoff': 664, 'id': '33' }, { 'name': 'Boerum Hill', 'color': '#E633FC', 'Pickup': 1342, 'Dropoff': 719, 'id': '25' }, { 'name': 'Jackson Heights', 'color': '#955C05', 'Pickup': 1124, 'Dropoff': 1120, 'id': '129' }, { 'name': 'Downtown Brooklyn/MetroTech', 'color': '#82273A', 'Pickup': 1119, 'Dropoff': 490, 'id': '65' }, { 'name': 'DUMBO/Vinegar Hill', 'color': '#D98A12', 'Pickup': 1065, 'Dropoff': 381, 'id': '66' }, { 'name': 'Forest Hills', 'color': '#0FC505', 'Pickup': 1028, 'Dropoff': 638, 'id': '95' }, { 'name': 'Woodside', 'color': '#E5344A', 'Pickup': 918, 'Dropoff': 677, 'id': '260' }, { 'name': 'Hamilton Heights', 'color': '#BCC964', 'Pickup': 857, 'Dropoff': 812, 'id': '116' }, { 'name': 'Steinway', 'color': '#EE15C0', 'Pickup': 857, 'Dropoff': 787, 'id': '223' }, { 'name': 'Sunnyside', 'color': '#AA7B77', 'Pickup': 832, 'Dropoff': 747, 'id': '226' }]);
+
+            rendersBubbleMap();
+            formatJSON();
         });
     });
 
-    function retrieve(limit, type, time1, time2) {        
-        $("#hourNumber").text("Showing hours from " + time1 + " to " + time2);
-
+    function retrieve(limit, type, time1, time2) {
+        //$("#hourNumber").text("Showing hours from " + time1 + " to " + time2);
         zoneSlider.setAttribute('disabled', true);
         timeSlider.setAttribute('disabled', true);
         $(".control-widget").prop('disabled', true);
@@ -126,18 +412,28 @@
                 url: "@Url.Action("RetrieveTopZones", "Home")",
                 data: { limit: limit, type: type, time1: time1, time2: time2 },
                 success: function (res) {
+                    var pu_v = JSON.parse(res[1]);
+                    var do_v = JSON.parse(res[2]);
+                    var id_v = JSON.parse(res[4]);
+                                       
+
                     taxizones = JSON.parse(res[0]);
                       //assign random colors to chords
                     jQuery.each(taxizones, function (i, val) {
                         val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
+                        val.Pickup = pu_v[i];
+                        val.Dropoff = do_v[i];
+                        val.id = id_v[i].toString();
                     });
                     zones = $.extend(true, [], taxizones);
-
+                    //dataSet = anychart.data.set(zones);
+                    //map.draw();
                     var newMatrixJson = [];
                     jQuery.each(JSON.parse(res[3]), function (i, val) {
                         var sp = val.split(',');
                         var hold = [];
                         jQuery.each(sp, function (i, val) {
+                            console.log(val);
                             hold.push(parseInt(val));
                         });
                         newMatrixJson.push(hold);
@@ -158,6 +454,11 @@
 
         function initSliders() {
             noUiSlider.create(zoneSlider, {
+                orientation: 'vertical',
+                tooltips: true,
+                format: wNumb({
+                    decimals: 0
+                }),
                 start: [1, limit],
                 step: 1,
                 behaviour: 'drag-tap',
@@ -169,13 +470,18 @@
             });
 
             zoneSlider.noUiSlider.on('change', function (values) {
-                zone1 = parseInt(values[0], 10);
-                zone2 = parseInt(values[1], 10);
-                $("#zoneNumber").text("Showing Zone " + zone1 + " to Zone " + zone2);
+                zone1 = values[0];
+                zone2 = values[1];
+                //$("#zoneNumber").text("Showing Zone " + zone1 + " to Zone " + zone2);
                 formatJSON();
             });
 
             noUiSlider.create(timeSlider, {
+                orientation: 'vertical',
+                tooltips: true,
+                format: wNumb({
+                    decimals: 0
+                }),
                 start: [time1, time2],
                 step: 1,
                 behaviour: 'drag-tap',
@@ -186,8 +492,8 @@
                 }
             });
             timeSlider.noUiSlider.on('change', function (values) {
-                time1 = parseInt(values[0], 10);
-                time2 = parseInt(values[1], 10);
+                time1 = values[0];
+                time2 = values[1];
                 retrieve(limit, type, time1, time2);
                 formatJSON()
             });
@@ -207,12 +513,20 @@
             }, this);
 
             $("#zones").html(JSON.stringify(zones, null, 2));
+
+            tripCount = 0;
+
+            jQuery.each(trips, function (i, val) {
+                jQuery.each(val, function (j, val2) {
+                    tripCount += parseInt(val2);
+                });
+            });
+            $("#tripCount").html(tripCount);
             updateChords(trips);
         }
-</script>
 
-<script>
-        var width = 1000,
+
+        var width = 800,
             height = 800,
             outerRadius = Math.min(width, height) / 2 - 50,
             innerRadius = outerRadius - 18;
@@ -243,7 +557,7 @@
         var last_layout; //store layout between updates
 
         /*** Initialize the visualization ***/
-        var g = d3.select("#diagram").append("svg")
+        var g = d3.select("#chordDiagram").append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")

@@ -20,8 +20,16 @@ namespace WebApplication1
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/nouislider").Include(
-                      "~/Scripts/nouislider.js"));
-            
+                      "~/Scripts/nouislider.js",
+                      "~/Scripts/wNumb.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/d3").Include(
+                      "~/Scripts/d3.v2.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/anymap").Include(
+                      "~/Scripts/anychart-bundle.min.js",
+                      "~/Scripts/taxizones.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/font-awesome.js"));
@@ -33,6 +41,10 @@ namespace WebApplication1
 
             bundles.Add(new StyleBundle("~/Content/nouislider").Include(
                       "~/Content/nouislider.css"));
+
+            bundles.Add(new StyleBundle("~/Content/anymap").Include(
+                      "~/Content/anychart-ui.min.css",
+                      "~/Content/anychart.css"));
         }
     }
 }

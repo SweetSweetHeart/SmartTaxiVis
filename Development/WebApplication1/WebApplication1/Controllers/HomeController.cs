@@ -50,21 +50,22 @@ namespace WebApplication1.Controllers
             reader.Fill(table);
 
             var list = new List<JObject>();
-            long[] PUArray = new long[table.Rows.Count];
-            long[] DOArray = new long[table.Rows.Count];
+            int[] IDArray = new int[table.Rows.Count];
+            int[] PUArray = new int[table.Rows.Count];
+            int[] DOArray = new int[table.Rows.Count];
             string[] JSONArray = new string[table.Rows.Count];
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 var pair = new JObject();
                 pair["name"] = table.Rows[i][1].ToString();
                 list.Add(pair);
-                PUArray[i] = Convert.ToInt64(table.Rows[i][2]);
-                DOArray[i] = Convert.ToInt64(table.Rows[i][3]);
+                IDArray[i] = Convert.ToInt32(table.Rows[i][0]);
+                PUArray[i] = Convert.ToInt32(table.Rows[i][2]);
+                DOArray[i] = Convert.ToInt32(table.Rows[i][3]);
                 JSONArray[i] = table.Rows[i][4].ToString();
             }
             conn.Close();
-            //Debug.WriteLine(JsonConvert.SerializeObject(list));
-            string[] jsonArray = { JsonConvert.SerializeObject(list), JsonConvert.SerializeObject(PUArray), JsonConvert.SerializeObject(DOArray), JsonConvert.SerializeObject(JSONArray) };
+            string[] jsonArray = { JsonConvert.SerializeObject(list), JsonConvert.SerializeObject(PUArray), JsonConvert.SerializeObject(DOArray), JsonConvert.SerializeObject(JSONArray), JsonConvert.SerializeObject(IDArray) };
             stopwatch.Stop();
             Debug.WriteLine(stopwatch.ElapsedMilliseconds);
 
