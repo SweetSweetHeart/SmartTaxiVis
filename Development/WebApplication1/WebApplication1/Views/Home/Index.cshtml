@@ -70,10 +70,6 @@
 
             // Create AnyMap chart
             map = anychart.map();
-            console.log(map);
-
-            map2 = anychart.connector();
-            console.log(map2);
 
             map.unboundRegions()
                 .enabled(true)
@@ -82,7 +78,6 @@
 
             // Map geojson data for drawing taxizone contours
             map.geoData('anychart.maps.taxizone');
-
 
             // Helper function to create several series
             var createSeries = function (name, data, color) {
@@ -117,7 +112,7 @@
                     .hoverFill(color)
                     .hoverSize(10)
                     .type('circle');
-            };           
+            };
 
             // Map data attributes
             var dropoffSeries = dataSet.mapAs(null, {
@@ -129,12 +124,12 @@
             // IMPORTANT!!! map ID field to geojson ID field
             map.geoIdField("LocationID");
 
-            createSeries('0 - 1,000', dropoffSeries.filter('size', filter_function(0, 1000)), '#80deea');
-            createSeries('1,000 - 2,000', dropoffSeries.filter('size', filter_function(1000, 2000)), '#26c6da');
-            createSeries('2,000 - 3,000', dropoffSeries.filter('size', filter_function(2000, 3000)), '#00acc1');
-            createSeries('3,000 - 4,000', dropoffSeries.filter('size', filter_function(3000, 4000)), '#0097a7');
-            createSeries('4,000 - 5,000', dropoffSeries.filter('size', filter_function(4000, 5000)), '#00838f');
-            createSeries('More than 5,000', dropoffSeries.filter('size', filter_function(5000)), '#006064');
+            createSeries('0 - 200', dropoffSeries.filter('size', filter_function(0, 200)), '#80deea');
+            createSeries('200 - 400', dropoffSeries.filter('size', filter_function(200, 400)), '#26c6da');
+            createSeries('400 - 600', dropoffSeries.filter('size', filter_function(400, 600)), '#00acc1');
+            createSeries('600 - 800', dropoffSeries.filter('size', filter_function(600, 800)), '#0097a7');
+            createSeries('800 - 1,000', dropoffSeries.filter('size', filter_function(800, 1000)), '#00838f');
+            createSeries('More than 1,000', dropoffSeries.filter('size', filter_function(1000)), '#006064');
 
             // Enable map legend
             map.legend().enabled(true);
@@ -183,7 +178,7 @@
 <script>
 
 
-    function local(){
+function local() {
         limit = 20, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
         type = "PU";  // The default order of TaxiZones is by pickup [PU] counts
 
@@ -191,22 +186,33 @@
         timeSlider = document.getElementById('timeSlider');
 
         // Some default values to play with, before the server returns actual data
-        matrixJson = [[795, 811, 725, 470, 503, 7, 0, 125, 0, 1, 1, 2, 0, 2, 12, 133, 1, 1, 8, 3], [1009, 693, 398, 210, 232, 11, 8, 48, 1, 5, 1, 2, 0, 0, 8, 55, 5, 2, 9, 2], [736, 316, 753, 512, 856, 3, 1, 100, 0, 0, 0, 0, 0, 2, 3, 198, 0, 2, 1, 1], [245, 133, 319, 678, 237, 1, 0, 165, 0, 0, 0, 1, 0, 1, 2, 137, 1, 2, 1, 2], [394, 117, 664, 216, 727, 3, 1, 124, 0, 0, 2, 0, 2, 2, 0, 230, 2, 0, 2, 0], [4, 7, 3, 5, 3, 1068, 52, 8, 0, 3, 3, 1, 0, 4, 139, 4, 12, 164, 493, 98], [2, 5, 0, 1, 5, 73, 495, 0, 0, 1, 3, 1, 0, 1, 430, 1, 84, 196, 39, 13], [74, 31, 66, 183, 130, 1, 1, 467, 0, 1, 0, 1, 1, 2, 2, 206, 1, 2, 3, 1], [1, 0, 0, 0, 1, 1, 0, 0, 341, 140, 108, 174, 94, 174, 2, 0, 1, 0, 1, 2], [1, 7, 1, 0, 0, 2, 0, 0, 127, 791, 94, 140, 25, 58, 1, 0, 0, 2, 2, 0], [1, 2, 1, 2, 0, 0, 0, 0, 99, 136, 210, 145, 132, 88, 2, 1, 0, 1, 0, 3], [2, 0, 1, 1, 0, 2, 0, 1, 128, 230, 115, 155, 48, 70, 0, 0, 0, 2, 1, 2], [0, 3, 0, 1, 1, 0, 0, 1, 75, 47, 151, 64, 46, 97, 0, 0, 1, 1, 0, 2], [0, 3, 3, 0, 0, 0, 1, 2, 132, 77, 80, 79, 124, 82, 2, 0, 2, 1, 1, 4], [1, 0, 1, 1, 1, 119, 204, 0, 1, 0, 1, 0, 0, 2, 500, 0, 24, 149, 68, 11], [58, 28, 123, 156, 174, 1, 0, 173, 0, 0, 0, 2, 0, 0, 1, 186, 0, 0, 2, 0], [1, 1, 3, 1, 0, 8, 58, 2, 0, 0, 0, 0, 1, 1, 22, 0, 521, 6, 8, 5], [2, 1, 0, 1, 0, 172, 157, 1, 1, 0, 0, 2, 1, 0, 145, 1, 7, 173, 45, 18], [3, 10, 1, 2, 1, 259, 20, 3, 1, 0, 0, 2, 2, 1, 70, 1, 4, 43, 424, 20], [1, 3, 2, 0, 0, 75, 4, 2, 2, 1, 2, 2, 2, 4, 8, 0, 4, 13, 13, 487]];
-
-        taxizones = [{ "name": "East Harlem North", "color": "#1CAEA8", "Pickup": 6347, "Dropoff": 3556, "id": "74" }, { "name": "East Harlem South", "color": "#E8AE69", "Pickup": 6180, "Dropoff": 2386, "id": "75" }, { "name": "Central Harlem", "color": "#4457DC", "Pickup": 5780, "Dropoff": 3280, "id": "41" }, { "name": "Morningside Heights", "color": "#575191", "Pickup": 4645, "Dropoff": 2739, "id": "166" }, { "name": "Central Harlem North", "color": "#E961D3", "Pickup": 3815, "Dropoff": 3192, "id": "42" }, { "name": "Astoria", "color": "#8F74DF", "Pickup": 3665, "Dropoff": 2203, "id": "7" }, { "name": "Elmhurst", "color": "#DD1314", "Pickup": 2937, "Dropoff": 1386, "id": "82" }, { "name": "Washington Heights South", "color": "#9719BC", "Pickup": 2788, "Dropoff": 1577, "id": "244" }, { "name": "Fort Greene", "color": "#AAED3D", "Pickup": 2735, "Dropoff": 1498, "id": "97" }, { "name": "Park Slope", "color": "#ED9D21", "Pickup": 2689, "Dropoff": 2000, "id": "181" }, { "name": "Brooklyn Heights", "color": "#52CD29", "Pickup": 2533, "Dropoff": 1198, "id": "33" }, { "name": "Boerum Hill", "color": "#AEDA5C", "Pickup": 2051, "Dropoff": 1157, "id": "25" }, { "name": "DUMBO/Vinegar Hill", "color": "#7F1825", "Pickup": 1886, "Dropoff": 666, "id": "66" }, { "name": "Downtown Brooklyn/MetroTech", "color": "#EBCAC7", "Pickup": 1786, "Dropoff": 909, "id": "65" }, { "name": "Jackson Heights", "color": "#969743", "Pickup": 1760, "Dropoff": 1653, "id": "129" }, { "name": "Hamilton Heights", "color": "#8A7A1F", "Pickup": 1647, "Dropoff": 1305, "id": "116" }, { "name": "Forest Hills", "color": "#C3F360", "Pickup": 1605, "Dropoff": 973, "id": "95" }, { "name": "Woodside", "color": "#DCF696", "Pickup": 1505, "Dropoff": 1012, "id": "260" }, { "name": "Steinway", "color": "#F94F63", "Pickup": 1440, "Dropoff": 1281, "id": "223" }, { "name": "Long Island City/Hunters Point", "color": "#461D9F", "Pickup": 1436, "Dropoff": 971, "id": "145" }];
-        // Assign random colors to chords
+        tripMatrix = countT[0];
+        taxizones = zoneT[0];
+    // Assign random colors to chords
         jQuery.each(taxizones, function (i, val) {
             val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
         });
         zones = $.extend(true, [], taxizones);
-        dataSet = anychart.data.set(zones);
 
+        hour = 1;
+
+        interval = setInterval(function () {
+            if (hour <= 23) {
+                chordAnimation(hour);
+                hour++;
+            }
+            else {
+                hour = 0;
+            }
+        }, 3000);
+
+        dataSet = anychart.data.set(zones);
     }
 
     $(function () {
         local();
         rendersBubbleMap();
-        updateChords(matrixJson);
+        updateChords(tripMatrix);
         initSliders();
         $("#zones").html(JSON.stringify(zones, null, 2));
 
@@ -221,12 +227,74 @@
         });
 
         $("#btn_local").click(function () {
-            local();
-            zoneSlider.noUiSlider.set([1, limit]);
-            rendersBubbleMap();
-            formatJSON();
+            //local();
+            //zoneSlider.noUiSlider.set([1, limit]);
+            //console.log(zones);
+            //console.log(tripMatrix);    
+            
         });
     });
+
+    function chordAnimation(count) {
+        zones = zoneT[count];
+        tripMatrix = countT[count];
+        formatJSON();
+    }
+    
+
+    function retrieveLocal(time) {
+        var start = time;
+        var end = time + 1;
+        if (time == 24) {
+            console.log(JSON.stringify(zoneT));
+            console.log(JSON.stringify(countT));
+        }
+        else
+        {
+            if (time == 23) {
+                end = 0;
+            }
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("RetrieveTopZones", "Home")",
+                data: { limit: 20, type: "PU", time1: start, time2: end },
+                success: function (res) {
+                    var pu_v = JSON.parse(res[1]);
+                    var do_v = JSON.parse(res[2]);
+                    var id_v = JSON.parse(res[4]);
+
+                    taxizones = JSON.parse(res[0]);
+                    // Assign random colors to chords
+                    jQuery.each(taxizones, function (i, val) {
+                        val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
+                        val.Pickup = pu_v[i];
+                        val.Dropoff = do_v[i];
+                        val.id = id_v[i].toString();
+                    });
+                    zones = $.extend(true, [], taxizones);
+                    var newMatrixJson = [];
+                    jQuery.each(JSON.parse(res[3]), function (i, val) {
+                        var sp = val.split(',');
+                        var hold = [];
+                        jQuery.each(sp, function (i, val) {
+                            hold.push(parseInt(val));
+                        });
+                        newMatrixJson.push(hold);
+                    });
+
+                    zoneT.push(zones);
+                    countT.push(newMatrixJson);
+
+                    retrieveLocal(time + 1);
+
+                },
+                error: function (emp) {
+                    alert('Your Internet connection might be unstable, please refresh and try again.');
+                }
+            });
+        }
+        }
+
 
     function retrieve(limit, type, time1, time2) {
         zoneSlider.setAttribute('disabled', true);
@@ -252,7 +320,6 @@
                         val.id = id_v[i].toString();
                     });
                     zones = $.extend(true, [], taxizones);
-                    console.log(JSON.stringify(zones));
                     var newMatrixJson = [];
                     jQuery.each(JSON.parse(res[3]), function (i, val) {
                         var sp = val.split(',');
@@ -262,8 +329,7 @@
                         });
                         newMatrixJson.push(hold);
                     });
-                    matrixJson = newMatrixJson;
-                    console.log(JSON.stringify(newMatrixJson));
+                    tripMatrix = newMatrixJson;
                     formatJSON();
                     zoneSlider.removeAttribute('disabled');
                     timeSlider.removeAttribute('disabled');
@@ -275,350 +341,354 @@
                 }
             });
             $("#zones").html(JSON.stringify(zones, null, 2));
+    }
+
+    function initSliders() {
+        noUiSlider.create(zoneSlider, {
+            orientation: 'vertical',
+            tooltips: true,
+            format: wNumb({
+                decimals: 0
+            }),
+            start: [1, limit],
+            step: 1,
+            behaviour: 'drag-tap',
+            connect: true,
+            range: {
+                'min': 1,
+                'max': limit
+            }
+        });
+
+        zoneSlider.noUiSlider.on('change', function (values) {
+            zone1 = values[0];
+            zone2 = values[1];
+            formatJSON();
+        });
+
+        noUiSlider.create(timeSlider, {
+            orientation: 'vertical',
+            tooltips: true,
+            format: wNumb({
+                decimals: 0
+            }),
+            start: [time1, time2],
+            step: 1,
+            behaviour: 'drag-tap',
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 23
+            }
+        });
+        timeSlider.noUiSlider.on('change', function (values) {
+            time1 = values[0];
+            time2 = values[1];
+            //retrieve(limit, type, time1, time2);
+            formatJSON()
+        });
+    };
+
+
+    // Reformat the trip matrix when conditions changes, and update related visualisations
+    function formatJSON() {
+        var trips = $.extend(true, [], tripMatrix);
+        //zones = $.extend(true, [], taxizones);
+        zones.splice(0, zone1 - 1);
+        zones.splice(zone2 - zone1 + 1, limit - zone2);
+        trips.splice(0, zone1 - 1);
+        trips.splice(zone2 - zone1, limit - zone2);
+        trips.forEach(function (element, i) {
+            element.splice(0, zone1 - 1);
+            element.splice(zone2 - zone1, limit - zone2);
+        }, this);
+
+        $("#zones").html(JSON.stringify(zones, null, 2));
+
+        tripCount = 0;
+
+        jQuery.each(trips, function (i, val) {
+            jQuery.each(val, function (j, val2) {
+                tripCount += parseInt(val2);
+            });
+        });
+        $("#tripCount").html(tripCount);
+
+        dataSet = anychart.data.set(zones);
+        rendersBubbleMap();
+
+        updateChords(trips);
+    }
+
+
+    var width = 800,
+        height = 800,
+        outerRadius = Math.min(width, height) / 2 - 50,
+        innerRadius = outerRadius - 18;
+
+    // Create number formatting functions
+    var formatPercent = d3.format("%");
+    var numberWithCommas = d3.format("0,f");
+
+    // Create the arc path data generator for the groups
+    var arc = d3.svg.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius);
+
+    // Create the chord path data generator for the chords
+    var path = d3.svg.chord()
+        .radius(innerRadius);
+
+    // Define the default chord layout parameters
+    function getDefaultLayout() {
+        return d3.layout.chord()
+            .padding(0.03)
+            .sortSubgroups(d3.descending)
+            .sortChords(d3.ascending);
+    }
+    var last_layout; // store layout between updates
+
+    // Initialize the visualization
+    var g = d3.select("#chordDiagram").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("id", "circle")
+        .attr("transform",
+        "translate(" + width / 2 + "," + height / 2 + ")");
+
+    g.append("circle")
+        .attr("r", outerRadius);
+
+
+
+    // Create OR update a chord layout from a data matrix
+    function updateChords(matrix) {
+        layout = getDefaultLayout();
+        layout.matrix(matrix);
+
+        // Create/update "group" elements
+        var groupG = g.selectAll("g.group")
+            .data(layout.groups(), function (d) {
+                return d.index;
+                //use a key function in case the
+                //groups are sorted differently between updates
+            });
+
+        groupG.exit()
+            .transition()
+            .duration(800)
+            .attr("opacity", 0.5)
+            .remove(); // Remove after transitions are complete
+
+        var newGroups = groupG.enter().append("g")
+            .attr("class", "group");
+        // The enter selection is stored in a variable so we can
+        // Enter the <path>, <text>, and <title> elements as well
+
+        // Create the title tooltip for the new groups
+        newGroups.append("title");
+
+        // Update the (tooltip) title text based on the data
+        groupG.select("title")
+            .text(function (d, i) {
+                return numberWithCommas(d.value) +
+                    " trips started in " +
+                    zones[i].name;
+            });
+
+        // create the arc paths and set the constant attributes
+        // (those based on the group index, not on the value)
+        newGroups.append("path")
+            .attr("id", function (d) {
+                return "group" + d.index;
+            })
+            .style("fill", function (d) {
+                return zones[d.index].color;
+            });
+
+        // Update the paths to match the layout and color
+        groupG.select("path")
+            .transition()
+            .duration(800)
+            .attr("opacity", 0.5)
+            .attr("d", arc)
+            .style("fill", function (d) {
+                return zones[d.index].color;
+            })
+            .transition().duration(10).attr("opacity", 1) //reset opacity
+            ;
+
+        newGroups.append("svg:text")
+            .attr("xlink:href", function (d) {
+                return "#group" + d.index;
+            })
+            .attr("dy", ".35em")
+            .attr("color", "#fff")
+            .text(function (d) {
+                return zones[d.index].name;
+            });
+
+        // Position group labels to match layout
+        groupG.select("text")
+            .transition()
+            .duration(800)
+            .text(function (d) {
+                return zones[d.index].name;
+            })
+            .attr("transform", function (d) {
+                d.angle = (d.startAngle + d.endAngle) / 2;
+                // Store the midpoint angle in the data object
+
+                return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" +
+                    " translate(" + (innerRadius + 26) + ")" +
+                    (d.angle > Math.PI ? " rotate(180)" : " rotate(0)");
+                // Include the rotate zero so that transforms can be interpolated
+            })
+            .attr("text-anchor", function (d) {
+                return d.angle > Math.PI ? "end" : "begin";
+            });
+
+
+        var chordPaths = g.selectAll("path.chord")
+            .data(layout.chords(), chordKey);
+
+        var newChords = chordPaths.enter()
+            .append("path")
+            .attr("class", "chord");
+
+        newChords.append("title");
+
+        chordPaths.select("title")
+            .text(function (d) {
+                if (zones[d.target.index].name !== zones[d.source.index].name) {
+                    return [numberWithCommas(d.source.value),
+                        " trips from ",
+                    zones[d.source.index].name,
+                        " to ",
+                    zones[d.target.index].name,
+                        "\n",
+                    numberWithCommas(d.target.value),
+                        " trips from ",
+                    zones[d.target.index].name,
+                        " to ",
+                    zones[d.source.index].name
+                    ].join("");
+                } else {
+                    return numberWithCommas(d.source.value) +
+                        " trips started and ended in " +
+                        zones[d.source.index].name;
+                }
+            });
+
+        chordPaths.exit().transition()
+            .duration(800)
+            .attr("opacity", 0)
+            .remove();
+
+        chordPaths.transition()
+            .duration(800)
+            .attr("opacity", 0.5)
+            .style("fill", function (d) {
+                return zones[d.source.index].color;
+            })
+            .attr("d", path)
+            .transition().duration(10).attr("opacity", 1);
+
+        groupG.on("mouseover", function (d) {
+            chordPaths.classed("fade", function (p) {
+                return ((p.source.index != d.index) && (p.target.index != d.index));
+            });
+        });
+
+        chordPaths.on("mouseover", function () {
+            chordPaths.attr("opacity", 0.2);
+            $(this).attr("opacity", 1);
+        });
+
+        chordPaths.on("mouseout", function () {
+            chordPaths.attr("opacity", 0.5);
+        });
+
+        g.on("mouseout", function () {
+            if (this == g.node()) {
+                // Only respond to mouseout of the entire circle not mouseout events for sub-components
+                chordPaths.classed("fade", false);
+            }
+        });
+
+        last_layout = layout;
+    }
+
+    function arcTween(oldLayout) {
+        var oldGroups = {};
+        if (oldLayout) {
+            oldLayout.groups().forEach(function (groupData) {
+                oldGroups[groupData.index] = groupData;
+            });
         }
-
-        function initSliders() {
-            noUiSlider.create(zoneSlider, {
-                orientation: 'vertical',
-                tooltips: true,
-                format: wNumb({
-                    decimals: 0
-                }),
-                start: [1, limit],
-                step: 1,
-                behaviour: 'drag-tap',
-                connect: true,
-                range: {
-                    'min': 1,
-                    'max': limit
-                }
-            });
-
-            zoneSlider.noUiSlider.on('change', function (values) {
-                zone1 = values[0];
-                zone2 = values[1];
-                formatJSON();
-            });
-
-            noUiSlider.create(timeSlider, {
-                orientation: 'vertical',
-                tooltips: true,
-                format: wNumb({
-                    decimals: 0
-                }),
-                start: [time1, time2],
-                step: 1,
-                behaviour: 'drag-tap',
-                connect: true,
-                range: {
-                    'min': 0,
-                    'max': 23
-                }
-            });
-            timeSlider.noUiSlider.on('change', function (values) {
-                time1 = values[0];
-                time2 = values[1];
-                retrieve(limit, type, time1, time2);
-                formatJSON()
-            });
+        return function (d, i) {
+            var tween;
+            var old = oldGroups[d.index];
+            if (old) { // There's a matching old group
+                tween = d3.interpolate(old, d);
+            } else {
+                // Create a zero-width arc object
+                var emptyArc = {
+                    startAngle: d.startAngle,
+                    endAngle: d.startAngle
+                };
+                tween = d3.interpolate(emptyArc, d);
+            }
+            return function (t) {
+                return arc(tween(t));
+            };
         };
+    }
 
+    function chordKey(data) {
+        return (data.source.index < data.target.index) ?
+            data.source.index + "-" + data.target.index :
+            data.target.index + "-" + data.source.index;
+    }
 
-        // Reformat the trip matrix when conditions changes, and update related visualisations
-        function formatJSON() {
-            var trips = $.extend(true, [], matrixJson);
-            zones = $.extend(true, [], taxizones);
-            zones.splice(0, zone1 - 1);
-            zones.splice(zone2 - zone1 + 1, limit - zone2);
-            trips.splice(0, zone1 - 1);
-            trips.splice(zone2 - zone1, limit - zone2);
-            trips.forEach(function (element, i) {
-                element.splice(0, zone1 - 1);
-                element.splice(zone2 - zone1, limit - zone2);
-            }, this);
-
-            $("#zones").html(JSON.stringify(zones, null, 2));
-
-            tripCount = 0;
-
-            jQuery.each(trips, function (i, val) {
-                jQuery.each(val, function (j, val2) {
-                    tripCount += parseInt(val2);
-                });
+    function chordTween(oldLayout) {
+        var oldChords = {};
+        if (oldLayout) {
+            oldLayout.chords().forEach(function (chordData) {
+                oldChords[chordKey(chordData)] = chordData;
             });
-            $("#tripCount").html(tripCount);
-
-            dataSet = anychart.data.set(zones);
-            rendersBubbleMap();
-            updateChords(trips);
         }
 
-
-        var width = 800,
-            height = 800,
-            outerRadius = Math.min(width, height) / 2 - 50,
-            innerRadius = outerRadius - 18;
-
-        // Create number formatting functions
-        var formatPercent = d3.format("%");
-        var numberWithCommas = d3.format("0,f");
-
-        // Create the arc path data generator for the groups
-        var arc = d3.svg.arc()
-            .innerRadius(innerRadius)
-            .outerRadius(outerRadius);
-
-        // Create the chord path data generator for the chords
-        var path = d3.svg.chord()
-            .radius(innerRadius);
-
-        // Define the default chord layout parameters
-        function getDefaultLayout() {
-            return d3.layout.chord()
-                .padding(0.03)
-                .sortSubgroups(d3.descending)
-                .sortChords(d3.ascending);
-        }
-        var last_layout; // store layout between updates
-
-        // Initialize the visualization
-        var g = d3.select("#chordDiagram").append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("id", "circle")
-            .attr("transform",
-            "translate(" + width / 2 + "," + height / 2 + ")");
-
-        g.append("circle")
-            .attr("r", outerRadius);
-
-
-
-        // Create OR update a chord layout from a data matrix
-        function updateChords(matrix) {
-            layout = getDefaultLayout();
-            layout.matrix(matrix);
-
-            // Create/update "group" elements
-            var groupG = g.selectAll("g.group")
-                .data(layout.groups(), function (d) {
-                    return d.index;
-                    //use a key function in case the
-                    //groups are sorted differently between updates
-                });
-
-            groupG.exit()
-                .transition()
-                .duration(800)
-                .attr("opacity", 0.5)
-                .remove(); // Remove after transitions are complete
-
-            var newGroups = groupG.enter().append("g")
-                .attr("class", "group");
-            // The enter selection is stored in a variable so we can
-            // Enter the <path>, <text>, and <title> elements as well
-
-            // Create the title tooltip for the new groups
-            newGroups.append("title");
-
-            // Update the (tooltip) title text based on the data
-            groupG.select("title")
-                .text(function (d, i) {
-                    return numberWithCommas(d.value) +
-                        " trips started in " +
-                        zones[i].name;
-                });
-
-            // create the arc paths and set the constant attributes
-            // (those based on the group index, not on the value)
-            newGroups.append("path")
-                .attr("id", function (d) {
-                    return "group" + d.index;
-                })
-                .style("fill", function (d) {
-                    return zones[d.index].color;
-                });
-
-            // Update the paths to match the layout
-            groupG.select("path")
-                .transition()
-                .duration(800)
-                .attr("opacity", 0.5)
-                .attr("d", arc)
-                .transition().duration(10).attr("opacity", 1) //reset opacity
-                ;
-
-            newGroups.append("svg:text")
-                .attr("xlink:href", function (d) {
-                    return "#group" + d.index;
-                })
-                .attr("dy", ".35em")
-                .attr("color", "#fff")
-                .text(function (d) {
-                    return zones[d.index].name;
-                });
-
-            // Position group labels to match layout
-            groupG.select("text")
-                .transition()
-                .duration(800)
-                .text(function (d) {
-                    return zones[d.index].name;
-                })
-                .attr("transform", function (d) {
-                    d.angle = (d.startAngle + d.endAngle) / 2;
-                    // Store the midpoint angle in the data object
-
-                    return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" +
-                        " translate(" + (innerRadius + 26) + ")" +
-                        (d.angle > Math.PI ? " rotate(180)" : " rotate(0)");
-                    // Include the rotate zero so that transforms can be interpolated
-                })
-                .attr("text-anchor", function (d) {
-                    return d.angle > Math.PI ? "end" : "begin";
-                });
-
-
-            var chordPaths = g.selectAll("path.chord")
-                .data(layout.chords(), chordKey);
-
-            var newChords = chordPaths.enter()
-                .append("path")
-                .attr("class", "chord");
-
-            newChords.append("title");
-
-            chordPaths.select("title")
-                .text(function (d) {
-                    if (zones[d.target.index].name !== zones[d.source.index].name) {
-                        return [numberWithCommas(d.source.value),
-                            " trips from ",
-                        zones[d.source.index].name,
-                            " to ",
-                        zones[d.target.index].name,
-                            "\n",
-                        numberWithCommas(d.target.value),
-                            " trips from ",
-                        zones[d.target.index].name,
-                            " to ",
-                        zones[d.source.index].name
-                        ].join("");
-                    } else {
-                        return numberWithCommas(d.source.value) +
-                            " trips started and ended in " +
-                            zones[d.source.index].name;
-                    }
-                });
-
-            chordPaths.exit().transition()
-                .duration(800)
-                .attr("opacity", 0)
-                .remove();
-
-            chordPaths.transition()
-                .duration(800)
-                .attr("opacity", 0.5)
-                .style("fill", function (d) {
-                    return zones[d.source.index].color;
-                })
-                .attr("d", path)
-                .transition().duration(10).attr("opacity", 1);
-
-            groupG.on("mouseover", function (d) {
-                chordPaths.classed("fade", function (p) {
-                    return ((p.source.index != d.index) && (p.target.index != d.index));
-                });
-            });
-
-            chordPaths.on("mouseover", function () {
-                chordPaths.attr("opacity", 0.2);
-                $(this).attr("opacity", 1);
-            });
-
-            chordPaths.on("mouseout", function () {
-                chordPaths.attr("opacity", 0.5);
-            });
-
-            g.on("mouseout", function () {
-                if (this == g.node()) {
-                    // Only respond to mouseout of the entire circle not mouseout events for sub-components
-                    chordPaths.classed("fade", false);
-                }
-            });
-
-            last_layout = layout;
-        }
-
-        function arcTween(oldLayout) {
-            var oldGroups = {};
-            if (oldLayout) {
-                oldLayout.groups().forEach(function (groupData) {
-                    oldGroups[groupData.index] = groupData;
-                });
-            }
-            return function (d, i) {
-                var tween;
-                var old = oldGroups[d.index];
-                if (old) { // There's a matching old group
-                    tween = d3.interpolate(old, d);
-                } else {
-                    // Create a zero-width arc object
-                    var emptyArc = {
-                        startAngle: d.startAngle,
-                        endAngle: d.startAngle
+        return function (d, i) {
+            var tween;
+            var old = oldChords[chordKey(d)];
+            if (old) {
+                if (d.source.index != old.source.index) {
+                    old = {
+                        source: old.target,
+                        target: old.source
                     };
-                    tween = d3.interpolate(emptyArc, d);
                 }
-                return function (t) {
-                    return arc(tween(t));
-                };
-            };
-        }
 
-        function chordKey(data) {
-            return (data.source.index < data.target.index) ?
-                data.source.index + "-" + data.target.index :
-                data.target.index + "-" + data.source.index;
-        }
-
-        function chordTween(oldLayout) {
-            var oldChords = {};
-            if (oldLayout) {
-                oldLayout.chords().forEach(function (chordData) {
-                    oldChords[chordKey(chordData)] = chordData;
-                });
-            }
-
-            return function (d, i) {
-                var tween;
-                var old = oldChords[chordKey(d)];
-                if (old) {
-                    if (d.source.index != old.source.index) {
-                        old = {
-                            source: old.target,
-                            target: old.source
-                        };
+                tween = d3.interpolate(old, d);
+            } else {
+                // Create a zero-width chord object
+                var emptyChord = {
+                    source: {
+                        startAngle: d.source.startAngle,
+                        endAngle: d.source.startAngle
+                    },
+                    target: {
+                        startAngle: d.target.startAngle,
+                        endAngle: d.target.startAngle
                     }
-
-                    tween = d3.interpolate(old, d);
-                } else {
-                    // Create a zero-width chord object
-                    var emptyChord = {
-                        source: {
-                            startAngle: d.source.startAngle,
-                            endAngle: d.source.startAngle
-                        },
-                        target: {
-                            startAngle: d.target.startAngle,
-                            endAngle: d.target.startAngle
-                        }
-                    };
-                    tween = d3.interpolate(emptyChord, d);
-                }
-                return function (t) {
-                    return path(tween(t));
                 };
+                tween = d3.interpolate(emptyChord, d);
+            }
+            return function (t) {
+                return path(tween(t));
             };
-        }
+        };
+    }
 </script>

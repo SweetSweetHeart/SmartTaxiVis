@@ -24,12 +24,14 @@ namespace WebApplication1
                       "~/Scripts/wNumb.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/d3").Include(
-                      "~/Scripts/d3.v2.min.js"));
+                "~/Scripts/data.js",
+                      "~/Scripts/d3.v2.min.js"
+                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/anymap").Include(
                       "~/Scripts/anychart-bundle.min.js",
                       "~/Scripts/proj4.js",
-                      "~/Scripts/taxizones.js"));
+                      "~/Scripts/taxizonesGeoJSON.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",

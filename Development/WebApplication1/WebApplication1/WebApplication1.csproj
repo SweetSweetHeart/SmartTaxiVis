@@ -265,6 +265,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\d3.v2.min.js" />
+    <Content Include="Scripts\data.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -280,7 +281,7 @@
     <Content Include="Scripts\nouislider.js" />
     <Content Include="Scripts\nouislider.min.js" />
     <Content Include="Scripts\proj4.js" />
-    <Content Include="Scripts\taxizones.js" />
+    <Content Include="Scripts\taxizonesGeoJSON.js" />
     <Content Include="Scripts\wNumb.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
