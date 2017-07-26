@@ -28,6 +28,7 @@ namespace WebApplication1
 
             bundles.Add(new ScriptBundle("~/bundles/anymap").Include(
                       "~/Scripts/anychart-bundle.min.js",
+                      "~/Scripts/proj4.js",
                       "~/Scripts/taxizones.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
