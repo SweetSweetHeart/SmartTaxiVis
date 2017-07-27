@@ -17,8 +17,8 @@ namespace WebApplication1.Controllers
         private TaxiDataEntities db = new TaxiDataEntities();
 
         //MySqlConnection conn = new MySqlConnection(@"server=Localhost;user id=root;password=root;persistsecurityinfo=True;database=TaxiData;allowuservariables=True")
-        //MySqlConnection conn = new MySqlConnection(@"server=45.76.131.144;user id=taxi;password=taxidb;persistsecurityinfo=True;database=TaxiData;allowuservariables=True;port=3306");
-        MySqlConnection conn = new MySqlConnection(@"server=Localhost;user id=taxi;password=taxidb;persistsecurityinfo=True;database=TaxiData;allowuservariables=True;port=3309");
+        MySqlConnection conn = new MySqlConnection(@"server=45.76.131.144;user id=taxi;password=taxidb;persistsecurityinfo=True;database=TaxiData;allowuservariables=True;port=3306");
+        //MySqlConnection conn = new MySqlConnection(@"server=Localhost;user id=taxi;password=taxidb;persistsecurityinfo=True;database=TaxiData;allowuservariables=True;port=3309");
         public class Record
         {
             public int id { get; set; }

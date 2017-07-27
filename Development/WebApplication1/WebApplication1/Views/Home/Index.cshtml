@@ -40,17 +40,13 @@
                             <button id="btn_PU" type="button" class="btn btn-danger control-widget">By Pickup</button>
                         </td>
                         <td><button id="btn_DO" type="button" class="btn btn-info control-widget">By Dropoff</button></td>
-                        <td>
-                            <button id="btn_local" type="button" class="btn btn-success control-widget">Load local data</button>
-                        </td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
                     <tr align="left">
-                        <td></td>
                         <td>
-                            Trips displayed:
+                            Trips displayed: 
                         </td>
                         <td id="tripCount" style="font-weight:bold;">89885</td>
                     </tr>
@@ -65,7 +61,7 @@
 
     <div id="anymap"></div>
     <script type="text/javascript">
-        function rendersBubbleMap() {
+        function renderMap() {
             $('#anymap').html("");
 
             // Create AnyMap chart
@@ -78,6 +74,22 @@
 
             // Map geojson data for drawing taxizone contours
             map.geoData('anychart.maps.taxizone');
+
+            // IMPORTANT!!! map ID field to geojson ID field
+            map.geoIdField("LocationID");
+
+            var tempSeries = map.choropleth(connectorBase);
+            tempSeries.id('helper');
+            tempSeries.enabled(false);
+            tempSeries.legendItem().enabled(false);
+
+            // add connector series
+            if (connectorData != null) {
+                var connectorSeries = map.connector(connectorData);
+                connectorSeries.id('connector');
+                connectorSeries.tooltip().format("{%from} - {%to}");
+                connectorSeries.legendItem().enabled(false);
+            }
 
             // Helper function to create several series
             var createSeries = function (name, data, color) {
@@ -121,9 +133,6 @@
                 size: 'Pickup'
             });
 
-            // IMPORTANT!!! map ID field to geojson ID field
-            map.geoIdField("LocationID");
-
             createSeries('0 - 200', dropoffSeries.filter('size', filter_function(0, 200)), '#80deea');
             createSeries('200 - 400', dropoffSeries.filter('size', filter_function(200, 400)), '#26c6da');
             createSeries('400 - 600', dropoffSeries.filter('size', filter_function(400, 600)), '#00acc1');
@@ -147,8 +156,7 @@
             interactivity.zoomOnDoubleClick(true);
 
             // Initiates chart drawing in to the div with id anymap
-            map.container('anymap');
-            map.draw();
+            map.container('anymap').draw();
         };
 
         // Helper function to bind data field to the local var.
@@ -161,6 +169,28 @@
                 return function (fieldVal) {
                     return val1 <= fieldVal;
                 };
+        }
+
+        function getConnector(id1, id2) {
+            // get the helper series
+            var series = map.getSeries('helper');
+
+            // find regions with proper ids
+            var pointIndex1 = series.data().find("id", id1);
+            var pointIndex2 = series.data().find("id", id2);
+            // get the bounds of the first region
+            var point1 = series.getPoint(pointIndex1);
+            var bounds1 = point1.getFeatureBounds();
+            // get the bounds of the second region
+            var point2 = series.getPoint(pointIndex2);
+            var bounds2 = point2.getFeatureBounds();
+
+            // transformers pixel coordinates to latitude and longitude
+            var latLong1 = map.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
+            var latLong2 = map.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
+
+            // return an array to be used in connector data set
+            return [parseFloat((latLong1.lat).toFixed(7)), parseFloat((latLong1.long).toFixed(7)), parseFloat((latLong2.lat).toFixed(7)), parseFloat((latLong2.long).toFixed(7))];
         }
     </script>
 
@@ -176,9 +206,7 @@
 
 <pre id="zones" class="pre-scrollable"></pre>
 <script>
-
-
-function local() {
+    function local() {
         limit = 20, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
         type = "PU";  // The default order of TaxiZones is by pickup [PU] counts
 
@@ -205,13 +233,13 @@ function local() {
                 hour = 0;
             }
         }, 3000);
-
+        connectorData = null;
         dataSet = anychart.data.set(zones);
     }
 
     $(function () {
         local();
-        rendersBubbleMap();
+        renderMap();
         updateChords(tripMatrix);
         initSliders();
         $("#zones").html(JSON.stringify(zones, null, 2));
@@ -230,17 +258,17 @@ function local() {
             //local();
             //zoneSlider.noUiSlider.set([1, limit]);
             //console.log(zones);
-            //console.log(tripMatrix);    
-            
+            //console.log(tripMatrix);
+
         });
     });
 
     function chordAnimation(count) {
-        zones = zoneT[count];
+        taxizones = zoneT[count];
         tripMatrix = countT[count];
         formatJSON();
     }
-    
+
 
     function retrieveLocal(time) {
         var start = time;
@@ -393,7 +421,7 @@ function local() {
     // Reformat the trip matrix when conditions changes, and update related visualisations
     function formatJSON() {
         var trips = $.extend(true, [], tripMatrix);
-        //zones = $.extend(true, [], taxizones);
+        zones = $.extend(true, [], taxizones);
         zones.splice(0, zone1 - 1);
         zones.splice(zone2 - zone1 + 1, limit - zone2);
         trips.splice(0, zone1 - 1);
@@ -413,10 +441,9 @@ function local() {
             });
         });
         $("#tripCount").html(tripCount);
-
         dataSet = anychart.data.set(zones);
-        rendersBubbleMap();
-
+        connectorData = null;
+        renderMap();
         updateChords(trips);
     }
 
@@ -601,10 +628,23 @@ function local() {
             });
         });
 
-        chordPaths.on("mouseover", function () {
+        chordPaths.on("mouseover", function (d) {
             chordPaths.attr("opacity", 0.2);
             $(this).attr("opacity", 1);
         });
+
+
+        chordPaths.on("click", function (d) {
+            if (zones[d.source.index].id != zones[d.target.index].id) {
+                connectorData = [{
+                    points: getConnector(zones[d.source.index].id, zones[d.target.index].id),
+                    from: zones[d.source.index].name,
+                    to: zones[d.target.index].name
+                }]
+                renderMap();
+            }
+        });
+
 
         chordPaths.on("mouseout", function () {
             chordPaths.attr("opacity", 0.5);
