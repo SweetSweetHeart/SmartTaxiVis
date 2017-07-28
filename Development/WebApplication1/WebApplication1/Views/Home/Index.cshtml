@@ -13,40 +13,23 @@
     <table>
         <tr>
             <td><div id="chordDiagram"></div></td>
-            <td>
+            <td style="width:200px;">
+                <div id="zoneSlider" data-toggle="popover" data-placement="right" data-content="Adjust taxizones"></div><br /><br /><br />
+                <div id="timeSlider" data-toggle="popover" data-placement="right" data-content="Adjust hour range (Pending fix)"></div><br /><br /><br />
                 <table>
-                    <tr align="left">
-                        <td></td>
+                    <tr>
                         <td>
-                            Zone Slider
-                            <br /><br />
-                        </td>
-                        <td>
-                            Time Slider
-                            <br /><br />
+                            &nbsp;
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td>
-                            <div id="zoneSlider" style="height:200px;"></div><br />
-                        </td>
-                        <td>
-                            <div id="timeSlider" style="height:200px;"></div><br />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button id="btn_PU" type="button" class="btn btn-danger control-widget">By Pickup</button>
-                        </td>
-                        <td><button id="btn_DO" type="button" class="btn btn-info control-widget">By Dropoff</button></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
+                        @*<td><button id="btn_PU" type="button" class="btn btn-danger control-widget">By Pickup</button></td>
+                            <td><button id="btn_DO" type="button" class="btn btn-info control-widget">By Dropoff</button></td>*@
+                        <td><button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;Animation</button></td>
                     </tr>
                     <tr align="left">
                         <td>
-                            Trips displayed: 
+                            Trips displayed:&nbsp;
                         </td>
                         <td id="tripCount" style="font-weight:bold;">89885</td>
                     </tr>
@@ -222,17 +205,6 @@
         });
         zones = $.extend(true, [], taxizones);
 
-        hour = 1;
-
-        interval = setInterval(function () {
-            if (hour <= 23) {
-                chordAnimation(hour);
-                hour++;
-            }
-            else {
-                hour = 0;
-            }
-        }, 3000);
         connectorData = null;
         dataSet = anychart.data.set(zones);
     }
@@ -242,6 +214,11 @@
         renderMap();
         updateChords(tripMatrix);
         initSliders();
+        $('[data-toggle="popover"]').popover({
+            trigger: 'manual'
+        });
+        $('#timeSlider').popover('show');
+        $('#zoneSlider').popover('show');
         $("#zones").html(JSON.stringify(zones, null, 2));
 
         $("#btn_PU").click(function () {
@@ -259,14 +236,41 @@
             //zoneSlider.noUiSlider.set([1, limit]);
             //console.log(zones);
             //console.log(tripMatrix);
-
         });
+
+        $('#btn_pause').click(function (e) {
+            e.preventDefault();
+            toggleAnimation();
+        });
+        chordAnimation();
     });
 
-    function chordAnimation(count) {
-        taxizones = zoneT[count];
-        tripMatrix = countT[count];
-        formatJSON();
+    function chordAnimation() {
+        isPaused = false;
+        hour = 1;
+        interval = setInterval(function () {
+            if (!isPaused) {
+                if (hour <= 23) {
+                    taxizones = zoneT[hour];
+                    tripMatrix = countT[hour];
+                    formatJSON();
+                    hour++;
+                }
+                else {
+                    hour = 0;
+                }
+            }
+        }, 3000);
+    }
+    function toggleAnimation(){
+        if (!isPaused) {
+            isPaused = true;
+            $('#btn_pause').html("<i class='fa fa-play' aria-hidden='true'></i>&nbsp;Animation");
+        }
+        else {
+            isPaused = false;
+            $('#btn_pause').html("<i class='fa fa-pause' aria-hidden='true'></i>&nbsp;Animation");
+        }
     }
 
 
@@ -373,7 +377,6 @@
 
     function initSliders() {
         noUiSlider.create(zoneSlider, {
-            orientation: 'vertical',
             tooltips: true,
             format: wNumb({
                 decimals: 0
@@ -391,11 +394,12 @@
         zoneSlider.noUiSlider.on('change', function (values) {
             zone1 = values[0];
             zone2 = values[1];
+            isPaused = false;
+            toggleAnimation();
             formatJSON();
         });
 
         noUiSlider.create(timeSlider, {
-            orientation: 'vertical',
             tooltips: true,
             format: wNumb({
                 decimals: 0
@@ -406,14 +410,19 @@
             connect: true,
             range: {
                 'min': 0,
+                '50%': 12,
                 'max': 23
+            },
+            pips: {
+                mode: 'range',
+                density: 4
             }
         });
         timeSlider.noUiSlider.on('change', function (values) {
             time1 = values[0];
             time2 = values[1];
             //retrieve(limit, type, time1, time2);
-            formatJSON()
+            formatJSON();
         });
     };
 
