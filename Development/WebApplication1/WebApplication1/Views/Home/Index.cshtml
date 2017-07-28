@@ -190,7 +190,7 @@
 <pre id="zones" class="pre-scrollable"></pre>
 <script>
     function local() {
-        limit = 20, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
+        limit = 263, zone1 = 1, zone2 = 263, time1 = 9, time2 = 15; // Some global variables needed.
         type = "PU";  // The default order of TaxiZones is by pickup [PU] counts
 
         zoneSlider = document.getElementById('zoneSlider');
@@ -207,6 +207,9 @@
 
         connectorData = null;
         dataSet = anychart.data.set(zones);
+
+        zoneTN = [];
+        countTN = [];
     }
 
     $(function () {
@@ -243,6 +246,8 @@
             toggleAnimation();
         });
         chordAnimation();
+
+        //retrieveLocal(0);
     });
 
     function chordAnimation() {
@@ -273,13 +278,13 @@
         }
     }
 
-
+    
     function retrieveLocal(time) {
         var start = time;
         var end = time + 1;
         if (time == 24) {
-            console.log(JSON.stringify(zoneT));
-            console.log(JSON.stringify(countT));
+            console.log(JSON.stringify(zoneTN));
+            console.log(JSON.stringify(countTN));
         }
         else
         {
@@ -289,7 +294,7 @@
             $.ajax({
                 type: 'POST',
                 url: "@Url.Action("RetrieveTopZones", "Home")",
-                data: { limit: 20, type: "PU", time1: start, time2: end },
+                data: { limit: 263, type: "PU", time1: start, time2: end },
                 success: function (res) {
                     var pu_v = JSON.parse(res[1]);
                     var do_v = JSON.parse(res[2]);
@@ -314,9 +319,9 @@
                         newMatrixJson.push(hold);
                     });
 
-                    zoneT.push(zones);
-                    countT.push(newMatrixJson);
-
+                    zoneTN.push(zones);
+                    countTN.push(newMatrixJson);
+                    console.log(time);
                     retrieveLocal(time + 1);
 
                 },
@@ -328,7 +333,7 @@
         }
 
 
-    function retrieve(limit, type, time1, time2) {
+    @*function retrieve(limit, type, time1, time2) {
         zoneSlider.setAttribute('disabled', true);
         timeSlider.setAttribute('disabled', true);
         $(".control-widget").prop('disabled', true);
@@ -373,7 +378,7 @@
                 }
             });
             $("#zones").html(JSON.stringify(zones, null, 2));
-    }
+    }*@
 
     function initSliders() {
         noUiSlider.create(zoneSlider, {
@@ -457,8 +462,8 @@
     }
 
 
-    var width = 800,
-        height = 800,
+    var width = 1200,
+        height = 1200,
         outerRadius = Math.min(width, height) / 2 - 50,
         innerRadius = outerRadius - 18;
 
