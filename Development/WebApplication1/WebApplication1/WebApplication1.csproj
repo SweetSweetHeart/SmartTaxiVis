@@ -264,8 +264,10 @@
     <Content Include="Scripts\anychart-bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\customize\chordDiagram.js" />
+    <Content Include="Scripts\customize\slider.js" />
     <Content Include="Scripts\d3.v2.min.js" />
-    <Content Include="Scripts\data.js" />
+    <Content Include="Scripts\customize\data.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -277,11 +279,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\customize\mapDiagram.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\nouislider.js" />
     <Content Include="Scripts\nouislider.min.js" />
     <Content Include="Scripts\proj4.js" />
-    <Content Include="Scripts\taxizonesGeoJSON.js" />
+    <Content Include="Scripts\customize\taxizonesGeoJSON.js" />
     <Content Include="Scripts\wNumb.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

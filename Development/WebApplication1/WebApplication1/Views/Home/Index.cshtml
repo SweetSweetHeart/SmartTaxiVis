@@ -9,176 +9,57 @@
 @Scripts.Render("~/bundles/anymap")
 @Styles.Render("~/Content/nouislider")
 @Styles.Render("~/Content/anymap")
-<div class="center-block">
-    <table>
+<div>
+    <!--
+
+    <table class="table table-responsive">
+        <tr id="graphs">
+            <td class="graph">
+                <div id="chordDiagram"></div>
+            </td>
+            <td class="graph">
+                <div id="anymap"></div>
+
+            </td>
+        </tr>
         <tr>
-            <td><div id="chordDiagram"></div></td>
-            <td style="width:200px;">
-                <div id="zoneSlider" data-toggle="popover" data-placement="right" data-content="Adjust taxizones"></div><br /><br /><br />
-                <div id="timeSlider" data-toggle="popover" data-placement="right" data-content="Adjust hour range (Pending fix)"></div><br /><br /><br />
+            <td>
                 <table>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        @*<td><button id="btn_PU" type="button" class="btn btn-danger control-widget">By Pickup</button></td>
-                            <td><button id="btn_DO" type="button" class="btn btn-info control-widget">By Dropoff</button></td>*@
-                        <td><button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;Animation</button></td>
-                    </tr>
                     <tr align="left">
                         <td>
                             Trips displayed:&nbsp;
                         </td>
                         <td id="tripCount" style="font-weight:bold;">89885</td>
                     </tr>
+                    <tr>
+                        @*<td><button id="btn_PU" type="button" class="btn btn-danger control-widget">By Pickup</button></td>
+                            <td><button id="btn_DO" type="button" class="btn btn-info control-widget">By Dropoff</button></td>*@
+                        <td><button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;Animation</button></td>
+                    </tr>
+
                 </table>
             </td>
-        </tr>
-        <tr>
-            <td></td>
+            <td>
+                <div id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div><br /><br /><br />
+                <div id="timeSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour range (Pending fix)"></div><br /><br /><br />
+
+            </td>
             <td></td>
         </tr>
     </table>
-
-    <div id="anymap"></div>
-    <script type="text/javascript">
-        function renderMap() {
-            $('#anymap').html("");
-
-            // Create AnyMap chart
-            map = anychart.map();
-
-            map.unboundRegions()
-                .enabled(true)
-                .fill('#E1E1E1')
-                .stroke('#D2D2D2');
-
-            // Map geojson data for drawing taxizone contours
-            map.geoData('anychart.maps.taxizone');
-
-            // IMPORTANT!!! map ID field to geojson ID field
-            map.geoIdField("LocationID");
-
-            var tempSeries = map.choropleth(connectorBase);
-            tempSeries.id('helper');
-            tempSeries.enabled(false);
-            tempSeries.legendItem().enabled(false);
-
-            // add connector series
-            if (connectorData != null) {
-                var connectorSeries = map.connector(connectorData);
-                connectorSeries.id('connector');
-                connectorSeries.tooltip().format("{%from} - {%to}");
-                connectorSeries.legendItem().enabled(false);
-            }
-
-            // Helper function to create several series
-            var createSeries = function (name, data, color) {
-                // Set marker series
-                var series = map.marker(data).name(name);
-                series.legendItem({
-                    iconType: "circle",
-                    iconFill: color,
-                    iconStroke: '2 #E1E1E1'
-                });
-
-                // Set Tooltip for series
-                series.tooltip()
-                    .useHtml(true)
-                    .padding([8, 13, 10, 13])
-                    .title(false)
-                    .separator(false)
-                    .fontSize(14)
-                    .format(function () {
-                        return '<span>' + this.getData('name') + '</span><br />' +
-                            '<span style="font-size: 12px; color: #E1E1E1">Trips: ' +
-                            parseInt(this.getData('size')).toLocaleString() + '</span>';
-                    });
-
-                // Set styles for marker
-                series.selectionMode("none")
-                    .stroke('2 #757575')
-                    .hoverStroke('3 #616161')
-                    .fill(color)
-                    .size(5)
-                    .labels(false)
-                    .hoverFill(color)
-                    .hoverSize(10)
-                    .type('circle');
-            };
-
-            // Map data attributes
-            var dropoffSeries = dataSet.mapAs(null, {
-                name: 'name',
-                id: 'id',
-                size: 'Pickup'
-            });
-
-            createSeries('0 - 200', dropoffSeries.filter('size', filter_function(0, 200)), '#80deea');
-            createSeries('200 - 400', dropoffSeries.filter('size', filter_function(200, 400)), '#26c6da');
-            createSeries('400 - 600', dropoffSeries.filter('size', filter_function(400, 600)), '#00acc1');
-            createSeries('600 - 800', dropoffSeries.filter('size', filter_function(600, 800)), '#0097a7');
-            createSeries('800 - 1,000', dropoffSeries.filter('size', filter_function(800, 1000)), '#00838f');
-            createSeries('More than 1,000', dropoffSeries.filter('size', filter_function(1000)), '#006064');
-
-            // Enable map legend
-            map.legend().enabled(true);
-
-            // Create zoom controls
-            var zoomController = anychart.ui.zoom();
-            zoomController.render(map);
-
-            // Disable context menu
-            map.contextMenu(false);
-
-            // Set map inteactions
-            var interactivity = map.interactivity();
-            interactivity.zoomOnMouseWheel(true);
-            interactivity.zoomOnDoubleClick(true);
-
-            // Initiates chart drawing in to the div with id anymap
-            map.container('anymap').draw();
-        };
-
-        // Helper function to bind data field to the local var.
-        function filter_function(val1, val2) {
-            if (val2)
-                return function (fieldVal) {
-                    return val1 <= fieldVal && fieldVal < val2;
-                };
-            else
-                return function (fieldVal) {
-                    return val1 <= fieldVal;
-                };
-        }
-
-        function getConnector(id1, id2) {
-            // get the helper series
-            var series = map.getSeries('helper');
-
-            // find regions with proper ids
-            var pointIndex1 = series.data().find("id", id1);
-            var pointIndex2 = series.data().find("id", id2);
-            // get the bounds of the first region
-            var point1 = series.getPoint(pointIndex1);
-            var bounds1 = point1.getFeatureBounds();
-            // get the bounds of the second region
-            var point2 = series.getPoint(pointIndex2);
-            var bounds2 = point2.getFeatureBounds();
-
-            // transformers pixel coordinates to latitude and longitude
-            var latLong1 = map.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
-            var latLong2 = map.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
-
-            // return an array to be used in connector data set
-            return [parseFloat((latLong1.lat).toFixed(7)), parseFloat((latLong1.long).toFixed(7)), parseFloat((latLong2.lat).toFixed(7)), parseFloat((latLong2.long).toFixed(7))];
-        }
-    </script>
-
-
-
+        -->
+    <div id="graphs">
+        <div id="chordDiagram"></div>
+        <div id="anymap"></div>
+    </div>
+    <div id="controller">
+        <div class="controlsWrapper">
+            <h3>Trips displayed: <span id="tripCount">89885</span></h3>
+            <button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;Animation</button>
+        </div>
+        <div class="slidersWrapper" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
+        <div class="slidersWrapper" id="timeSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour range (Pending fix)"></div>
+    </div>
     <div id="loading" style="display:none;">
         <span>
             <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
@@ -187,10 +68,9 @@
     </div>
 </div>
 
-<pre id="zones" class="pre-scrollable"></pre>
 <script>
     function local() {
-        limit = 263, zone1 = 1, zone2 = 263, time1 = 9, time2 = 15; // Some global variables needed.
+        limit = 263, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
         type = "PU";  // The default order of TaxiZones is by pickup [PU] counts
 
         zoneSlider = document.getElementById('zoneSlider');
@@ -215,14 +95,13 @@
     $(function () {
         local();
         renderMap();
-        updateChords(tripMatrix);
+        formatJSON();
         initSliders();
         $('[data-toggle="popover"]').popover({
             trigger: 'manual'
         });
         $('#timeSlider').popover('show');
         $('#zoneSlider').popover('show');
-        $("#zones").html(JSON.stringify(zones, null, 2));
 
         $("#btn_PU").click(function () {
             type = "PU";
@@ -246,39 +125,10 @@
             toggleAnimation();
         });
         chordAnimation();
-
         //retrieveLocal(0);
     });
 
-    function chordAnimation() {
-        isPaused = false;
-        hour = 1;
-        interval = setInterval(function () {
-            if (!isPaused) {
-                if (hour <= 23) {
-                    taxizones = zoneT[hour];
-                    tripMatrix = countT[hour];
-                    formatJSON();
-                    hour++;
-                }
-                else {
-                    hour = 0;
-                }
-            }
-        }, 3000);
-    }
-    function toggleAnimation(){
-        if (!isPaused) {
-            isPaused = true;
-            $('#btn_pause').html("<i class='fa fa-play' aria-hidden='true'></i>&nbsp;Animation");
-        }
-        else {
-            isPaused = false;
-            $('#btn_pause').html("<i class='fa fa-pause' aria-hidden='true'></i>&nbsp;Animation");
-        }
-    }
 
-    
     function retrieveLocal(time) {
         var start = time;
         var end = time + 1;
@@ -321,7 +171,6 @@
 
                     zoneTN.push(zones);
                     countTN.push(newMatrixJson);
-                    console.log(time);
                     retrieveLocal(time + 1);
 
                 },
@@ -330,146 +179,46 @@
                 }
             });
         }
-        }
-
-
-    @*function retrieve(limit, type, time1, time2) {
-        zoneSlider.setAttribute('disabled', true);
-        timeSlider.setAttribute('disabled', true);
-        $(".control-widget").prop('disabled', true);
-        $("#loading").show();
-            $("#zones").html(JSON.stringify(zones, null, 2));
-            $.ajax({
-                type: 'POST',
-                url: "@Url.Action("RetrieveTopZones", "Home")",
-                data: { limit: limit, type: type, time1: time1, time2: time2 },
-                success: function (res) {
-                    var pu_v = JSON.parse(res[1]);
-                    var do_v = JSON.parse(res[2]);
-                    var id_v = JSON.parse(res[4]);
-
-                    taxizones = JSON.parse(res[0]);
-                    // Assign random colors to chords
-                    jQuery.each(taxizones, function (i, val) {
-                        val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
-                        val.Pickup = pu_v[i];
-                        val.Dropoff = do_v[i];
-                        val.id = id_v[i].toString();
-                    });
-                    zones = $.extend(true, [], taxizones);
-                    var newMatrixJson = [];
-                    jQuery.each(JSON.parse(res[3]), function (i, val) {
-                        var sp = val.split(',');
-                        var hold = [];
-                        jQuery.each(sp, function (i, val) {
-                            hold.push(parseInt(val));
-                        });
-                        newMatrixJson.push(hold);
-                    });
-                    tripMatrix = newMatrixJson;
-                    formatJSON();
-                    zoneSlider.removeAttribute('disabled');
-                    timeSlider.removeAttribute('disabled');
-                    $(".control-widget").prop('disabled', false);
-                    $("#loading").hide();
-                },
-                error: function (emp) {
-                    alert('Your Internet connection might be unstable, please refresh and try again.');
-                }
-            });
-            $("#zones").html(JSON.stringify(zones, null, 2));
-    }*@
-
-    function initSliders() {
-        noUiSlider.create(zoneSlider, {
-            tooltips: true,
-            format: wNumb({
-                decimals: 0
-            }),
-            start: [1, limit],
-            step: 1,
-            behaviour: 'drag-tap',
-            connect: true,
-            range: {
-                'min': 1,
-                'max': limit
-            }
-        });
-
-        zoneSlider.noUiSlider.on('change', function (values) {
-            zone1 = values[0];
-            zone2 = values[1];
-            isPaused = false;
-            toggleAnimation();
-            formatJSON();
-        });
-
-        noUiSlider.create(timeSlider, {
-            tooltips: true,
-            format: wNumb({
-                decimals: 0
-            }),
-            start: [time1, time2],
-            step: 1,
-            behaviour: 'drag-tap',
-            connect: true,
-            range: {
-                'min': 0,
-                '50%': 12,
-                'max': 23
-            },
-            pips: {
-                mode: 'range',
-                density: 4
-            }
-        });
-        timeSlider.noUiSlider.on('change', function (values) {
-            time1 = values[0];
-            time2 = values[1];
-            //retrieve(limit, type, time1, time2);
-            formatJSON();
-        });
-    };
-
-
-    // Reformat the trip matrix when conditions changes, and update related visualisations
-    function formatJSON() {
-        var trips = $.extend(true, [], tripMatrix);
-        zones = $.extend(true, [], taxizones);
-        zones.splice(0, zone1 - 1);
-        zones.splice(zone2 - zone1 + 1, limit - zone2);
-        trips.splice(0, zone1 - 1);
-        trips.splice(zone2 - zone1, limit - zone2);
-        trips.forEach(function (element, i) {
-            element.splice(0, zone1 - 1);
-            element.splice(zone2 - zone1, limit - zone2);
-        }, this);
-
-        $("#zones").html(JSON.stringify(zones, null, 2));
-
-        tripCount = 0;
-
-        jQuery.each(trips, function (i, val) {
-            jQuery.each(val, function (j, val2) {
-                tripCount += parseInt(val2);
-            });
-        });
-        $("#tripCount").html(tripCount);
-        dataSet = anychart.data.set(zones);
-        connectorData = null;
-        renderMap();
-        updateChords(trips);
     }
 
 
-    var width = 1200,
-        height = 1200,
-        outerRadius = Math.min(width, height) / 2 - 50,
+    // Reformat the trip matrix when conditions changes, and update related visualisations
+
+    var targetSize = $("#chordDiagram").width() * .85;
+    var marginSide = $("#chordDiagram").width() * .075;
+    
+    function resize() {
+        targetSize = $("#chordDiagram").width() * .85;
+        marginSide = $("#chordDiagram").width() * .075;
+        var svg = d3.select("#chordDiagram")
+            .attr("width", targetSize)
+            .attr("height", targetSize);
+
+        $('[data-toggle="popover"]').popover('show');
+
+        outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
+            innerRadius = outerRadius - 18;
+
+        arc = d3.svg.arc()
+            .innerRadius(innerRadius)
+            .outerRadius(outerRadius);
+
+        path = d3.svg.chord()
+            .radius(innerRadius);
+
+        $('#circle').attr("r", outerRadius);
+    }
+
+    $(window).resize(function () {
+        resize();
+        renderMap();
+        formatJSON();
+    });
+
+    var outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
         innerRadius = outerRadius - 18;
 
-    // Create number formatting functions
-    var formatPercent = d3.format("%");
-    var numberWithCommas = d3.format("0,f");
+    var viewBoxDimensions = "0 0 " + targetSize + " " + targetSize;
 
     // Create the arc path data generator for the groups
     var arc = d3.svg.arc()
@@ -480,269 +229,23 @@
     var path = d3.svg.chord()
         .radius(innerRadius);
 
-    // Define the default chord layout parameters
-    function getDefaultLayout() {
-        return d3.layout.chord()
-            .padding(0.03)
-            .sortSubgroups(d3.descending)
-            .sortChords(d3.ascending);
-    }
-    var last_layout; // store layout between updates
+        var last_layout; // store layout between updates
 
-    // Initialize the visualization
-    var g = d3.select("#chordDiagram").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
+        // Create number formatting functions
+        var formatPercent = d3.format("%");
+        var numberWithCommas = d3.format("0,f");
+
+        // Initialize the visualization
+        var g = d3.select("#chordDiagram").append("svg")
+            .attr("id", "chordSvg")
+            .attr("viewBox", viewBoxDimensions)
+            .attr("preserveAspectRatio", "xMinYMid") 
+            .append("g")
         .attr("id", "circle")
+        .attr("overflow-x", "visible")
         .attr("transform",
-        "translate(" + width / 2 + "," + height / 2 + ")");
+            "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
 
     g.append("circle")
         .attr("r", outerRadius);
-
-
-
-    // Create OR update a chord layout from a data matrix
-    function updateChords(matrix) {
-        layout = getDefaultLayout();
-        layout.matrix(matrix);
-
-        // Create/update "group" elements
-        var groupG = g.selectAll("g.group")
-            .data(layout.groups(), function (d) {
-                return d.index;
-                //use a key function in case the
-                //groups are sorted differently between updates
-            });
-
-        groupG.exit()
-            .transition()
-            .duration(800)
-            .attr("opacity", 0.5)
-            .remove(); // Remove after transitions are complete
-
-        var newGroups = groupG.enter().append("g")
-            .attr("class", "group");
-        // The enter selection is stored in a variable so we can
-        // Enter the <path>, <text>, and <title> elements as well
-
-        // Create the title tooltip for the new groups
-        newGroups.append("title");
-
-        // Update the (tooltip) title text based on the data
-        groupG.select("title")
-            .text(function (d, i) {
-                return numberWithCommas(d.value) +
-                    " trips started in " +
-                    zones[i].name;
-            });
-
-        // create the arc paths and set the constant attributes
-        // (those based on the group index, not on the value)
-        newGroups.append("path")
-            .attr("id", function (d) {
-                return "group" + d.index;
-            })
-            .style("fill", function (d) {
-                return zones[d.index].color;
-            });
-
-        // Update the paths to match the layout and color
-        groupG.select("path")
-            .transition()
-            .duration(800)
-            .attr("opacity", 0.5)
-            .attr("d", arc)
-            .style("fill", function (d) {
-                return zones[d.index].color;
-            })
-            .transition().duration(10).attr("opacity", 1) //reset opacity
-            ;
-
-        newGroups.append("svg:text")
-            .attr("xlink:href", function (d) {
-                return "#group" + d.index;
-            })
-            .attr("dy", ".35em")
-            .attr("color", "#fff")
-            .text(function (d) {
-                return zones[d.index].name;
-            });
-
-        // Position group labels to match layout
-        groupG.select("text")
-            .transition()
-            .duration(800)
-            .text(function (d) {
-                return zones[d.index].name;
-            })
-            .attr("transform", function (d) {
-                d.angle = (d.startAngle + d.endAngle) / 2;
-                // Store the midpoint angle in the data object
-
-                return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" +
-                    " translate(" + (innerRadius + 26) + ")" +
-                    (d.angle > Math.PI ? " rotate(180)" : " rotate(0)");
-                // Include the rotate zero so that transforms can be interpolated
-            })
-            .attr("text-anchor", function (d) {
-                return d.angle > Math.PI ? "end" : "begin";
-            });
-
-
-        var chordPaths = g.selectAll("path.chord")
-            .data(layout.chords(), chordKey);
-
-        var newChords = chordPaths.enter()
-            .append("path")
-            .attr("class", "chord");
-
-        newChords.append("title");
-
-        chordPaths.select("title")
-            .text(function (d) {
-                if (zones[d.target.index].name !== zones[d.source.index].name) {
-                    return [numberWithCommas(d.source.value),
-                        " trips from ",
-                    zones[d.source.index].name,
-                        " to ",
-                    zones[d.target.index].name,
-                        "\n",
-                    numberWithCommas(d.target.value),
-                        " trips from ",
-                    zones[d.target.index].name,
-                        " to ",
-                    zones[d.source.index].name
-                    ].join("");
-                } else {
-                    return numberWithCommas(d.source.value) +
-                        " trips started and ended in " +
-                        zones[d.source.index].name;
-                }
-            });
-
-        chordPaths.exit().transition()
-            .duration(800)
-            .attr("opacity", 0)
-            .remove();
-
-        chordPaths.transition()
-            .duration(800)
-            .attr("opacity", 0.5)
-            .style("fill", function (d) {
-                return zones[d.source.index].color;
-            })
-            .attr("d", path)
-            .transition().duration(10).attr("opacity", 1);
-
-        groupG.on("mouseover", function (d) {
-            chordPaths.classed("fade", function (p) {
-                return ((p.source.index != d.index) && (p.target.index != d.index));
-            });
-        });
-
-        chordPaths.on("mouseover", function (d) {
-            chordPaths.attr("opacity", 0.2);
-            $(this).attr("opacity", 1);
-        });
-
-
-        chordPaths.on("click", function (d) {
-            if (zones[d.source.index].id != zones[d.target.index].id) {
-                connectorData = [{
-                    points: getConnector(zones[d.source.index].id, zones[d.target.index].id),
-                    from: zones[d.source.index].name,
-                    to: zones[d.target.index].name
-                }]
-                renderMap();
-            }
-        });
-
-
-        chordPaths.on("mouseout", function () {
-            chordPaths.attr("opacity", 0.5);
-        });
-
-        g.on("mouseout", function () {
-            if (this == g.node()) {
-                // Only respond to mouseout of the entire circle not mouseout events for sub-components
-                chordPaths.classed("fade", false);
-            }
-        });
-
-        last_layout = layout;
-    }
-
-    function arcTween(oldLayout) {
-        var oldGroups = {};
-        if (oldLayout) {
-            oldLayout.groups().forEach(function (groupData) {
-                oldGroups[groupData.index] = groupData;
-            });
-        }
-        return function (d, i) {
-            var tween;
-            var old = oldGroups[d.index];
-            if (old) { // There's a matching old group
-                tween = d3.interpolate(old, d);
-            } else {
-                // Create a zero-width arc object
-                var emptyArc = {
-                    startAngle: d.startAngle,
-                    endAngle: d.startAngle
-                };
-                tween = d3.interpolate(emptyArc, d);
-            }
-            return function (t) {
-                return arc(tween(t));
-            };
-        };
-    }
-
-    function chordKey(data) {
-        return (data.source.index < data.target.index) ?
-            data.source.index + "-" + data.target.index :
-            data.target.index + "-" + data.source.index;
-    }
-
-    function chordTween(oldLayout) {
-        var oldChords = {};
-        if (oldLayout) {
-            oldLayout.chords().forEach(function (chordData) {
-                oldChords[chordKey(chordData)] = chordData;
-            });
-        }
-
-        return function (d, i) {
-            var tween;
-            var old = oldChords[chordKey(d)];
-            if (old) {
-                if (d.source.index != old.source.index) {
-                    old = {
-                        source: old.target,
-                        target: old.source
-                    };
-                }
-
-                tween = d3.interpolate(old, d);
-            } else {
-                // Create a zero-width chord object
-                var emptyChord = {
-                    source: {
-                        startAngle: d.source.startAngle,
-                        endAngle: d.source.startAngle
-                    },
-                    target: {
-                        startAngle: d.target.startAngle,
-                        endAngle: d.target.startAngle
-                    }
-                };
-                tween = d3.interpolate(emptyChord, d);
-            }
-            return function (t) {
-                return path(tween(t));
-            };
-        };
-    }
 </script>

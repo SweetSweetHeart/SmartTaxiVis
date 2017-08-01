@@ -25,10 +25,6 @@ svg {
     font-family: 'Exo 2', sans-serif;
 }
 
-.center-block {
-    text-align: center;
-}
-
 /*.sliderDiv {
     padding: 15px 0 5px 0;
 }*/
@@ -40,13 +36,79 @@ svg {
 
 /*css for anymap*/
 #anymap {
-    width: 1000px;
-    height: 800px;
+    width: 100%;
+    height: 500px;
+    padding: 0em;
     margin: auto;
-    padding: 40px 0 0 0;
 }
 
 .anychart-credits {
     display: none;
 }
 
+#graphs{
+    width: 90%;
+    margin: 0em 5%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#chordDiagram{
+    width: 100%;
+    height: auto;
+}
+
+#controller{
+    width: 90%;
+    margin: 2em 5%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.controlsWrapper{
+    margin: 2em 0em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+
+.slidersWrapper {
+    margin: 3em 0em;
+}
+
+#controller h3{
+    display: block;
+    width: 70%;
+    float: left;
+    margin: 0em;
+    font-size: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+}
+
+#controller h3 #tripCount {
+    display: inline-block;
+}
+
+#controller #btn_pause {
+    display: block;
+    width: 25%;
+    margin-left: 5%;
+    box-sizing: border-box;
+    float: right;
+}
+
+#controller #zoneSlider,
+#controller #timeSlider {
+    display: block;
+}
+
+@media(min-width: 960px){
+    #graphs{
+        flex-direction: row;
+    }
+}
