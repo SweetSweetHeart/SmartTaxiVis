@@ -4,8 +4,12 @@
     interval = setInterval(function () {
         if (!isPaused) {
             if (hour <= 22) {
-                taxizones = zoneT[hour];
+                zoneMatrix = zoneT[hour];
                 tripMatrix = countT[hour];
+
+                console.log(zoneMatrix.length);
+                console.log(tripMatrix.length);
+
                 formatJSON();
                 hour++;
             }
@@ -17,14 +21,20 @@
 }
 
 
-function toggleAnimation() {
-    if (!isPaused) {
+function toggleAnimation(pausing) {
+    if (pausing) {
         isPaused = true;
-        $('#btn_pause').html("<i class='fa fa-play' aria-hidden='true'></i>&nbsp;Animation");
+        $('#btn_pause').html("<i class='fa fa-play' aria-hidden='true'></i>&nbsp;&nbsp;Animation");
     }
     else {
-        isPaused = false;
-        $('#btn_pause').html("<i class='fa fa-pause' aria-hidden='true'></i>&nbsp;Animation");
+        if (!isPaused) {
+            isPaused = true;
+            $('#btn_pause').html("<i class='fa fa-play' aria-hidden='true'></i>&nbsp;&nbsp;Animation");
+        }
+        else {
+            isPaused = false;
+            $('#btn_pause').html("<i class='fa fa-pause' aria-hidden='true'></i>&nbsp;&nbsp;Animation");
+        }
     }
 }
 
@@ -38,8 +48,22 @@ function getDefaultLayout() {
 
 // Reformat the trip matrix when conditions changes, and update related visualisations
 function formatJSON() {
+    
+    //tripMatrix = countT[time1];
+    //for (var i = time1; i < time2; i++) {
+    //    if (i == 23) {
+
+    //    }
+    //    if (countT[i].length <= countT[i + 1].length) {
+    //        tripMatrix = matrixAddition(countT[i], countT[i + 1]);
+    //    }
+    //    else {
+    //        tripMatrix = matrixAddition(countT[i + 1], countT[i]);
+    //    }
+    //}
+
     var trips = $.extend(true, [], tripMatrix);
-    zones = $.extend(true, [], taxizones);
+    zones = $.extend(true, [], zoneMatrix);
     zones.splice(0, zone1 - 1);
     zones.splice(zone2 - zone1 + 1, limit - zone2);
     trips.splice(0, zone1 - 1);
@@ -60,9 +84,13 @@ function formatJSON() {
     dataSet = anychart.data.set(zones);
     connectorData = null;
 
-    if (trips.length != 0) {
+    if (tripCount > 0) {
+        $("#chordDiagram").show();
         renderMap();
         updateChords(trips);
+    }
+    else {
+        $("#chordDiagram").hide();
     }
 }
 
@@ -200,12 +228,14 @@ function updateChords(matrix) {
         .transition().duration(10).attr("opacity", 1);
 
     groupG.on("mouseover", function (d) {
+        toggleAnimation(true);
         chordPaths.classed("fade", function (p) {
             return ((p.source.index != d.index) && (p.target.index != d.index));
         });
     });
 
     chordPaths.on("mouseover", function (d) {
+        toggleAnimation(true);
         chordPaths.attr("opacity", 0.2);
         $(this).attr("opacity", 1);
     });
@@ -218,13 +248,14 @@ function updateChords(matrix) {
                 from: zones[d.source.index].name,
                 to: zones[d.target.index].name
             }]
+            toggleAnimation(true);
             renderMap();
         }
     });
 
-
     chordPaths.on("mouseout", function () {
         chordPaths.attr("opacity", 0.5);
+        //toggleAnimation(false);
     });
 
     g.on("mouseout", function () {
@@ -233,11 +264,7 @@ function updateChords(matrix) {
             chordPaths.classed("fade", false);
         }
     });
-
     last_layout = layout;
-
-
-
 }
 
 function arcTween(oldLayout) {

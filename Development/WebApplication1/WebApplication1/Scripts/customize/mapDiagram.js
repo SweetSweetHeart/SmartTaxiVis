@@ -81,8 +81,8 @@
     map.legend().enabled(false);
 
     // Create zoom controls
-    //var zoomController = anychart.ui.zoom();
-    //zoomController.render(map);
+    var zoomController = anychart.ui.zoom();
+    zoomController.render(map);
 
     // Disable context menu
     map.contextMenu(false);

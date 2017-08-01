@@ -10,44 +10,6 @@
 @Styles.Render("~/Content/nouislider")
 @Styles.Render("~/Content/anymap")
 <div>
-    <!--
-
-    <table class="table table-responsive">
-        <tr id="graphs">
-            <td class="graph">
-                <div id="chordDiagram"></div>
-            </td>
-            <td class="graph">
-                <div id="anymap"></div>
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <table>
-                    <tr align="left">
-                        <td>
-                            Trips displayed:&nbsp;
-                        </td>
-                        <td id="tripCount" style="font-weight:bold;">89885</td>
-                    </tr>
-                    <tr>
-                        @*<td><button id="btn_PU" type="button" class="btn btn-danger control-widget">By Pickup</button></td>
-                            <td><button id="btn_DO" type="button" class="btn btn-info control-widget">By Dropoff</button></td>*@
-                        <td><button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;Animation</button></td>
-                    </tr>
-
-                </table>
-            </td>
-            <td>
-                <div id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div><br /><br /><br />
-                <div id="timeSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour range (Pending fix)"></div><br /><br /><br />
-
-            </td>
-            <td></td>
-        </tr>
-    </table>
-        -->
     <div id="graphs">
         <div id="chordDiagram"></div>
         <div id="anymap"></div>
@@ -55,41 +17,49 @@
     <div id="controller">
         <div class="controlsWrapper">
             <h3>Trips displayed: <span id="tripCount">89885</span></h3>
-            <button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;Animation</button>
+            <button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;&nbsp;Animation</button>
         </div>
-        <div class="slidersWrapper" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
-        <div class="slidersWrapper" id="timeSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour range (Pending fix)"></div>
+        <div class="slidersWrapper" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust zoneMatrix"></div>
+        @*<div class="slidersWrapper" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour range (Pending fix)"></div>*@
     </div>
-    <div id="loading" style="display:none;">
-        <span>
-            <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
-            Loading...
-        </span>
-    </div>
+    @*<div id="loading" style="display:none;">
+            <span>
+                <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+                Loading...
+            </span>
+        </div>*@
 </div>
 
 <script>
     function local() {
         limit = 263, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
-        type = "PU";  // The default order of TaxiZones is by pickup [PU] counts
 
         zoneSlider = document.getElementById('zoneSlider');
-        timeSlider = document.getElementById('timeSlider');
+        //hourSlider = document.getElementById('hourSlider');
 
         // Some default values to play with, before the server returns actual data
         tripMatrix = countT[0];
-        taxizones = zoneT[0];
-    // Assign random colors to chords
-        jQuery.each(taxizones, function (i, val) {
+        zoneMatrix = zoneT[0];
+
+        // Assign random colors to chords
+        jQuery.each(zoneMatrix, function (i, val) {
             val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
         });
-        zones = $.extend(true, [], taxizones);
+        zones = $.extend(true, [], zoneMatrix);
 
         connectorData = null;
         dataSet = anychart.data.set(zones);
 
         zoneTN = [];
         countTN = [];
+    }
+
+    function matrixAddition(a, b) {
+        return a.map(function (n, i) {
+            return n.map(function (o, j) {
+                return o + b[i][j];
+            });
+        });
     }
 
     $(function () {
@@ -100,29 +70,12 @@
         $('[data-toggle="popover"]').popover({
             trigger: 'manual'
         });
-        $('#timeSlider').popover('show');
+        $('#hourSlider').popover('show');
         $('#zoneSlider').popover('show');
-
-        $("#btn_PU").click(function () {
-            type = "PU";
-            retrieve(limit, type, time1, time2);
-        });
-
-        $("#btn_DO").click(function () {
-            type = "DO";
-            retrieve(limit, type, time1, time2);
-        });
-
-        $("#btn_local").click(function () {
-            //local();
-            //zoneSlider.noUiSlider.set([1, limit]);
-            //console.log(zones);
-            //console.log(tripMatrix);
-        });
 
         $('#btn_pause').click(function (e) {
             e.preventDefault();
-            toggleAnimation();
+            toggleAnimation(false);
         });
         chordAnimation();
         //retrieveLocal(0);
@@ -150,15 +103,15 @@
                     var do_v = JSON.parse(res[2]);
                     var id_v = JSON.parse(res[4]);
 
-                    taxizones = JSON.parse(res[0]);
+                    zoneMatrix = JSON.parse(res[0]);
                     // Assign random colors to chords
-                    jQuery.each(taxizones, function (i, val) {
+                    jQuery.each(zoneMatrix, function (i, val) {
                         val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
                         val.Pickup = pu_v[i];
                         val.Dropoff = do_v[i];
                         val.id = id_v[i].toString();
                     });
-                    zones = $.extend(true, [], taxizones);
+                    zones = $.extend(true, [], zoneMatrix);
                     var newMatrixJson = [];
                     jQuery.each(JSON.parse(res[3]), function (i, val) {
                         var sp = val.split(',');
@@ -186,17 +139,13 @@
 
     var targetSize = $("#chordDiagram").width() * .85;
     var marginSide = $("#chordDiagram").width() * .075;
-    
-    function resize() {
-        targetSize = $("#chordDiagram").width() * .85;
-        marginSide = $("#chordDiagram").width() * .075;
+
+    $(window).resize(function () {
         var svg = d3.select("#chordDiagram")
             .attr("width", targetSize)
             .attr("height", targetSize);
 
-        $('[data-toggle="popover"]').popover('show');
-
-        outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
+         outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
             innerRadius = outerRadius - 18;
 
         arc = d3.svg.arc()
@@ -207,12 +156,8 @@
             .radius(innerRadius);
 
         $('#circle').attr("r", outerRadius);
-    }
+        $('[data-toggle="popover"]').popover('show');
 
-    $(window).resize(function () {
-        resize();
-        renderMap();
-        formatJSON();
     });
 
     var outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
@@ -237,9 +182,8 @@
 
         // Initialize the visualization
         var g = d3.select("#chordDiagram").append("svg")
-            .attr("id", "chordSvg")
             .attr("viewBox", viewBoxDimensions)
-            .attr("preserveAspectRatio", "xMinYMid") 
+            .attr("preserveAspectRatio", "xMinYMid")
             .append("g")
         .attr("id", "circle")
         .attr("overflow-x", "visible")
