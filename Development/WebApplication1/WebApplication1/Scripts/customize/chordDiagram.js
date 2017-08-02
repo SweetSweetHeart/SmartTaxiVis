@@ -1,16 +1,10 @@
 ﻿function chordAnimation() {
     isPaused = false;
-    hour = 1;
+    hour = 10;
     interval = setInterval(function () {
         if (!isPaused) {
             if (hour <= 22) {
-                zoneMatrix = zoneT[hour];
-                tripMatrix = countT[hour];
-
-                console.log(zoneMatrix.length);
-                console.log(tripMatrix.length);
-
-                formatJSON();
+                animationSetData();
                 hour++;
             }
             else {
@@ -20,6 +14,13 @@
     }, 3000);
 }
 
+function animationSetData() {
+    zoneMatrix = zoneT[hour];
+    tripMatrix = countT[hour];
+    hourSlider.noUiSlider.set(hour);
+    $("#hour").html(hour);
+    formatJSON();
+}
 
 function toggleAnimation(pausing) {
     if (pausing) {
@@ -48,7 +49,7 @@ function getDefaultLayout() {
 
 // Reformat the trip matrix when conditions changes, and update related visualisations
 function formatJSON() {
-    
+
     //tripMatrix = countT[time1];
     //for (var i = time1; i < time2; i++) {
     //    if (i == 23) {
@@ -242,15 +243,23 @@ function updateChords(matrix) {
 
 
     chordPaths.on("click", function (d) {
+        var pointData = getConnector(zones[d.source.index].id, zones[d.target.index].id);
         if (zones[d.source.index].id != zones[d.target.index].id) {
             connectorData = [{
-                points: getConnector(zones[d.source.index].id, zones[d.target.index].id),
+                points: pointData,
                 from: zones[d.source.index].name,
                 to: zones[d.target.index].name
-            }]
-            toggleAnimation(true);
-            renderMap();
+            }];
+            addConnectorSeries(connectorData);
+            highlightPoint(zones[d.source.index]);
         }
+        else {
+            removeMapSeries('connector');
+            highlightPoint(zones[d.source.index]);
+        }
+
+        toggleAnimation(true);
+
     });
 
     chordPaths.on("mouseout", function () {

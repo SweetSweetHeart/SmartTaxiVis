@@ -80,14 +80,11 @@ svg {
     margin: 3em 0em;
 }
 
-#controller h3{
+#controller h3 {
     display: block;
-    width: 70%;
-    float: left;
-    margin: 0em;
+    width: 25%;
+    float: right;
     font-size: 1.5em;
-    height: 1.5em;
-    line-height: 1.5em;
 }
 
 #controller h3 #tripCount {
@@ -96,15 +93,17 @@ svg {
 
 #controller #btn_pause {
     display: block;
-    width: 25%;
-    margin-left: 5%;
+    width: 10%;
+    min-width: 150px;
+    max-height: 50px;
     box-sizing: border-box;
-    float: right;
+    float: left;
 }
 
 #controller #zoneSlider,
-#controller #timeSlider {
+#controller #hourSlider {
     display: block;
+    width: 25%;
 }
 
 @media(min-width: 960px){

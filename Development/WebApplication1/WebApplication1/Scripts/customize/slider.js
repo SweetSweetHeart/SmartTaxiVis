@@ -17,34 +17,34 @@
     zoneSlider.noUiSlider.on('change', function (values) {
         zone1 = values[0];
         zone2 = values[1];
-        isPaused = false;
-        toggleAnimation();
+        toggleAnimation(true);
         formatJSON();
     });
 
-    //noUiSlider.create(hourSlider, {
-    //    tooltips: true,
-    //    format: wNumb({
-    //        decimals: 0
-    //    }),
-    //    start: [time1, time2],
-    //    step: 1,
-    //    behaviour: 'drag-tap',
-    //    connect: true,
-    //    range: {
-    //        'min': 0,
-    //        '50%': 12,
-    //        'max': 23
-    //    },
-    //    pips: {
-    //        mode: 'range',
-    //        density: 4
-    //    }
-    //});
-    //hourSlider.noUiSlider.on('change', function (values) {
-    //    time1 = values[0];
-    //    time2 = values[1];
-    //    //retrieve(limit, type, time1, time2);
-    //    formatJSON();
-    //});
+    noUiSlider.create(hourSlider, {
+        tooltips: true,
+        animate: true,
+        format: wNumb({
+            decimals: 0
+        }),
+        start: time1,
+        step: 1,
+        range: {
+            'min': [0],
+            'max': [23]
+        }
+    });
+
+    hourSlider.noUiSlider.on('change', function (values) {
+        time1 = values[0];
+        if (time1 > 23)
+            time1 = 0;
+        hour = time1;
+        animationSetData();
+        hour++;
+        //time2 = values[1];
+        //retrieve(limit, type, time1, time2);
+        toggleAnimation(true);
+        formatJSON();
+    });
 };
