@@ -1,4 +1,5 @@
-﻿#chart {
+﻿/*css for Chord diagram*/
+#chart {
     font: 10px sans-serif;
 }
 
@@ -24,15 +25,89 @@ svg {
     font-family: 'Exo 2', sans-serif;
 }
 
-.center-block{
-    text-align:center;
-}
-
-.sliderDiv {
+/*.sliderDiv {
     padding: 15px 0 5px 0;
-}
+}*/
 
-#zoneSlider, #timeSlider {
+/*#zoneSlider, #timeSlider {
     margin: auto;
     max-width: 400px;
+}*/
+
+/*css for anymap*/
+#anymap {
+    width: 100%;
+    height: 500px;
+    padding: 0em;
+    margin: auto;
+}
+
+.anychart-credits {
+    display: none;
+}
+
+#graphs{
+    width: 90%;
+    margin: 0em 5%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#chordDiagram{
+    width: 100%;
+    height: auto;
+}
+
+#controller{
+    width: 90%;
+    margin: 2em 5%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.controlsWrapper{
+    margin: 2em 0em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+
+.slidersWrapper {
+    margin: 3em 0em;
+}
+
+#controller h3 {
+    display: block;
+    width: 25%;
+    float: right;
+    font-size: 1.5em;
+}
+
+#controller h3 #tripCount {
+    display: inline-block;
+}
+
+#controller #btn_pause {
+    display: block;
+    width: 10%;
+    min-width: 150px;
+    max-height: 50px;
+    box-sizing: border-box;
+    float: left;
+}
+
+#controller #zoneSlider,
+#controller #hourSlider {
+    display: block;
+    width: 25%;
+}
+
+@media(min-width: 960px){
+    #graphs{
+        flex-direction: row;
+    }
 }
