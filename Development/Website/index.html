@@ -16,6 +16,8 @@
     <script src="JS/d3.v2.min.js"></script>
     <script src="JS/chordDiagram.js"></script>
 
+    <script src="JS/histogram.js"></script>
+
     <script src="JS/slider.js"></script>
     <script src="JS/nouislider.js"></script>
     <script src="JS/wNumb.js"></script>
@@ -64,8 +66,7 @@
     <div class="container-fluid body-content">
         <div id="nomatch" style="display: none;">
             <h1>
-                <i class="fa fa-meh-o fa-2x fa-fw"></i>
-                No trips matched for the conditions defined.
+                <i class="fa fa-meh-o fa-2x fa-fw"></i> No trips matched for the conditions defined.
             </h1>
         </div>
         <div>
@@ -77,6 +78,7 @@
                 <div class="controlsWrapper">
                     <button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;&nbsp;Animation</button>
                     <h3>NO. of trips: <span id="tripCount">89885</span> <br />Hour of the day: <span id="hour">0</span></h3>
+                    <div id='histogram' style="width:50%"></div>
                     <div class="slidersWrapper" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
                     <div class="slidersWrapper" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
                 </div>
@@ -85,7 +87,7 @@
 
         <script>
             function local() {
-                limit = 263, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
+                totalZoneNum = 263, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
 
                 zoneSlider = document.getElementById('zoneSlider');
                 hourSlider = document.getElementById('hourSlider');
@@ -94,11 +96,13 @@
                 tripMatrix = countT[time1];
                 zoneMatrix = zoneT[time1];
 
-                // Assign random colors to chords
-                jQuery.each(zoneMatrix, function (i, val) {
-                    val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
-                });
                 zones = $.extend(true, [], zoneMatrix);
+
+                tripCount = getTripCount(tripMatrix);
+                // Assign random colors to chords
+                jQuery.each(zones, function (i, val) {
+                    val.color = RainBowColor(val.Pickup, tripCount);
+                });
 
                 connectorData = null;
                 dataSet = anychart.data.set(zones);
@@ -109,13 +113,8 @@
                 countTN = [];
             }
 
-            function matrixAddition(a, b) {
-                return a.map(function (n, i) {
-                    return n.map(function (o, j) {
-                        return o + b[i][j];
-                    });
-                });
-            }
+
+
 
             $(function () {
                 local();
@@ -135,65 +134,6 @@
                 chordAnimation();
                 //retrieveLocal(0);
             });
-
-
-            function retrieveLocal(time) {
-                var start = time;
-                var end = time + 1;
-                if (time == 24) {
-                    console.log(JSON.stringify(zoneTN));
-                    console.log(JSON.stringify(countTN));
-                } else {
-                    if (time == 23) {
-                        end = 0;
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        url: "/Home/RetrieveTopZones",
-                        data: {
-                            limit: 263,
-                            type: "PU",
-                            time1: start,
-                            time2: end
-                        },
-                        success: function (res) {
-                            var pu_v = JSON.parse(res[1]);
-                            var do_v = JSON.parse(res[2]);
-                            var id_v = JSON.parse(res[4]);
-
-                            zoneMatrix = JSON.parse(res[0]);
-                            // Assign random colors to chords
-                            jQuery.each(zoneMatrix, function (i, val) {
-                                val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
-                                val.Pickup = pu_v[i];
-                                val.Dropoff = do_v[i];
-                                val.id = id_v[i].toString();
-                            });
-                            zones = $.extend(true, [], zoneMatrix);
-                            var newMatrixJson = [];
-                            jQuery.each(JSON.parse(res[3]), function (i, val) {
-                                var sp = val.split(',');
-                                var hold = [];
-                                jQuery.each(sp, function (i, val) {
-                                    hold.push(parseInt(val));
-                                });
-                                newMatrixJson.push(hold);
-                            });
-
-                            zoneTN.push(zones);
-                            countTN.push(newMatrixJson);
-                            retrieveLocal(time + 1);
-
-                        },
-                        error: function (emp) {
-                            alert(
-                                'Your Internet connection might be unstable, please refresh and try again.'
-                            );
-                        }
-                    });
-                }
-            }
-
 
             // Reformat the trip matrix when conditions changes, and update related visualisations
 
