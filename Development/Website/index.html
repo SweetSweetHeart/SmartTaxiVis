@@ -15,8 +15,8 @@
     <script src="JS/data.js"></script>
     <script src="JS/d3.v2.min.js"></script>
     <script src="JS/chordDiagram.js"></script>
-    
-      <script src="JS/histogram.js"></script>  
+
+    <script src="JS/histogram.js"></script>
 
     <script src="JS/slider.js"></script>
     <script src="JS/nouislider.js"></script>
@@ -66,8 +66,7 @@
     <div class="container-fluid body-content">
         <div id="nomatch" style="display: none;">
             <h1>
-                <i class="fa fa-meh-o fa-2x fa-fw"></i>
-                No trips matched for the conditions defined.
+                <i class="fa fa-meh-o fa-2x fa-fw"></i> No trips matched for the conditions defined.
             </h1>
         </div>
         <div>
@@ -79,7 +78,7 @@
                 <div class="controlsWrapper">
                     <button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;&nbsp;Animation</button>
                     <h3>NO. of trips: <span id="tripCount">89885</span> <br />Hour of the day: <span id="hour">0</span></h3>
-                    <div id='histogram' style="width:50%" ></div>
+                    <div id='histogram' style="width:50%"></div>
                     <div class="slidersWrapper" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
                     <div class="slidersWrapper" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
                 </div>
@@ -88,7 +87,7 @@
 
         <script>
             function local() {
-                limit = 263, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
+                totalZoneNum = 263, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
 
                 zoneSlider = document.getElementById('zoneSlider');
                 hourSlider = document.getElementById('hourSlider');
@@ -97,6 +96,7 @@
                 tripMatrix = countT[time1];
                 zoneMatrix = zoneT[time1];
 
+                
                 // Assign random colors to chords
                 jQuery.each(zoneMatrix, function (i, val) {
                     val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
@@ -111,6 +111,8 @@
                 zoneTN = [];
                 countTN = [];
             }
+
+
 
             $(function () {
                 local();
@@ -128,7 +130,6 @@
                     toggleAnimation(false);
                 });
                 chordAnimation();
-                drawHistogram();
                 //retrieveLocal(0);
             });
 
