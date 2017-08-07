@@ -28,6 +28,15 @@ function drawHistogram() {
 
     var series = histogramChart.column(dataMap);
 
+    series.tooltip()
+        .useHtml(true)
+        .title(false)
+        .separator(false)
+        .fontSize(14)
+        .format(function () {
+            return '<span>Hour: ' + this.getData('x') + " to " + (parseInt(this.getData('x')) + 1) + " <br/>" + "Trips: " + this.getData('value') + '</span>';
+        });
+
     // set the chart title
     // chart.title("Histogram");
 
