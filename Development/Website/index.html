@@ -96,12 +96,13 @@
                 tripMatrix = countT[time1];
                 zoneMatrix = zoneT[time1];
 
-                
-                // Assign random colors to chords
-                jQuery.each(zoneMatrix, function (i, val) {
-                    val.color = '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
-                });
                 zones = $.extend(true, [], zoneMatrix);
+
+                tripCount = getTripCount(tripMatrix);
+                // Assign random colors to chords
+                jQuery.each(zones, function (i, val) {
+                    val.color = RainBowColor(val.Pickup, tripCount);
+                });
 
                 connectorData = null;
                 dataSet = anychart.data.set(zones);
@@ -111,6 +112,7 @@
                 zoneTN = [];
                 countTN = [];
             }
+
 
 
 

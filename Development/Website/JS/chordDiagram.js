@@ -43,6 +43,7 @@ function getDefaultLayout() {
         .sortChords(d3.ascending);
 }
 
+// Calculate the given trip count
 function getTripCount(data) {
     var result = 0;
     jQuery.each(data, function (i, val) {
@@ -53,6 +54,15 @@ function getTripCount(data) {
     return result;
 }
 
+// Generate rain bow clor map
+function RainBowColor(length, maxLength) {
+    var i = (length * 550 / maxLength);
+    var r = Math.round(Math.sin(0.024 * i + 0) * 127 + 128);
+    var g = Math.round(Math.sin(0.024 * i + 2) * 127 + 128);
+    var b = Math.round(Math.sin(0.024 * i + 4) * 127 + 128);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
 // Reformat the trip matrix when conditions changes, and update related visualisations
 function formatJSON() {
     var trips = $.extend(true, [], tripMatrix);
@@ -60,7 +70,13 @@ function formatJSON() {
     spliceMatrix(zones);
     spliceMatrix(trips);
     spliceSubMatrix(trips);
+
     tripCount = getTripCount(trips);
+    // Assign random colors to chords
+    jQuery.each(zones, function (i, val) {
+        val.color = RainBowColor(val.Pickup, tripCount);
+    });
+
     $("#tripCount").html(tripCount);
     dataSet = anychart.data.set(zones);
     connectorData = null;
@@ -289,12 +305,12 @@ function arcTween(oldLayout) {
         if (old) { // There's a matching old group
             tween = d3.interpolate(old, d);
         } else {
-            // Create a zero-width arc object
-            // var emptyArc = {
-            //     startAngle: d.startAngle,
-            //     endAngle: d.startAngle
-            // };
-            // tween = d3.interpolate(emptyArc, d);
+            // Create a zero- width arc object
+            var emptyArc = {
+                startAngle: d.startAngle,
+                endAngle: d.startAngle
+            };
+            tween = d3.interpolate(emptyArc, d);
         }
         return function (t) {
             return arc(tween(t));
@@ -329,18 +345,18 @@ function chordTween(oldLayout) {
 
             tween = d3.interpolate(old, d);
         } else {
-            // Create a zero-width chord object
-            // var emptyChord = {
-            //     source: {
-            //         startAngle: d.source.startAngle,
-            //         endAngle: d.source.startAngle
-            //     },
-            //     target: {
-            //         startAngle: d.target.startAngle,
-            //         endAngle: d.target.startAngle
-            //     }
-            // };
-            // tween = d3.interpolate(emptyChord, d);
+            // Create a zero- width chord object
+            var emptyChord = {
+                source: {
+                    startAngle: d.source.startAngle,
+                    endAngle: d.source.startAngle
+                },
+                target: {
+                    startAngle: d.target.startAngle,
+                    endAngle: d.target.startAngle
+                }
+            };
+            tween = d3.interpolate(emptyChord, d);
         }
         return function (t) {
             return path(tween(t));
