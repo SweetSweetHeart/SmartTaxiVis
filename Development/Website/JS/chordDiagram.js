@@ -1,8 +1,8 @@
 ﻿function chordAnimation() {
     isPaused = false;
-    interval = setInterval(function () {
-        time1++;
+    interval = setInterval(function () {        
         if (!isPaused) {
+            time1++;
             if (time1 > 23)
                 time1 = 0;
             animationSetData();
