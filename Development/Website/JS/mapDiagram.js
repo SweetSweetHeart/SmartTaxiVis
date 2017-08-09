@@ -128,7 +128,7 @@ function filterFunction(val1, val2) {
  * Generate a Connector coordinate from point A to point B
  * @param {SeriesPoint} pointA - Point A.
  * @param {SeriesPoint} pointB - Point B.
- * @returns {string} A Connector coordinate in JSON.
+ * @returns {string} - A Connector coordinate in JSON.
  */
 function getConnector(pointA, pointB) {
     // get the helper series

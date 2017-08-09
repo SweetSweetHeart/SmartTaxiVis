@@ -37,11 +37,7 @@
 
     hourSlider.noUiSlider.on('change', function (values) {
         time1 = values[0];
-        hour = time1;
         animationSetData();
-        hour++;
-        //time2 = values[1];
-        //retrieve(totalZoneNum, type, time1, time2);
         toggleAnimation(true);
         formatJSON();
     });

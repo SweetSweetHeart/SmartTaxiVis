@@ -1,4 +1,8 @@
-﻿function chordAnimation() {
+﻿/**
+ * Start the animation for Chord Diagram.
+ * 
+ */
+function chordAnimation() {
     isPaused = false;
     interval = setInterval(function () {        
         if (!isPaused) {
@@ -10,6 +14,11 @@
     }, 3000);
 }
 
+
+/**
+ * Update variables zoneMatrix and zoneMatrix, and HTML element 'Hour of the day' to the corresponding hour animated.
+ * 
+ */
 function animationSetData() {
     zoneMatrix = zoneT[time1];
     tripMatrix = countT[time1];
@@ -18,6 +27,12 @@ function animationSetData() {
     formatJSON();
 }
 
+
+/**
+ * Toggle the animation state based on the input boolean value.
+ * 
+ * @param {boolean} pausing - The input boolean value.
+ */
 function toggleAnimation(pausing) {
     if (pausing) {
         isPaused = true;
@@ -36,6 +51,11 @@ function toggleAnimation(pausing) {
 }
 
 
+/**
+ * Sort the Chord Diagram.
+ * 
+ * @returns {d3.layout} - The sorted D3 Chord Diagram layout.
+ */
 function getDefaultLayout() {
     return d3.layout.chord()
         .padding(0.03)
@@ -43,7 +63,13 @@ function getDefaultLayout() {
         .sortChords(d3.ascending);
 }
 
-// Calculate the given trip count
+
+/**
+ * Calculate the given trip count.
+ * 
+ * @param {string} data - The input trip count data in JSON.
+ * @returns {number} -The trip count.
+ */
 function getTripCount(data) {
     var result = 0;
     jQuery.each(data, function (i, val) {
@@ -54,8 +80,15 @@ function getTripCount(data) {
     return result;
 }
 
-// Generate rain bow clor map
-function RainBowColor(length, maxLength) {
+
+/**
+ * Generate a rainbow color map based on the ratio of trips and the total trip count.
+ * 
+ * @param {number} length  - Trip count of one zone as the dividend.
+ * @param {number} maxLength - Total trip count of all zones as the divisor.
+ * @returns A rgb color.
+ */
+function GenerateRainBowColorMap(length, maxLength) {
     var i = (length * 550 / maxLength);
     var r = Math.round(Math.sin(0.024 * i + 0) * 127 + 128);
     var g = Math.round(Math.sin(0.024 * i + 2) * 127 + 128);
@@ -63,7 +96,10 @@ function RainBowColor(length, maxLength) {
     return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
 
-// Reformat the trip matrix when conditions changes, and update related visualisations
+/**
+ * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
+ * Also update the visibility of some HTML elements.
+ */
 function formatJSON() {
     var trips = $.extend(true, [], tripMatrix);
     zones = $.extend(true, [], zoneMatrix);
@@ -74,7 +110,7 @@ function formatJSON() {
     tripCount = getTripCount(trips);
     // Assign random colors to chords
     jQuery.each(zones, function (i, val) {
-        val.color = RainBowColor(val.Pickup, tripCount);
+        val.color = GenerateRainBowColorMap(val.Pickup, tripCount);
     });
 
     $("#tripCount").html(tripCount);
@@ -96,11 +132,26 @@ function formatJSON() {
     }
 }
 
+
+
+/**
+ * Splice the input array based on the zones selected.
+ * 
+ * @param {any[]} matrix - The input array with all zones.
+ * @returns {any[]} - The spliced array with the selected zones only.
+ */
 function spliceMatrix(matrix) {
     matrix.splice(0, zone1);
     matrix.splice(zone2 - zone1 + 1, totalZoneNum - zone2);
     return matrix;
 }
+
+/**
+ * 
+ * 
+ * @param {any[]} matrix 
+ * @returns  {any[]} - The spliced array with the selected zones only.
+ */
 
 function spliceSubMatrix(matrix) {
     matrix.forEach(function (element, i) {

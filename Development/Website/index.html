@@ -6,26 +6,26 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page - Smart City Vis - Qiru Wang</title>
-    <link href="CSS/Site.css" rel="stylesheet">
-    <link href="CSS/bootstrap.css" rel="stylesheet">
-    <link href="CSS/font-awesome.css" rel="stylesheet">
-    <script src="JS/modernizr-2.8.3.js"></script>
-    <script src="JS/jquery-3.1.1.js"></script>
-    <script src="JS/bootstrap.js"></script>
-    <script src="JS/data.js"></script>
-    <script src="JS/d3.v2.min.js"></script>
-    <script src="JS/chordDiagram.js"></script>
+    <link href="css/Site.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <script src="js/lib/modernizr-2.8.3.js"></script>
+    <script src="js/lib/jquery-3.1.1.js"></script>
+    <script src="js/lib/bootstrap.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/lib/d3.v2.min.js"></script>
+    <script src="js/chordDiagram.js"></script>
 
-    <script src="JS/histogram.js"></script>
+    <script src="js/histogram.js"></script>
 
-    <script src="JS/slider.js"></script>
-    <script src="JS/nouislider.js"></script>
-    <script src="JS/wNumb.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/lib/nouislider.js"></script>
+    <script src="js/lib/wNumb.js"></script>
 
-    <script src="JS/anychart-bundle.min.js"></script>
-    <script src="JS/proj4.js"></script>
-    <script src="JS/mapDiagram.js"></script>
-    <script src="JS/taxizonesGeoJSON.js"></script>
+    <script src="js/lib/anychart-bundle.min.js"></script>
+    <script src="js/lib/proj4.js"></script>
+    <script src="js/mapDiagram.js"></script>
+    <script src="js/taxizonesGeoJSON.js"></script>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
                 tripCount = getTripCount(tripMatrix);
                 // Assign random colors to chords
                 jQuery.each(zones, function (i, val) {
-                    val.color = RainBowColor(val.Pickup, tripCount);
+                    val.color = GenerateRainBowColorMap(val.Pickup, tripCount);
                 });
 
                 connectorData = null;
@@ -203,9 +203,9 @@
         </script>
         <hr>
         <footer>
-            <link href="CSS/nouislider.css" rel="stylesheet">
-            <link href="CSS/anychart-ui.min.css" rel="stylesheet">
-            <link href="CSS/anychart.css" rel="stylesheet">
+            <link href="css/nouislider.css" rel="stylesheet">
+            <link href="css/anychart-ui.min.css" rel="stylesheet">
+            <link href="css/anychart.css" rel="stylesheet">
             <p>© 2017 - Smart City Vis - Qiru Wang</p>
         </footer>
     </div>
