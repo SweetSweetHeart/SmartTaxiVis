@@ -1,4 +1,7 @@
-﻿function renderMap() {
+﻿/**
+ * Render a Choropleth map as base series, add Marker series on top of the base series.
+ */
+function renderMap() {
     $('#anymap').html("");
 
     // Create AnyMap chart
@@ -78,12 +81,12 @@
         size: 'Pickup'
     });
 
-    createSeries('0 - 200', markerSeries.filter('size', filter_function(0, 200)), '#80deea');
-    createSeries('200 - 400', markerSeries.filter('size', filter_function(200, 400)), '#26c6da');
-    createSeries('400 - 600', markerSeries.filter('size', filter_function(400, 600)), '#00acc1');
-    createSeries('600 - 800', markerSeries.filter('size', filter_function(600, 800)), '#0097a7');
-    createSeries('800 - 1,000', markerSeries.filter('size', filter_function(800, 1000)), '#00838f');
-    createSeries('More than 1,000', markerSeries.filter('size', filter_function(1000)), '#006064');
+    createSeries('0 - 200', markerSeries.filter('size', filterFunction(0, 200)), '#80deea');
+    createSeries('200 - 400', markerSeries.filter('size', filterFunction(200, 400)), '#26c6da');
+    createSeries('400 - 600', markerSeries.filter('size', filterFunction(400, 600)), '#00acc1');
+    createSeries('600 - 800', markerSeries.filter('size', filterFunction(600, 800)), '#0097a7');
+    createSeries('800 - 1,000', markerSeries.filter('size', filterFunction(800, 1000)), '#00838f');
+    createSeries('More than 1,000', markerSeries.filter('size', filterFunction(1000)), '#006064');
 
     // Enable map legend
     map.legend().enabled(false);
@@ -104,8 +107,13 @@
     map.container('anymap').draw();
 };
 
-// Helper function to bind data field to the local var.
-function filter_function(val1, val2) {
+/**
+ * Filter function to bind data to variables only with the range.
+ * @param {number} val1 - The first range value.
+ * @param {number} val2 - The second range value.
+ * @returns {number} The filtered result.
+ */
+function filterFunction(val1, val2) {
     if (val2)
         return function (fieldVal) {
             return val1 <= fieldVal && fieldVal < val2;
@@ -116,13 +124,19 @@ function filter_function(val1, val2) {
         };
 }
 
-function getConnector(id1, id2) {
+/**
+ * Generate a Connector coordinate from point A to point B
+ * @param {SeriesPoint} pointA - Point A.
+ * @param {SeriesPoint} pointB - Point B.
+ * @returns {string} A Connector coordinate in JSON.
+ */
+function getConnector(pointA, pointB) {
     // get the helper series
     var series = map.getSeries('helper');
 
     // find regions with proper ids
-    var pointIndex1 = series.data().find("id", id1);
-    var pointIndex2 = series.data().find("id", id2);
+    var pointIndex1 = series.data().find("id", pointA);
+    var pointIndex2 = series.data().find("id", pointB);
     // get the bounds of the first region
     var point1 = series.getPoint(pointIndex1);
     var bounds1 = point1.getFeatureBounds();
@@ -138,12 +152,18 @@ function getConnector(id1, id2) {
     return [parseFloat((latLong1.lat).toFixed(7)), parseFloat((latLong1.long).toFixed(7)), parseFloat((latLong2.lat).toFixed(7)), parseFloat((latLong2.long).toFixed(7))];
 }
 
-function highlightPoint(data) {
+
+/**
+ * Highlight the corresponding marker of the selected zoom on the map.
+ * 
+ * @param {string} zone - The zone that should be highlighted.
+ */
+function highlightPoint(zone) {
     if (pointClickedViaPath != null)
-        if (pointClickedViaPath.get('id') != data.id)
+        if (pointClickedViaPath.get('id') != zone.id)
             pointClickedViaPath.selected(false);
 
-    var pickup = data.Pickup;
+    var pickup = zone.Pickup;
     var seriesId;
     if (pickup < 200)
         seriesId = '#80deea';
@@ -160,22 +180,27 @@ function highlightPoint(data) {
 
     var targetSeries = map.getSeries(seriesId);
 
-    var pointIndex = targetSeries.data().find("id", data.id);
+    var pointIndex = targetSeries.data().find("id", zone.id);
 
     if (pointClickedViaPath != null) {
-        if (pointClickedViaPath.get('id') != data.id) {
+        if (pointClickedViaPath.get('id') != zone.id) {
             pointClickedViaPath = targetSeries.getPoint(pointIndex);
             pointClickedViaPath.selected(true);
-            map.zoomToFeature(data.id);
+            map.zoomToFeature(zone.id);
         }
     } else {
         pointClickedViaPath = targetSeries.getPoint(pointIndex);
         pointClickedViaPath.selected(true);
-        map.zoomToFeature(data.id);
+        map.zoomToFeature(zone.id);
     }
 
 }
 
+/**
+ * Add a Connector series to the base map.
+ * 
+ * @param {string} connectorData - The JSON data to be added to the base map as a Connector series.
+ */
 function addConnectorSeries(connectorData) {
     // add connector series
     removeMapSeries('connector');
@@ -189,6 +214,11 @@ function addConnectorSeries(connectorData) {
     });
 }
 
+/**
+ * Remove a map series with its ID.
+ * 
+ * @param {string} seriesId - The ID of targeted series.
+ */
 function removeMapSeries(seriesId) {
     if (map.getSeries(seriesId) != null)
         map.removeSeries(seriesId);
