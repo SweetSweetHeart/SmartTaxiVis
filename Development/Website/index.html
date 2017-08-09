@@ -75,12 +75,22 @@
                 <div id="anymap"></div>
             </div>
             <div id="controller">
-                <div class="controlsWrapper">
-                    <button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;&nbsp;Animation</button>
-                    <h3>NO. of trips: <span id="tripCount">89885</span> <br />Hour of the day: <span id="hour">0</span></h3>
-                    <div id='histogram' style="width:50%"></div>
-                    <div class="slidersWrapper" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
-                    <div class="slidersWrapper" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
+                <div class="controlsWrapper cW1">
+                    <h3>
+                        NO. of trips: <span id="tripCount">89885</span>
+                        <br /> Hour of the day: <span id="hour">0</span>
+                    </h3>
+                    <button id="btn_pause" type="button" class="btn btn-danger control-widget">
+                        <i class="fa fa-pause" aria-hidden="true"></i>
+                        &nbsp;&nbsp;Animation
+                    </button>
+                </div>
+                <div class="controlsWrapper cW2">
+                    <div id='histogram'></div>
+                    <div class="slidersWrapper">
+                        <div class="slider" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
+                        <div class="slider" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
+                    </div>
                 </div>
             </div>
         </div>
