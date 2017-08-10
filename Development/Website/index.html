@@ -32,11 +32,11 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-<span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="index.html">Smart City Vis</a>
             </div>
 
@@ -44,54 +44,46 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index.html">Home</a></li>
                     <li><a href="doc/out/index.html">Documentation</a></li>
-                    <!-- <li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-<ul class="dropdown-menu" role="menu">
-<li><a href="#">Action</a></li>
-<li><a href="#">Another action</a></li>
-<li><a href="#">Something else here</a></li>
-<li class="divider"></li>
-<li><a href="#">Separated link</a></li>
-<li class="divider"></li>
-<li><a href="#">One more separated link</a></li>
-</ul>
-</li> -->
                 </ul>
-                <!-- <ul class="nav navbar-nav navbar-right">
-<li><a href="#">Link</a></li>
-</ul> -->
             </div>
         </div>
     </nav>
-    <div class="body-content">
-        <div id="nomatch" style="display: none;">
-            <h1>
-                <i class="fa fa-meh-o fa-2x fa-fw"></i> No trips matched for the conditions defined.
-            </h1>
-        </div>
-        <div>
-            <div id="graphs">
-                <div id="chordDiagram"></div>
-                <div id="anymap"></div>
+    <div class="container-fluid">
+        <div class="body-content">
+            <div id="nomatch" style="display: none;">
+                <h1>
+                    <i class="fa fa-meh-o fa-2x fa-fw"></i> No trips matched for the conditions defined.
+                </h1>
             </div>
-            <div id="controller">
-                <div class="controlsWrapper cW1">
-                    <h3>
-                        NO. of trips: <span id="tripCount">89885</span>
-                        <br /> Hour of the day: <span id="hour">0</span>
-                    </h3>
-                    <button id="btn_pause" type="button" class="btn btn-danger control-widget">
-<i class="fa fa-pause" aria-hidden="true"></i>
-&nbsp;&nbsp;Animation
-</button>
-                </div>
-                <div class="controlsWrapper cW2">
-                    <div id='histogram'></div>
-                    <div class="slidersWrapper">
-                        <div class="slider" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
-                        <div class="slider" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
+            <div class="row">
+                <div id="chordDiagram" class="col-md-6 col-xs-12"></div>
+                <div id="anymap" class="col-md-6 col-xs-12"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="row buttonRow">
+                        <div class="col-sm-4 col-xs-12">
+                            <button id="btn_pause" type="button" class="btn btn-danger">
+                                <i class="fa fa-pause" aria-hidden="true"></i>
+                            &nbsp;&nbsp;Animation
+                            </button>
+                        </div>
+                        <div class="col-sm-8 col-xs-12">
+                            <h4>
+                                Trips: <span id="tripCount">89885</span>
+                            </h4>
+                            <h4>Hour: <span id="hour">0</span>
+                            </h4>
+                        </div>
                     </div>
                 </div>
+                <div class="col-xs-8 pull-right">
+                    <div id='histogram'></div>
+                </div>
+            </div>
+            <div class="row sliderRow">
+                <div class="col-md-7 col-xs-10 slider" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
+                <div class="col-md-4 col-xs-10 slider" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
             </div>
         </div>
 
@@ -102,6 +94,7 @@
             <link href="css/anychart.css" rel="stylesheet">
             <p>© 2017 - Smart City Vis - Qiru Wang</p>
         </footer>
+    </div>
     </div>
 </body>
 

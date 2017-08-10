@@ -27,150 +27,87 @@ svg {
 }
 
 
-/*.sliderDiv {
-    padding: 15px 0 5px 0;
-}*/
-
-
-/*#zoneSlider, #timeSlider {
-    margin: auto;
-    max-width: 400px;
-}*/
-
-
 /*css for anymap*/
 
 #anymap {
-    width: 100%;
-    height: 500px;
-    padding: 0em;
-    margin: auto;
+    height: 700px;
 }
 
 .anychart-credits {
     display: none;
 }
 
-#graphs {
-    width: 90%;
-    margin: 0em 5%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-#chordDiagram {
-    width: 100%;
-    height: auto;
-}
-
-#controller {
-    width: 90%;
-    margin: 2em 5%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-#histogram {
-    width: 100%;
-}
-
-.controlsWrapper {
-    margin: 2em 0em;
-    display: flex;
-    align-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.cW1 {
-    width: 100%;
-    justify-content: flex-start;
-}
-
-.cW2 {
-    width: 100%;
-    justify-content: space-between;
-}
-
-.slidersWrapper {
-    width: 100%;
-    margin: 3em 0em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .slider {
-    width: 100%;
-    display: block;
-    margin: 8em 0em 0em 0em;
+    margin: 3em 0em 3em 2em;
 }
 
-.slider:first-child {
-    margin: 2em 0em 0em 0em;
-}
-
-#controller h3 {
-    display: block;
-    width: 100%;
-    float: right;
-    font-size: 1.5em;
-}
-
-#controller h3 #tripCount {
-    display: inline-block;
-}
-
-#controller #btn_pause {
-    display: block;
-    width: 100%;
-    padding: .5em 1em;
-    margin: 2em auto 0em auto;
+.buttonRow {
+    margin: 3em 0em 0em 0em;
 }
 
 footer p {
     text-align: center;
 }
 
-@media(min-width: 960px) {
-    #graphs {
-        flex-direction: row;
+@media(min-width: 1920px) {
+    .buttonRow div:nth-child(2) {
+        margin: -3em 0em 0em 15em;
     }
-    #chordDiagram,
-    #anymap {
-        width: 50%;
+    .buttonRow h4:nth-child(2) {
+        margin: -1.6em 0em 0em 10em;
     }
-    #controller {
-        flex-direction: row;
+    #btn_pause {
+        margin-left: 1em;
     }
-    .cW1 {
-        width: 25%;
-        justify-content: flex-start;
+}
+
+@media(min-width: 1440px) and (max-width: 1919px) {
+    .buttonRow div:nth-child(2) {
+        margin: -3em 0em 0em 12em;
     }
-    .cW2 {
-        width: 75%;
-        justify-content: space-between;
+    .buttonRow h4:nth-child(2) {
+        margin: -1.6em 0em 0em 8em;
     }
-    #controller #btn_pause {
-        max-width: 70%;
-        margin: 7em 0em 0em 0em;
+    .buttonRow {
+        margin: 3.7em 0em 0em 0em;
     }
-    #controller h3 {
-        max-width: 80%;
-        width: auto；
+}
+
+@media(min-width: 960px) and (max-width: 1439px) {
+    .buttonRow div:nth-child(2) {
+        margin: -3em 0em 0em 8.5em;
     }
-    .slidersWrapper {
-        flex-direction: row;
+    .buttonRow h4:nth-child(2) {
+        margin: -1.6em 0em 0em 5.5em;
     }
-    .slider {
-        width: 30%;
-        margin: 0em;
+    .buttonRow {
+        margin: 3.7em 0em 0em 0em;
     }
-    .slider:first-child {
-        margin: 0em;
-        width: 66%;
+}
+
+@media(min-width: 768px) and (max-width: 959px) {
+    .buttonRow div:nth-child(2) {
+        margin: -3em 0em 0em 3em;
+    }
+    .buttonRow h4 {
+        margin: 0.2em 0em 0em 4.5em;
+    }
+    .buttonRow h4:nth-child(2) {
+        margin: -2.1em 0em 0em 7.7em;
+    }
+    .buttonRow {
+        margin: 3.7em 0em 0em 0em;
+    }
+}
+
+@media(min-width: 425px) and (max-width: 767px) {
+    .buttonRow {
+        margin: 0em 0em 0em 0em;
+    }
+    .buttonRow div:nth-child(1) {
+        margin: 1em 0em 0em 3em;
+    }
+    .buttonRow div:nth-child(2) {
+        margin: 0em 0em 0em 3em;
     }
 }

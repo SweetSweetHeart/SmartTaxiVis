@@ -7,11 +7,18 @@
  * @module Map
  */
 
+$(window).resize(function () {        
+        $("#anymap").css("height", $("#anymap").css("width"));
+    });
+
 /**
  * Render a Choropleth map as base series, add Marker series on top of the base series.
  */
 function renderMap() {
     $('#anymap').html('');
+
+
+
 
     map = anychart.map();
 
@@ -125,6 +132,8 @@ function renderMap() {
 
     /** Initiates the drawing into the div with id anymap */
     map.container('anymap').draw();
+
+    $("#anymap").css("height", $("#anymap").css("width"));
 };
 
 /**

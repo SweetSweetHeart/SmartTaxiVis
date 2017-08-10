@@ -170,5 +170,5 @@ $(function () {
         e.preventDefault();
         toggleAnimation(false);
     });
-    chordAnimation();
+    chordAnimation();      
 });
