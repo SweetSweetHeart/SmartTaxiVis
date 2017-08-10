@@ -1,5 +1,77 @@
-﻿/**
- * @author Qiru Wang <689404@swansea.ac.uk>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Smart City Vis Documentation Source: mapDiagram.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.flatly.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Smart City Vis Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-ChordDiagram.html">ChordDiagram</a></li><li><a href="module-Initialisation.html">Initialisation</a></li><li><a href="module-Map.html">Map</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: mapDiagram.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">﻿/**
+ * @author Qiru Wang &lt;689404@swansea.ac.uk>
  * 
  */
 
@@ -54,9 +126,9 @@ function renderMap() {
             .separator(false)
             .fontSize(14)
             .format(function () {
-                return '<span>' + this.getData('name') + '</span><br />' +
-                    '<span style="font-size: 12px; color: #E1E1E1">Trips: ' +
-                    parseInt(this.getData('size')).toLocaleString() + '</span>';
+                return '&lt;span>' + this.getData('name') + '&lt;/span>&lt;br />' +
+                    '&lt;span style="font-size: 12px; color: #E1E1E1">Trips: ' +
+                    parseInt(this.getData('size')).toLocaleString() + '&lt;/span>';
             });
 
         /** Set styles for marker */
@@ -136,11 +208,11 @@ function renderMap() {
 function filterFunction(start, end) {
     if (end)
         return function (fieldVal) {
-            return start <= fieldVal && fieldVal < end;
+            return start &lt;= fieldVal &amp;&amp; fieldVal &lt; end;
         };
     else
         return function (fieldVal) {
-            return start <= fieldVal;
+            return start &lt;= fieldVal;
         };
 }
 
@@ -186,15 +258,15 @@ function highlightPoint(zone) {
 
     var pickup = zone.Pickup;
     var seriesId;
-    if (pickup < 200)
+    if (pickup &lt; 200)
         seriesId = '#80deea';
-    else if (pickup < 400)
+    else if (pickup &lt; 400)
         seriesId = '#26c6da';
-    else if (pickup < 600)
+    else if (pickup &lt; 600)
         seriesId = '#00acc1';
-    else if (pickup < 800)
+    else if (pickup &lt; 800)
         seriesId = '#0097a7';
-    else if (pickup < 1000)
+    else if (pickup &lt; 1000)
         seriesId = '#00838f';
     else
         seriesId = '#006064';
@@ -243,4 +315,140 @@ function addConnectorSeries(connectorData) {
 function removeMapSeries(seriesId) {
     if (map.getSeries(seriesId) != null)
         map.removeSeries(seriesId);
-}
+}</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Qiru Wang © 2017 
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
+	
+		on Thu Aug 10th 2017
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
