@@ -169,7 +169,7 @@ function spliceSubMatrix(matrix) {
 }
 
 /**
- * Initialise a Chrod Diagram.
+ * Initialise a Chord Diagram.
  * 
  */
 function initChordDiagram() {
