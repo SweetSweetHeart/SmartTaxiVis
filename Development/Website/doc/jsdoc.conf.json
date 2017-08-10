@@ -1,0 +1,33 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "plugins": ["plugins/markdown"],
+  "templates": {
+    "logoFile": "",
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "dateFormat": "ddd MMM Do YYYY",
+    "outputSourceFiles": true,
+    "outputSourcePath": true,
+    "systemName": "Smart City Vis Documentation",
+    "footer": "",
+    "copyright": "Qiru Wang © 2017 ",
+    "navType": "vertical",
+    "theme": "flatly",
+    "linenums": true,
+    "collapseSymbols": false,
+    "protocol": "html://",
+    "methodHeadingReturns": false
+  },
+  "recurseDepth": 10,
+  "source": {
+    "include": ["../js/"],
+    "exclude": ["../js/lib/"],
+    "includePattern": ".+\\.js$"
+  },
+  "markdown": {
+    "parser": "gfm",
+    "hardwrap": true
+  }
+}

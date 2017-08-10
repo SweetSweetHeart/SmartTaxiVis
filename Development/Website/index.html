@@ -4,66 +4,66 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <title>Home Page - Smart City Vis - Qiru Wang</title>
-    <link href="CSS/Site.css" rel="stylesheet">
-    <link href="CSS/bootstrap.css" rel="stylesheet">
-    <link href="CSS/font-awesome.css" rel="stylesheet">
-    <script src="JS/modernizr-2.8.3.js"></script>
-    <script src="JS/jquery-3.1.1.js"></script>
-    <script src="JS/bootstrap.js"></script>
-    <script src="JS/data.js"></script>
-    <script src="JS/d3.v2.min.js"></script>
-    <script src="JS/chordDiagram.js"></script>
+    <link href="css/Site.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
 
-    <script src="JS/histogram.js"></script>
+    <script src="js/lib/modernizr-2.8.3.js"></script>
+    <script src="js/lib/jquery-3.1.1.js"></script>
+    <script src="js/lib/bootstrap.js"></script>
+    <script src="js/lib/d3.v2.min.js"></script>
+    <script src="js/lib/nouislider.js"></script>
+    <script src="js/lib/wNumb.js"></script>
+    <script src="js/lib/anychart-bundle.min.js"></script>
+    <script src="js/lib/proj4.js"></script>
 
-    <script src="JS/slider.js"></script>
-    <script src="JS/nouislider.js"></script>
-    <script src="JS/wNumb.js"></script>
-
-    <script src="JS/anychart-bundle.min.js"></script>
-    <script src="JS/proj4.js"></script>
-    <script src="JS/mapDiagram.js"></script>
-    <script src="JS/taxizonesGeoJSON.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/taxizonesGeoJSON.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/mapDiagram.js"></script>
+    <script src="js/chordDiagram.js"></script>
+    <script src="js/histogram.js"></script>
 </head>
 
 <body>
-    <nav class=" container-fluid navbar navbar-default">
-        <div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
                 <a class="navbar-brand" href="index.html">Smart City Vis</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="doc/out/index.html">Documentation</a></li>
+                    <!-- <li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+<ul class="dropdown-menu" role="menu">
+<li><a href="#">Action</a></li>
+<li><a href="#">Another action</a></li>
+<li><a href="#">Something else here</a></li>
+<li class="divider"></li>
+<li><a href="#">Separated link</a></li>
+<li class="divider"></li>
+<li><a href="#">One more separated link</a></li>
+</ul>
+</li> -->
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                </ul>
+                <!-- <ul class="nav navbar-nav navbar-right">
+<li><a href="#">Link</a></li>
+</ul> -->
             </div>
         </div>
     </nav>
-    <div class="container-fluid body-content">
+    <div class="body-content">
         <div id="nomatch" style="display: none;">
             <h1>
                 <i class="fa fa-meh-o fa-2x fa-fw"></i> No trips matched for the conditions defined.
@@ -75,129 +75,31 @@
                 <div id="anymap"></div>
             </div>
             <div id="controller">
-                <div class="controlsWrapper">
-                    <button id="btn_pause" type="button" class="btn btn-danger control-widget"><i class="fa fa-pause" aria-hidden="true"></i>&nbsp;&nbsp;Animation</button>
-                    <h3>NO. of trips: <span id="tripCount">89885</span> <br />Hour of the day: <span id="hour">0</span></h3>
-                    <div id='histogram' style="width:50%"></div>
-                    <div class="slidersWrapper" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
-                    <div class="slidersWrapper" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
+                <div class="controlsWrapper cW1">
+                    <h3>
+                        NO. of trips: <span id="tripCount">89885</span>
+                        <br /> Hour of the day: <span id="hour">0</span>
+                    </h3>
+                    <button id="btn_pause" type="button" class="btn btn-danger control-widget">
+<i class="fa fa-pause" aria-hidden="true"></i>
+&nbsp;&nbsp;Animation
+</button>
+                </div>
+                <div class="controlsWrapper cW2">
+                    <div id='histogram'></div>
+                    <div class="slidersWrapper">
+                        <div class="slider" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
+                        <div class="slider" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <script>
-            function local() {
-                totalZoneNum = 263, zone1 = 1, zone2 = 20, time1 = 9, time2 = 15; // Some global variables needed.
-
-                zoneSlider = document.getElementById('zoneSlider');
-                hourSlider = document.getElementById('hourSlider');
-
-                // Some default values to play with, before the server returns actual data
-                tripMatrix = countT[time1];
-                zoneMatrix = zoneT[time1];
-
-                zones = $.extend(true, [], zoneMatrix);
-
-                tripCount = getTripCount(tripMatrix);
-                // Assign random colors to chords
-                jQuery.each(zones, function (i, val) {
-                    val.color = RainBowColor(val.Pickup, tripCount);
-                });
-
-                connectorData = null;
-                dataSet = anychart.data.set(zones);
-
-                pointClickedViaPath = null;
-
-                zoneTN = [];
-                countTN = [];
-            }
-
-
-
-
-            $(function () {
-                local();
-                renderMap();
-                formatJSON();
-                initSliders();
-                $('[data-toggle="popover"]').popover({
-                    trigger: 'manual'
-                });
-                $('#hourSlider').popover('show');
-                $('#zoneSlider').popover('show');
-
-                $('#btn_pause').click(function (e) {
-                    e.preventDefault();
-                    toggleAnimation(false);
-                });
-                chordAnimation();
-                //retrieveLocal(0);
-            });
-
-            // Reformat the trip matrix when conditions changes, and update related visualisations
-
-            var targetSize = $("#chordDiagram").width() * .85;
-            var marginSide = $("#chordDiagram").width() * .075;
-
-            $(window).resize(function () {
-                var svg = d3.select("#chordDiagram")
-                    .attr("width", targetSize)
-                    .attr("height", targetSize);
-
-                outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
-                    innerRadius = outerRadius - 18;
-
-                arc = d3.svg.arc()
-                    .innerRadius(innerRadius)
-                    .outerRadius(outerRadius);
-
-                path = d3.svg.chord()
-                    .radius(innerRadius);
-
-                $('#circle').attr("r", outerRadius);
-                $('[data-toggle="popover"]').popover('show');
-
-            });
-
-            var outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
-                innerRadius = outerRadius - 18;
-
-            var viewBoxDimensions = "0 0 " + targetSize + " " + targetSize;
-
-            // Create the arc path data generator for the groups
-            var arc = d3.svg.arc()
-                .innerRadius(innerRadius)
-                .outerRadius(outerRadius);
-
-            // Create the chord path data generator for the chords
-            var path = d3.svg.chord()
-                .radius(innerRadius);
-
-            var last_layout; // store layout between updates
-
-            // Create number formatting functions
-            var formatPercent = d3.format("%");
-            var numberWithCommas = d3.format("0,f");
-
-            // Initialize the visualization
-            var g = d3.select("#chordDiagram").append("svg")
-                .attr("viewBox", viewBoxDimensions)
-                .attr("preserveAspectRatio", "xMinYMid")
-                .append("g")
-                .attr("id", "circle")
-                .attr("overflow-x", "visible")
-                .attr("transform",
-                    "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
-
-            g.append("circle")
-                .attr("r", outerRadius);
-        </script>
         <hr>
         <footer>
-            <link href="CSS/nouislider.css" rel="stylesheet">
-            <link href="CSS/anychart-ui.min.css" rel="stylesheet">
-            <link href="CSS/anychart.css" rel="stylesheet">
+            <link href="css/nouislider.css" rel="stylesheet">
+            <link href="css/anychart-ui.min.css" rel="stylesheet">
+            <link href="css/anychart.css" rel="stylesheet">
             <p>© 2017 - Smart City Vis - Qiru Wang</p>
         </footer>
     </div>

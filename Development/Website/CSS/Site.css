@@ -1,4 +1,5 @@
 ﻿/*css for Chord diagram*/
+
 #chart {
     font: 10px sans-serif;
 }
@@ -25,16 +26,20 @@ svg {
     font-family: 'Exo 2', sans-serif;
 }
 
+
 /*.sliderDiv {
     padding: 15px 0 5px 0;
 }*/
+
 
 /*#zoneSlider, #timeSlider {
     margin: auto;
     max-width: 400px;
 }*/
 
+
 /*css for anymap*/
+
 #anymap {
     width: 100%;
     height: 500px;
@@ -46,7 +51,7 @@ svg {
     display: none;
 }
 
-#graphs{
+#graphs {
     width: 90%;
     margin: 0em 5%;
     height: auto;
@@ -54,12 +59,12 @@ svg {
     flex-direction: column;
 }
 
-#chordDiagram{
+#chordDiagram {
     width: 100%;
     height: auto;
 }
 
-#controller{
+#controller {
     width: 90%;
     margin: 2em 5%;
     height: auto;
@@ -67,22 +72,50 @@ svg {
     flex-direction: column;
 }
 
-.controlsWrapper{
-    margin: 2em 0em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
+#histogram {
+    width: 100%;
 }
 
+.controlsWrapper {
+    margin: 2em 0em;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.cW1 {
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.cW2 {
+    width: 100%;
+    justify-content: space-between;
+}
 
 .slidersWrapper {
+    width: 100%;
     margin: 3em 0em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slider {
+    width: 100%;
+    display: block;
+    margin: 8em 0em 0em 0em;
+}
+
+.slider:first-child {
+    margin: 2em 0em 0em 0em;
 }
 
 #controller h3 {
     display: block;
-    width: 25%;
+    width: 100%;
     float: right;
     font-size: 1.5em;
 }
@@ -93,21 +126,51 @@ svg {
 
 #controller #btn_pause {
     display: block;
-    width: 10%;
-    min-width: 150px;
-    max-height: 50px;
-    box-sizing: border-box;
-    float: left;
+    width: 100%;
+    padding: .5em 1em;
+    margin: 2em auto 0em auto;
 }
 
-#controller #zoneSlider,
-#controller #hourSlider {
-    display: block;
-    width: 25%;
+footer p {
+    text-align: center;
 }
 
-@media(min-width: 960px){
-    #graphs{
+@media(min-width: 960px) {
+    #graphs {
         flex-direction: row;
+    }
+    #chordDiagram,
+    #anymap {
+        width: 50%;
+    }
+    #controller {
+        flex-direction: row;
+    }
+    .cW1 {
+        width: 25%;
+        justify-content: flex-start;
+    }
+    .cW2 {
+        width: 75%;
+        justify-content: space-between;
+    }
+    #controller #btn_pause {
+        max-width: 70%;
+        margin: 7em 0em 0em 0em;
+    }
+    #controller h3 {
+        max-width: 80%;
+        width: auto；
+    }
+    .slidersWrapper {
+        flex-direction: row;
+    }
+    .slider {
+        width: 30%;
+        margin: 0em;
+    }
+    .slider:first-child {
+        margin: 0em;
+        width: 66%;
     }
 }
