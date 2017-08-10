@@ -112,9 +112,7 @@ function initGlobalVariables() {
      * @type {Array.<number[]>}
      */
     tripMatrix = countT[time1];
-
-    console.log(tripMatrix);
-
+    
     /**
      * Taxizone matrix of the selected hour.
      * @type {Array.<number[]>}
