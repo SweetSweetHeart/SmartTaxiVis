@@ -5,7 +5,10 @@ function generateHistogramData() {
         var trips = $.extend(true, [], countT[i]);
         spliceMatrix(trips);
         spliceSubMatrix(trips);
-        tripCount = getTripCount(trips);
+        var tripCount =0 ;
+        jQuery.each(trips, function (i, val) {
+            tripCount += getTripCount(val);
+        });
         if (i == time1) {
             histogramData.push([i.toString(), tripCount, "#e74c3c"]);
         }

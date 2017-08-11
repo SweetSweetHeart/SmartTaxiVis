@@ -69,7 +69,6 @@ function getDefaultLayout() {
         .sortChords(d3.ascending);
 }
 
-
 /**
  * Calculate the given trip count.
  * 
@@ -79,9 +78,7 @@ function getDefaultLayout() {
 function getTripCount(data) {
     var result = 0;
     jQuery.each(data, function (i, val) {
-        jQuery.each(val, function (j, val2) {
-            result += parseInt(val2);
-        });
+        result += parseInt(val);
     });
     return result;
 }
@@ -90,16 +87,34 @@ function getTripCount(data) {
 /**
  * Generate a rainbow color map based on the ratio of trips and the total trip count.
  * 
- * @param {number} length  - Trip count of one zone as the dividend.
- * @param {number} maxLength - Total trip count of all zones as the divisor.
+ * @param {number} trips  - Trip count of one zone as the dividend.
+ * @param {number} totalTrips - Total trip count of all zones as the divisor.
  * @returns - A rgb color.
  */
-function generateRainBowColorMap(length, maxLength) {
-    var i = (length * 550 / maxLength);
-    var r = Math.round(Math.sin(0.024 * i + 0) * 127 + 128);
-    var g = Math.round(Math.sin(0.024 * i + 2) * 127 + 128);
-    var b = Math.round(Math.sin(0.024 * i + 4) * 127 + 128);
-    return 'rgb(' + r + ',' + g + ',' + b + ')';
+function generateRainBowColorMap(trips, totalTrips) {
+    var i = Math.round(200 - Math.abs(1 - (trips * 1000 / totalTrips)));
+    chordLegendColor.push(i);
+    return 'hsl(' + i + ',83%,50%)';
+}
+
+/**
+ * Generate a legend for Chord Diagram based on the color map used.
+ * 
+ */
+function generateChordColorLegend() {
+    $("#chordColorLegend").empty();
+    $("#chordColorLegend").append("Legend: &nbsp; &nbsp; &nbsp; Max ");
+
+    chordLegendColor = Array.from(new Set(chordLegendColor));
+    chordLegendColor.sort(function (a, b) { return a - b; });
+    var last;
+    jQuery.each(chordLegendColor, function (i, val) {
+        if ((last == null) || (last != null && val > (last + 5)))
+            $("#chordColorLegend").append("<font style=color:hsl(" + val + ",83%,50%)>█</font>");
+        last = val;
+    });
+    $("#chordColorLegend").append(" Min");
+    chordLegendColor = [];
 }
 
 /**
@@ -107,39 +122,59 @@ function generateRainBowColorMap(length, maxLength) {
  * Also update the visibility of some HTML elements.
  */
 function formatJSON() {
-    var trips = $.extend(true, [], tripMatrix);
+    trips = $.extend(true, [], tripMatrix);
     zones = $.extend(true, [], zoneMatrix);
     spliceMatrix(zones);
     spliceMatrix(trips);
     spliceSubMatrix(trips);
 
-    tripCount = getTripCount(trips);
-    // Assign random colors to chords
+    var tripCount = 0;
+
+    jQuery.each(trips, function (i, val) {
+        tripCount += getTripCount(val);
+    });
+
+    // Assign random colors to chords    
     jQuery.each(zones, function (i, val) {
         val.color = generateRainBowColorMap(val.Pickup, tripCount);
     });
 
-    $("#tripCount").html(tripCount);
-
-
-    dataSet = anychart.data.set(zones);
-
-    connectorData = null;
+    generateChordColorLegend();
     generateHistogramData();
 
+    $("#tripCount").html(tripCount);
+
+    dataSet = anychart.data.set(zones);
+    connectorData = null;
+
     if (tripCount > 0) {
-        $("#chordDiagram:hidden").show();
-        $("#anymap:hidden").show();
-        $("#nomatch:visible").hide();
+        toggleNoMatchMessage(false);
         renderMap();
         updateChordDiagram(trips);
+        console.log
     } else {
-        $("#chordDiagram:visible").hide();
-        $("#anymap:visible").hide();
-        $("#nomatch:hidden").show();
+        toggleNoMatchMessage(true);
     }
 }
 
+
+/**
+ * Toggle the display of 'No Match' message, visulisations and controls.
+ * 
+ * @param {boolean} toggle 
+ */
+function toggleNoMatchMessage(toggle) {
+    if (!toggle) {
+        $(".visualisationRow:hidden").show();
+        $(".controlRow:hidden").show();
+        $("#nomatch:visible").hide();
+    }
+    else {
+        $(".visualisationRow:visible").hide();
+        $(".controlRow:visible").hide();
+        $("#nomatch:hidden").show();
+    }
+}
 
 
 /**
@@ -162,9 +197,9 @@ function spliceMatrix(matrix) {
  */
 
 function spliceSubMatrix(matrix) {
-    matrix.forEach(function (element, i) {
-        spliceMatrix(element);
-    }, this);
+    jQuery.each(matrix, function (i, val) {
+        spliceMatrix(val);
+    });
     return matrix;
 }
 
@@ -212,7 +247,7 @@ function initChordDiagram() {
     path = d3.svg.chord()
         .radius(innerRadius);
 
-    var last_layout; // store layout between updates
+    lastLayout = getDefaultLayout(); // store layout between updates
 
     // Create number formatting functions
     var formatPercent = d3.format("%");
@@ -226,7 +261,7 @@ function initChordDiagram() {
         .attr("id", "circle")
         .attr("overflow-x", "visible")
         .attr("transform",
-            "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
+        "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
 
     g.append("circle")
         .attr("r", outerRadius);
@@ -240,7 +275,6 @@ function initChordDiagram() {
 function updateChordDiagram(matrix) {
     // Remove empty svg generated by animation loop.
     $("svg[width=0]").remove();
-
     layout = getDefaultLayout();
     layout.matrix(matrix);
 
@@ -290,11 +324,12 @@ function updateChordDiagram(matrix) {
         .duration(800)
         .attr("opacity", 0.5)
         .attr("d", arc)
+        .attrTween("d", arcTween(lastLayout))
         .style("fill", function (d) {
             return zones[d.index].color;
         })
         .transition().duration(10).attr("opacity", 1) //reset opacity
-    ;
+        ;
 
     newGroups.append("svg:text")
         .attr("xlink:href", function (d) {
@@ -340,15 +375,15 @@ function updateChordDiagram(matrix) {
             if (zones[d.target.index].name !== zones[d.source.index].name) {
                 return [numberWithCommas(d.source.value),
                     " trips from ",
-                    zones[d.source.index].name,
+                zones[d.source.index].name,
                     " to ",
-                    zones[d.target.index].name,
+                zones[d.target.index].name,
                     "\n",
-                    numberWithCommas(d.target.value),
+                numberWithCommas(d.target.value),
                     " trips from ",
-                    zones[d.target.index].name,
+                zones[d.target.index].name,
                     " to ",
-                    zones[d.source.index].name
+                zones[d.source.index].name
                 ].join("");
             } else {
                 return numberWithCommas(d.source.value) +
@@ -368,6 +403,7 @@ function updateChordDiagram(matrix) {
         .style("fill", function (d) {
             return zones[d.source.index].color;
         })
+        .attrTween("d", chordTween(lastLayout))
         .attr("d", path)
         .transition().duration(10).attr("opacity", 1);
 
@@ -383,8 +419,6 @@ function updateChordDiagram(matrix) {
         chordPaths.attr("opacity", 0.2);
         $(this).attr("opacity", 1);
     });
-
-
     chordPaths.on("click", function (d) {
         var pointData = getConnector(zones[d.source.index].id, zones[d.target.index].id);
         if (zones[d.source.index].id != zones[d.target.index].id) {
@@ -399,23 +433,19 @@ function updateChordDiagram(matrix) {
             removeMapSeries('connector');
             highlightPoint(zones[d.source.index]);
         }
-
         toggleAnimation(true);
-
     });
-
     chordPaths.on("mouseout", function () {
         chordPaths.attr("opacity", 0.5);
         //toggleAnimation(false);
     });
-
     g.on("mouseout", function () {
         if (this == g.node()) {
             // Only respond to mouseout of the entire circle not mouseout events for sub-components
             chordPaths.classed("fade", false);
         }
     });
-    last_layout = layout;
+    lastLayout = layout;
 }
 
 function arcTween(oldLayout) {
@@ -457,7 +487,6 @@ function chordTween(oldLayout) {
             oldChords[chordKey(chordData)] = chordData;
         });
     }
-
     return function (d, i) {
         var tween;
         var old = oldChords[chordKey(d)];
@@ -468,7 +497,6 @@ function chordTween(oldLayout) {
                     target: old.source
                 };
             }
-
             tween = d3.interpolate(old, d);
         } else {
             // Create a zero- width chord object

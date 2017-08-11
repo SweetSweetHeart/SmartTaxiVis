@@ -28,8 +28,8 @@ function initSliders() {
     });
 
     zoneSlider.noUiSlider.on('change', function (values) {
-        zone1 = values[0];
-        zone2 = values[1];
+        zone1 = parseInt(values[0]);
+        zone2 = parseInt(values[1]);
         toggleAnimation(true);
         formatJSON();
     });
@@ -49,7 +49,7 @@ function initSliders() {
     });
 
     hourSlider.noUiSlider.on('change', function (values) {
-        time1 = values[0];
+        time1 = parseInt(values[0]);
         animationSetData();
         toggleAnimation(true);
         formatJSON();
@@ -112,25 +112,16 @@ function initGlobalVariables() {
      * @type {Array.<number[]>}
      */
     tripMatrix = countT[time1];
-    
+
     /**
      * Taxizone matrix of the selected hour.
      * @type {Array.<number[]>}
      */
     zoneMatrix = zoneT[time1];
 
-    zones = $.extend(true, [], zoneMatrix);
+    zones = null;
+    trips = null;
 
-    /**
-     * The total trip count.
-     * @type {number}
-     */
-    tripCount = getTripCount(tripMatrix);
-
-    // Assign random colors to chords
-    jQuery.each(zones, function (i, val) {
-        val.color = generateRainBowColorMap(val.Pickup, tripCount);
-    });
 
     /** 
      * Connector dataset for AnyMap.
@@ -144,7 +135,7 @@ function initGlobalVariables() {
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
      * @type {anychart.data.Set} 
      */
-    dataSet = anychart.data.set(zones);
+    dataSet = anychart.data.set(zoneMatrix);
 
     /**
      * The point that represents a taxizone, corresponding to the clicked path on Chord Diagram.
@@ -152,6 +143,10 @@ function initGlobalVariables() {
      * @see {@link https://api.anychart.com/7.14.3/anychart.core.SeriesPoint}
      */
     pointClickedViaPath = null;
+
+    lastLayout = null;
+
+    chordLegendColor = [];
 }
 
 $(function () {
@@ -170,5 +165,5 @@ $(function () {
         e.preventDefault();
         toggleAnimation(false);
     });
-    chordAnimation();      
+    chordAnimation();
 });

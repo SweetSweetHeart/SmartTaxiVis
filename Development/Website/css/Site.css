@@ -26,6 +26,10 @@ svg {
     font-family: 'Exo 2', sans-serif;
 }
 
+#chordColorLegend{
+    opacity: 0.6;
+}
+
 
 /*css for anymap*/
 
@@ -75,10 +79,10 @@ footer p {
 
 @media(min-width: 960px) and (max-width: 1439px) {
     .buttonRow div:nth-child(2) {
-        margin: -3em 0em 0em 8.5em;
+        margin: -3em 0em 0em 9em;
     }
     .buttonRow h4:nth-child(2) {
-        margin: -1.6em 0em 0em 5.5em;
+        margin: -1.6em 0em 0em 6em;
     }
     .buttonRow {
         margin: 3.7em 0em 0em 0em;
