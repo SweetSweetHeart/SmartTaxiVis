@@ -6,7 +6,7 @@ Developed by **Qiru Wang** and submitted to **Swansea University** in partial fu
 
 Supervised by **[Dr. Robert S. Laramee](http://www.swansea.ac.uk/staff/science/computer-science/r.s.laramee/)** in **Swansea University**.
 
-<img src="https://www.dropbox.com/s/l0tklnqmcl3ahcf/swansea-university-logo.svg?dl=1" alt="Swansea University Logo" width="300px">
+<img src="https://dl.dropboxusercontent.com/s/l0tklnqmcl3ahcf/swansea-university-logo.svg?dl=1" alt="Swansea University Logo" width="300px">
 
 ### Declaration
 - This work has not previously been accepted in substance for any degree and is not being currently submitted for any degree.

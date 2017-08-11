@@ -34,60 +34,7 @@ function renderMap() {
     tempSeries.enabled(false);
     tempSeries.legendItem().enabled(false);
 
-    /** Helper function to create several series */
-    var createSeries = function (name, data, color) {
 
-        /** Set marker series.
-         * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
-         * @type {anychart.core.map.series.Marker}
-         */
-        var series = map.marker(data).name(name);
-        series.legendItem({
-            iconType: "circle",
-            iconFill: color,
-            iconStroke: '2 #E1E1E1'
-        });
-
-        /** Set Tooltip for series */
-        series.tooltip()
-            .useHtml(true)
-            .padding([8, 13, 10, 13])
-            .title(false)
-            .separator(false)
-            .fontSize(14)
-            .format(function () {
-                return '<span>' + this.getData('name') + '</span><br />' +
-                    '<span style="font-size: 12px; color: #E1E1E1">Trips: ' +
-                    parseInt(this.getData('size')).toLocaleString() + '</span>';
-            });
-
-        /** Set styles for marker */
-        series.selectionMode("none")
-            .stroke('2 #757575')
-            .hoverStroke('3 #616161')
-            .fill(color)
-            .size(5)
-            .labels(false)
-            .hoverFill('#e74c3c')
-            .hoverSize(8)
-            .selectType('star7')
-            .selectFill('#e74c3c')
-            .selectSize(10)
-            .type('circle');
-
-        series.id(color);
-
-        series.listen("pointClick", function (e) {
-            if (pointClickedViaPath != null)
-                pointClickedViaPath.selected(false);
-
-            pointClickedViaPath = e.point;
-            pointClickedViaPath.selected(true);
-            removeMapSeries('connector');
-            map.zoomToFeature(pointClickedViaPath.get("id"));
-            toggleAnimation(true);
-        });
-    };
 
     /** Map data attributes. 
      * @type {anychart.data.Mapping}
@@ -99,12 +46,12 @@ function renderMap() {
         size: 'Pickup'
     });
 
-    createSeries('0 - 200', markerSeries.filter('size', filterFunction(0, 200)), '#80deea');
-    createSeries('200 - 400', markerSeries.filter('size', filterFunction(200, 400)), '#26c6da');
-    createSeries('400 - 600', markerSeries.filter('size', filterFunction(400, 600)), '#00acc1');
-    createSeries('600 - 800', markerSeries.filter('size', filterFunction(600, 800)), '#0097a7');
-    createSeries('800 - 1,000', markerSeries.filter('size', filterFunction(800, 1000)), '#00838f');
-    createSeries('More than 1,000', markerSeries.filter('size', filterFunction(1000)), '#006064');
+    createDotSeries('0 - 200', markerSeries.filter('size', filterFunction(0, 200)), '#80deea');
+    createDotSeries('200 - 400', markerSeries.filter('size', filterFunction(200, 400)), '#26c6da');
+    createDotSeries('400 - 600', markerSeries.filter('size', filterFunction(400, 600)), '#00acc1');
+    createDotSeries('600 - 800', markerSeries.filter('size', filterFunction(600, 800)), '#0097a7');
+    createDotSeries('800 - 1,000', markerSeries.filter('size', filterFunction(800, 1000)), '#00838f');
+    createDotSeries('More than 1,000', markerSeries.filter('size', filterFunction(1000)), '#006064');
 
     /** Enable map legend */
     map.legend().enabled(false);
@@ -129,6 +76,69 @@ function renderMap() {
     map.container('anymap').draw();
 
     $("#anymap").css("height", $("#anymap").css("width"));
+};
+
+
+
+/** 
+ * Create a marker series.
+ * 
+ * @param {string} name - Name of the marker series.
+ * @param {any} data - Data of the marker series.
+ * @param {string} color - Color of the marker series.
+ * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
+ */
+function createDotSeries(name, data, color) {
+    /** Set marker series.
+     * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
+     * @type {anychart.core.map.series.Marker}
+     */
+    var series = map.marker(data).name(name);
+    series.legendItem({
+        iconType: "circle",
+        iconFill: color,
+        iconStroke: '2 #E1E1E1'
+    });
+
+    /** Set Tooltip for series */
+    series.tooltip()
+        .useHtml(true)
+        .padding([8, 13, 10, 13])
+        .title(false)
+        .separator(false)
+        .fontSize(14)
+        .format(function () {
+            return '<span>' + this.getData('name') + '</span><br />' +
+                '<span style="font-size: 12px; color: #E1E1E1">Trips: ' +
+                parseInt(this.getData('size')).toLocaleString() + '</span>';
+        });
+
+    /** Set styles for marker */
+    series.selectionMode("none")
+        .stroke('2 #757575')
+        .hoverStroke('3 #616161')
+        .fill(color)
+        .size(5)
+        .labels(false)
+        .hoverFill('#e74c3c')
+        .hoverSize(8)
+        .selectType('star7')
+        .selectFill('#e74c3c')
+        .selectSize(10)
+        .type('circle');
+
+    series.id(color);
+
+    series.listen("pointClick", function (e) {
+        if (pointClickedViaPath != null)
+            pointClickedViaPath.selected(false);
+
+        pointClickedViaPath = e.point;
+        pointClickedViaPath.selected(true);
+        removeMapSeries('connector');
+        map.zoomToFeature(pointClickedViaPath.get("id"));
+        toggleAnimation(true);
+    });
 };
 
 /**
