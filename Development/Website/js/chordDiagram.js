@@ -92,7 +92,7 @@ function getTripCount(data) {
  * @returns - A rgb color.
  */
 function generateRainBowColorMap(trips, totalTrips) {
-    var i = Math.round(200 - Math.abs(1 - (trips * 1000 / totalTrips)));
+    var i = Math.round(200 - Math.abs(1 - (trips * 800 / totalTrips)));
     chordLegendColor.push(i);
     return 'hsl(' + i + ',83%,50%)';
 }
@@ -106,10 +106,12 @@ function generateChordColorLegend() {
     $("#chordColorLegend").append("Legend: &nbsp; &nbsp; &nbsp; Max ");
 
     chordLegendColor = Array.from(new Set(chordLegendColor));
-    chordLegendColor.sort(function (a, b) { return a - b; });
+    chordLegendColor.sort(function (a, b) {
+        return a - b;
+    });
     var last;
     jQuery.each(chordLegendColor, function (i, val) {
-        if ((last == null) || (last != null && val > (last + 5)))
+        if ((last == null) || (last != null && val > (last + 3)))
             $("#chordColorLegend").append("<font style=color:hsl(" + val + ",83%,50%)>█</font>");
         last = val;
     });
@@ -168,8 +170,7 @@ function toggleNoMatchMessage(toggle) {
         $(".visualisationRow:hidden").show();
         $(".controlRow:hidden").show();
         $("#nomatch:visible").hide();
-    }
-    else {
+    } else {
         $(".visualisationRow:visible").hide();
         $(".controlRow:visible").hide();
         $("#nomatch:hidden").show();
@@ -261,7 +262,7 @@ function initChordDiagram() {
         .attr("id", "circle")
         .attr("overflow-x", "visible")
         .attr("transform",
-        "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
+            "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
 
     g.append("circle")
         .attr("r", outerRadius);
@@ -329,7 +330,7 @@ function updateChordDiagram(matrix) {
             return zones[d.index].color;
         })
         .transition().duration(10).attr("opacity", 1) //reset opacity
-        ;
+    ;
 
     newGroups.append("svg:text")
         .attr("xlink:href", function (d) {
@@ -375,15 +376,15 @@ function updateChordDiagram(matrix) {
             if (zones[d.target.index].name !== zones[d.source.index].name) {
                 return [numberWithCommas(d.source.value),
                     " trips from ",
-                zones[d.source.index].name,
+                    zones[d.source.index].name,
                     " to ",
-                zones[d.target.index].name,
+                    zones[d.target.index].name,
                     "\n",
-                numberWithCommas(d.target.value),
+                    numberWithCommas(d.target.value),
                     " trips from ",
-                zones[d.target.index].name,
+                    zones[d.target.index].name,
                     " to ",
-                zones[d.source.index].name
+                    zones[d.source.index].name
                 ].join("");
             } else {
                 return numberWithCommas(d.source.value) +

@@ -5,7 +5,7 @@ function generateHistogramData() {
         var trips = $.extend(true, [], countT[i]);
         spliceMatrix(trips);
         spliceSubMatrix(trips);
-        var tripCount =0 ;
+        var tripCount = 0;
         jQuery.each(trips, function (i, val) {
             tripCount += getTripCount(val);
         });
@@ -15,10 +15,10 @@ function generateHistogramData() {
         else
             histogramData.push([i.toString(), tripCount]);
     }
-    drawHistogram();
+    generateHistogram();
 }
 
-function drawHistogram() {
+function generateHistogram() {
     // create a data set
     $('#histogram').html("");
     var data = anychart.data.set(histogramData);

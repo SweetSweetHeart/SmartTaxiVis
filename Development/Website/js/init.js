@@ -96,12 +96,14 @@ function initGlobalVariables() {
     /**
      * A noUiSlider for taxizones.
      * @type {noUiSlider}
+ * @see {@link https://refreshless.com/nouislider/}
      */
     zoneSlider = document.getElementById('zoneSlider');
 
     /**
      * A noUiSlider for hours of the day.
      * @type {noUiSlider}
+ * @see {@link https://refreshless.com/nouislider/}
      */
     hourSlider = document.getElementById('hourSlider');
 

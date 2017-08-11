@@ -16,9 +16,7 @@ $(window).resize(function () {
  */
 function renderMap() {
     $('#anymap').empty();
-
     map = anychart.map();
-
     /** Create a AnyMap base map */
     map.unboundRegions()
         .enabled(true)
