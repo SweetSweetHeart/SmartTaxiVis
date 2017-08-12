@@ -4,7 +4,7 @@
  */
 
 /**
- * @module Map
+ * @module MapView
  */
 
 $(window).resize(function () {

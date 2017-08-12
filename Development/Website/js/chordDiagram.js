@@ -219,8 +219,8 @@ function initChordDiagram() {
             .attr("width", targetSize)
             .attr("height", targetSize);
 
-        outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
-            innerRadius = outerRadius - 18;
+        outerRadius = Math.min(targetSize, targetSize) / 2 - 50;
+        innerRadius = outerRadius - 18;
 
         arc = d3.svg.arc()
             .innerRadius(innerRadius)
@@ -234,8 +234,8 @@ function initChordDiagram() {
 
     });
 
-    outerRadius = Math.min(targetSize, targetSize) / 2 - 50,
-        innerRadius = outerRadius - 18;
+    outerRadius = Math.min(targetSize, targetSize) / 2 - 50;
+    innerRadius = outerRadius - 18;
 
     viewBoxDimensions = "0 0 " + targetSize + " " + targetSize;
 
@@ -420,6 +420,7 @@ function updateChordDiagram(matrix) {
         chordPaths.attr("opacity", 0.2);
         $(this).attr("opacity", 1);
     });
+
     chordPaths.on("click", function (d) {
         var pointData = getConnector(zones[d.source.index].id, zones[d.target.index].id);
         if (zones[d.source.index].id != zones[d.target.index].id) {

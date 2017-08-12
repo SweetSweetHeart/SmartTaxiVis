@@ -10,7 +10,7 @@
     "dateFormat": "ddd MMM Do YYYY",
     "outputSourceFiles": true,
     "outputSourcePath": true,
-    "systemName": "Smart City Vis Documentation",
+    "systemName": "Smart City Vis",
     "footer": "",
     "copyright": "© 2017 - Smart City Vis - Qiru Wang",
     "navType": "vertical",
