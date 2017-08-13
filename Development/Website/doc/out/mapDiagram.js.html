@@ -112,12 +112,12 @@ function renderMap() {
         size: 'Pickup'
     });
 
-    createDotSeries('0 - 200', markerSeries.filter('size', filterFunction(0, 200)), '#80deea');
-    createDotSeries('200 - 400', markerSeries.filter('size', filterFunction(200, 400)), '#26c6da');
-    createDotSeries('400 - 600', markerSeries.filter('size', filterFunction(400, 600)), '#00acc1');
-    createDotSeries('600 - 800', markerSeries.filter('size', filterFunction(600, 800)), '#0097a7');
-    createDotSeries('800 - 1,000', markerSeries.filter('size', filterFunction(800, 1000)), '#00838f');
-    createDotSeries('More than 1,000', markerSeries.filter('size', filterFunction(1000)), '#006064');
+    createDotSeries('0 - 200', markerSeries.filter('size', filterMarkerRange(0, 200)), '#80deea');
+    createDotSeries('200 - 400', markerSeries.filter('size', filterMarkerRange(200, 400)), '#26c6da');
+    createDotSeries('400 - 600', markerSeries.filter('size', filterMarkerRange(400, 600)), '#00acc1');
+    createDotSeries('600 - 800', markerSeries.filter('size', filterMarkerRange(600, 800)), '#0097a7');
+    createDotSeries('800 - 1,000', markerSeries.filter('size', filterMarkerRange(800, 1000)), '#00838f');
+    createDotSeries('More than 1,000', markerSeries.filter('size', filterMarkerRange(1000)), '#006064');
 
     /** Enable map legend */
     map.legend().enabled(false);
@@ -208,12 +208,12 @@ function createDotSeries(name, data, color) {
 };
 
 /**
- * Filter function to bind data to variables only with the range.
+ * Filter function to bind data to variables only within the range.
  * @param {number} start - The start range value.
  * @param {number} end - The end range value.
  * @returns {number} - The filtered result.
  */
-function filterFunction(start, end) {
+function filterMarkerRange(start, end) {
     if (end)
         return function (fieldVal) {
             return start &lt;= fieldVal &amp;&amp; fieldVal &lt; end;
