@@ -26,7 +26,7 @@ svg {
     font-family: 'Exo 2', sans-serif;
 }
 
-#chordColorLegend{
+#chordColorLegend {
     opacity: 0.6;
 }
 
@@ -45,8 +45,13 @@ svg {
     margin: 3em 0em 3em 2em;
 }
 
-.buttonRow {
+
+/* .buttonRow {
     margin: 3em 0em 0em 0em;
+} */
+
+.buttonRow div:nth-child(2) label:nth-child(2) {
+    margin-left: 0;
 }
 
 footer p {
@@ -72,9 +77,9 @@ footer p {
     .buttonRow h4:nth-child(2) {
         margin: -1.6em 0em 0em 8em;
     }
-    .buttonRow {
+    /* .buttonRow {
         margin: 3.7em 0em 0em 0em;
-    }
+    } */
 }
 
 @media(min-width: 960px) and (max-width: 1439px) {
@@ -84,23 +89,17 @@ footer p {
     .buttonRow h4:nth-child(2) {
         margin: -1.6em 0em 0em 6em;
     }
-    .buttonRow {
+    /* .buttonRow {
         margin: 3.7em 0em 0em 0em;
-    }
+    } */
 }
 
 @media(min-width: 768px) and (max-width: 959px) {
     .buttonRow div:nth-child(2) {
-        margin: -3em 0em 0em 3em;
+        margin: -3em 0em 0em 9em;
     }
     .buttonRow h4 {
         margin: 0.2em 0em 0em 4.5em;
-    }
-    .buttonRow h4:nth-child(2) {
-        margin: -2.1em 0em 0em 7.7em;
-    }
-    .buttonRow {
-        margin: 3.7em 0em 0em 0em;
     }
 }
 
@@ -108,10 +107,9 @@ footer p {
     .buttonRow {
         margin: 0em 0em 0em 0em;
     }
-    .buttonRow div:nth-child(1) {
-        margin: 1em 0em 0em 3em;
-    }
-    .buttonRow div:nth-child(2) {
-        margin: 0em 0em 0em 3em;
-    }
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
 }

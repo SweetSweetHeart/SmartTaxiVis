@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Smart City Vis Modules</title>
+	<title>Smart City Vis Source: histogram.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -57,93 +57,122 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	<h1 class="page-title">Modules</h1>
+		<h1 class="page-title">Source: histogram.js</h1>
+    
 <section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/**
+ * @author Qiru Wang 689404@swansea.ac.uk
+ * 
+ * @module Histogram
+ */
 
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
-
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
+/**
+ * Start generating histogram.
+ * 
+ */
+function generateHistogram() {
+    if ($("#histogramZone").is(":checked"))
+        generateHistogramDataZone()
+    else if ($("#histogramHour").is(":checked"))
+        generateHistogramDataHour();
+}
 
 
+/**
+ * Generate data for Hour Histogram.
+ * 
+ */
+function generateHistogramDataHour() {
+    var histogramData = [];
+    for (var i = 0; i &lt; countT.length; i++) {
+        var trips = $.extend(true, [], countT[i]);
+        spliceMatrix(trips);
+        spliceSubMatrix(trips);
+        var tripCount = 0;
+        jQuery.each(trips, function (i, val) {
+            tripCount += getTripCount(val);
+        });
+        if (i == time1) {
+            histogramData.push([i.toString(), tripCount, "#e74c3c"]);
+        } else
+            histogramData.push([i.toString(), tripCount]);
+    }
+    renderHistogram(histogramData, "hour");
+}
 
-	
+/**
+ * Generate data for Zone Histogram.
+ * 
+ */
+function generateHistogramDataZone() {
+    var histogramData = [];
+    var trips = $.extend(true, [], zoneMatrix);
+    spliceMatrix(trips);
+    jQuery.each(trips, function (i, val) {
+        histogramData.push([val.name, val.Pickup]);
+    });
+    renderHistogram(histogramData, "zone");
+}
 
-	
+/**
+ * 
+ * 
+ * @param {Array.&lt;any[]>} input - The input data for histogram.
+ * @param {string} type - Type of the histogram generate, either Zone or Hour.
+ */
+function renderHistogram(input, type) {
+    $('#histogram').empty();
+    var data = anychart.data.set(input);
 
-	
+    // create a chart
+    histogramChart = anychart.column();
+    // create a column series and set the data
+    var dataMap = data.mapAs({
+        x: [0],
+        value: [1],
+        fill: [2]
+    });
 
-	
-</dl>
+    var series = histogramChart.column(dataMap);
 
+    series.tooltip()
+        .useHtml(true)
+        .title(false)
+        .separator(false)
+        .fontSize(14)
+        .format(function () {
+            if (type == "hour")
+                return "&lt;span>Taxizone: " + this.getData('x') + " to " + (parseInt(this.getData('x')) + 1) + " &lt;br/>" + "Trips: " + this.getData('value') + '&lt;/span>';
+            else
+                return "&lt;span>Taxizone: " + this.getData('x') + " &lt;br/>" + "Trips: " + this.getData('value') + '&lt;/span>';
+        });
 
-        
-    
-    </div>
+    if (type == "hour") {
+        var xAxis = histogramChart.xAxis().title("Hour")
+        histogramChart.listen("pointClick", function (e) {
+            time1 = e.pointIndex;
+            animationSetData();
+            toggleAnimation(true);
+        });
+    } else {
+        var xAxis = histogramChart.xAxis().title("Zone")
+    }
+    var yAxis = histogramChart.yAxis().title("Trips").orientation('right');
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
+    histogramChart.contextMenu(false);
+    histogramChart.barGroupsPadding(0);
+    histogramChart.container("histogram").draw();
+};</pre>
+    </article>
 </section>
+
 
 
 
@@ -153,10 +182,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>

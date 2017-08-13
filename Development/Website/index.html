@@ -62,25 +62,36 @@
                 </div>
                 <div id="anymap" class="col-md-6 col-xs-12"></div>
             </div>
-            <div class="row controlRow">
+            <div class="row controlRow vertical-align">
                 <div class="col-xs-4">
                     <div class="row buttonRow">
-                        <div class="col-sm-4 col-xs-12">
+                        <div class="col-sm-5 col-xs-12">
                             <button id="btn_pause" type="button" class="btn btn-danger">
                                 <i class="fa fa-pause" aria-hidden="true"></i>
                             &nbsp;&nbsp;Animation
                             </button>
                         </div>
-                        <div class="col-sm-8 col-xs-12">
-                            <h4>
-                                Trips: <span id="tripCount">89885</span>
-                            </h4>
-                            <h4>Hour: <span id="hour">0</span>
-                            </h4>
+                        <div class="col-sm-7 col-xs-12">
+                            <label class="radio-inline">
+                                    <strong>Hour</strong>: <span id="hour">0</span>
+                                 </label>
+                            <label class="radio-inline">
+                                    <strong>Trips</strong>: <span id="tripCount">89885</span>
+                                </label>
                         </div>
                     </div>
+
                 </div>
                 <div class="col-xs-8 pull-right">
+                    <div class="text-center">
+                        <strong>Histogram visualises</strong>:
+                        <label class="radio-inline">
+                                    <input type="radio" name="radioGroup" id="histogramZone" value="zone"> Zones
+                                </label>
+                        <label class="radio-inline">
+                                    <input type="radio" name="radioGroup" id="histogramHour" value="hour" checked> Hours
+                                </label>
+                    </div>
                     <div id='histogram'></div>
                 </div>
             </div>

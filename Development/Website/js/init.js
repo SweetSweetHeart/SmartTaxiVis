@@ -1,9 +1,6 @@
 /**
- * @author Qiru Wang <689404@swansea.ac.uk>
+ * @author Qiru Wang 689404@swansea.ac.uk
  * 
- */
-
-/**
  * @module Initialisation
  */
 
@@ -96,14 +93,14 @@ function initGlobalVariables() {
     /**
      * A noUiSlider for taxizones.
      * @type {noUiSlider}
- * @see {@link https://refreshless.com/nouislider/}
+     * @see {@link https://refreshless.com/nouislider/}
      */
     zoneSlider = document.getElementById('zoneSlider');
 
     /**
      * A noUiSlider for hours of the day.
      * @type {noUiSlider}
- * @see {@link https://refreshless.com/nouislider/}
+     * @see {@link https://refreshless.com/nouislider/}
      */
     hourSlider = document.getElementById('hourSlider');
 
@@ -167,5 +164,10 @@ $(function () {
         e.preventDefault();
         toggleAnimation(false);
     });
+
+    $("#histogramZone, #histogramHour").change(function () {
+        generateHistogram();
+    });
+
     chordAnimation();
 });

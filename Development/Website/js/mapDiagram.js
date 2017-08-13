@@ -1,9 +1,6 @@
 ﻿/**
- * @author Qiru Wang <689404@swansea.ac.uk>
+ * @author Qiru Wang 689404@swansea.ac.uk
  * 
- */
-
-/**
  * @module MapView
  */
 
