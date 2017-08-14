@@ -133,14 +133,13 @@ $(function () {
     $('#hourSlider').popover('show');
     $('#zoneSlider').popover('show');
 
-    $('#btn_pause').click(function (e) {
-        e.preventDefault();
+    $('#btn_pause').click(function () {
         toggleAnimation(false);
     });
 
     $("#histogramZone, #histogramHour").change(function () {
         generateHistogram();
+        toggleAnimation(true);
     });
-
     chordAnimation();
 });

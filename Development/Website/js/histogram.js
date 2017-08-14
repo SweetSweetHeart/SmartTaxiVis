@@ -96,6 +96,7 @@ function renderHistogram(input, type) {
         var xAxis = histogramChart.xAxis().title("Zone");
         histogramChart.listen("pointClick", function (e) {
             highlightZone(zones[e.pointIndex].id);
+            toggleAnimation(true);
         });
     }
     var yAxis = histogramChart.yAxis().title("Trips").orientation('right');
