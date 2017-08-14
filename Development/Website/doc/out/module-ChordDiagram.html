@@ -155,7 +155,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~animationSetData"><span class="type-signature">&lt;inner> </span>animationSetData()</h4>
+    <h4 class="name" id="~animationSetData"><span class="type-signature">&lt;inner> </span>animationSetData<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -163,7 +163,7 @@
 
     
     <div class="description">
-        <p>Update variables zoneMatrix and zoneMatrix, and HTML element 'Hour of the day' to the corresponding hour animated.</p>
+        <p>Update variables zoneMatrix ,tripMatrix, and HTML element 'Hour of the day' to the corresponding hour animated.</p>
     </div>
     
 
@@ -243,7 +243,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~chordAnimation"><span class="type-signature">&lt;inner> </span>chordAnimation()</h4>
+    <h4 class="name" id="~chordAnimation"><span class="type-signature">&lt;inner> </span>chordAnimation<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -331,7 +331,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~formatJSON"><span class="type-signature">&lt;inner> </span>formatJSON()</h4>
+    <h4 class="name" id="~formatJSON"><span class="type-signature">&lt;inner> </span>formatJSON<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -386,7 +386,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-123">line 123</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-160">line 160</a>
 			</li>
 		</ul>
 	</dd>
@@ -419,7 +419,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~generateChordColorLegend"><span class="type-signature">&lt;inner> </span>generateChordColorLegend()</h4>
+    <h4 class="name" id="~generateChordColorLegend"><span class="type-signature">&lt;inner> </span>generateChordColorLegend<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -474,7 +474,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-101">line 101</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-138">line 138</a>
 			</li>
 		</ul>
 	</dd>
@@ -507,7 +507,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~generateRainBowColorMap"><span class="type-signature">&lt;inner> </span>generateRainBowColorMap(trips, totalTrips)</h4>
+    <h4 class="name" id="~generateRainBowColorMap"><span class="type-signature">&lt;inner> </span>generateRainBowColorMap<span class="signature">(trips, totalTrips)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -666,7 +666,7 @@
             
 <div class="param-desc">
     <ul>
-<li>A rgb color.</li>
+<li>A HSL color.</li>
 </ul>
 </div>
 
@@ -682,7 +682,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~getDefaultLayout"><span class="type-signature">&lt;inner> </span>getDefaultLayout()</h4>
+    <h4 class="name" id="~getDefaultLayout"><span class="type-signature">&lt;inner> </span>getDefaultLayout<span class="signature">()</span><span class="type-signature"> &rarr; {d3.layout}</span></h4>
     
     
 </dt>
@@ -803,7 +803,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~getTripCount"><span class="type-signature">&lt;inner> </span>getTripCount(data)</h4>
+    <h4 class="name" id="~getTripCount"><span class="type-signature">&lt;inner> </span>getTripCount<span class="signature">(data)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
     
 </dt>
@@ -967,7 +967,219 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~initChordDiagram"><span class="type-signature">&lt;inner> </span>initChordDiagram()</h4>
+    <h4 class="name" id="~hslToRgb"><span class="type-signature">&lt;inner> </span>hslToRgb<span class="signature">(h, s, l)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Converts an HSL color value to RGB. Conversion formula<br>adapted from http://en.wikipedia.org/wiki/HSL_color_space.<br>Assumes h, s, and l are contained in the set [0, 1] and<br>returns r, g, and b in the set [0, 255].</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>h</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The hue.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The saturation.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>l</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The lightness.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="chordDiagram.js.html">chordDiagram.js</a>,
+				 <a href="chordDiagram.js.html#sunlight-1-line-109">line 109</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <ul>
+<li>A RGB color.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="~initChordDiagram"><span class="type-signature">&lt;inner> </span>initChordDiagram<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1022,7 +1234,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-207">line 207</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-249">line 249</a>
 			</li>
 		</ul>
 	</dd>
@@ -1055,7 +1267,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~spliceMatrix"><span class="type-signature">&lt;inner> </span>spliceMatrix(matrix)</h4>
+    <h4 class="name" id="~spliceMatrix"><span class="type-signature">&lt;inner> </span>spliceMatrix<span class="signature">(matrix)</span><span class="type-signature"> &rarr; {Array.&lt;number>|Array.&lt;string>}</span></h4>
     
     
 </dt>
@@ -1163,7 +1375,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-183">line 183</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-225">line 225</a>
 			</li>
 		</ul>
 	</dd>
@@ -1225,7 +1437,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~spliceSubMatrix"><span class="type-signature">&lt;inner> </span>spliceSubMatrix(matrix)</h4>
+    <h4 class="name" id="~spliceSubTripMatrix"><span class="type-signature">&lt;inner> </span>spliceSubTripMatrix<span class="signature">(matrix)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
     
     
 </dt>
@@ -1285,7 +1497,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>The input trip matrix.</p></td>
         </tr>
 
     
@@ -1330,7 +1542,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-196">line 196</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-238">line 238</a>
 			</li>
 		</ul>
 	</dd>
@@ -1389,7 +1601,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~toggleAnimation"><span class="type-signature">&lt;inner> </span>toggleAnimation(pausing)</h4>
+    <h4 class="name" id="~toggleAnimation"><span class="type-signature">&lt;inner> </span>toggleAnimation<span class="signature">(pausing)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1527,7 +1739,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~toggleNoMatchMessage"><span class="type-signature">&lt;inner> </span>toggleNoMatchMessage(toggle)</h4>
+    <h4 class="name" id="~toggleNoMatchMessage"><span class="type-signature">&lt;inner> </span>toggleNoMatchMessage<span class="signature">(toggle)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1632,7 +1844,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-164">line 164</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-206">line 206</a>
 			</li>
 		</ul>
 	</dd>
@@ -1665,7 +1877,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~updateChordDiagram"><span class="type-signature">&lt;inner> </span>updateChordDiagram(matrix)</h4>
+    <h4 class="name" id="~updateChordDiagram"><span class="type-signature">&lt;inner> </span>updateChordDiagram<span class="signature">(matrix)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1770,7 +1982,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-270">line 270</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-312">line 312</a>
 			</li>
 		</ul>
 	</dd>
@@ -1853,7 +2065,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
 	
-		on Sun Aug 13th 2017
+		on Tue Aug 15th 2017
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

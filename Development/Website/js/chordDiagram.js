@@ -22,12 +22,12 @@ function chordAnimation() {
 
 
 /**
- * Update variables zoneMatrix and zoneMatrix, and HTML element 'Hour of the day' to the corresponding hour animated.
+ * Update variables zoneMatrix ,tripMatrix, and HTML element 'Hour of the day' to the corresponding hour animated.
  * 
  */
 function animationSetData() {
-    zoneMatrix = zoneT[time1];
-    tripMatrix = countT[time1];
+    // zoneMatrix = zoneT[time1];
+    // tripMatrix = countT[time1];
     hourSlider.noUiSlider.set(time1);
     $("#hour").html(time1);
     formatJSON();
@@ -158,11 +158,11 @@ function generateChordColorLegend() {
  * Also update the visibility of some HTML elements.
  */
 function formatJSON() {
-    trips = $.extend(true, [], tripMatrix);
-    zones = $.extend(true, [], zoneMatrix);
+    trips = $.extend(true, [], countT[time1]);
+    zones = $.extend(true, [], zoneT[time1]);
     spliceMatrix(zones);
     spliceMatrix(trips);
-    spliceSubMatrix(trips);
+    spliceSubTripMatrix(trips);
 
     var tripCount = 0;
 
@@ -231,11 +231,11 @@ function spliceMatrix(matrix) {
 /**
  * Splice the input nested array based on the zones selected, for trip count matrix.
  * 
- * @param {number[]} matrix 
+ * @param {number[]} matrix - The input trip matrix.
  * @returns  {number[]} - The spliced array with the selected zones only.
  */
 
-function spliceSubMatrix(matrix) {
+function spliceSubTripMatrix(matrix) {
     jQuery.each(matrix, function (i, val) {
         spliceMatrix(val);
     });
@@ -298,7 +298,7 @@ function initChordDiagram() {
         .attr("id", "circle")
         .attr("overflow-x", "visible")
         .attr("transform",
-        "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
+            "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
 
     g.append("circle")
         .attr("r", outerRadius);
@@ -366,7 +366,7 @@ function updateChordDiagram(matrix) {
             return zones[d.index].color;
         })
         .transition().duration(10).attr("opacity", 1) //reset opacity
-        ;
+    ;
 
     newGroups.append("svg:text")
         .attr("xlink:href", function (d) {
@@ -412,15 +412,15 @@ function updateChordDiagram(matrix) {
             if (zones[d.target.index].name !== zones[d.source.index].name) {
                 return [numberWithCommas(d.source.value),
                     " trips from ",
-                zones[d.source.index].name,
+                    zones[d.source.index].name,
                     " to ",
-                zones[d.target.index].name,
+                    zones[d.target.index].name,
                     "\n",
-                numberWithCommas(d.target.value),
+                    numberWithCommas(d.target.value),
                     " trips from ",
-                zones[d.target.index].name,
+                    zones[d.target.index].name,
                     " to ",
-                zones[d.source.index].name
+                    zones[d.source.index].name
                 ].join("");
             } else {
                 return numberWithCommas(d.source.value) +

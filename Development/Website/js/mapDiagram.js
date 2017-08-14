@@ -26,10 +26,10 @@ function renderMap() {
     /** IMPORTANT!!! map ID field to geojson ID field */
     map.geoIdField("LocationID");
 
-    var tempSeries = map.choropleth(connectorBase);
-    tempSeries.id('helper');
-    tempSeries.enabled(false);
-    tempSeries.legendItem().enabled(false);
+    var choroplethSeries = map.choropleth(connectorBase);
+    choroplethSeries.id('choropleth');
+    choroplethSeries.enabled(false);
+    choroplethSeries.legendItem().enabled(false);
 
     jQuery.each(zones, function (i, val) {
         var dataLoop = anychart.data.set([val]);
@@ -87,13 +87,7 @@ function createDotSeries(name, data, color) {
      * @type {anychart.core.map.series.Marker}
      */
     var series = map.marker(data).name(name);
-
-   
-
-var newcolor = color.split('(').pop().split(',').shift();
-
-console.log(hslToRgb(newcolor,83,50));
-
+    var newcolor = color.split('(').pop().split(',').shift();
     series.legendItem({
         iconType: "circle",
         iconFill: color,
@@ -128,7 +122,6 @@ console.log(hslToRgb(newcolor,83,50));
         .type('circle');
 
     series.id(name);
-
     series.listen("pointClick", function (e) {
         if (pointClickedViaPath != null)
             pointClickedViaPath.selected(false);
@@ -166,9 +159,8 @@ function filterMarkerRange(start, end) {
  * @returns {string} - A Connector coordinate in JSON.
  */
 function getConnector(pointA, pointB) {
-    /** get the helper series */
-    var series = map.getSeries('helper');
-
+    /** get the choropleth series */
+    var series = map.getSeries('choropleth');
     /** find regions with proper ids */
     var pointIndex1 = series.data().find("id", pointA);
     var pointIndex2 = series.data().find("id", pointB);
@@ -189,9 +181,9 @@ function getConnector(pointA, pointB) {
 
 
 /**
- * Highlight the corresponding marker of the selected zoom on the map.
+ * Highlight the corresponding marker of the selected zone on the map.
  * 
- * @param {string} zone - The zone that should be highlighted.
+ * @param {string} zone - The marker that should be highlighted.
  */
 function highlightPoint(zone) {
     if (pointClickedViaPath != null)
@@ -213,7 +205,22 @@ function highlightPoint(zone) {
         pointClickedViaPath.selected(true);
         map.zoomToFeature(zone.id);
     }
+}
 
+/**
+ * Highlight the the selected zone on the map.
+ * 
+ * @param {string} zoneId - The ID of the zone that should be highlighted.
+ */
+function highlightZone(zoneId) {
+    removeMapSeries("highlightZone");
+    var highlightZone = map.choropleth([{
+        "id": zoneId
+    }]);
+    highlightZone.id("highlightZone");
+    highlightZone.enabled(true);
+    highlightZone.legendItem().enabled(false);
+    map.zoomToFeature(zoneId);
 }
 
 /**
@@ -228,7 +235,6 @@ function addConnectorSeries(connectorData) {
     connectorSeries.id('connector');
     connectorSeries.tooltip().format("{%from} - {%to}");
     connectorSeries.legendItem().enabled(false);
-
     connectorSeries.listen("pointClick", function (e) {
         toggleAnimation(true);
     });

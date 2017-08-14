@@ -25,7 +25,7 @@ function generateHistogramDataHour() {
     for (var i = 0; i < countT.length; i++) {
         var trips = $.extend(true, [], countT[i]);
         spliceMatrix(trips);
-        spliceSubMatrix(trips);
+        spliceSubTripMatrix(trips);
         var tripCount = 0;
         jQuery.each(trips, function (i, val) {
             tripCount += getTripCount(val);
@@ -44,7 +44,7 @@ function generateHistogramDataHour() {
  */
 function generateHistogramDataZone() {
     var histogramData = [];
-    var trips = $.extend(true, [], zoneMatrix);
+    var trips = $.extend(true, [], zoneT[time1]);
     spliceMatrix(trips);
     jQuery.each(trips, function (i, val) {
         histogramData.push([val.name, val.Pickup]);
@@ -80,20 +80,23 @@ function renderHistogram(input, type) {
         .fontSize(14)
         .format(function () {
             if (type == "hour")
-                return "<span>Taxizone: " + this.getData('x') + " to " + (parseInt(this.getData('x')) + 1) + " <br/>" + "Trips: " + this.getData('value') + '</span>';
+                return "<span>Hour: " + this.getData('x') + " to " + (parseInt(this.getData('x')) + 1) + " <br/>" + "Trips: " + this.getData('value') + '</span>';
             else
                 return "<span>Taxizone: " + this.getData('x') + " <br/>" + "Trips: " + this.getData('value') + '</span>';
         });
 
     if (type == "hour") {
-        var xAxis = histogramChart.xAxis().title("Hour")
+        var xAxis = histogramChart.xAxis().title("Hour");
         histogramChart.listen("pointClick", function (e) {
             time1 = e.pointIndex;
             animationSetData();
             toggleAnimation(true);
         });
     } else {
-        var xAxis = histogramChart.xAxis().title("Zone")
+        var xAxis = histogramChart.xAxis().title("Zone");
+        histogramChart.listen("pointClick", function (e) {
+            highlightZone(zones[e.pointIndex].id);
+        });
     }
     var yAxis = histogramChart.yAxis().title("Trips").orientation('right');
 

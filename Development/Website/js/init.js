@@ -106,18 +106,6 @@ function initGlobalVariables() {
 
     // Some default values to play with, before the server returns actual data
 
-    /**
-     * Trip count matrix of the selected hour.
-     * @type {Array.<number[]>}
-     */
-    tripMatrix = countT[time1];
-
-    /**
-     * Taxizone matrix of the selected hour.
-     * @type {Array.<number[]>}
-     */
-    zoneMatrix = zoneT[time1];
-
     zones = null;
     trips = null;
 

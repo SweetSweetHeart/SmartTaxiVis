@@ -95,29 +95,25 @@ function renderMap() {
     /** IMPORTANT!!! map ID field to geojson ID field */
     map.geoIdField("LocationID");
 
-    var tempSeries = map.choropleth(connectorBase);
-    tempSeries.id('helper');
-    tempSeries.enabled(false);
-    tempSeries.legendItem().enabled(false);
+    var choroplethSeries = map.choropleth(connectorBase);
+    choroplethSeries.id('choropleth');
+    choroplethSeries.enabled(false);
+    choroplethSeries.legendItem().enabled(false);
 
-
-
-    /** Map data attributes. 
-     * @type {anychart.data.Mapping}
-     * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
-     */
-    var markerSeries = dataSet.mapAs(null, {
-        name: 'name',
-        id: 'id',
-        size: 'Pickup'
+    jQuery.each(zones, function (i, val) {
+        var dataLoop = anychart.data.set([val]);
+        /** Map data attributes. 
+         * @type {anychart.data.Mapping}
+         * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
+         */
+        var loopSeries = dataLoop.mapAs(null, {
+            name: 'name',
+            id: 'id',
+            size: 'Pickup',
+            color: 'color'
+        });
+        createDotSeries(val.name, loopSeries, val.color);
     });
-
-    createDotSeries('0 - 200', markerSeries.filter('size', filterMarkerRange(0, 200)), '#80deea');
-    createDotSeries('200 - 400', markerSeries.filter('size', filterMarkerRange(200, 400)), '#26c6da');
-    createDotSeries('400 - 600', markerSeries.filter('size', filterMarkerRange(400, 600)), '#00acc1');
-    createDotSeries('600 - 800', markerSeries.filter('size', filterMarkerRange(600, 800)), '#0097a7');
-    createDotSeries('800 - 1,000', markerSeries.filter('size', filterMarkerRange(800, 1000)), '#00838f');
-    createDotSeries('More than 1,000', markerSeries.filter('size', filterMarkerRange(1000)), '#006064');
 
     /** Enable map legend */
     map.legend().enabled(false);
@@ -160,6 +156,7 @@ function createDotSeries(name, data, color) {
      * @type {anychart.core.map.series.Marker}
      */
     var series = map.marker(data).name(name);
+    var newcolor = color.split('(').pop().split(',').shift();
     series.legendItem({
         iconType: "circle",
         iconFill: color,
@@ -193,8 +190,7 @@ function createDotSeries(name, data, color) {
         .selectSize(10)
         .type('circle');
 
-    series.id(color);
-
+    series.id(name);
     series.listen("pointClick", function (e) {
         if (pointClickedViaPath != null)
             pointClickedViaPath.selected(false);
@@ -232,9 +228,8 @@ function filterMarkerRange(start, end) {
  * @returns {string} - A Connector coordinate in JSON.
  */
 function getConnector(pointA, pointB) {
-    /** get the helper series */
-    var series = map.getSeries('helper');
-
+    /** get the choropleth series */
+    var series = map.getSeries('choropleth');
     /** find regions with proper ids */
     var pointIndex1 = series.data().find("id", pointA);
     var pointIndex2 = series.data().find("id", pointB);
@@ -255,32 +250,17 @@ function getConnector(pointA, pointB) {
 
 
 /**
- * Highlight the corresponding marker of the selected zoom on the map.
+ * Highlight the corresponding marker of the selected zone on the map.
  * 
- * @param {string} zone - The zone that should be highlighted.
+ * @param {string} zone - The marker that should be highlighted.
  */
 function highlightPoint(zone) {
     if (pointClickedViaPath != null)
         if (pointClickedViaPath.get('id') != zone.id)
             pointClickedViaPath.selected(false);
-
-    var pickup = zone.Pickup;
-    var seriesId;
-    if (pickup &lt; 200)
-        seriesId = '#80deea';
-    else if (pickup &lt; 400)
-        seriesId = '#26c6da';
-    else if (pickup &lt; 600)
-        seriesId = '#00acc1';
-    else if (pickup &lt; 800)
-        seriesId = '#0097a7';
-    else if (pickup &lt; 1000)
-        seriesId = '#00838f';
-    else
-        seriesId = '#006064';
-
+    var pickup = zone.name;
+    var seriesId = zone.name;
     var targetSeries = map.getSeries(seriesId);
-
     var pointIndex = targetSeries.data().find("id", zone.id);
 
     if (pointClickedViaPath != null) {
@@ -294,7 +274,22 @@ function highlightPoint(zone) {
         pointClickedViaPath.selected(true);
         map.zoomToFeature(zone.id);
     }
+}
 
+/**
+ * Highlight the the selected zone on the map.
+ * 
+ * @param {string} zoneId - The ID of the zone that should be highlighted.
+ */
+function highlightZone(zoneId) {
+    removeMapSeries("highlightZone");
+    var highlightZone = map.choropleth([{
+        "id": zoneId
+    }]);
+    highlightZone.id("highlightZone");
+    highlightZone.enabled(true);
+    highlightZone.legendItem().enabled(false);
+    map.zoomToFeature(zoneId);
 }
 
 /**
@@ -309,7 +304,6 @@ function addConnectorSeries(connectorData) {
     connectorSeries.id('connector');
     connectorSeries.tooltip().format("{%from} - {%to}");
     connectorSeries.legendItem().enabled(false);
-
     connectorSeries.listen("pointClick", function (e) {
         toggleAnimation(true);
     });
@@ -368,7 +362,7 @@ function removeMapSeries(seriesId) {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
 	
-		on Sun Aug 13th 2017
+		on Tue Aug 15th 2017
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
