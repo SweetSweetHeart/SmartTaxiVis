@@ -31,24 +31,20 @@ function renderMap() {
     tempSeries.enabled(false);
     tempSeries.legendItem().enabled(false);
 
-
-
-    /** Map data attributes. 
-     * @type {anychart.data.Mapping}
-     * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
-     */
-    var markerSeries = dataSet.mapAs(null, {
-        name: 'name',
-        id: 'id',
-        size: 'Pickup'
+    jQuery.each(zones, function (i, val) {
+        var dataLoop = anychart.data.set([val]);
+        /** Map data attributes. 
+         * @type {anychart.data.Mapping}
+         * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
+         */
+        var loopSeries = dataLoop.mapAs(null, {
+            name: 'name',
+            id: 'id',
+            size: 'Pickup',
+            color: 'color'
+        });
+        createDotSeries(val.name, loopSeries, val.color);
     });
-
-    createDotSeries('0 - 200', markerSeries.filter('size', filterMarkerRange(0, 200)), '#80deea');
-    createDotSeries('200 - 400', markerSeries.filter('size', filterMarkerRange(200, 400)), '#26c6da');
-    createDotSeries('400 - 600', markerSeries.filter('size', filterMarkerRange(400, 600)), '#00acc1');
-    createDotSeries('600 - 800', markerSeries.filter('size', filterMarkerRange(600, 800)), '#0097a7');
-    createDotSeries('800 - 1,000', markerSeries.filter('size', filterMarkerRange(800, 1000)), '#00838f');
-    createDotSeries('More than 1,000', markerSeries.filter('size', filterMarkerRange(1000)), '#006064');
 
     /** Enable map legend */
     map.legend().enabled(false);
@@ -91,6 +87,13 @@ function createDotSeries(name, data, color) {
      * @type {anychart.core.map.series.Marker}
      */
     var series = map.marker(data).name(name);
+
+   
+
+var newcolor = color.split('(').pop().split(',').shift();
+
+console.log(hslToRgb(newcolor,83,50));
+
     series.legendItem({
         iconType: "circle",
         iconFill: color,
@@ -124,7 +127,7 @@ function createDotSeries(name, data, color) {
         .selectSize(10)
         .type('circle');
 
-    series.id(color);
+    series.id(name);
 
     series.listen("pointClick", function (e) {
         if (pointClickedViaPath != null)
@@ -194,24 +197,9 @@ function highlightPoint(zone) {
     if (pointClickedViaPath != null)
         if (pointClickedViaPath.get('id') != zone.id)
             pointClickedViaPath.selected(false);
-
-    var pickup = zone.Pickup;
-    var seriesId;
-    if (pickup < 200)
-        seriesId = '#80deea';
-    else if (pickup < 400)
-        seriesId = '#26c6da';
-    else if (pickup < 600)
-        seriesId = '#00acc1';
-    else if (pickup < 800)
-        seriesId = '#0097a7';
-    else if (pickup < 1000)
-        seriesId = '#00838f';
-    else
-        seriesId = '#006064';
-
+    var pickup = zone.name;
+    var seriesId = zone.name;
     var targetSeries = map.getSeries(seriesId);
-
     var pointIndex = targetSeries.data().find("id", zone.id);
 
     if (pointClickedViaPath != null) {

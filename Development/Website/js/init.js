@@ -121,21 +121,6 @@ function initGlobalVariables() {
     zones = null;
     trips = null;
 
-
-    /** 
-     * Connector dataset for AnyMap.
-     * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
-     * @type {anychart.data.Set} 
-     */
-    connectorData = null;
-
-    /** 
-     * Dataset for AnyMap. 
-     * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
-     * @type {anychart.data.Set} 
-     */
-    dataSet = anychart.data.set(zoneMatrix);
-
     /**
      * The point that represents a taxizone, corresponding to the clicked path on Chord Diagram.
      * @type {anychart.core.SeriesPoint}

@@ -86,12 +86,49 @@ function getTripCount(data) {
  * 
  * @param {number} trips  - Trip count of one zone as the dividend.
  * @param {number} totalTrips - Total trip count of all zones as the divisor.
- * @returns - A rgb color.
+ * @returns - A HSL color.
  */
 function generateRainBowColorMap(trips, totalTrips) {
     var i = Math.round(200 - Math.abs(1 - (trips * 800 / totalTrips)));
     chordLegendColor.push(i);
     return 'hsl(' + i + ',83%,50%)';
+}
+
+
+/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param {number}  h      - The hue.
+ * @param {number}  s      - The saturation.
+ * @param {number}  l      - The lightness.
+ * @return {string}  - A RGB color.
+ */
+function hslToRgb(h, s, l) {
+    var r, g, b;
+
+    if (s == 0) {
+        r = g = b = l; // achromatic
+    } else {
+        function hue2rgb(p, q, t) {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+        }
+
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return 'rgb(' + r * 255 + ',' + g * 255 + ',' + b * 255 + ')';
 }
 
 /**
@@ -109,7 +146,7 @@ function generateChordColorLegend() {
     var last;
     jQuery.each(chordLegendColor, function (i, val) {
         if ((last == null) || (last != null && val > (last + 3)))
-            $("#chordColorLegend").append("<font style=color:hsl(" + val + ",83%,50%)>█</font>");
+            $("#chordColorLegend").append("<font style=color:hsl(" + val + ",80%,53%)>█</font>");
         last = val;
     });
     $("#chordColorLegend").append(" Min");
@@ -143,7 +180,12 @@ function formatJSON() {
 
     $("#tripCount").html(tripCount);
 
-    dataSet = anychart.data.set(zones);
+    /** 
+     * Dataset for AnyMap. 
+     * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
+     * @type {anychart.data.Set} 
+     */
+    var dataSet = anychart.data.set(zones);
     connectorData = null;
 
     if (tripCount > 0) {
@@ -256,7 +298,7 @@ function initChordDiagram() {
         .attr("id", "circle")
         .attr("overflow-x", "visible")
         .attr("transform",
-            "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
+        "translate(" + targetSize / 2 + "," + targetSize / 2 + ")");
 
     g.append("circle")
         .attr("r", outerRadius);
@@ -324,7 +366,7 @@ function updateChordDiagram(matrix) {
             return zones[d.index].color;
         })
         .transition().duration(10).attr("opacity", 1) //reset opacity
-    ;
+        ;
 
     newGroups.append("svg:text")
         .attr("xlink:href", function (d) {
@@ -370,15 +412,15 @@ function updateChordDiagram(matrix) {
             if (zones[d.target.index].name !== zones[d.source.index].name) {
                 return [numberWithCommas(d.source.value),
                     " trips from ",
-                    zones[d.source.index].name,
+                zones[d.source.index].name,
                     " to ",
-                    zones[d.target.index].name,
+                zones[d.target.index].name,
                     "\n",
-                    numberWithCommas(d.target.value),
+                numberWithCommas(d.target.value),
                     " trips from ",
-                    zones[d.target.index].name,
+                zones[d.target.index].name,
                     " to ",
-                    zones[d.source.index].name
+                zones[d.source.index].name
                 ].join("");
             } else {
                 return numberWithCommas(d.source.value) +
@@ -418,7 +460,13 @@ function updateChordDiagram(matrix) {
     chordPaths.on("click", function (d) {
         var pointData = getConnector(zones[d.source.index].id, zones[d.target.index].id);
         if (zones[d.source.index].id != zones[d.target.index].id) {
-            connectorData = [{
+
+            /** 
+             * Connector dataset for AnyMap.
+             * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
+             * @type {anychart.data.Set} 
+             */
+            var connectorData = [{
                 points: pointData,
                 from: zones[d.source.index].name,
                 to: zones[d.target.index].name
