@@ -1,15 +1,7 @@
 {
     "env": {
-        "browser": true
+        "browser": true,
+        "jquery": true
     },
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": false
-        },
-        "sourceType": "module"
-    },
-    "rules": {
-        "no-unreachable": "warn",
-        "no-unused-vars": "warn"
-    }
+    "extends": ["airbnb"]
 }
