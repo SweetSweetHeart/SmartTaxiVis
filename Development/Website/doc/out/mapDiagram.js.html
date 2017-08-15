@@ -20,7 +20,8 @@
 <div class="navbar navbar-default navbar-fixed-top ">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="../../index.html">Smart City Vis</a>
+		<a class="navbar-brand" href="../../index.html"><img class="branding-logo" src="swansea-university-logo-white.png"
+		alt="logo"/>Smart City Vis</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -73,73 +74,72 @@
  * @module MapView
  */
 
-$(window).resize(function () {
-    $("#anymap").css("height", $("#anymap").css("width"));
+$(window).resize(() => {
+  $('#anymap').css('height', $('#anymap').css('width'));
 });
 
 /**
  * Render a Choropleth map as base series, add Marker series on top of the base series.
  */
 function renderMap() {
-    $('#anymap').empty();
-    map = anychart.map();
-    /** Create a AnyMap base map */
-    map.unboundRegions()
-        .enabled(true)
-        .fill('#E1E1E1')
-        .stroke('#D2D2D2');
+  $('#anymap').empty();
+  map = anychart.map();
+  /** Create a AnyMap base map */
+  map.unboundRegions()
+    .enabled(true)
+    .fill('#E1E1E1')
+    .stroke('#D2D2D2');
 
-    /** Map geojson data for drawing taxizone contours */
-    map.geoData('anychart.maps.taxizone');
+  /** Map geojson data for drawing taxizone contours */
+  map.geoData('anychart.maps.taxizone');
 
-    /** IMPORTANT!!! map ID field to geojson ID field */
-    map.geoIdField("LocationID");
+  /** IMPORTANT!!! map ID field to geojson ID field */
+  map.geoIdField('LocationID');
 
-    var choroplethSeries = map.choropleth(connectorBase);
-    choroplethSeries.id('choropleth');
-    choroplethSeries.enabled(false);
-    choroplethSeries.legendItem().enabled(false);
+  const choroplethSeries = map.choropleth(connectorBase);
+  choroplethSeries.id('choropleth');
+  choroplethSeries.enabled(false);
+  choroplethSeries.legendItem().enabled(false);
 
-    jQuery.each(zones, function (i, val) {
-        var dataLoop = anychart.data.set([val]);
-        /** Map data attributes. 
-         * @type {anychart.data.Mapping}
-         * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
-         */
-        var loopSeries = dataLoop.mapAs(null, {
-            name: 'name',
-            id: 'id',
-            size: 'Pickup',
-            color: 'color'
-        });
-        createDotSeries(val.name, loopSeries, val.color);
-    });
-
-    /** Enable map legend */
-    map.legend().enabled(false);
-
-    /**
-     * Create zoom controllers for the map.
-     * @type {anychart.ui.Zoom}
-     * @see {@link https://api.anychart.com/7.14.3/anychart.ui#zoom}
+  jQuery.each(zones, (i, val) => {
+    const dataLoop = anychart.data.set([val]);
+    /** Map data attributes. 
+     * @type {anychart.data.Mapping}
+     * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
-    var zoomController = anychart.ui.zoom();
-    zoomController.render(map);
+    const loopSeries = dataLoop.mapAs(null, {
+      name: 'name',
+      id: 'id',
+      size: 'Pickup',
+      color: 'color',
+    });
+    createDotSeries(val.name, loopSeries, val.color);
+  });
 
-    /** Disable context menu */
-    map.contextMenu(false);
+  /** Enable map legend */
+  map.legend().enabled(false);
 
-    /** Set map inteactions */
-    //var interactivity = map.interactivity();
-    //interactivity.zoomOnMouseWheel(false);
-    //interactivity.zoomOnDoubleClick(false);
+  /**
+   * Create zoom controllers for the map.
+   * @type {anychart.ui.Zoom}
+   * @see {@link https://api.anychart.com/7.14.3/anychart.ui#zoom}
+   */
+  const zoomController = anychart.ui.zoom();
+  zoomController.render(map);
 
-    /** Initiates the drawing into the div with id anymap */
-    map.container('anymap').draw();
+  /** Disable context menu */
+  map.contextMenu(false);
 
-    $("#anymap").css("height", $("#anymap").css("width"));
-};
+  /** Set map inteactions */
+  // var interactivity = map.interactivity();
+  // interactivity.zoomOnMouseWheel(false);
+  // interactivity.zoomOnDoubleClick(false);
 
+  /** Initiates the drawing into the div with id anymap */
+  map.container('anymap').draw();
+
+  $('#anymap').css('height', $('#anymap').css('width'));
+}
 
 
 /** 
@@ -151,57 +151,56 @@ function renderMap() {
  * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
  */
 function createDotSeries(name, data, color) {
-    /** Set marker series.
-     * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
-     * @type {anychart.core.map.series.Marker}
-     */
-    var series = map.marker(data).name(name);
-    var newcolor = color.split('(').pop().split(',').shift();
-    series.legendItem({
-        iconType: "circle",
-        iconFill: color,
-        iconStroke: '2 #E1E1E1'
+  /** Set marker series.
+   * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
+   * @type {anychart.core.map.series.Marker}
+   */
+  const series = map.marker(data).name(name);
+  series.legendItem({
+    iconType: 'circle',
+    iconFill: color,
+    iconStroke: '2 #E1E1E1',
+  });
+
+  /** Set Tooltip for series */
+  series.tooltip()
+    .useHtml(true)
+    .padding([8, 13, 10, 13])
+    .title(false)
+    .separator(false)
+    .fontSize(14)
+    .format(function () {
+      return `&lt;span>${this.getData('name')}&lt;/span>&lt;br />` +
+        `&lt;span style="font-size: 12px; color: #E1E1E1">Trips: ${
+          parseInt(this.getData('size')).toLocaleString()}&lt;/span>`;
     });
+  /** Set styles for marker */
+  series.selectionMode('none')
+    .stroke('2 #757575')
+    .hoverStroke('3 #616161')
+    .fill(color)
+    .size(5)
+    .labels(false)
+    .hoverFill('#e74c3c')
+    .hoverSize(8)
+    .selectType('star7')
+    .selectFill('#e74c3c')
+    .selectSize(10)
+    .type('circle');
 
-    /** Set Tooltip for series */
-    series.tooltip()
-        .useHtml(true)
-        .padding([8, 13, 10, 13])
-        .title(false)
-        .separator(false)
-        .fontSize(14)
-        .format(function () {
-            return '&lt;span>' + this.getData('name') + '&lt;/span>&lt;br />' +
-                '&lt;span style="font-size: 12px; color: #E1E1E1">Trips: ' +
-                parseInt(this.getData('size')).toLocaleString() + '&lt;/span>';
-        });
+  series.id(name);
+  series.listen('pointClick', (e) => {
+    if (pointClickedViaPath != null) {
+      pointClickedViaPath.selected(false);
+    }
 
-    /** Set styles for marker */
-    series.selectionMode("none")
-        .stroke('2 #757575')
-        .hoverStroke('3 #616161')
-        .fill(color)
-        .size(5)
-        .labels(false)
-        .hoverFill('#e74c3c')
-        .hoverSize(8)
-        .selectType('star7')
-        .selectFill('#e74c3c')
-        .selectSize(10)
-        .type('circle');
-
-    series.id(name);
-    series.listen("pointClick", function (e) {
-        if (pointClickedViaPath != null)
-            pointClickedViaPath.selected(false);
-
-        pointClickedViaPath = e.point;
-        pointClickedViaPath.selected(true);
-        removeMapSeries('connector');
-        map.zoomToFeature(pointClickedViaPath.get("id"));
-        toggleAnimation(true);
-    });
-};
+    pointClickedViaPath = e.point;
+    pointClickedViaPath.selected(true);
+    removeMapSeries('connector');
+    map.zoomToFeature(pointClickedViaPath.get('id'));
+    toggleAnimation(true);
+  });
+}
 
 /**
  * Filter function to bind data to variables only within the range.
@@ -210,14 +209,14 @@ function createDotSeries(name, data, color) {
  * @returns {number} - The filtered result.
  */
 function filterMarkerRange(start, end) {
-    if (end)
-        return function (fieldVal) {
-            return start &lt;= fieldVal &amp;&amp; fieldVal &lt; end;
-        };
-    else
-        return function (fieldVal) {
-            return start &lt;= fieldVal;
-        };
+  if (end) {
+    return function (fieldVal) {
+      return start &lt;= fieldVal &amp;&amp; fieldVal &lt; end;
+    };
+  }
+  return function (fieldVal) {
+    return start &lt;= fieldVal;
+  };
 }
 
 /**
@@ -228,24 +227,36 @@ function filterMarkerRange(start, end) {
  * @returns {string} - A Connector coordinate in JSON.
  */
 function getConnector(pointA, pointB) {
-    /** get the choropleth series */
-    var series = map.getSeries('choropleth');
-    /** find regions with proper ids */
-    var pointIndex1 = series.data().find("id", pointA);
-    var pointIndex2 = series.data().find("id", pointB);
-    /** get the bounds of the first region */
-    var point1 = series.getPoint(pointIndex1);
-    var bounds1 = point1.getFeatureBounds();
-    /** get the bounds of the second region */
-    var point2 = series.getPoint(pointIndex2);
-    var bounds2 = point2.getFeatureBounds();
+  /** get the choropleth series */
+  const series = map.getSeries('choropleth');
+  /** find regions with proper ids */
+  const pointIndex1 = series.data().find('id', pointA);
+  const pointIndex2 = series.data().find('id', pointB);
+  /** get the bounds of the first region */
+  const point1 = series.getPoint(pointIndex1);
+  const bounds1 = point1.getFeatureBounds();
+  /** get the bounds of the second region */
+  const point2 = series.getPoint(pointIndex2);
+  const bounds2 = point2.getFeatureBounds();
 
-    /** transformers pixel coordinates to latitude and longitude */
-    var latLong1 = map.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
-    var latLong2 = map.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
+  /** transformers pixel coordinates to latitude and longitude */
+  const latLong1 = map.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
+  const latLong2 = map.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
 
-    /** return an array to be used in connector data setv */
-    return [parseFloat((latLong1.lat).toFixed(7)), parseFloat((latLong1.long).toFixed(7)), parseFloat((latLong2.lat).toFixed(7)), parseFloat((latLong2.long).toFixed(7))];
+  /** return an array to be used in connector data setv */
+  return [parseFloat((latLong1.lat).toFixed(7)), parseFloat((latLong1.long).toFixed(7)), parseFloat((latLong2.lat).toFixed(7)), parseFloat((latLong2.long).toFixed(7))];
+}
+
+
+/**
+ * Remove a map series with its ID.
+ * 
+ * @param {string} seriesId - The ID of targeted series.
+ */
+function removeMapSeries(seriesId) {
+  if (map.getSeries(seriesId) != null) {
+    map.removeSeries(seriesId);
+  }
 }
 
 
@@ -255,25 +266,27 @@ function getConnector(pointA, pointB) {
  * @param {string} zone - The marker that should be highlighted.
  */
 function highlightPoint(zone) {
-    if (pointClickedViaPath != null)
-        if (pointClickedViaPath.get('id') != zone.id)
-            pointClickedViaPath.selected(false);
-    var pickup = zone.name;
-    var seriesId = zone.name;
-    var targetSeries = map.getSeries(seriesId);
-    var pointIndex = targetSeries.data().find("id", zone.id);
-
-    if (pointClickedViaPath != null) {
-        if (pointClickedViaPath.get('id') != zone.id) {
-            pointClickedViaPath = targetSeries.getPoint(pointIndex);
-            pointClickedViaPath.selected(true);
-            map.zoomToFeature(zone.id);
-        }
-    } else {
-        pointClickedViaPath = targetSeries.getPoint(pointIndex);
-        pointClickedViaPath.selected(true);
-        map.zoomToFeature(zone.id);
+  if (pointClickedViaPath != null) {
+    if (pointClickedViaPath.get('id') != zone.id) {
+      pointClickedViaPath.selected(false);
     }
+  }
+  const pickup = zone.name;
+  const seriesId = zone.name;
+  const targetSeries = map.getSeries(seriesId);
+  const pointIndex = targetSeries.data().find('id', zone.id);
+
+  if (pointClickedViaPath != null) {
+    if (pointClickedViaPath.get('id') != zone.id) {
+      pointClickedViaPath = targetSeries.getPoint(pointIndex);
+      pointClickedViaPath.selected(true);
+      map.zoomToFeature(zone.id);
+    }
+  } else {
+    pointClickedViaPath = targetSeries.getPoint(pointIndex);
+    pointClickedViaPath.selected(true);
+    map.zoomToFeature(zone.id);
+  }
 }
 
 /**
@@ -282,14 +295,14 @@ function highlightPoint(zone) {
  * @param {string} zoneId - The ID of the zone that should be highlighted.
  */
 function highlightZone(zoneId) {
-    removeMapSeries("highlightZone");
-    var highlightZone = map.choropleth([{
-        "id": zoneId
-    }]);
-    highlightZone.id("highlightZone");
-    highlightZone.enabled(true);
-    highlightZone.legendItem().enabled(false);
-    map.zoomToFeature(zoneId);
+  removeMapSeries('highlightZone');
+  const highlightZone = map.choropleth([{
+    id: zoneId,
+  }]);
+  highlightZone.id('highlightZone');
+  highlightZone.enabled(true);
+  highlightZone.legendItem().enabled(false);
+  map.zoomToFeature(zoneId);
 }
 
 /**
@@ -298,26 +311,17 @@ function highlightZone(zoneId) {
  * @param {string} connectorData - The JSON data to be added to the base map as a Connector series.
  */
 function addConnectorSeries(connectorData) {
-    /** add connector series */
-    removeMapSeries('connector');
-    var connectorSeries = map.connector(connectorData);
-    connectorSeries.id('connector');
-    connectorSeries.tooltip().format("{%from} - {%to}");
-    connectorSeries.legendItem().enabled(false);
-    connectorSeries.listen("pointClick", function (e) {
-        toggleAnimation(true);
-    });
+  /** add connector series */
+  removeMapSeries('connector');
+  const connectorSeries = map.connector(connectorData);
+  connectorSeries.id('connector');
+  connectorSeries.tooltip().format('{%from} - {%to}');
+  connectorSeries.legendItem().enabled(false);
+  connectorSeries.listen('pointClick', (e) => {
+    toggleAnimation(true);
+  });
 }
-
-/**
- * Remove a map series with its ID.
- * 
- * @param {string} seriesId - The ID of targeted series.
- */
-function removeMapSeries(seriesId) {
-    if (map.getSeries(seriesId) != null)
-        map.removeSeries(seriesId);
-}</pre>
+</pre>
     </article>
 </section>
 

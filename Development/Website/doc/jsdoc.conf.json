@@ -4,7 +4,7 @@
   },
   "plugins": ["plugins/markdown"],
   "templates": {
-    "logoFile": "",
+    "logoFile": "swansea-university-logo-white.png",
     "cleverLinks": false,
     "monospaceLinks": false,
     "dateFormat": "ddd MMM Do YYYY",
