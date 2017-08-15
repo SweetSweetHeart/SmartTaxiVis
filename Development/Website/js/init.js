@@ -12,7 +12,7 @@ function initSliders() {
     noUiSlider.create(zoneSlider, {
         tooltips: true,
         format: wNumb({
-            decimals: 0
+            decimals: 0,
         }),
         start: [1, zone2],
         step: 1,
@@ -20,11 +20,11 @@ function initSliders() {
         connect: true,
         range: {
             'min': 1,
-            'max': totalZoneNum
-        }
+            'max': totalZoneNum,
+        },
     });
 
-    zoneSlider.noUiSlider.on('change', function (values) {
+    zoneSlider.noUiSlider.on('change', function(values) {
         zone1 = parseInt(values[0]);
         zone2 = parseInt(values[1]);
         toggleAnimation(true);
@@ -35,23 +35,23 @@ function initSliders() {
         tooltips: true,
         animate: true,
         format: wNumb({
-            decimals: 0
+            decimals: 0,
         }),
         start: time1,
         step: 1,
         range: {
             'min': [0],
-            'max': [23]
-        }
+            'max': [23],
+        },
     });
 
-    hourSlider.noUiSlider.on('change', function (values) {
+    hourSlider.noUiSlider.on('change', function(values) {
         time1 = parseInt(values[0]);
         animationSetData();
         toggleAnimation(true);
         formatJSON();
     });
-};
+}
 
 /**
  * Initialise global variables needed for the application.
@@ -121,23 +121,23 @@ function initGlobalVariables() {
     chordLegendColor = [];
 }
 
-$(function () {
+$(function() {
     initGlobalVariables();
     initChordDiagram();
     renderMap();
     formatJSON();
     initSliders();
     $('[data-toggle="popover"]').popover({
-        trigger: 'manual'
+        trigger: 'manual',
     });
     $('#hourSlider').popover('show');
     $('#zoneSlider').popover('show');
 
-    $('#btn_pause').click(function () {
+    $('#btn_pause').click(function() {
         toggleAnimation(false);
     });
 
-    $("#histogramZone, #histogramHour").change(function () {
+    $('#histogramZone, #histogramHour').change(function() {
         generateHistogram();
         toggleAnimation(true);
     });

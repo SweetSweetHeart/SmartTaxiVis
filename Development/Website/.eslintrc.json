@@ -1,0 +1,15 @@
+{
+    "env": {
+        "browser": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": false
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn"
+    }
+}

@@ -32,8 +32,9 @@ function generateHistogramDataHour() {
         });
         if (i == time1) {
             histogramData.push([i.toString(), tripCount, "#e74c3c"]);
-        } else
+        } else {
             histogramData.push([i.toString(), tripCount]);
+        }
     }
     renderHistogram(histogramData, "hour");
 }
@@ -59,11 +60,12 @@ function generateHistogramDataZone() {
  * @param {string} type - Type of the histogram generate, either Zone or Hour.
  */
 function renderHistogram(input, type) {
-    $('#histogram').empty();
+    $("#histogram").empty();
     var data = anychart.data.set(input);
 
     // create a chart
     histogramChart = anychart.column();
+
     // create a column series and set the data
     var dataMap = data.mapAs({
         x: [0],
@@ -79,10 +81,11 @@ function renderHistogram(input, type) {
         .separator(false)
         .fontSize(14)
         .format(function () {
-            if (type == "hour")
+            if (type == "hour") {
                 return "<span>Hour: " + this.getData('x') + " to " + (parseInt(this.getData('x')) + 1) + " <br/>" + "Trips: " + this.getData('value') + '</span>';
-            else
+            } else {
                 return "<span>Taxizone: " + this.getData('x') + " <br/>" + "Trips: " + this.getData('value') + '</span>';
+            }
         });
 
     if (type == "hour") {
@@ -99,7 +102,7 @@ function renderHistogram(input, type) {
             toggleAnimation(true);
         });
     }
-    var yAxis = histogramChart.yAxis().title("Trips").orientation('right');
+    var yAxis = histogramChart.yAxis().title("Trips").orientation("right");
 
     histogramChart.contextMenu(false);
     histogramChart.barGroupsPadding(0);

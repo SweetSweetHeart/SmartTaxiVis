@@ -87,7 +87,6 @@ function createDotSeries(name, data, color) {
      * @type {anychart.core.map.series.Marker}
      */
     var series = map.marker(data).name(name);
-    var newcolor = color.split('(').pop().split(',').shift();
     series.legendItem({
         iconType: "circle",
         iconFill: color,
@@ -106,7 +105,6 @@ function createDotSeries(name, data, color) {
                 '<span style="font-size: 12px; color: #E1E1E1">Trips: ' +
                 parseInt(this.getData('size')).toLocaleString() + '</span>';
         });
-
     /** Set styles for marker */
     series.selectionMode("none")
         .stroke('2 #757575')
