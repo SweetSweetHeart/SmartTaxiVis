@@ -8,12 +8,17 @@ $(window).resize(() => {
   $('#anymap').css('height', $('#anymap').css('width'));
 });
 
+anychart.licenseKey('689404@swansea.ac.uk-52d848b-7c97169e');
 /**
  * Render a Choropleth map as base series, add Marker series on top of the base series.
  */
 function renderMap() {
   $('#anymap').empty();
   map = anychart.map();
+
+  const credits = map.credits();
+  credits.enabled(false);
+
   /** Create a AnyMap base map */
   map.unboundRegions()
     .enabled(true)

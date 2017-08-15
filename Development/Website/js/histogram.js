@@ -55,6 +55,9 @@ function renderHistogram(input, type) {
   // create a chart
   histogramChart = anychart.column();
 
+  const credits = histogramChart.credits();
+  credits.enabled(false);
+
   // create a column series and set the data
   const dataMap = data.mapAs({
     x: [0],
