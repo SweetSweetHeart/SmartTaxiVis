@@ -14,7 +14,7 @@
     "footer": "",
     "copyright": "© 2017 - Smart City Vis - Qiru Wang",
     "navType": "vertical",
-    "theme": "flatly",
+    "theme": "yeti",
     "linenums": true,
     "collapseSymbols": false,
     "protocol": "html://",
