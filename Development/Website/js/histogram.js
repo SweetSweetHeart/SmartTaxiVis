@@ -11,8 +11,8 @@
  */
 function generateHistogramDataHour() {
   const histogramData = [];
-  for (let i = 0; i < countT.length; i++) {
-    const trips = $.extend(true, [], countT[i]);
+  for (let i = 0; i < tripT.length; i++) {
+    const trips = $.extend(true, [], tripT[i]);
     spliceMatrix(trips);
     spliceSubTripMatrix(trips);
     var tripCount = 0;

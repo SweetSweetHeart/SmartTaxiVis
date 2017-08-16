@@ -142,4 +142,14 @@ $(() => {
     toggleAnimation(true);
   });
   chordAnimation();
+
+  // for (let i = 0; i <= 8000; i++) {
+  //   $('<span>&#9608;</span>').css({
+  //     color: RainBowColor(i),
+  //   }).appendTo('#chordColorLegend');
+  // }
+
+
 });
+
+

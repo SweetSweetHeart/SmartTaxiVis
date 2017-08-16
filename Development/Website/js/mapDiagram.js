@@ -51,12 +51,13 @@ function renderMap() {
     createDotSeries(val.name, loopSeries, val.color);
   });
 
-  /** Enable map legend */
+  /** Disable map legend */
   map.legend().enabled(false);
 
   /**
    * Create zoom controllers for the map.
    * @type {anychart.ui.Zoom}
+   * @memberof MapView~renderMap#
    * @see {@link https://api.anychart.com/7.14.3/anychart.ui#zoom}
    */
   const zoomController = anychart.ui.zoom();
@@ -178,7 +179,7 @@ function getConnector(pointA, pointB) {
   const latLong1 = map.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
   const latLong2 = map.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
 
-  /** return an array to be used in connector data setv */
+  /** return an array to be used in connector series */
   return [parseFloat((latLong1.lat).toFixed(7)), parseFloat((latLong1.long).toFixed(7)), parseFloat((latLong2.lat).toFixed(7)), parseFloat((latLong2.long).toFixed(7))];
 }
 
@@ -206,7 +207,6 @@ function highlightPoint(zone) {
       pointClickedViaPath.selected(false);
     }
   }
-  const pickup = zone.name;
   const seriesId = zone.name;
   const targetSeries = map.getSeries(seriesId);
   const pointIndex = targetSeries.data().find('id', zone.id);
