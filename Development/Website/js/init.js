@@ -61,47 +61,47 @@ function initGlobalVariables() {
   // Some global variables needed.
 
   /**
-     * Total number of taxizones.
-     * @type {number}
-     */
+   * Total number of taxizones.
+   * @type {number}
+   */
   totalZoneNum = 263;
 
   /**
-     * Starting index of taxizones selected.
-     * @type {number}
-     */
+   * Starting index of taxizones selected.
+   * @type {number}
+   */
   zone1 = 1;
 
   /**
-     * Ending index of taxizones selected.
-     * @type {number}
-     */
+   * Ending index of taxizones selected.
+   * @type {number}
+   */
   zone2 = 20;
 
   /**
-     * Starting index of hours selected.
-     * @type {number}
-     */
+   * Starting index of hours selected.
+   * @type {number}
+   */
   time1 = 9;
 
   /**
-     * Starting index of hours selected.
-     * @type {number}
-     */
+   * Starting index of hours selected.
+   * @type {number}
+   */
   time2 = 15;
 
   /**
-     * A noUiSlider for taxizones.
-     * @type {noUiSlider}
-     * @see {@link https://refreshless.com/nouislider/}
-     */
+   * A noUiSlider for taxizones.
+   * @type {noUiSlider}
+   * @see {@link https://refreshless.com/nouislider/}
+   */
   zoneSlider = document.getElementById('zoneSlider');
 
   /**
-     * A noUiSlider for hours of the day.
-     * @type {noUiSlider}
-     * @see {@link https://refreshless.com/nouislider/}
-     */
+   * A noUiSlider for hours of the day.
+   * @type {noUiSlider}
+   * @see {@link https://refreshless.com/nouislider/}
+   */
   hourSlider = document.getElementById('hourSlider');
 
   // Some default values to play with, before the server returns actual data
@@ -110,10 +110,10 @@ function initGlobalVariables() {
   trips = null;
 
   /**
-     * The point that represents a taxizone, corresponding to the clicked path on Chord Diagram.
-     * @type {anychart.core.SeriesPoint}
-     * @see {@link https://api.anychart.com/7.14.3/anychart.core.SeriesPoint}
-     */
+   * The point that represents a taxizone, corresponding to the clicked path on Chord Diagram.
+   * @type {anychart.core.SeriesPoint}
+   * @see {@link https://api.anychart.com/7.14.3/anychart.core.SeriesPoint}
+   */
   pointClickedViaPath = null;
 
   lastLayout = null;
