@@ -34,7 +34,7 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-ChordDiagram.html">ChordDiagram</a></li><li><a href="module-Histogram.html">Histogram</a></li><li><a href="module-Initialisation.html">Initialisation</a></li><li><a href="module-MapView.html">MapView</a></li>
+					<li><a href="module-Initialiser.html">Initialiser</a></li><li><a href="module-Vis_ChordDiagram.html">Vis/ChordDiagram</a></li><li><a href="module-Vis_Histogram.html">Vis/Histogram</a></li><li><a href="module-Vis_MapView.html">Vis/MapView</a></li>
 				</ul>
 			</li>
 			
@@ -74,9 +74,9 @@
             class="sunlight-highlight-javascript linenums">/**
  * @author Qiru Wang 689404@swansea.ac.uk
  * 
- * @module Histogram
+ * @module Vis/Histogram
+ * @requires Initialiser
  */
-
 
 /**
  * Generate data for Hour Histogram.
@@ -84,8 +84,8 @@
  */
 function generateHistogramDataHour() {
   const histogramData = [];
-  for (let i = 0; i &lt; countT.length; i++) {
-    const trips = $.extend(true, [], countT[i]);
+  for (let i = 0; i &lt; tripT.length; i++) {
+    const trips = $.extend(true, [], tripT[i]);
     spliceMatrix(trips);
     spliceSubTripMatrix(trips);
     var tripCount = 0;
@@ -224,7 +224,7 @@ function generateHistogram() {
 
 
 	<span class="copyright">
-	© 2017 - Smart City Vis - Qiru Wang
+	© 2017 - Smart Taxi Vis - Qiru Wang
 	</span>
 
 <span class="jsdoc-message">

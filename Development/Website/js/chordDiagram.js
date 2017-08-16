@@ -1,7 +1,8 @@
 ﻿/**
  * @author Qiru Wang 689404@swansea.ac.uk
  * 
- * @module ChordDiagram
+ * @module Vis/ChordDiagram
+ * @requires Initialiser
  */
 
 /**
@@ -88,9 +89,9 @@ function getTripCount(data) {
  * @returns - A RGB color.
  */
 function generateRainBowColorMap(trips, totalTrips) {
-  const i = Math.round(100 - Math.abs(1 - (trips * totalZoneNum / 5000))); 
-  chordLegendColor.push(i); 
-  return `hsl(${i},83%,50%)`; 
+  const i = Math.round(100 - Math.abs(1 - (trips * totalZoneNum / 5000)));
+  // chordLegendColor.push(i);
+  return `hsl(${i},83%,50%)`;
 }
 
 
@@ -101,15 +102,15 @@ function generateRainBowColorMap(trips, totalTrips) {
 function generateChordColorLegend() {
   $('#chordColorLegend').empty();
   $('#chordColorLegend').append('Legend: &nbsp; &nbsp; &nbsp; Max ');
- 
+
   console.log(chordLegendColor);
-  
+
   chordLegendColor = Array.from(new Set(chordLegendColor));
   chordLegendColor.sort((a, b) => a - b);
   let last;
   jQuery.each(chordLegendColor, (i, val) => {
     if ((last == null) || (last != null && val > (last + 1))) {
-      $('#chordColorLegend').append(`<font style=color:hsl(${val},80%,53%)>█</font>`); 
+      $('#chordColorLegend').append(`<font style=color:hsl(${val},80%,53%)>█</font>`);
     }
     last = val;
   });
@@ -139,7 +140,7 @@ function formatJSON() {
     val.color = generateRainBowColorMap(val.Pickup, tripCount);
   });
 
-  //generateChordColorLegend(); /** Not needed for the moment. */
+  // generateChordColorLegend(); /** Not needed for the moment. */
   generateHistogram();
 
   $('#tripCount').html(tripCount);

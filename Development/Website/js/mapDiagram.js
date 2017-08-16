@@ -1,7 +1,8 @@
 ﻿/**
  * @author Qiru Wang 689404@swansea.ac.uk
  * 
- * @module MapView
+ * @module Vis/MapView
+ * @requires Initialiser
  */
 
 $(window).resize(() => {
@@ -57,7 +58,7 @@ function renderMap() {
   /**
    * Create zoom controllers for the map.
    * @type {anychart.ui.Zoom}
-   * @memberof MapView~renderMap#
+   * @memberof Vis/MapView
    * @see {@link https://api.anychart.com/7.14.3/anychart.ui#zoom}
    */
   const zoomController = anychart.ui.zoom();

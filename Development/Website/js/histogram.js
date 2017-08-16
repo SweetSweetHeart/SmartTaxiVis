@@ -1,9 +1,9 @@
 /**
  * @author Qiru Wang 689404@swansea.ac.uk
  * 
- * @module Histogram
+ * @module Vis/Histogram
+ * @requires Initialiser
  */
-
 
 /**
  * Generate data for Hour Histogram.

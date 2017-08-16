@@ -34,7 +34,7 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-ChordDiagram.html">ChordDiagram</a></li><li><a href="module-Histogram.html">Histogram</a></li><li><a href="module-Initialisation.html">Initialisation</a></li><li><a href="module-MapView.html">MapView</a></li>
+					<li><a href="module-Initialiser.html">Initialiser</a></li><li><a href="module-Vis_ChordDiagram.html">Vis/ChordDiagram</a></li><li><a href="module-Vis_Histogram.html">Vis/Histogram</a></li><li><a href="module-Vis_MapView.html">Vis/MapView</a></li>
 				</ul>
 			</li>
 			
@@ -74,7 +74,8 @@
             class="sunlight-highlight-javascript linenums">﻿/**
  * @author Qiru Wang 689404@swansea.ac.uk
  * 
- * @module MapView
+ * @module Vis/MapView
+ * @requires Initialiser
  */
 
 $(window).resize(() => {
@@ -124,12 +125,13 @@ function renderMap() {
     createDotSeries(val.name, loopSeries, val.color);
   });
 
-  /** Enable map legend */
+  /** Disable map legend */
   map.legend().enabled(false);
 
   /**
    * Create zoom controllers for the map.
    * @type {anychart.ui.Zoom}
+   * @memberof Vis/MapView
    * @see {@link https://api.anychart.com/7.14.3/anychart.ui#zoom}
    */
   const zoomController = anychart.ui.zoom();
@@ -251,7 +253,7 @@ function getConnector(pointA, pointB) {
   const latLong1 = map.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
   const latLong2 = map.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
 
-  /** return an array to be used in connector data setv */
+  /** return an array to be used in connector series */
   return [parseFloat((latLong1.lat).toFixed(7)), parseFloat((latLong1.long).toFixed(7)), parseFloat((latLong2.lat).toFixed(7)), parseFloat((latLong2.long).toFixed(7))];
 }
 
@@ -279,7 +281,6 @@ function highlightPoint(zone) {
       pointClickedViaPath.selected(false);
     }
   }
-  const pickup = zone.name;
   const seriesId = zone.name;
   const targetSeries = map.getSeries(seriesId);
   const pointIndex = targetSeries.data().find('id', zone.id);
@@ -368,7 +369,7 @@ function addConnectorSeries(connectorData) {
 
 
 	<span class="copyright">
-	© 2017 - Smart City Vis - Qiru Wang
+	© 2017 - Smart Taxi Vis - Qiru Wang
 	</span>
 
 <span class="jsdoc-message">
