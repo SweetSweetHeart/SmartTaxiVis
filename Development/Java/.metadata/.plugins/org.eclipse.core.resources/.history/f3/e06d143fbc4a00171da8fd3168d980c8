@@ -1,8 +1,0 @@
-class Text{
-    String text;
-    public void setText(String text){}
-    public String getText(){}
-    public void display(){}
-    public void Main(String[] args){}
-
-}
