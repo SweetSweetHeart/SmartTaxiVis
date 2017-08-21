@@ -89,7 +89,7 @@ function renderHistogram(input, type) {
   } else {
     var xAxis = histogramChart.xAxis().title('Zone');
     histogramChart.listen('pointClick', (e) => {
-      highlightZone(zones[e.pointIndex].id);
+      highlightZone(zones[e.pointIndex].ZoneId);
       toggleAnimation(true);
     });
   }

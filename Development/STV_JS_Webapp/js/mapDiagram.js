@@ -235,7 +235,7 @@ function highlightZone(zoneId) {
   const highlightZone = map.choropleth([{
     id: zoneId,
   }]);
-  highlightzone.ZoneId('highlightZone');
+  highlightZone.id('highlightZone');
   highlightZone.enabled(true);
   highlightZone.legendItem().enabled(false);
   map.zoomToFeature(zoneId);
