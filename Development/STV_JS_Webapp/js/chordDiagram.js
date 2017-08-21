@@ -86,10 +86,10 @@ function getTripCount(data) {
  * 
  * @param {number} trips  - Trip count of one zone as the dividend.
  * @param {number} totalTrips - Total trip count of all zones as the divisor.
- * @returns - A RGB color.
+ * @returns - A HSL color.
  */
 function generateRainBowColorMap(trips, totalTrips) {
-  const i = Math.round(100 - Math.abs(1 - (trips * totalZoneNum / 5000)));
+  const i = Math.round(100 - Math.abs(1 - (trips * totalZoneNum / 3000)));
   // chordLegendColor.push(i);
   return `hsl(${i},83%,50%)`;
 }
@@ -102,8 +102,6 @@ function generateRainBowColorMap(trips, totalTrips) {
 function generateChordColorLegend() {
   $('#chordColorLegend').empty();
   $('#chordColorLegend').append('Legend: &nbsp; &nbsp; &nbsp; Max ');
-
-  console.log(chordLegendColor);
 
   chordLegendColor = Array.from(new Set(chordLegendColor));
   chordLegendColor.sort((a, b) => a - b);
@@ -137,7 +135,7 @@ function formatJSON() {
 
   // Assign random colors to chords    
   jQuery.each(zones, (i, val) => {
-    val.color = generateRainBowColorMap(val.Pickup, tripCount);
+    val.color = generateRainBowColorMap(val.PickUpCount, tripCount);
   });
 
   // generateChordColorLegend(); /** Not needed for the moment. */
@@ -307,7 +305,7 @@ function updateChordDiagram(matrix) {
   groupG.select('title')
     .text((d, i) => `${numberWithCommas(d.value)
     } trips started in ${
-      zones[i].name}`);
+      zones[i].ZoneName}`);
 
   // create the arc paths and set the constant attributes
   // (those based on the group index, not on the value)
@@ -330,13 +328,13 @@ function updateChordDiagram(matrix) {
     .attr('xlink:href', d => `#group${d.index}`)
     .attr('dy', '.35em')
     .attr('color', '#fff')
-    .text(d => zones[d.index].name);
+    .text(d => zones[d.index].ZoneName);
 
   // Position group labels to match layout
   groupG.select('text')
     .transition()
     .duration(800)
-    .text(d => zones[d.index].name)
+    .text(d => zones[d.index].ZoneName)
     .attr('transform', (d) => {
       d.angle = (d.startAngle + d.endAngle) / 2;
 
@@ -361,23 +359,23 @@ function updateChordDiagram(matrix) {
 
   chordPaths.select('title')
     .text((d) => {
-      if (zones[d.target.index].name !== zones[d.source.index].name) {
+      if (zones[d.target.index].ZoneName !== zones[d.source.index].ZoneName) {
         return [numberWithCommas(d.source.value),
           ' trips from ',
-          zones[d.source.index].name,
+          zones[d.source.index].ZoneName,
           ' to ',
-          zones[d.target.index].name,
+          zones[d.target.index].ZoneName,
           '\n',
           numberWithCommas(d.target.value),
           ' trips from ',
-          zones[d.target.index].name,
+          zones[d.target.index].ZoneName,
           ' to ',
-          zones[d.source.index].name,
+          zones[d.source.index].ZoneName,
         ].join('');
       }
       return `${numberWithCommas(d.source.value)
       } trips started and ended in ${
-        zones[d.source.index].name}`;
+        zones[d.source.index].ZoneName}`;
     });
 
   chordPaths.exit().transition()
@@ -405,8 +403,8 @@ function updateChordDiagram(matrix) {
   });
 
   chordPaths.on('click', (d) => {
-    const pointData = getConnector(zones[d.source.index].id, zones[d.target.index].id);
-    if (zones[d.source.index].id != zones[d.target.index].id) {
+    const pointData = getConnector(zones[d.source.index].ZoneId, zones[d.target.index].ZoneId);
+    if (zones[d.source.index].ZoneId != zones[d.target.index].ZoneId) {
       /** 
              * Connector dataset for AnyMap.
              * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
@@ -414,8 +412,8 @@ function updateChordDiagram(matrix) {
              */
       const connectorData = [{
         points: pointData,
-        from: zones[d.source.index].name,
-        to: zones[d.target.index].name,
+        from: zones[d.source.index].ZoneName,
+        to: zones[d.target.index].ZoneName,
       }];
       addConnectorSeries(connectorData);
       highlightPoint(zones[d.source.index]);

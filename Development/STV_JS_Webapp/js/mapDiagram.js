@@ -44,12 +44,12 @@ function renderMap() {
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
     const loopSeries = dataLoop.mapAs(null, {
-      name: 'name',
-      id: 'id',
-      size: 'Pickup',
+      name: 'ZoneName',
+      id: 'ZoneId',
+      size: 'PickUpCount',
       color: 'color',
     });
-    createDotSeries(val.name, loopSeries, val.color);
+    createDotSeries(val.ZoneName, loopSeries, val.color);
   });
 
   /** Disable map legend */
@@ -204,24 +204,24 @@ function removeMapSeries(seriesId) {
  */
 function highlightPoint(zone) {
   if (pointClickedViaPath != null) {
-    if (pointClickedViaPath.get('id') != zone.id) {
+    if (pointClickedViaPath.get('id') != zone.ZoneId) {
       pointClickedViaPath.selected(false);
     }
   }
-  const seriesId = zone.name;
+  const seriesId = zone.ZoneName;
   const targetSeries = map.getSeries(seriesId);
-  const pointIndex = targetSeries.data().find('id', zone.id);
+  const pointIndex = targetSeries.data().find('id', zone.ZoneId);
 
   if (pointClickedViaPath != null) {
-    if (pointClickedViaPath.get('id') != zone.id) {
+    if (pointClickedViaPath.get('id') != zone.ZoneId) {
       pointClickedViaPath = targetSeries.getPoint(pointIndex);
       pointClickedViaPath.selected(true);
-      map.zoomToFeature(zone.id);
+      map.zoomToFeature(zone.ZoneId);
     }
   } else {
     pointClickedViaPath = targetSeries.getPoint(pointIndex);
     pointClickedViaPath.selected(true);
-    map.zoomToFeature(zone.id);
+    map.zoomToFeature(zone.ZoneId);
   }
 }
 
@@ -235,7 +235,7 @@ function highlightZone(zoneId) {
   const highlightZone = map.choropleth([{
     id: zoneId,
   }]);
-  highlightZone.id('highlightZone');
+  highlightzone.ZoneId('highlightZone');
   highlightZone.enabled(true);
   highlightZone.legendItem().enabled(false);
   map.zoomToFeature(zoneId);

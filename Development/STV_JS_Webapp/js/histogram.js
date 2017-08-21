@@ -37,7 +37,7 @@ function generateHistogramDataZone() {
   const trips = $.extend(true, [], zoneT[time1]);
   spliceMatrix(trips);
   jQuery.each(trips, (i, val) => {
-    histogramData.push([val.name, val.Pickup]);
+    histogramData.push([val.ZoneName, val.PickUpCount]);
   });
   renderHistogram(histogramData, 'zone');
 }

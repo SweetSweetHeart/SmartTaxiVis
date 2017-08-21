@@ -31,7 +31,7 @@ public class JsonExporter {
     private Statement stmt;
     private ResultSet rs;
     private ArrayList<ArrayList<TaxiZone>> zoneResultList = new ArrayList<>();
-    private ArrayList<ArrayList<float[]>> matrixResultList = new ArrayList<>();
+    private ArrayList<ArrayList<int[]>> matrixResultList = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -45,15 +45,15 @@ public class JsonExporter {
         System.out.println("getZoneData() finished in: " + zone + "ms");
 
         exporter.getTripMatrix();
-        long trip = System.currentTimeMillis() - startTime;
+        long trip = System.currentTimeMillis() - zone;
         System.out.println("getTripMatrix() finished in: " + trip + "ms");
 
         exporter.getPriceMatrix();
-        long price = System.currentTimeMillis() - startTime;
+        long price = System.currentTimeMillis() - trip;
         System.out.println("getPriceMatrix() finished in: " + price + "ms");
 
         exporter.getDistanceMatrix();
-        long distance = System.currentTimeMillis() - startTime;
+        long distance = System.currentTimeMillis() - price;
         System.out.println("getDistanceMatrix() finished in: " + distance + "ms");
 
         exporter.writeJsonFile(exporter.getResult());
@@ -150,7 +150,7 @@ public class JsonExporter {
         for (int i = 0; i < HOUR2; i++) {
             procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call first_cursor_Price_time(" + procedure + ")");
-            
+
             convertMatrixToList();
 
             System.out.println("getDistanceMatrix() " + (i + 1) + "th loop");
@@ -200,12 +200,12 @@ public class JsonExporter {
 
     public void convertMatrixToList() {
         try {
-            ArrayList<float[]> eachZone = new ArrayList<>();
+            ArrayList<int[]> eachZone = new ArrayList<>();
             while (getResultSet().next()) {
                 String[] data = rs.getString(2).split(",");
-                float[] dataInt = new float[data.length];
+                int[] dataInt = new int[data.length];
                 for (int i = 0; i < data.length; i++) {
-                    dataInt[i] = Float.parseFloat(data[i]);
+                    dataInt[i] = (int)(Double.parseDouble(data[i]) * 100);
                 }
                 eachZone.add(dataInt);
             }
