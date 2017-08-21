@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Smart City Vis Source: chordDiagram.js</title>
+	<title>Smart Taxi Vis Source: chordDiagram.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,8 +20,8 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" target="_blank" href="../../index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
-		alt="logo"/>Smart City Vis</a>
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
+		alt="logo"/>Smart Taxi Vis</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -78,6 +78,96 @@
  * @requires Initialiser
  */
 
+
+/**
+ * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
+ * Also update the visibility of some HTML elements.
+ */
+function formatJSON() {
+  data = $.extend(true, [], tripT[TIME1]);
+
+  // data = $.extend(true, [], distanceT[TIME1]);
+
+  // data = $.extend(true, [], priceT[TIME1]);
+
+  zones = $.extend(true, [], zoneT[TIME1]);
+  spliceMatrix(zones);
+  spliceMatrix(data);
+  spliceSubTripMatrix(data);
+
+  let dataCount = 0;
+
+  jQuery.each(data, (i, val) => {
+    dataCount += getDataCount(val);
+  });
+
+
+  // Assign colors to chords    
+  jQuery.each(zones, (i, val) => {
+    val.color = generateRainBowColorMap(getDataCount(data[i]), dataCount);
+    //console.log(getDataCount(data[i]), dataCount);
+  });
+
+  highlightColormap(lowerColor, higherColor);
+
+  // generateChordColorLegend(); /** Not needed for the moment. */
+  generateHistogram();
+
+  $('#dataCount').html(dataCount);
+
+  /** 
+   * Dataset for AnyMap. 
+   * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
+   * @type {anychart.data.Set} 
+   */
+  const dataSet = anychart.data.set(zones);
+  connectorData = null;
+
+  if (dataCount > 0) {
+    toggleNoMatchMessage(false);
+    renderMap();
+    updateChordDiagram(data);
+  } else {
+    toggleNoMatchMessage(true);
+  }
+
+
+
+
+  // var colorHTML = "";
+  // for (var index = 0; index &lt; 100; index += 3) {
+  //   colorHTML += '&lt;font id="color' + index + '" style="color:hsl(' + index + ',90%,53%)">█&lt;/font>';
+
+  // }
+  // console.log(colorHTML);
+}
+
+
+function highlightColormap(low, high) {
+
+  $('#chordColorLegend font').css({
+    "border-style": "none",
+    "border-width": "7px"
+  });
+
+  $('#color' + Math.ceil(low / 3) * 3).css({
+    "border-style": "solid none solid solid"
+  });
+
+  $('#color' + Math.ceil(high / 3) * 3).css({
+    "border-style": "solid solid solid none"
+  });
+
+  for (var index = (Math.ceil(low / 3) + 1) * 3; index &lt; Math.ceil(high / 3) * 3; index += 3) {
+    $('#color' + index).css({
+      "border-style": "solid none solid none"
+    });
+  }
+
+  lowerColor = 100;
+  higherColor = 0;
+}
+
 /**
  * Start the animation for Chord Diagram.
  * 
@@ -86,9 +176,9 @@ function chordAnimation() {
   isPaused = false;
   interval = setInterval(() => {
     if (!isPaused) {
-      time1++;
-      if (time1 > 23) {
-        time1 = 0;
+      TIME1++;
+      if (TIME1 > 23) {
+        TIME1 = 0;
       }
       animationSetData();
     }
@@ -97,14 +187,12 @@ function chordAnimation() {
 
 
 /**
- * Update variables zoneMatrix ,tripMatrix, and HTML element 'Hour of the day' to the corresponding hour animated.
+ * Update hourSlider and HTML element 'Hour of the day' to the corresponding hour animated.
  * 
  */
 function animationSetData() {
-  // zoneMatrix = zoneT[time1];
-  // tripMatrix = tripT[time1];
-  hourSlider.noUiSlider.set(time1);
-  $('#hour').html(time1);
+  hourSlider.noUiSlider.set(TIME1);
+  $('#hour').html(TIME1);
   formatJSON();
 }
 
@@ -140,12 +228,12 @@ function getDefaultLayout() {
 }
 
 /**
- * Calculate the given trip count.
+ * Calculate the given data count.
  * 
- * @param {string} data - The input trip count data in JSON.
- * @returns {number} - The total trip count.
+ * @param {string} data - The input data count data in JSON.
+ * @returns {number} - The total data count.
  */
-function getTripCount(data) {
+function getDataCount(data) {
   let result = 0;
   jQuery.each(data, (i, val) => {
     result += parseInt(val);
@@ -154,19 +242,46 @@ function getTripCount(data) {
 }
 
 
+var lowerColor = 100;
+var higherColor = 0;
+
 /**
- * Generate a rainbow color map based on the ratio of trips and the total trip count.
+ * Generate a rainbow color map based on the ratio of data count and the total data count.
  * 
  * @param {number} trips  - Trip count of one zone as the dividend.
- * @param {number} totalTrips - Total trip count of all zones as the divisor.
- * @returns - A RGB color.
+ * @param {number} totalTrips - Total data count of all zones as the divisor.
+ * @returns - A HSL color.
  */
 function generateRainBowColorMap(trips, totalTrips) {
-  const i = Math.round(100 - Math.abs(1 - (trips * totalZoneNum / 5000)));
-  // chordLegendColor.push(i);
+  if (trips / totalTrips) {
+
+  }
+
+  const i = Math.round(100 - Math.abs(1 - (trips * TOTALZONENUM / totalTrips * 2.8)));
+  console.log(trips / totalTrips, i);
+
+  if (lowerColor > i)
+    lowerColor = i;
+
+  if (higherColor &lt; i)
+    higherColor = i;
+
   return `hsl(${i},83%,50%)`;
 }
 
+
+// function generateRainBowColorMap(trips, totalTrips) {
+//   var i = trips / totalTrips * 50;
+
+//   console.log(trips, totalTrips, i);
+
+//   var r = Math.sin(0.1 * i + 0) * 127 + 128;
+//   var g = Math.sin(0.2 * i + 2) * 127 + 128;
+//   var b = Math.sin(0.3 * i + 4) * 127 + 128;
+
+
+//   return `rgb(${r},${g},${b})`;
+// }
 
 /**
  * Generate a legend for Chord Diagram based on the color map used.
@@ -176,63 +291,17 @@ function generateChordColorLegend() {
   $('#chordColorLegend').empty();
   $('#chordColorLegend').append('Legend: &amp;nbsp; &amp;nbsp; &amp;nbsp; Max ');
 
-  console.log(chordLegendColor);
-
   chordLegendColor = Array.from(new Set(chordLegendColor));
   chordLegendColor.sort((a, b) => a - b);
   let last;
   jQuery.each(chordLegendColor, (i, val) => {
     if ((last == null) || (last != null &amp;&amp; val > (last + 1))) {
-      $('#chordColorLegend').append(`&lt;font style=color:hsl(${val},80%,53%)>█&lt;/font>`);
+      $('#chordColorLegend').append(`&lt;font style=color:hsl(${val},90%,53%)>█&lt;/font>`);
     }
     last = val;
   });
   $('#chordColorLegend').append(' Min');
   chordLegendColor = [];
-}
-
-/**
- * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
- * Also update the visibility of some HTML elements.
- */
-function formatJSON() {
-  trips = $.extend(true, [], tripT[time1]);
-  zones = $.extend(true, [], zoneT[time1]);
-  spliceMatrix(zones);
-  spliceMatrix(trips);
-  spliceSubTripMatrix(trips);
-
-  let tripCount = 0;
-
-  jQuery.each(trips, (i, val) => {
-    tripCount += getTripCount(val);
-  });
-
-  // Assign random colors to chords    
-  jQuery.each(zones, (i, val) => {
-    val.color = generateRainBowColorMap(val.Pickup, tripCount);
-  });
-
-  // generateChordColorLegend(); /** Not needed for the moment. */
-  generateHistogram();
-
-  $('#tripCount').html(tripCount);
-
-  /** 
-     * Dataset for AnyMap. 
-     * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
-     * @type {anychart.data.Set} 
-     */
-  const dataSet = anychart.data.set(zones);
-  connectorData = null;
-
-  if (tripCount > 0) {
-    toggleNoMatchMessage(false);
-    renderMap();
-    updateChordDiagram(trips);
-  } else {
-    toggleNoMatchMessage(true);
-  }
 }
 
 
@@ -261,15 +330,15 @@ function toggleNoMatchMessage(toggle) {
  * @returns {number[]|string[]} - The spliced array with the selected zones only.
  */
 function spliceMatrix(matrix) {
-  matrix.splice(0, zone1);
-  matrix.splice(zone2 - zone1 + 1, totalZoneNum - zone2);
+  matrix.splice(0, ZONE1);
+  matrix.splice(ZONE2 - ZONE1 + 1, TOTALZONENUM - ZONE2);
   return matrix;
 }
 
 /**
- * Splice the input nested array based on the zones selected, for trip count matrix.
+ * Splice the input nested array based on the zones selected, for data count matrix.
  * 
- * @param {number[]} matrix - The input trip matrix.
+ * @param {number[]} matrix - The input data matrix.
  * @returns  {number[]} - The spliced array with the selected zones only.
  */
 
@@ -344,7 +413,7 @@ function initChordDiagram() {
 /**
  * Update the chords for Chord Diagram. Add event listeners, transition effects and many minor tweaks to Chord Diagram.
  * 
- * @param {Array.&lt;number[]>} matrix - The input data matrix of trips
+ * @param {Array.&lt;number[]>} matrix - The input data matrix of data
  */
 function updateChordDiagram(matrix) {
   // Remove empty svg generated by animation loop.
@@ -355,7 +424,7 @@ function updateChordDiagram(matrix) {
   // Create/update "group" elements
   const groupG = g.selectAll('g.group')
     .data(layout.groups(), d =>
-      d.index,
+      d.index
 
       // use a key function in case the
       // groups are sorted differently between updates
@@ -370,17 +439,17 @@ function updateChordDiagram(matrix) {
   const newGroups = groupG.enter().append('g')
     .attr('class', 'group');
 
-    // The enter selection is stored in a variable so we can
-    // Enter the &lt;path>, &lt;text>, and &lt;title> elements as well
+  // The enter selection is stored in a variable so we can
+  // Enter the &lt;path>, &lt;text>, and &lt;title> elements as well
 
-    // Create the title tooltip for the new groups
+  // Create the title tooltip for the new groups
   newGroups.append('title');
 
   // Update the (tooltip) title text based on the data
   groupG.select('title')
     .text((d, i) => `${numberWithCommas(d.value)
-    } trips started in ${
-      zones[i].name}`);
+      } trips started in ${
+      zones[i].ZoneName}`);
 
   // create the arc paths and set the constant attributes
   // (those based on the group index, not on the value)
@@ -403,21 +472,21 @@ function updateChordDiagram(matrix) {
     .attr('xlink:href', d => `#group${d.index}`)
     .attr('dy', '.35em')
     .attr('color', '#fff')
-    .text(d => zones[d.index].name);
+    .text(d => zones[d.index].ZoneName);
 
   // Position group labels to match layout
   groupG.select('text')
     .transition()
     .duration(800)
-    .text(d => zones[d.index].name)
+    .text(d => zones[d.index].ZoneName)
     .attr('transform', (d) => {
       d.angle = (d.startAngle + d.endAngle) / 2;
 
       // Store the midpoint angle in the data object
 
       return `rotate(${d.angle * 180 / Math.PI - 90})` +
-                ` translate(${innerRadius + 26})${
-                  d.angle > Math.PI ? ' rotate(180)' : ' rotate(0)'}`;
+        ` translate(${innerRadius + 26})${
+        d.angle > Math.PI ? ' rotate(180)' : ' rotate(0)'}`;
 
       // Include the rotate zero so that transforms can be interpolated
     })
@@ -434,23 +503,23 @@ function updateChordDiagram(matrix) {
 
   chordPaths.select('title')
     .text((d) => {
-      if (zones[d.target.index].name !== zones[d.source.index].name) {
+      if (zones[d.target.index].ZoneName !== zones[d.source.index].ZoneName) {
         return [numberWithCommas(d.source.value),
           ' trips from ',
-          zones[d.source.index].name,
+          zones[d.source.index].ZoneName,
           ' to ',
-          zones[d.target.index].name,
+          zones[d.target.index].ZoneName,
           '\n',
           numberWithCommas(d.target.value),
           ' trips from ',
-          zones[d.target.index].name,
+          zones[d.target.index].ZoneName,
           ' to ',
-          zones[d.source.index].name,
+          zones[d.source.index].ZoneName,
         ].join('');
       }
       return `${numberWithCommas(d.source.value)
-      } trips started and ended in ${
-        zones[d.source.index].name}`;
+        } trips started and ended in ${
+        zones[d.source.index].ZoneName}`;
     });
 
   chordPaths.exit().transition()
@@ -478,17 +547,17 @@ function updateChordDiagram(matrix) {
   });
 
   chordPaths.on('click', (d) => {
-    const pointData = getConnector(zones[d.source.index].id, zones[d.target.index].id);
-    if (zones[d.source.index].id != zones[d.target.index].id) {
+    const pointData = getConnector(zones[d.source.index].ZoneId, zones[d.target.index].ZoneId);
+    if (zones[d.source.index].ZoneId != zones[d.target.index].ZoneId) {
       /** 
-             * Connector dataset for AnyMap.
-             * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
-             * @type {anychart.data.Set} 
-             */
+       * Connector dataset for AnyMap.
+       * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
+       * @type {anychart.data.Set} 
+       */
       const connectorData = [{
         points: pointData,
-        from: zones[d.source.index].name,
-        to: zones[d.target.index].name,
+        from: zones[d.source.index].ZoneName,
+        to: zones[d.target.index].ZoneName,
       }];
       addConnectorSeries(connectorData);
       highlightPoint(zones[d.source.index]);
@@ -580,8 +649,7 @@ function chordTween(oldLayout) {
       return path(tween(t));
     };
   };
-}
-</pre>
+}</pre>
     </article>
 </section>
 
@@ -626,7 +694,7 @@ function chordTween(oldLayout) {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
 	
-		on Wed Aug 16th 2017
+		on Mon Aug 21st 2017
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

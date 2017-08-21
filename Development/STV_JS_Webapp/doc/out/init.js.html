@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Smart City Vis Source: init.js</title>
+	<title>Smart Taxi Vis Source: init.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,8 +20,8 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" target="_blank" href="../../index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
-		alt="logo"/>Smart City Vis</a>
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
+		alt="logo"/>Smart Taxi Vis</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -77,123 +77,6 @@
  * @module Initialiser
  */
 
-/**
- * Initialise a noUiSlider for zones and hours.
- * @see {@link https://refreshless.com/nouislider/}
- */
-function initSliders() {
-  noUiSlider.create(zoneSlider, {
-    tooltips: true,
-    format: wNumb({
-      decimals: 0,
-    }),
-    start: [1, zone2],
-    step: 1,
-    behaviour: 'drag-tap',
-    connect: true,
-    range: {
-      min: 1,
-      max: totalZoneNum,
-    },
-  });
-
-  zoneSlider.noUiSlider.on('change', (values) => {
-    zone1 = parseInt(values[0]);
-    zone2 = parseInt(values[1]);
-    toggleAnimation(true);
-    formatJSON();
-  });
-
-  noUiSlider.create(hourSlider, {
-    tooltips: true,
-    animate: true,
-    format: wNumb({
-      decimals: 0,
-    }),
-    start: time1,
-    step: 1,
-    range: {
-      min: [0],
-      max: [23],
-    },
-  });
-
-  hourSlider.noUiSlider.on('change', (values) => {
-    time1 = parseInt(values[0]);
-    animationSetData();
-    toggleAnimation(true);
-    formatJSON();
-  });
-}
-
-/**
- * Initialise global variables needed for the application.
- * 
- */
-function initGlobalVariables() {
-  // Some global variables needed.
-
-  /**
-     * Total number of taxizones.
-     * @type {number}
-     */
-  totalZoneNum = 263;
-
-  /**
-     * Starting index of taxizones selected.
-     * @type {number}
-     */
-  zone1 = 1;
-
-  /**
-     * Ending index of taxizones selected.
-     * @type {number}
-     */
-  zone2 = 20;
-
-  /**
-     * Starting index of hours selected.
-     * @type {number}
-     */
-  time1 = 9;
-
-  /**
-     * Starting index of hours selected.
-     * @type {number}
-     */
-  time2 = 15;
-
-  /**
-     * A noUiSlider for taxizones.
-     * @type {noUiSlider}
-     * @see {@link https://refreshless.com/nouislider/}
-     */
-  zoneSlider = document.getElementById('zoneSlider');
-
-  /**
-     * A noUiSlider for hours of the day.
-     * @type {noUiSlider}
-     * @see {@link https://refreshless.com/nouislider/}
-     */
-  hourSlider = document.getElementById('hourSlider');
-
-  // Some default values to play with, before the server returns actual data
-
-  zones = null;
-  trips = null;
-
-  /**
-     * The point that represents a taxizone, corresponding to the clicked path on Chord Diagram.
-     * @type {anychart.core.SeriesPoint}
-     * @see {@link https://api.anychart.com/7.14.3/anychart.core.SeriesPoint}
-     */
-  pointClickedViaPath = null;
-
-  lastLayout = null;
-
-  // chordLegendColor = [];
-}
-
 $(() => {
   initGlobalVariables();
   initChordDiagram();
@@ -203,8 +86,8 @@ $(() => {
   $('[data-toggle="popover"]').popover({
     trigger: 'manual',
   });
-  $('#hourSlider').popover('show');
-  $('#zoneSlider').popover('show');
+  $('#HOURSLIDER').popover('show');
+  $('#ZONESLIDER').popover('show');
 
   $('#btn_pause').click(() => {
     toggleAnimation(false);
@@ -215,15 +98,127 @@ $(() => {
     toggleAnimation(true);
   });
   chordAnimation();
-
-  // for (let i = 0; i &lt;= 8000; i++) {
-  //   $('&lt;span>&amp;#9608;&lt;/span>').css({
-  //     color: RainBowColor(i),
-  //   }).appendTo('#chordColorLegend');
-  // }
 });
 
-</pre>
+
+/**
+ * Initialise global variables needed for the application.
+ * 
+ */
+function initGlobalVariables() {
+  // Some global variables needed.
+
+  /**
+   * Total number of taxizones.
+   * @type {number}
+   */
+  TOTALZONENUM = 263;
+
+  /**
+   * Starting index of taxizones selected.
+   * @type {number}
+   */
+  ZONE1 = 1;
+
+  /**
+   * Ending index of taxizones selected.
+   * @type {number}
+   */
+  ZONE2 = 20;
+
+  /**
+   * Starting index of hours selected.
+   * @type {number}
+   */
+  TIME1 = 9;
+
+  $('#hour').html(TIME1);
+  /**
+   * Starting index of hours selected.
+   * @type {number}
+   */
+  TIME2 = 15;
+
+  /**
+   * A noUiSlider for taxizones.
+   * @type {noUiSlider}
+   * @see {@link https://refreshless.com/nouislider/}
+   */
+  ZONESLIDER = document.getElementById('zoneSlider');
+
+  /**
+   * A noUiSlider for hours of the day.
+   * @type {noUiSlider}
+   * @see {@link https://refreshless.com/nouislider/}
+   */
+  HOURSLIDER = document.getElementById('hourSlider');
+
+  // Some default values to play with, before the server returns actual data
+
+  zones = null;
+  trips = null;
+
+  /**
+   * The point that represents a taxizone, corresponding to the clicked path on Chord Diagram.
+   * @type {anychart.core.SeriesPoint}
+   * @see {@link https://api.anychart.com/7.14.3/anychart.core.SeriesPoint}
+   */
+  pointClickedViaPath = null;
+
+  lastLayout = null;
+
+  // chordLegendColor = [];
+}
+
+
+/**
+ * Initialise a noUiSlider for zones and hours.
+ * @see {@link https://refreshless.com/nouislider/}
+ */
+function initSliders() {
+  noUiSlider.create(ZONESLIDER, {
+    tooltips: true,
+    format: wNumb({
+      decimals: 0,
+    }),
+    start: [1, ZONE2],
+    step: 1,
+    behaviour: 'drag-tap',
+    connect: true,
+    range: {
+      min: 1,
+      max: TOTALZONENUM,
+    },
+  });
+
+  ZONESLIDER.noUiSlider.on('change', (values) => {
+    ZONE1 = parseInt(values[0]);
+    ZONE2 = parseInt(values[1]);
+    toggleAnimation(true);
+    formatJSON();
+  });
+
+  noUiSlider.create(HOURSLIDER, {
+    tooltips: true,
+    animate: true,
+    format: wNumb({
+      decimals: 0,
+    }),
+    start: TIME1,
+    step: 1,
+    range: {
+      min: [0],
+      max: [23],
+    },
+  });
+
+  HOURSLIDER.noUiSlider.on('change', (values) => {
+    TIME1 = parseInt(values[0]);
+    animationSetData();
+    toggleAnimation(true);
+    formatJSON();
+  });
+}</pre>
     </article>
 </section>
 
@@ -268,7 +263,7 @@ $(() => {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
 	
-		on Wed Aug 16th 2017
+		on Mon Aug 21st 2017
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

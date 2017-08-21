@@ -24,7 +24,7 @@
   "recurseDepth": 10,
   "source": {
     "include": ["../js/"],
-    "exclude": ["../js/lib/"],
+    "exclude": ["../js/lib/", "../js/data/"],
     "includePattern": ".+\\.js$"
   },
   "markdown": {
