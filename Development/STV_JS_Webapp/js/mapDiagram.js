@@ -41,7 +41,6 @@ function renderMap() {
     const dataLoop = anychart.data.set([val]);
     /** Map data attributes. 
      * @type {anychart.data.Mapping}
-     * @memberof Vis/MapView
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
     const loopSeries = dataLoop.mapAs(null, {
@@ -59,7 +58,6 @@ function renderMap() {
   /**
    * Create zoom controllers for the map.
    * @type {anychart.ui.Zoom}
-   * @memberof Vis/MapView
    * @see {@link https://api.anychart.com/7.14.3/anychart.ui#zoom}
    */
   const zoomController = anychart.ui.zoom();
@@ -110,7 +108,7 @@ function createDotSeries(name, data, color) {
     .format(function () {
       return `<span>${this.getData('name')}</span><br />` +
         `<span style="font-size: 12px; color: #E1E1E1">Trips: ${
-          parseInt(this.getData('size')).toLocaleString()}</span>`;
+        parseInt(this.getData('size')).toLocaleString()}</span>`;
     });
   /** Set styles for marker */
   series.selectionMode('none')

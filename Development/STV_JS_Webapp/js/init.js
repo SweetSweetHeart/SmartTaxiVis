@@ -6,15 +6,15 @@
 
 $(() => {
   initGlobalVariables();
+  initSliders();
   initChordDiagram();
   renderMap();
   formatJSON();
-  initSliders();
   $('[data-toggle="popover"]').popover({
     trigger: 'manual',
   });
-  $('#HOURSLIDER').popover('show');
-  $('#ZONESLIDER').popover('show');
+  $('#hourSlider').popover('show');
+  $('#zoneSlider').popover('show');
 
   $('#btn_pause').click(() => {
     toggleAnimation(false);
@@ -119,8 +119,8 @@ function initSliders() {
   });
 
   ZONESLIDER.noUiSlider.on('change', (values) => {
-    ZONE1 = parseInt(values[0]);
-    ZONE2 = parseInt(values[1]);
+    ZONE1 = parseInt(values[0]) - 1;
+    ZONE2 = parseInt(values[1]) - 1;
     toggleAnimation(true);
     formatJSON();
   });

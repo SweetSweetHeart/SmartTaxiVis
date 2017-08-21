@@ -12,6 +12,15 @@
  */
 function formatJSON() {
   data = $.extend(true, [], tripT[TIME1]);
+  TOTALZONENUM = data.length;
+
+
+  ZONESLIDER.noUiSlider.updateOptions({
+    range: {
+      'min': 1,
+      'max': data.length
+    }
+  });
 
   // data = $.extend(true, [], distanceT[TIME1]);
 
@@ -259,7 +268,7 @@ function generateChordColorLegend() {
 
 /**
  * Toggle the display of 'No Match' message, visulisations and controls.
- * 
+ * @deprecated since issue #16 d74a4be48342c7c2c3aa9d31c09b34b286f5d733
  * @param {boolean} toggle - If True: displays the message.
  */
 function toggleNoMatchMessage(toggle) {
@@ -282,8 +291,8 @@ function toggleNoMatchMessage(toggle) {
  * @returns {number[]|string[]} - The spliced array with the selected zones only.
  */
 function spliceMatrix(matrix) {
-  matrix.splice(0, ZONE1);
-  matrix.splice(ZONE2 - ZONE1 + 1, TOTALZONENUM - ZONE2);
+  matrix.splice(0, ZONE1 - 1);
+  matrix.splice(ZONE2 - ZONE1, TOTALZONENUM - 1 - ZONE2);
   return matrix;
 }
 
