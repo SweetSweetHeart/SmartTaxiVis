@@ -23,19 +23,33 @@ function formatJSON() {
   spliceSubTripMatrix(data);
 
   let dataCount = 0;
+  let maxCount = 0;
+  let minCount = 0;
 
   jQuery.each(data, (i, val) => {
-    dataCount += getDataCount(val);
+
+    var count = getDataCount(val);
+    dataCount += count;
+
+    if (count > maxCount)
+      maxCount = count;
+
+    if (count < minCount)
+      minCount = count;
   });
 
 
   // Assign colors to chords    
   jQuery.each(zones, (i, val) => {
-    val.color = generateRainBowColorMap(getDataCount(data[i]), dataCount);
+    val.color = generateRainBowColorMap(getDataCount(data[i]), maxCount, minCount);
     //console.log(getDataCount(data[i]), dataCount);
   });
 
+
   highlightColormap(lowerColor, higherColor);
+
+
+
 
   // generateChordColorLegend(); /** Not needed for the moment. */
   generateHistogram();
@@ -70,6 +84,12 @@ function formatJSON() {
 }
 
 
+/**
+ * Highlight the current range of colors used on the colormap legend.
+ * 
+ * @param {any} low - The starting color.
+ * @param {any} high - The ending color.
+ */
 function highlightColormap(low, high) {
 
   $('#chordColorLegend font').css({
@@ -169,23 +189,42 @@ function getDataCount(data) {
 }
 
 
+
+
+// function generateRainBowColorMap(trips, totalTrips, max, min) {
+//   if (trips / totalTrips) {
+
+//   }
+//   const i = Math.round(100 - Math.abs(1 - (trips * TOTALZONENUM / totalTrips * 2.8)));
+
+
+//   console.log(i);
+
+//   if (lowerColor > i)
+//     lowerColor = i;
+
+//   if (higherColor < i)
+//     higherColor = i;
+
+//   return `hsl(${i},83%,50%)`;
+// }
+
+
 var lowerColor = 100;
 var higherColor = 0;
 
 /**
- * Generate a rainbow color map based on the ratio of data count and the total data count.
+ * Generate a rainbow color map based on the ratio of data count and the min/max data count.
  * 
- * @param {number} trips  - Trip count of one zone as the dividend.
- * @param {number} totalTrips - Total data count of all zones as the divisor.
+ * @param {number} data  - Data count of one zone as the dividend.
+ * @param {number} max - Max data count in the selected dataset.
+ * @param {number} min - Min data count in the selected dataset.
  * @returns - A HSL color.
  */
-function generateRainBowColorMap(trips, totalTrips) {
-  if (trips / totalTrips) {
+function generateRainBowColorMap(data, max, min) {
+  var i = Math.abs(((data - min) / (max - min)) * 100 - 100);
 
-  }
-
-  const i = Math.round(100 - Math.abs(1 - (trips * TOTALZONENUM / totalTrips * 2.8)));
-  console.log(trips / totalTrips, i);
+  //var i = Math.abs(((max - data) / (max - min)) * 100);
 
   if (lowerColor > i)
     lowerColor = i;
@@ -195,20 +234,6 @@ function generateRainBowColorMap(trips, totalTrips) {
 
   return `hsl(${i},83%,50%)`;
 }
-
-
-// function generateRainBowColorMap(trips, totalTrips) {
-//   var i = trips / totalTrips * 50;
-
-//   console.log(trips, totalTrips, i);
-
-//   var r = Math.sin(0.1 * i + 0) * 127 + 128;
-//   var g = Math.sin(0.2 * i + 2) * 127 + 128;
-//   var b = Math.sin(0.3 * i + 4) * 127 + 128;
-
-
-//   return `rgb(${r},${g},${b})`;
-// }
 
 /**
  * Generate a legend for Chord Diagram based on the color map used.
