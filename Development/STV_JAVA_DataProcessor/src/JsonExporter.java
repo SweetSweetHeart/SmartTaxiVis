@@ -21,24 +21,50 @@ public class JsonExporter {
     //private final int HOUR1 = 0;
     private final int HOUR2 = 24;
     private final int TIMEOUT = 10000;
-    Connection con;
-    Statement stmt;
-    ResultSet rs;
-    ArrayList<ArrayList<TaxiZone>> resultList = new ArrayList<>();
-    private String PROCEDURE;
+
+
+    private String procedure;
+    private String result = "";
+
+
+    private Connection con;
+    private Statement stmt;
+    private ResultSet rs;
+    private ArrayList<ArrayList<TaxiZone>> zoneResultList = new ArrayList<>();
+    private ArrayList<ArrayList<float[]>> matrixResultList = new ArrayList<>();
+
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
-        JsonExporter main = new JsonExporter();
-        main.openConnection();
-        main.setStatement();
-        main.getHourlyData();
-        main.writeJsonFile();
-        main.closeConnection();
-        long estimatedTime = System.currentTimeMillis() - startTime;
-        System.out.println("Time taken: " + estimatedTime  + "ms");
+        JsonExporter exporter = new JsonExporter();
+        exporter.openConnection();
+        exporter.setStatement();
+
+        exporter.getZoneData();
+        long zone = System.currentTimeMillis() - startTime;
+        System.out.println("getZoneData() finished in: " + zone + "ms");
+
+        exporter.getTripMatrix();
+        long trip = System.currentTimeMillis() - startTime;
+        System.out.println("getTripMatrix() finished in: " + trip + "ms");
+
+        exporter.getPriceMatrix();
+        long price = System.currentTimeMillis() - startTime;
+        System.out.println("getPriceMatrix() finished in: " + price + "ms");
+
+        exporter.getDistanceMatrix();
+        long distance = System.currentTimeMillis() - startTime;
+        System.out.println("getDistanceMatrix() finished in: " + distance + "ms");
+
+        exporter.writeJsonFile(exporter.getResult());
+        exporter.closeConnection();
+        long totalTime = System.currentTimeMillis() - startTime;
+        System.out.println("Total time taken: " + totalTime + "ms");
     }
 
+    public String getResult() {
+        return result;
+    }
 
     public boolean openConnection() {
         try {
@@ -77,9 +103,9 @@ public class JsonExporter {
         return stmt;
     }
 
-    public boolean setResultSet() {
+    public boolean setResultSet(String SQL) {
         try {
-            rs = getStatement().executeQuery("call getTotalCounts(" + PROCEDURE + ")");
+            rs = getStatement().executeQuery(SQL);
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -92,17 +118,65 @@ public class JsonExporter {
     }
 
 
-    public void getHourlyData() {
+    public void getZoneData() {
 
         for (int i = 0; i < HOUR2; i++) {
-            PROCEDURE = TOTALZONE + "," + i + "," + (i + 1);
-            setResultSet();
-            convertToJSON();
+            procedure = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call getTotalCounts(" + procedure + ")");
+            convertZoneToList();
         }
 
+        Gson gson = new Gson();
+        result += "var zoneT = " + gson.toJson(zoneResultList) + ";\n";
     }
 
-    public void convertToJSON() {
+    public void getTripMatrix() {
+
+        for (int i = 0; i < HOUR2; i++) {
+            procedure = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call first_cursor_PU_time(" + procedure + ")");
+            convertMatrixToList();
+
+            System.out.println("getTripMatrix() " + (i + 1) + "th loop");
+        }
+
+        Gson gson = new Gson();
+        result += "var tripT = " + gson.toJson(matrixResultList) + ";\n";
+        matrixResultList.clear();
+    }
+
+    public void getPriceMatrix() {
+
+        for (int i = 0; i < HOUR2; i++) {
+            procedure = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call first_cursor_Price_time(" + procedure + ")");
+            
+            convertMatrixToList();
+
+            System.out.println("getDistanceMatrix() " + (i + 1) + "th loop");
+        }
+
+        Gson gson = new Gson();
+        result += "var priceT = " + gson.toJson(matrixResultList) + ";\n";
+        matrixResultList.clear();
+    }
+
+    public void getDistanceMatrix() {
+
+        for (int i = 0; i < HOUR2; i++) {
+            procedure = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call first_cursor_Distance_time(" + procedure + ")");
+            convertMatrixToList();
+
+            System.out.println("getDistanceMatrix() " + (i + 1) + "th loop");
+        }
+
+        Gson gson = new Gson();
+        result += "var distanceT = " + gson.toJson(matrixResultList) + ";\n";
+        matrixResultList.clear();
+    }
+
+    public void convertZoneToList() {
         ArrayList<TaxiZone> zoneList = new ArrayList<>();
 
         try {
@@ -120,20 +194,34 @@ public class JsonExporter {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            resultList.add(zoneList);
+            zoneResultList.add(zoneList);
         }
     }
 
-    public void writeJsonFile() {
-        Gson gson = new Gson();
-        String result = "var zoneT = " + gson.toJson(resultList) + ";";
+    public void convertMatrixToList() {
         try {
-            FileOutputStream fs = new FileOutputStream("data.js");
-            PrintStream out = new PrintStream(fs);
-            out.print(result);
+            ArrayList<float[]> eachZone = new ArrayList<>();
+            while (getResultSet().next()) {
+                String[] data = rs.getString(2).split(",");
+                float[] dataInt = new float[data.length];
+                for (int i = 0; i < data.length; i++) {
+                    dataInt[i] = Float.parseFloat(data[i]);
+                }
+                eachZone.add(dataInt);
+            }
+            matrixResultList.add(eachZone);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
+    public void writeJsonFile(String input) {
+        try {
+            FileOutputStream fs = new FileOutputStream("data.js");
+            PrintStream out = new PrintStream(fs);
+            out.print(input);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
