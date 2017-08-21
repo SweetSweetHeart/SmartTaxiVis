@@ -13,7 +13,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class JsonExporter {
-    private final String URL = "jdbc:mysql://45.76.131.144:3306/TaxiData";
+//    private final String URL = "jdbc:mysql://45.76.131.144:3306/TaxiData";
+// ssh -L 3306:45.76.131.144:3306 rss
+    private final String URL = "jdbc:mysql://localhost:3306/TaxiData";
     private final String USERNAME = "taxi";
     private final String PASSWORD = "taxidb";
 
@@ -41,20 +43,12 @@ public class JsonExporter {
         exporter.setStatement();
 
         exporter.getZoneData();
-        long zone = System.currentTimeMillis() - startTime;
-        System.out.println("getZoneData() finished in: " + zone + "ms");
 
         exporter.getTripMatrix();
-        long trip = System.currentTimeMillis() - zone;
-        System.out.println("getTripMatrix() finished in: " + trip + "ms");
 
         exporter.getPriceMatrix();
-        long price = System.currentTimeMillis() - trip;
-        System.out.println("getPriceMatrix() finished in: " + price + "ms");
 
         exporter.getDistanceMatrix();
-        long distance = System.currentTimeMillis() - price;
-        System.out.println("getDistanceMatrix() finished in: " + distance + "ms");
 
         exporter.writeJsonFile(exporter.getResult());
         exporter.closeConnection();
@@ -153,7 +147,7 @@ public class JsonExporter {
 
             convertMatrixToList();
 
-            System.out.println("getDistanceMatrix() " + (i + 1) + "th loop");
+            System.out.println("getPriceMatrix() " + (i + 1) + "th loop");
         }
 
         Gson gson = new Gson();
