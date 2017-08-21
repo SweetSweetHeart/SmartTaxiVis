@@ -41,6 +41,7 @@ function renderMap() {
     const dataLoop = anychart.data.set([val]);
     /** Map data attributes. 
      * @type {anychart.data.Mapping}
+     * @memberof Vis/MapView
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
     const loopSeries = dataLoop.mapAs(null, {
