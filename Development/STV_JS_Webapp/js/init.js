@@ -59,6 +59,7 @@ function initGlobalVariables() {
    */
   TIME1 = 9;
 
+  $('#hour').html(TIME1);
   /**
    * Starting index of hours selected.
    * @type {number}

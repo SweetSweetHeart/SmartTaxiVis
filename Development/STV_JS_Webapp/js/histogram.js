@@ -6,7 +6,7 @@
  */
 
 
- /**
+/**
  * Start generating histogram.
  * 
  */
@@ -27,17 +27,17 @@ function generateHistogram() {
 function generateHistogramDataHour() {
   const histogramData = [];
   for (let i = 0; i < tripT.length; i++) {
-    const trips = $.extend(true, [], tripT[i]);
-    spliceMatrix(trips);
-    spliceSubTripMatrix(trips);
-    var tripCount = 0;
-    jQuery.each(trips, (i, val) => {
-      tripCount += getDataCount(val);
+    const data = $.extend(true, [], tripT[i]);
+    spliceMatrix(data);
+    spliceSubTripMatrix(data);
+    var dataCount = 0;
+    jQuery.each(data, (i, val) => {
+      dataCount += getDataCount(val);
     });
     if (i === TIME1) {
-      histogramData.push([i.toString(), tripCount, '#e74c3c']);
+      histogramData.push([i.toString(), dataCount, '#e74c3c']);
     } else {
-      histogramData.push([i.toString(), tripCount]);
+      histogramData.push([i.toString(), dataCount]);
     }
   }
   renderHistogram(histogramData, 'hour');
@@ -49,9 +49,9 @@ function generateHistogramDataHour() {
  */
 function generateHistogramDataZone() {
   const histogramData = [];
-  const trips = $.extend(true, [], zoneT[TIME1]);
-  spliceMatrix(trips);
-  jQuery.each(trips, (i, val) => {
+  const data = $.extend(true, [], zoneT[TIME1]);
+  spliceMatrix(data);
+  jQuery.each(data, (i, val) => {
     histogramData.push([val.ZoneName, val.PickUpCount]);
   });
   renderHistogram(histogramData, 'zone');

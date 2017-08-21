@@ -12,20 +12,27 @@
  */
 function formatJSON() {
   data = $.extend(true, [], tripT[TIME1]);
+
+  // data = $.extend(true, [], distanceT[TIME1]);
+
+  // data = $.extend(true, [], priceT[TIME1]);
+
   zones = $.extend(true, [], zoneT[TIME1]);
   spliceMatrix(zones);
   spliceMatrix(data);
   spliceSubTripMatrix(data);
 
-  let tripCount = 0;
+  let dataCount = 0;
 
   jQuery.each(data, (i, val) => {
-    tripCount += getDataCount(val);
+    dataCount += getDataCount(val);
   });
 
-  // Assign random colors to chords    
+
+  // Assign colors to chords    
   jQuery.each(zones, (i, val) => {
-    val.color = generateRainBowColorMap(val.PickUpCount, tripCount);
+    val.color = generateRainBowColorMap(getDataCount(data[i]), dataCount);
+    //console.log(getDataCount(data[i]), dataCount);
   });
 
   highlightColormap(lowerColor, higherColor);
@@ -33,7 +40,7 @@ function formatJSON() {
   // generateChordColorLegend(); /** Not needed for the moment. */
   generateHistogram();
 
-  $('#tripCount').html(tripCount);
+  $('#dataCount').html(dataCount);
 
   /** 
    * Dataset for AnyMap. 
@@ -43,7 +50,7 @@ function formatJSON() {
   const dataSet = anychart.data.set(zones);
   connectorData = null;
 
-  if (tripCount > 0) {
+  if (dataCount > 0) {
     toggleNoMatchMessage(false);
     renderMap();
     updateChordDiagram(data);
@@ -175,7 +182,8 @@ var higherColor = 0;
  * @returns - A HSL color.
  */
 function generateRainBowColorMap(trips, totalTrips) {
-  const i = Math.round(100 - Math.abs(1 - (trips * TOTALZONENUM / 3000)));
+  const i = Math.round(100 - Math.abs(1 - (trips * TOTALZONENUM / totalTrips * 2.8)));
+  //console.log(i);
 
   if (lowerColor > i)
     lowerColor = i;
@@ -341,7 +349,7 @@ function updateChordDiagram(matrix) {
   // Create/update "group" elements
   const groupG = g.selectAll('g.group')
     .data(layout.groups(), d =>
-      d.index,
+      d.index
 
       // use a key function in case the
       // groups are sorted differently between updates
