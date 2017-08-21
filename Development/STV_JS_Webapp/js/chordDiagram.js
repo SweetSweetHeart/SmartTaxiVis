@@ -5,6 +5,89 @@
  * @requires Initialiser
  */
 
+
+/**
+ * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
+ * Also update the visibility of some HTML elements.
+ */
+function formatJSON() {
+  data = $.extend(true, [], tripT[TIME1]);
+  zones = $.extend(true, [], zoneT[TIME1]);
+  spliceMatrix(zones);
+  spliceMatrix(data);
+  spliceSubTripMatrix(data);
+
+  let tripCount = 0;
+
+  jQuery.each(data, (i, val) => {
+    tripCount += getDataCount(val);
+  });
+
+  // Assign random colors to chords    
+  jQuery.each(zones, (i, val) => {
+    val.color = generateRainBowColorMap(val.PickUpCount, tripCount);
+  });
+
+  highlightColormap(lowerColor, higherColor);
+
+  // generateChordColorLegend(); /** Not needed for the moment. */
+  generateHistogram();
+
+  $('#tripCount').html(tripCount);
+
+  /** 
+   * Dataset for AnyMap. 
+   * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
+   * @type {anychart.data.Set} 
+   */
+  const dataSet = anychart.data.set(zones);
+  connectorData = null;
+
+  if (tripCount > 0) {
+    toggleNoMatchMessage(false);
+    renderMap();
+    updateChordDiagram(data);
+  } else {
+    toggleNoMatchMessage(true);
+  }
+
+
+
+
+  // var colorHTML = "";
+  // for (var index = 0; index < 100; index += 3) {
+  //   colorHTML += '<font id="color' + index + '" style="color:hsl(' + index + ',90%,53%)">█</font>';
+
+  // }
+  // console.log(colorHTML);
+}
+
+
+function highlightColormap(low, high) {
+
+  $('#chordColorLegend font').css({
+    "border-style": "none",
+    "border-width": "7px"
+  });
+
+  $('#color' + Math.ceil(low / 3) * 3).css({
+    "border-style": "solid none solid solid"
+  });
+
+  $('#color' + Math.ceil(high / 3) * 3).css({
+    "border-style": "solid solid solid none"
+  });
+
+  for (var index = (Math.ceil(low / 3) + 1) * 3; index < Math.ceil(high / 3) * 3; index += 3) {
+    $('#color' + index).css({
+      "border-style": "solid none solid none"
+    });
+  }
+
+  lowerColor = 100;
+  higherColor = 0;
+}
+
 /**
  * Start the animation for Chord Diagram.
  * 
@@ -13,9 +96,9 @@ function chordAnimation() {
   isPaused = false;
   interval = setInterval(() => {
     if (!isPaused) {
-      time1++;
-      if (time1 > 23) {
-        time1 = 0;
+      TIME1++;
+      if (TIME1 > 23) {
+        TIME1 = 0;
       }
       animationSetData();
     }
@@ -28,10 +111,10 @@ function chordAnimation() {
  * 
  */
 function animationSetData() {
-  // zoneMatrix = zoneT[time1];
-  // tripMatrix = tripT[time1];
-  hourSlider.noUiSlider.set(time1);
-  $('#hour').html(time1);
+  // zoneMatrix = zoneT[TIME1];
+  // tripMatrix = tripT[TIME1];
+  hourSlider.noUiSlider.set(TIME1);
+  $('#hour').html(TIME1);
   formatJSON();
 }
 
@@ -72,7 +155,7 @@ function getDefaultLayout() {
  * @param {string} data - The input trip count data in JSON.
  * @returns {number} - The total trip count.
  */
-function getTripCount(data) {
+function getDataCount(data) {
   let result = 0;
   jQuery.each(data, (i, val) => {
     result += parseInt(val);
@@ -80,6 +163,9 @@ function getTripCount(data) {
   return result;
 }
 
+
+var lowerColor = 100;
+var higherColor = 0;
 
 /**
  * Generate a rainbow color map based on the ratio of trips and the total trip count.
@@ -89,11 +175,30 @@ function getTripCount(data) {
  * @returns - A HSL color.
  */
 function generateRainBowColorMap(trips, totalTrips) {
-  const i = Math.round(100 - Math.abs(1 - (trips * totalZoneNum / 3000)));
-  // chordLegendColor.push(i);
+  const i = Math.round(100 - Math.abs(1 - (trips * TOTALZONENUM / 3000)));
+
+  if (lowerColor > i)
+    lowerColor = i;
+
+  if (higherColor < i)
+    higherColor = i;
+
   return `hsl(${i},83%,50%)`;
 }
 
+
+// function generateRainBowColorMap(trips, totalTrips) {
+//   var i = trips / totalTrips * 50;
+
+//   console.log(trips, totalTrips, i);
+
+//   var r = Math.sin(0.1 * i + 0) * 127 + 128;
+//   var g = Math.sin(0.2 * i + 2) * 127 + 128;
+//   var b = Math.sin(0.3 * i + 4) * 127 + 128;
+
+
+//   return `rgb(${r},${g},${b})`;
+// }
 
 /**
  * Generate a legend for Chord Diagram based on the color map used.
@@ -108,56 +213,12 @@ function generateChordColorLegend() {
   let last;
   jQuery.each(chordLegendColor, (i, val) => {
     if ((last == null) || (last != null && val > (last + 1))) {
-      $('#chordColorLegend').append(`<font style=color:hsl(${val},80%,53%)>█</font>`);
+      $('#chordColorLegend').append(`<font style=color:hsl(${val},90%,53%)>█</font>`);
     }
     last = val;
   });
   $('#chordColorLegend').append(' Min');
   chordLegendColor = [];
-}
-
-/**
- * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
- * Also update the visibility of some HTML elements.
- */
-function formatJSON() {
-  trips = $.extend(true, [], tripT[time1]);
-  zones = $.extend(true, [], zoneT[time1]);
-  spliceMatrix(zones);
-  spliceMatrix(trips);
-  spliceSubTripMatrix(trips);
-
-  let tripCount = 0;
-
-  jQuery.each(trips, (i, val) => {
-    tripCount += getTripCount(val);
-  });
-
-  // Assign random colors to chords    
-  jQuery.each(zones, (i, val) => {
-    val.color = generateRainBowColorMap(val.PickUpCount, tripCount);
-  });
-
-  // generateChordColorLegend(); /** Not needed for the moment. */
-  generateHistogram();
-
-  $('#tripCount').html(tripCount);
-
-  /** 
-     * Dataset for AnyMap. 
-     * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
-     * @type {anychart.data.Set} 
-     */
-  const dataSet = anychart.data.set(zones);
-  connectorData = null;
-
-  if (tripCount > 0) {
-    toggleNoMatchMessage(false);
-    renderMap();
-    updateChordDiagram(trips);
-  } else {
-    toggleNoMatchMessage(true);
-  }
 }
 
 
@@ -186,8 +247,8 @@ function toggleNoMatchMessage(toggle) {
  * @returns {number[]|string[]} - The spliced array with the selected zones only.
  */
 function spliceMatrix(matrix) {
-  matrix.splice(0, zone1);
-  matrix.splice(zone2 - zone1 + 1, totalZoneNum - zone2);
+  matrix.splice(0, ZONE1);
+  matrix.splice(ZONE2 - ZONE1 + 1, TOTALZONENUM - ZONE2);
   return matrix;
 }
 
@@ -295,16 +356,16 @@ function updateChordDiagram(matrix) {
   const newGroups = groupG.enter().append('g')
     .attr('class', 'group');
 
-    // The enter selection is stored in a variable so we can
-    // Enter the <path>, <text>, and <title> elements as well
+  // The enter selection is stored in a variable so we can
+  // Enter the <path>, <text>, and <title> elements as well
 
-    // Create the title tooltip for the new groups
+  // Create the title tooltip for the new groups
   newGroups.append('title');
 
   // Update the (tooltip) title text based on the data
   groupG.select('title')
     .text((d, i) => `${numberWithCommas(d.value)
-    } trips started in ${
+      } trips started in ${
       zones[i].ZoneName}`);
 
   // create the arc paths and set the constant attributes
@@ -341,8 +402,8 @@ function updateChordDiagram(matrix) {
       // Store the midpoint angle in the data object
 
       return `rotate(${d.angle * 180 / Math.PI - 90})` +
-                ` translate(${innerRadius + 26})${
-                  d.angle > Math.PI ? ' rotate(180)' : ' rotate(0)'}`;
+        ` translate(${innerRadius + 26})${
+        d.angle > Math.PI ? ' rotate(180)' : ' rotate(0)'}`;
 
       // Include the rotate zero so that transforms can be interpolated
     })
@@ -374,7 +435,7 @@ function updateChordDiagram(matrix) {
         ].join('');
       }
       return `${numberWithCommas(d.source.value)
-      } trips started and ended in ${
+        } trips started and ended in ${
         zones[d.source.index].ZoneName}`;
     });
 
@@ -406,10 +467,10 @@ function updateChordDiagram(matrix) {
     const pointData = getConnector(zones[d.source.index].ZoneId, zones[d.target.index].ZoneId);
     if (zones[d.source.index].ZoneId != zones[d.target.index].ZoneId) {
       /** 
-             * Connector dataset for AnyMap.
-             * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
-             * @type {anychart.data.Set} 
-             */
+       * Connector dataset for AnyMap.
+       * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
+       * @type {anychart.data.Set} 
+       */
       const connectorData = [{
         points: pointData,
         from: zones[d.source.index].ZoneName,

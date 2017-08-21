@@ -5,6 +5,21 @@
  * @requires Initialiser
  */
 
+
+ /**
+ * Start generating histogram.
+ * 
+ */
+function generateHistogram() {
+  if ($('#histogramZone').is(':checked')) {
+    generateHistogramDataZone();
+  }
+  if ($('#histogramHour').is(':checked')) {
+    generateHistogramDataHour();
+  }
+}
+
+
 /**
  * Generate data for Hour Histogram.
  * 
@@ -17,9 +32,9 @@ function generateHistogramDataHour() {
     spliceSubTripMatrix(trips);
     var tripCount = 0;
     jQuery.each(trips, (i, val) => {
-      tripCount += getTripCount(val);
+      tripCount += getDataCount(val);
     });
-    if (i === time1) {
+    if (i === TIME1) {
       histogramData.push([i.toString(), tripCount, '#e74c3c']);
     } else {
       histogramData.push([i.toString(), tripCount]);
@@ -34,7 +49,7 @@ function generateHistogramDataHour() {
  */
 function generateHistogramDataZone() {
   const histogramData = [];
-  const trips = $.extend(true, [], zoneT[time1]);
+  const trips = $.extend(true, [], zoneT[TIME1]);
   spliceMatrix(trips);
   jQuery.each(trips, (i, val) => {
     histogramData.push([val.ZoneName, val.PickUpCount]);
@@ -82,7 +97,7 @@ function renderHistogram(input, type) {
   if (type === 'hour') {
     var xAxis = histogramChart.xAxis().title('Hour');
     histogramChart.listen('pointClick', (e) => {
-      time1 = e.pointIndex;
+      TIME1 = e.pointIndex;
       animationSetData();
       toggleAnimation(true);
     });
@@ -98,17 +113,4 @@ function renderHistogram(input, type) {
   histogramChart.contextMenu(false);
   histogramChart.barGroupsPadding(0);
   histogramChart.container('histogram').draw();
-}
-
-/**
- * Start generating histogram.
- * 
- */
-function generateHistogram() {
-  if ($('#histogramZone').is(':checked')) {
-    generateHistogramDataZone();
-  }
-  if ($('#histogramHour').is(':checked')) {
-    generateHistogramDataHour();
-  }
 }
