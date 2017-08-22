@@ -10,10 +10,10 @@
  * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
  * Also update the visibility of some HTML elements.
  */
-function formatJSON() {
+function formatJSON(type) {
+  console.log(type);
   data = $.extend(true, [], tripT[TIME1]);
   TOTALZONENUM = data.length;
-
 
   ZONESLIDER.noUiSlider.updateOptions({
     range: {
@@ -51,14 +51,7 @@ function formatJSON() {
   // Assign colors to chords    
   jQuery.each(zones, (i, val) => {
     val.color = generateRainBowColorMap(getDataCount(data[i]), maxCount, minCount);
-    //console.log(getDataCount(data[i]), dataCount);
   });
-
-
-  highlightColormap(lowerColor, higherColor);
-
-
-
 
   // generateChordColorLegend(); /** Not needed for the moment. */
   generateHistogram();
@@ -81,15 +74,7 @@ function formatJSON() {
     toggleNoMatchMessage(true);
   }
 
-
-
-
-  // var colorHTML = "";
-  // for (var index = 0; index < 100; index += 3) {
-  //   colorHTML += '<font id="color' + index + '" style="color:hsl(' + index + ',90%,53%)">█</font>';
-
-  // }
-  // console.log(colorHTML);
+  highlightColormap(lowerColor, higherColor);
 }
 
 
@@ -100,6 +85,7 @@ function formatJSON() {
  * @param {any} high - The ending color.
  */
 function highlightColormap(low, high) {
+
 
   $('#chordColorLegend font').css({
     "border-style": "none",
@@ -115,6 +101,7 @@ function highlightColormap(low, high) {
   });
 
   for (var index = (Math.ceil(low / 3) + 1) * 3; index < Math.ceil(high / 3) * 3; index += 3) {
+
     $('#color' + index).css({
       "border-style": "solid none solid none"
     });
@@ -199,26 +186,6 @@ function getDataCount(data) {
 
 
 
-
-// function generateRainBowColorMap(trips, totalTrips, max, min) {
-//   if (trips / totalTrips) {
-
-//   }
-//   const i = Math.round(100 - Math.abs(1 - (trips * TOTALZONENUM / totalTrips * 2.8)));
-
-
-//   console.log(i);
-
-//   if (lowerColor > i)
-//     lowerColor = i;
-
-//   if (higherColor < i)
-//     higherColor = i;
-
-//   return `hsl(${i},83%,50%)`;
-// }
-
-
 var lowerColor = 100;
 var higherColor = 0;
 
@@ -232,8 +199,6 @@ var higherColor = 0;
  */
 function generateRainBowColorMap(data, max, min) {
   var i = Math.abs(((data - min) / (max - min)) * 100 - 100);
-
-  //var i = Math.abs(((max - data) / (max - min)) * 100);
 
   if (lowerColor > i)
     lowerColor = i;
@@ -291,8 +256,8 @@ function toggleNoMatchMessage(toggle) {
  * @returns {number[]|string[]} - The spliced array with the selected zones only.
  */
 function spliceMatrix(matrix) {
-  matrix.splice(0, ZONE1 - 1);
-  matrix.splice(ZONE2 - ZONE1, TOTALZONENUM - 1 - ZONE2);
+  matrix.splice(0, ZONE1);
+  matrix.splice(ZONE2 - ZONE1, TOTALZONENUM - ZONE2);
   return matrix;
 }
 

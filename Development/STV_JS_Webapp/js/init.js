@@ -24,6 +24,12 @@ $(() => {
     generateHistogram();
     toggleAnimation(true);
   });
+
+  $('#chordTrip, #chordPrice,#chordDistance').change(() => {
+    formatJSON($(this).val());
+    toggleAnimation(true);
+  });
+
   chordAnimation();
 });
 
@@ -120,7 +126,7 @@ function initSliders() {
 
   ZONESLIDER.noUiSlider.on('change', (values) => {
     ZONE1 = parseInt(values[0]) - 1;
-    ZONE2 = parseInt(values[1]) - 1;
+    ZONE2 = parseInt(values[1]);
     toggleAnimation(true);
     formatJSON();
   });
