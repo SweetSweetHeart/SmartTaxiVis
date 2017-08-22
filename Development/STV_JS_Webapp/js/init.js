@@ -26,7 +26,7 @@ $(() => {
   });
 
   $('#chordTrip, #chordPrice,#chordDistance').change(() => {
-    formatJSON($(this).val());
+    formatJSON();
     toggleAnimation(true);
   });
 
@@ -90,6 +90,9 @@ function initGlobalVariables() {
 
   zones = null;
   trips = null;
+
+  lowerColor = 100;
+  higherColor = 0;
 
   /**
    * The point that represents a taxizone, corresponding to the clicked path on Chord Diagram.

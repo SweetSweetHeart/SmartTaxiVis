@@ -32,7 +32,7 @@ function generateHistogramDataHour() {
     spliceSubTripMatrix(data);
     var dataCount = 0;
     jQuery.each(data, (i, val) => {
-      dataCount += getDataCount(val);
+      dataCount += getIndividualDataCount(val);
     });
     if (i === TIME1) {
       histogramData.push([i.toString(), dataCount, '#e74c3c']);

@@ -10,8 +10,7 @@
  * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
  * Also update the visibility of some HTML elements.
  */
-function formatJSON(type) {
-  console.log(type);
+function formatJSON() {
   data = $.extend(true, [], tripT[TIME1]);
   TOTALZONENUM = data.length;
 
@@ -31,32 +30,13 @@ function formatJSON(type) {
   spliceMatrix(data);
   spliceSubTripMatrix(data);
 
-  let dataCount = 0;
-  let maxCount = 0;
-  let minCount = 0;
+  var counts = getTotalDataCount(data);
 
-  jQuery.each(data, (i, val) => {
-
-    var count = getDataCount(val);
-    dataCount += count;
-
-    if (count > maxCount)
-      maxCount = count;
-
-    if (count < minCount)
-      minCount = count;
-  });
-
-
-  // Assign colors to chords    
-  jQuery.each(zones, (i, val) => {
-    val.color = generateRainBowColorMap(getDataCount(data[i]), maxCount, minCount);
-  });
-
-  // generateChordColorLegend(); /** Not needed for the moment. */
+  generateColorForZone(zones, counts[1], counts[2]);
   generateHistogram();
 
-  $('#dataCount').html(dataCount);
+  $('#dataCount').html(counts[0]);
+
 
   /** 
    * Dataset for AnyMap. 
@@ -66,7 +46,7 @@ function formatJSON(type) {
   const dataSet = anychart.data.set(zones);
   connectorData = null;
 
-  if (dataCount > 0) {
+  if (counts[0] > 0) {
     toggleNoMatchMessage(false);
     renderMap();
     updateChordDiagram(data);
@@ -77,16 +57,39 @@ function formatJSON(type) {
   highlightColormap(lowerColor, higherColor);
 }
 
+/**
+ * Iterate the input matrix and sum up all count. Also calcualte the largest and the smallest values in the input data.
+ * 
+ * @param {Array.<number[]} data - A matrix that contains the input data
+ * @returns {number[]} - An array with total data count, the largest and the smallest values in the input data.
+ */
+function getTotalDataCount(data) {
+  let dataCount = 0;
+  let maxCount = 0;
+  let minCount = 0;
+
+  jQuery.each(data, (i, val) => {
+    var count = getIndividualDataCount(val);
+    dataCount += count;
+
+    if (count > maxCount)
+      maxCount = count;
+
+    if (count < minCount)
+      minCount = count;
+  });
+
+  return [dataCount, maxCount, minCount];
+}
+
 
 /**
- * Highlight the current range of colors used on the colormap legend.
+ * Highlight the current range of colors used on the colormap legend. Also reset global variables: lowerColor and higherColor.
  * 
- * @param {any} low - The starting color.
- * @param {any} high - The ending color.
+ * @param {number} low - The hue of the color for the largest data value.
+ * @param {number} high - The hud of the color for the smallest data value.
  */
 function highlightColormap(low, high) {
-
-
   $('#chordColorLegend font').css({
     "border-style": "none",
     "border-width": "7px"
@@ -101,12 +104,10 @@ function highlightColormap(low, high) {
   });
 
   for (var index = (Math.ceil(low / 3) + 1) * 3; index < Math.ceil(high / 3) * 3; index += 3) {
-
     $('#color' + index).css({
       "border-style": "solid none solid none"
     });
   }
-
   lowerColor = 100;
   higherColor = 0;
 }
@@ -174,20 +175,30 @@ function getDefaultLayout() {
  * Calculate the given data count.
  * 
  * @param {string} data - The input data count data in JSON.
- * @returns {number} - The total data count.
+ * @returns {number[]} - The total data count.
  */
-function getDataCount(data) {
-  let result = 0;
+function getIndividualDataCount(data) {
+  let count = 0;
   jQuery.each(data, (i, val) => {
-    result += parseInt(val);
+    count += parseInt(val);
   });
-  return result;
+  return count;
 }
 
 
+/**
+ * Based on the largest and the smallest data count for all zones, generate a set of colors for zones on the Chord Diagram.
+ * 
+ * @param {string[]} zones - A matrix that contains input taxi zones.
+ * @param {number} maxCount - The largest data count for all zones.
+ * @param {number} minCount - The smallest data count for all zones.
+ */
+function generateColorForZone(zones, maxCount, minCount) {
+  jQuery.each(zones, (i, val) => {
+    val.color = generateRainBowColorMap(getIndividualDataCount(data[i]), maxCount, minCount);
+  });
+}
 
-var lowerColor = 100;
-var higherColor = 0;
 
 /**
  * Generate a rainbow color map based on the ratio of data count and the min/max data count.
@@ -197,8 +208,8 @@ var higherColor = 0;
  * @param {number} min - Min data count in the selected dataset.
  * @returns - A HSL color.
  */
-function generateRainBowColorMap(data, max, min) {
-  var i = Math.abs(((data - min) / (max - min)) * 100 - 100);
+function generateRainBowColorMap(data, maxCount, minCount) {
+  var i = Math.abs(((data - minCount) / (maxCount - minCount)) * 100 - 100);
 
   if (lowerColor > i)
     lowerColor = i;
@@ -211,7 +222,7 @@ function generateRainBowColorMap(data, max, min) {
 
 /**
  * Generate a legend for Chord Diagram based on the color map used.
- * 
+ * @deprecated since issue #14 a4bc2a77a1b55f763afce4f62999cd662241bc59
  */
 function generateChordColorLegend() {
   $('#chordColorLegend').empty();
@@ -233,7 +244,7 @@ function generateChordColorLegend() {
 
 /**
  * Toggle the display of 'No Match' message, visulisations and controls.
- * @deprecated since issue #16 d74a4be48342c7c2c3aa9d31c09b34b286f5d733
+ * @deprecated since issue #13 7f60f8bf5540f2fac2b1e26e1fa347f793d74a98
  * @param {boolean} toggle - If True: displays the message.
  */
 function toggleNoMatchMessage(toggle) {
@@ -252,7 +263,7 @@ function toggleNoMatchMessage(toggle) {
 /**
  * Splice the input array based on the zones selected.
  * 
- * @param {number[]|string[]} matrix - The input array with all zones.
+ * @param {number[]|string[]} matrix - A matrix that contains the input data.
  * @returns {number[]|string[]} - The spliced array with the selected zones only.
  */
 function spliceMatrix(matrix) {
@@ -264,7 +275,7 @@ function spliceMatrix(matrix) {
 /**
  * Splice the input nested array based on the zones selected, for data count matrix.
  * 
- * @param {number[]} matrix - The input data matrix.
+ * @param {number[]} matrix - A matrix that contains the input data.
  * @returns  {number[]} - The spliced array with the selected zones only.
  */
 
@@ -339,7 +350,7 @@ function initChordDiagram() {
 /**
  * Update the chords for Chord Diagram. Add event listeners, transition effects and many minor tweaks to Chord Diagram.
  * 
- * @param {Array.<number[]>} matrix - The input data matrix of data
+ * @param {Array.<number[]>} matrix - A matrix that contains the input data.
  */
 function updateChordDiagram(matrix) {
   // Remove empty svg generated by animation loop.
