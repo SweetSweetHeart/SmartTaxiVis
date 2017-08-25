@@ -13,7 +13,7 @@ anychart.licenseKey('689404@swansea.ac.uk-52d848b-7c97169e');
 /**
  * Render a Choropleth map as base series, add Marker series on top of the base series.
  */
-function renderMap() {
+function generateMap() {
   $('#anymap').empty();
   map = anychart.map();
 
@@ -46,7 +46,7 @@ function renderMap() {
     const loopSeries = dataLoop.mapAs(null, {
       name: 'ZoneName',
       id: 'ZoneId',
-      size: 'PickUpCount',
+      size: 'Data',
       color: 'color',
     });
     createDotSeries(val.ZoneName, loopSeries, val.color);
@@ -123,7 +123,6 @@ function createDotSeries(name, data, color) {
     .selectFill('#e74c3c')
     .selectSize(10)
     .type('circle');
-
   series.id(name);
   series.listen('pointClick', (e) => {
     if (pointClickedViaPath != null) {

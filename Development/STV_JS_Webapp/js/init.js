@@ -8,7 +8,6 @@ $(() => {
   initGlobalVariables();
   initSliders();
   initChordDiagram();
-  renderMap();
   formatJSON();
   $('[data-toggle="popover"]').popover({
     trigger: 'manual',
@@ -42,19 +41,19 @@ function initGlobalVariables() {
   // Some global variables needed.
 
   /**
-   * Total number of taxizones.
+   * Total number of taxi zones.
    * @type {number}
    */
   TOTALZONENUM = 263;
 
   /**
-   * Starting index of taxizones selected.
+   * Starting index of taxi zones selected.
    * @type {number}
    */
   ZONE1 = 1;
 
   /**
-   * Ending index of taxizones selected.
+   * Ending index of taxi zones selected.
    * @type {number}
    */
   ZONE2 = 20;
@@ -73,7 +72,7 @@ function initGlobalVariables() {
   TIME2 = 15;
 
   /**
-   * A noUiSlider for taxizones.
+   * A noUiSlider for taxi zones.
    * @type {noUiSlider}
    * @see {@link https://refreshless.com/nouislider/}
    */
@@ -89,7 +88,6 @@ function initGlobalVariables() {
   // Some default values to play with, before the server returns actual data
 
   zones = null;
-  trips = null;
 
   lowerColor = 100;
   higherColor = 0;

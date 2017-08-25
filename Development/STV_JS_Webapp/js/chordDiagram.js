@@ -4,14 +4,18 @@
  * @module Vis/ChordDiagram
  * @requires Initialiser
  */
+function generateChordDiagram() {
+  if ($('#chordTrip').is(':checked')) {
+    data = $.extend(true, [], tripT[TIME1]);
+    zoneT = zonePUT;
+  } else if ($('#chordPrice').is(':checked')) {
+    data = $.extend(true, [], priceT[TIME1]);
+    zoneT = zoneAvePriceT;
+  } else if ($('#chordDistance').is(':checked')) {
+    data = $.extend(true, [], distanceT[TIME1]);
+    zoneT = zoneAvgDistanceT;
+  }
 
-
-/**
- * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
- * Also update the visibility of some HTML elements.
- */
-function formatJSON() {
-  data = $.extend(true, [], tripT[TIME1]);
   TOTALZONENUM = data.length;
 
   ZONESLIDER.noUiSlider.updateOptions({
@@ -21,10 +25,6 @@ function formatJSON() {
     }
   });
 
-  // data = $.extend(true, [], distanceT[TIME1]);
-
-  // data = $.extend(true, [], priceT[TIME1]);
-
   zones = $.extend(true, [], zoneT[TIME1]);
   spliceMatrix(zones);
   spliceMatrix(data);
@@ -32,12 +32,21 @@ function formatJSON() {
 
   var counts = getTotalDataCount(data);
 
-  generateColorForZone(zones, counts[1], counts[2]);
-  generateHistogram();
 
   $('#dataCount').html(counts[0]);
 
 
+  generateColorForZone(zones, counts[1], counts[2]);
+}
+
+/**
+ * Trigger all necessary functions when data is changed. E.g. Re-render Chord Diagram, Map Diagram and Histogram.
+ * Also update the visibility of some HTML elements.
+ */
+function formatJSON() {
+  generateChordDiagram();
+  generateHistogram();
+  generateMap();
   /** 
    * Dataset for AnyMap. 
    * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
@@ -46,21 +55,14 @@ function formatJSON() {
   const dataSet = anychart.data.set(zones);
   connectorData = null;
 
-  if (counts[0] > 0) {
-    toggleNoMatchMessage(false);
-    renderMap();
-    updateChordDiagram(data);
-  } else {
-    toggleNoMatchMessage(true);
-  }
-
+  updateChordDiagram(data);
   highlightColormap(lowerColor, higherColor);
 }
 
 /**
  * Iterate the input matrix and sum up all count. Also calcualte the largest and the smallest values in the input data.
  * 
- * @param {Array.<number[]} data - A matrix that contains the input data
+ * @param {Array.<number[]>} data - A matrix that contains the input data
  * @returns {number[]} - An array with total data count, the largest and the smallest values in the input data.
  */
 function getTotalDataCount(data) {
@@ -91,7 +93,7 @@ function getTotalDataCount(data) {
  */
 function highlightColormap(low, high) {
   $('#chordColorLegend font').css({
-    "border-style": "none",
+    "border-style": "none ",
     "border-width": "7px"
   });
 
@@ -99,11 +101,11 @@ function highlightColormap(low, high) {
     "border-style": "solid none solid solid"
   });
 
-  $('#color' + Math.ceil(high / 3) * 3).css({
+  $('#color' + Math.ceil((high / 3) - 1) * 3).css({
     "border-style": "solid solid solid none"
   });
 
-  for (var index = (Math.ceil(low / 3) + 1) * 3; index < Math.ceil(high / 3) * 3; index += 3) {
+  for (var index = (Math.ceil(low / 3) + 1) * 3; index < Math.ceil((high / 3) - 1) * 3; index += 3) {
     $('#color' + index).css({
       "border-style": "solid none solid none"
     });
@@ -111,6 +113,7 @@ function highlightColormap(low, high) {
   lowerColor = 100;
   higherColor = 0;
 }
+
 
 /**
  * Start the animation for Chord Diagram.
@@ -186,6 +189,9 @@ function getIndividualDataCount(data) {
 }
 
 
+var lowerColor = 100;
+var higherColor = 0;
+
 /**
  * Based on the largest and the smallest data count for all zones, generate a set of colors for zones on the Chord Diagram.
  * 
@@ -206,10 +212,10 @@ function generateColorForZone(zones, maxCount, minCount) {
  * @param {number} data  - Data count of one zone as the dividend.
  * @param {number} max - Max data count in the selected dataset.
  * @param {number} min - Min data count in the selected dataset.
- * @returns - A HSL color.
+ * @returns {string} - A HSL color. 
  */
 function generateRainBowColorMap(data, maxCount, minCount) {
-  var i = Math.abs(((data - minCount) / (maxCount - minCount)) * 100 - 100);
+  const i = Math.abs(((data - minCount) / (maxCount - minCount)) * 100 - 100);
 
   if (lowerColor > i)
     lowerColor = i;
@@ -222,7 +228,7 @@ function generateRainBowColorMap(data, maxCount, minCount) {
 
 /**
  * Generate a legend for Chord Diagram based on the color map used.
- * @deprecated since issue #14 a4bc2a77a1b55f763afce4f62999cd662241bc59
+ * @deprecated since issue #13 Dynamically update zoneSlider's range. 
  */
 function generateChordColorLegend() {
   $('#chordColorLegend').empty();
@@ -244,7 +250,7 @@ function generateChordColorLegend() {
 
 /**
  * Toggle the display of 'No Match' message, visulisations and controls.
- * @deprecated since issue #13 7f60f8bf5540f2fac2b1e26e1fa347f793d74a98
+ * @deprecated since issue #12 Dynamic ranged colormap.
  * @param {boolean} toggle - If True: displays the message.
  */
 function toggleNoMatchMessage(toggle) {
@@ -347,6 +353,83 @@ function initChordDiagram() {
     .attr('r', outerRadius);
 }
 
+/** 
+ * Format the text appeared when mouse hover the path. 
+ *  
+ * @param {string} path - A JSON string that contains the source and the target chord of the path. 
+ * @param {boolean} innerZone - If the path if representing the inner zone trips. 
+ * @returns {string} - THe text appeared when mouse hover the path. 
+ */
+function formatPathTitle(path, innerZone) {
+  var text = "";
+  var prefix = "";
+  if ($('#chordTrip').is(':checked')) {
+    path.source.value = formatNumber(path.source.value);
+    path.target.value = formatNumber(path.target.value);
+    text = " trips from ";
+  } else
+  if ($('#chordPrice').is(':checked')) {
+    formatNumber = d3.format('.2f');
+    path.source.value = formatNumber(path.source.value / 100);
+    path.target.value = formatNumber(path.target.value / 100);
+    text = " from ";
+    prefix = "$";
+  } else if ($('#chordDistance').is(':checked')) {
+    formatNumber = d3.format('2.f');
+    path.source.value = formatNumber(path.source.value / 100);
+    path.target.value = formatNumber(path.target.value / 100);
+    text = " km from ";
+  }
+  if (!innerZone) {
+    return [prefix, path.source.value,
+      text,
+      zones[path.source.index].ZoneName,
+      ' to ',
+      zones[path.target.index].ZoneName,
+      '\n',
+      prefix, path.target.value,
+      text,
+      zones[path.target.index].ZoneName,
+      ' to ',
+      zones[path.source.index].ZoneName,
+    ].join('');
+  } else {
+    return prefix + path.source.value +
+      " for inner zone trips within " +
+      zones[path.source.index].ZoneName;
+  }
+}
+
+/** 
+ * Format the text appeared when mouse hover the chord. 
+ *  
+ * @param {string} chord - A JSON string that contains the chord. 
+ * @param {any} index - The index of the taxi zone represented by the chord. 
+ * @returns {string} - The text appeared when mouse hover the chord. 
+ */
+function formatChordTitle(chord, index) {
+  var text = "";
+  var prefix = "";
+  if ($('#chordTrip').is(':checked')) {
+    formatNumber = d3.format('2,f');
+    chord.value = formatNumber(chord.value);
+    text = " trips ";
+  } else
+  if ($('#chordPrice').is(':checked')) {
+    formatNumber = d3.format('.2f');
+    chord.value = formatNumber(chord.value / 100);
+    text = " sum of average fare ";
+    prefix = "$";
+  } else if ($('#chordDistance').is(':checked')) {
+    formatNumber = d3.format('.2f');
+    chord.value = formatNumber(chord.value / 100);
+    text = " sum of average distance ";
+  }
+
+  return prefix + chord.value + text + `for ${ 
+    zones[index].ZoneName}`;
+}
+
 /**
  * Update the chords for Chord Diagram. Add event listeners, transition effects and many minor tweaks to Chord Diagram.
  * 
@@ -384,9 +467,7 @@ function updateChordDiagram(matrix) {
 
   // Update the (tooltip) title text based on the data
   groupG.select('title')
-    .text((d, i) => `${numberWithCommas(d.value)
-      } trips started in ${
-      zones[i].ZoneName}`);
+    .text((d, i) => formatChordTitle(d, i));
 
   // create the arc paths and set the constant attributes
   // (those based on the group index, not on the value)
@@ -440,23 +521,10 @@ function updateChordDiagram(matrix) {
 
   chordPaths.select('title')
     .text((d) => {
-      if (zones[d.target.index].ZoneName !== zones[d.source.index].ZoneName) {
-        return [numberWithCommas(d.source.value),
-          ' trips from ',
-          zones[d.source.index].ZoneName,
-          ' to ',
-          zones[d.target.index].ZoneName,
-          '\n',
-          numberWithCommas(d.target.value),
-          ' trips from ',
-          zones[d.target.index].ZoneName,
-          ' to ',
-          zones[d.source.index].ZoneName,
-        ].join('');
-      }
-      return `${numberWithCommas(d.source.value)
-        } trips started and ended in ${
-        zones[d.source.index].ZoneName}`;
+      if (zones[d.target.index].ZoneName !== zones[d.source.index].ZoneName)
+        return formatPathTitle(d, false);
+      else
+        return formatPathTitle(d, true);
     });
 
   chordPaths.exit().transition()
