@@ -6,7 +6,7 @@
 import Bobject.TaxiZone;
 import Bobject.TaxiZoneFloat;
 import Bobject.TaxiZoneInt;
-import com.google.gson.Gson;
+import com.google.m_gson.Gson;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,24 +26,23 @@ public class SQLDataReader {
     private final int HOUR2 = 24;
     private final int TIMEOUT = 10000;
 
-    private String procedure;
-    private String result = "";
+    private String PROCEDURE;
+    private String RESULT = "";
 
-    private Connection con;
-    private Statement stmt;
-    private ResultSet rs;
-    private ArrayList<ArrayList<TaxiZone>> zoneResultList = new ArrayList<>();
-    private ArrayList<ArrayList<int[]>> matrixResultList = new ArrayList<>();
-
+    private Connection CONNECTION;
+    private Statement STATEMENT;
+    private ResultSet RESULTSET;
+    private ArrayList<ArrayList<TaxiZone>> ZONERESULTLIST = new ArrayList<>();
+    private ArrayList<ArrayList<int[]>> MATRIXRESULTLIST = new ArrayList<>();
 
     public String getResult() {
-        return result;
+        return RESULT;
     }
 
     public boolean openConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            CONNECTION = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -53,7 +52,7 @@ public class SQLDataReader {
 
     public boolean closeConnection() {
         try {
-            con.close();
+            CONNECTION.close();
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -63,8 +62,8 @@ public class SQLDataReader {
 
     public boolean setStatement() {
         try {
-            stmt = con.createStatement();
-            stmt.setQueryTimeout(TIMEOUT);
+            STATEMENT = CONNECTION.createStatement();
+            STATEMENT.setQueryTimeout(TIMEOUT);
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -73,12 +72,12 @@ public class SQLDataReader {
     }
 
     public Statement getStatement() {
-        return stmt;
+        return STATEMENT;
     }
 
     public boolean setResultSet(String SQL) {
         try {
-            rs = getStatement().executeQuery(SQL);
+            RESULTSET = getStatement().executeQuery(SQL);
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -87,138 +86,135 @@ public class SQLDataReader {
     }
 
     public ResultSet getResultSet() {
-        return rs;
+        return RESULTSET;
     }
 
     public void getZoneDataByPU() {
         for (int i = 0; i < HOUR2; i++) {
-            procedure = TOTALZONE + "," + i + "," + (i + 1);
-            setResultSet("call getZoneByPU(" + procedure + ")");
+            PROCEDURE = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call getZoneByPU(" + PROCEDURE + ")");
             convertZoneToList(true);
         }
 
-        Gson gson = new Gson();
-        result += "var zonePUT = " + gson.toJson(zoneResultList) + ";\n\n\n\n\n\n";
-        zoneResultList.clear();
+        Gson m_gson = new Gson();
+        RESULT += "var ZONE_PUMATRIX = " + m_gson.toJson(ZONERESULTLIST) + ";\n\n\n\n\n\n";
+        ZONERESULTLIST.clear();
     }
 
     public void getZoneDataByAvgPrice() {
         for (int i = 0; i < HOUR2; i++) {
-            procedure = TOTALZONE + "," + i + "," + (i + 1);
-            setResultSet("call getZoneByAvgPrice(" + procedure + ")");
+            PROCEDURE = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call getZoneByAvgPrice(" + PROCEDURE + ")");
             convertZoneToList(false);
         }
 
-        Gson gson = new Gson();
-        result += "var zoneAvePriceT = " + gson.toJson(zoneResultList) + ";\n\n\n\n\n\n";
-        zoneResultList.clear();
+        Gson m_gson = new Gson();
+        RESULT += "var ZONE_AVG_PRICEMATRIX = " + m_gson.toJson(ZONERESULTLIST) + ";\n\n\n\n\n\n";
+        ZONERESULTLIST.clear();
     }
 
     public void getZoneDataByAvgDistance() {
         for (int i = 0; i < HOUR2; i++) {
-            procedure = TOTALZONE + "," + i + "," + (i + 1);
-            setResultSet("call getZoneByAvgDistance(" + procedure + ")");
+            PROCEDURE = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call getZoneByAvgDistance(" + PROCEDURE + ")");
             convertZoneToList(false);
         }
 
-        Gson gson = new Gson();
-        result += "var zoneAvgDistanceT = " + gson.toJson(zoneResultList) + ";\n\n\n\n\n\n";
-        zoneResultList.clear();
+        Gson m_gson = new Gson();
+        RESULT += "var ZONE_AVG_DISTANCEMATRIX = " + m_gson.toJson(ZONERESULTLIST) + ";\n\n\n\n\n\n";
+        ZONERESULTLIST.clear();
     }
 
     public void getTripMatrix() {
 
         for (int i = 0; i < HOUR2; i++) {
-            procedure = TOTALZONE + "," + i + "," + (i + 1);
-            setResultSet("call first_cursor_PU_time(" + procedure + ")");
+            PROCEDURE = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call first_cursor_PU_time(" + PROCEDURE + ")");
             convertMatrixToList();
 
             System.out.println("getTripMatrix() " + (i + 1) + "th loop");
         }
 
-        Gson gson = new Gson();
-        result += "var tripT = " + gson.toJson(matrixResultList) + ";\n\n\n\n\n\n";
-        matrixResultList.clear();
+        Gson m_gson = new Gson();
+        RESULT += "var TRIPMATRIX = " + m_gson.toJson(MATRIXRESULTLIST) + ";\n\n\n\n\n\n";
+        MATRIXRESULTLIST.clear();
     }
 
     public void getPriceMatrix() {
 
         for (int i = 0; i < HOUR2; i++) {
-            procedure = TOTALZONE + "," + i + "," + (i + 1);
-            setResultSet("call first_cursor_Price_time(" + procedure + ")");
+            PROCEDURE = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call first_cursor_Price_time(" + PROCEDURE + ")");
 
             convertMatrixToList();
 
             System.out.println("getPriceMatrix() " + (i + 1) + "th loop");
         }
 
-        Gson gson = new Gson();
-        result += "var priceT = " + gson.toJson(matrixResultList) + ";\n\n\n\n\n\n";
-        matrixResultList.clear();
+        Gson m_gson = new Gson();
+        RESULT += "var PRICEMATRIX = " + m_gson.toJson(MATRIXRESULTLIST) + ";\n\n\n\n\n\n";
+        MATRIXRESULTLIST.clear();
     }
 
     public void getDistanceMatrix() {
 
         for (int i = 0; i < HOUR2; i++) {
-            procedure = TOTALZONE + "," + i + "," + (i + 1);
-            setResultSet("call first_cursor_Distance_time(" + procedure + ")");
+            PROCEDURE = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call first_cursor_Distance_time(" + PROCEDURE + ")");
             convertMatrixToList();
 
             System.out.println("getDistanceMatrix() " + (i + 1) + "th loop");
         }
 
-        Gson gson = new Gson();
-        result += "var distanceT = " + gson.toJson(matrixResultList) + ";\n\n\n\n\n\n";
-        matrixResultList.clear();
+        Gson m_gson = new Gson();
+        RESULT += "var DISTANCEMATRIX = " + m_gson.toJson(MATRIXRESULTLIST) + ";\n\n\n\n\n\n";
+        MATRIXRESULTLIST.clear();
     }
 
     public void convertZoneToList(boolean type) {
-        ArrayList<TaxiZone> zoneList = new ArrayList<>();
+        ArrayList<TaxiZone> m_zoneList = new ArrayList<>();
 
         try {
-
             if (type) {
-
                 while (getResultSet().next()) {
                     TaxiZoneInt t = new TaxiZoneInt();
-                    t.setZoneId(rs.getInt(1));
-                    t.setZoneName(rs.getString(2));
-                    t.setData(rs.getInt(3));
-                    zoneList.add(t);
+                    t.setZoneId(RESULTSET.getInt(1));
+                    t.setZoneName(RESULTSET.getString(2));
+                    t.setData(RESULTSET.getInt(3));
+                    m_zoneList.add(t);
                 }
             } else {
                 while (getResultSet().next()) {
                     TaxiZoneFloat t = new TaxiZoneFloat();
-                    t.setZoneId(rs.getInt(1));
-                    t.setZoneName(rs.getString(2));
-                    t.setData(rs.getFloat(3));
-                    zoneList.add(t);
+                    t.setZoneId(RESULTSET.getInt(1));
+                    t.setZoneName(RESULTSET.getString(2));
+                    t.setData(RESULTSET.getFloat(3));
+                    m_zoneList.add(t);
                 }
             }
 
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            zoneResultList.add(zoneList);
+            ZONERESULTLIST.add(m_zoneList);
         }
     }
 
     public void convertMatrixToList() {
         try {
-            ArrayList<int[]> eachZone = new ArrayList<>();
+            ArrayList<int[]> m_eachZone = new ArrayList<>();
             while (getResultSet().next()) {
-                String[] data = rs.getString(2).split(",");
-                int[] dataInt = new int[data.length];
-                for (int i = 0; i < data.length; i++) {
-                    dataInt[i] = (int) (Double.parseDouble(data[i]) * 100);
+                String[] m_data = RESULTSET.getString(2).split(",");
+                int[] m_dataInt = new int[m_data.length];
+                for (int i = 0; i < m_data.length; i++) {
+                    m_dataInt[i] = (int) (Double.parseDouble(m_data[i]) * 100);
                 }
-                eachZone.add(dataInt);
+                m_eachZone.add(m_dataInt);
             }
-            matrixResultList.add(eachZone);
+            MATRIXRESULTLIST.add(m_eachZone);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-
 
 }
