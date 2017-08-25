@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" target="_blank" href="../../index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
 		alt="logo"/>Smart Taxi Vis</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -34,7 +34,7 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-Initialiser.html">Initialiser</a></li><li><a href="module-Vis_ChordDiagram.html">Vis/ChordDiagram</a></li><li><a href="module-Vis_Histogram.html">Vis/Histogram</a></li><li><a href="module-Vis_MapView.html">Vis/MapView</a></li>
+					<li><a href="module-Helper.html">Helper</a></li><li><a href="module-Vis_ChordDiagram.html">Vis/ChordDiagram</a></li><li><a href="module-Vis_Histogram.html">Vis/Histogram</a></li><li><a href="module-Vis_MapView.html">Vis/MapView</a></li>
 				</ul>
 			</li>
 			
@@ -146,7 +146,7 @@
         <h3 class="subsection-title">Requires</h3>
 
         <ul>
-            <li><a href="module-Initialiser.html">module:Initialiser</a></li>
+            <li><a href="module-Helper.html">module:Helper</a></li>
         </ul>
     
 
@@ -173,7 +173,7 @@
 
     
     <div class="description">
-        <p>Add a Connector series to the base map.</p>
+        <p>Add a Connector series to the base MAP.</p>
     </div>
     
 
@@ -225,7 +225,7 @@
 
             
 
-            <td class="description last"><p>The JSON data to be added to the base map as a Connector series.</p></td>
+            <td class="description last"><p>The JSON data to be added to the base MAP as a Connector series.</p></td>
         </tr>
 
     
@@ -270,7 +270,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="mapDiagram.js.html">mapDiagram.js</a>,
-				 <a href="mapDiagram.js.html#sunlight-1-line-247">line 247</a>
+				 <a href="mapDiagram.js.html#sunlight-1-line-262">line 262</a>
 			</li>
 		</ul>
 	</dd>
@@ -303,7 +303,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~createDotSeries"><span class="type-signature">&lt;inner> </span>createDotSeries<span class="signature">(name, data, color)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~createDotSeries"><span class="type-signature">&lt;inner> </span>createDotSeries<span class="signature">(name, input, color)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -370,7 +370,7 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>input</code></td>
             
 
             <td class="type">
@@ -456,7 +456,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="mapDiagram.js.html">mapDiagram.js</a>,
-				 <a href="mapDiagram.js.html#sunlight-1-line-89">line 89</a>
+				 <a href="mapDiagram.js.html#sunlight-1-line-90">line 90</a>
 			</li>
 		</ul>
 	</dd>
@@ -625,7 +625,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="mapDiagram.js.html">mapDiagram.js</a>,
-				 <a href="mapDiagram.js.html#sunlight-1-line-146">line 146</a>
+				 <a href="mapDiagram.js.html#sunlight-1-line-157">line 157</a>
 			</li>
 		</ul>
 	</dd>
@@ -692,7 +692,7 @@
 
     
     <div class="description">
-        <p>Render a Choropleth map as base series, add Marker series on top of the base series.</p>
+        <p>Render a Choropleth MAP as base series, add Marker series on top of the base series.</p>
     </div>
     
 
@@ -739,7 +739,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="mapDiagram.js.html">mapDiagram.js</a>,
-				 <a href="mapDiagram.js.html#sunlight-1-line-16">line 16</a>
+				 <a href="mapDiagram.js.html#sunlight-1-line-17">line 17</a>
 			</li>
 		</ul>
 	</dd>
@@ -901,7 +901,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="mapDiagram.js.html">mapDiagram.js</a>,
-				 <a href="mapDiagram.js.html#sunlight-1-line-164">line 164</a>
+				 <a href="mapDiagram.js.html#sunlight-1-line-175">line 175</a>
 			</li>
 		</ul>
 	</dd>
@@ -975,7 +975,7 @@
 
     
     <div class="description">
-        <p>Highlight the corresponding marker of the selected zone on the map.</p>
+        <p>Highlight the corresponding marker of the selected zone on the MAP.</p>
     </div>
     
 
@@ -1072,7 +1072,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="mapDiagram.js.html">mapDiagram.js</a>,
-				 <a href="mapDiagram.js.html#sunlight-1-line-203">line 203</a>
+				 <a href="mapDiagram.js.html#sunlight-1-line-218">line 218</a>
 			</li>
 		</ul>
 	</dd>
@@ -1113,7 +1113,7 @@
 
     
     <div class="description">
-        <p>Highlight the the selected zone on the map.</p>
+        <p>Highlight the the selected zone on the MAP.</p>
     </div>
     
 
@@ -1210,7 +1210,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="mapDiagram.js.html">mapDiagram.js</a>,
-				 <a href="mapDiagram.js.html#sunlight-1-line-231">line 231</a>
+				 <a href="mapDiagram.js.html#sunlight-1-line-246">line 246</a>
 			</li>
 		</ul>
 	</dd>
@@ -1251,7 +1251,7 @@
 
     
     <div class="description">
-        <p>Remove a map series with its ID.</p>
+        <p>Remove a MAP series with its ID.</p>
     </div>
     
 
@@ -1348,7 +1348,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="mapDiagram.js.html">mapDiagram.js</a>,
-				 <a href="mapDiagram.js.html#sunlight-1-line-191">line 191</a>
+				 <a href="mapDiagram.js.html#sunlight-1-line-206">line 206</a>
 			</li>
 		</ul>
 	</dd>

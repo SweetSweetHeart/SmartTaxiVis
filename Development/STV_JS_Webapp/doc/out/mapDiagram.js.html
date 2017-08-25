@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" target="_blank" href="../../index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
 		alt="logo"/>Smart Taxi Vis</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -34,7 +34,7 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-Initialiser.html">Initialiser</a></li><li><a href="module-Vis_ChordDiagram.html">Vis/ChordDiagram</a></li><li><a href="module-Vis_Histogram.html">Vis/Histogram</a></li><li><a href="module-Vis_MapView.html">Vis/MapView</a></li>
+					<li><a href="module-Helper.html">Helper</a></li><li><a href="module-Vis_ChordDiagram.html">Vis/ChordDiagram</a></li><li><a href="module-Vis_Histogram.html">Vis/Histogram</a></li><li><a href="module-Vis_MapView.html">Vis/MapView</a></li>
 				</ul>
 			</li>
 			
@@ -75,7 +75,7 @@
  * @author Qiru Wang 689404@swansea.ac.uk
  * 
  * @module Vis/MapView
- * @requires Initialiser
+ * @requires Helper
  */
 
 $(window).resize(() => {
@@ -83,69 +83,70 @@ $(window).resize(() => {
 });
 
 anychart.licenseKey('689404@swansea.ac.uk-52d848b-7c97169e');
+
 /**
- * Render a Choropleth map as base series, add Marker series on top of the base series.
+ * Render a Choropleth MAP as base series, add Marker series on top of the base series.
  */
 function generateMap() {
   $('#anymap').empty();
-  map = anychart.map();
+  MAP = anychart.map();
 
-  const credits = map.credits();
-  credits.enabled(false);
+  const m_credits = MAP.credits();
+  m_credits.enabled(false);
 
-  /** Create a AnyMap base map */
-  map.unboundRegions()
+  /** Create a AnyMap base MAP */
+  MAP.unboundRegions()
     .enabled(true)
     .fill('#E1E1E1')
     .stroke('#D2D2D2');
 
   /** Map geojson data for drawing taxizone contours */
-  map.geoData('anychart.maps.taxizone');
+  MAP.geoData('anychart.maps.taxizone');
 
-  /** IMPORTANT!!! map ID field to geojson ID field */
-  map.geoIdField('LocationID');
+  /** IMPORTANT!!! MAP ID field to geojson ID field */
+  MAP.geoIdField('LocationID');
 
-  const choroplethSeries = map.choropleth(connectorBase);
-  choroplethSeries.id('choropleth');
-  choroplethSeries.enabled(false);
-  choroplethSeries.legendItem().enabled(false);
+  const m_choroplethSeries = MAP.choropleth(connectorBase);
+  m_choroplethSeries.id('choropleth');
+  m_choroplethSeries.enabled(false);
+  m_choroplethSeries.legendItem().enabled(false);
 
-  jQuery.each(zones, (i, val) => {
-    const dataLoop = anychart.data.set([val]);
+  jQuery.each(ZONES, (i, val) => {
+    const m_dataLoop = anychart.data.set([val]);
     /** Map data attributes. 
      * @type {anychart.data.Mapping}
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
-    const loopSeries = dataLoop.mapAs(null, {
+    const m_loopSeries = m_dataLoop.mapAs(null, {
       name: 'ZoneName',
       id: 'ZoneId',
       size: 'Data',
       color: 'color',
     });
-    createDotSeries(val.ZoneName, loopSeries, val.color);
+    createDotSeries(val.ZoneName, m_loopSeries, val.color);
   });
 
-  /** Disable map legend */
-  map.legend().enabled(false);
+  /** Disable MAP legend */
+  MAP.legend().enabled(false);
 
   /**
-   * Create zoom controllers for the map.
+   * Create zoom controllers for the MAP.
    * @type {anychart.ui.Zoom}
    * @see {@link https://api.anychart.com/7.14.3/anychart.ui#zoom}
    */
-  const zoomController = anychart.ui.zoom();
-  zoomController.render(map);
+  const m_zoomController = anychart.ui.zoom();
+  m_zoomController.render(MAP);
 
   /** Disable context menu */
-  map.contextMenu(false);
+  MAP.contextMenu(false);
 
-  /** Set map inteactions */
-  // var interactivity = map.interactivity();
+  /** Set MAP inteactions */
+  // var interactivity = MAP.interactivity();
   // interactivity.zoomOnMouseWheel(false);
   // interactivity.zoomOnDoubleClick(false);
 
   /** Initiates the drawing into the div with id anymap */
-  map.container('anymap').draw();
+  MAP.container('anymap').draw();
 
   $('#anymap').css('height', $('#anymap').css('width'));
 }
@@ -155,24 +156,34 @@ function generateMap() {
  * Create a marker series.
  * 
  * @param {string} name - Name of the marker series.
- * @param {any} data - Data of the marker series.
+ * @param {any} input - Data of the marker series.
  * @param {string} color - Color of the marker series.
  * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
  */
-function createDotSeries(name, data, color) {
+function createDotSeries(name, input, color) {
   /** Set marker series.
    * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
-   * @type {anychart.core.map.series.Marker}
+   * @type {anychart.core.MAP.series.Marker}
    */
-  const series = map.marker(data).name(name);
-  series.legendItem({
+  const m_series = MAP.marker(input).name(name);
+  m_series.legendItem({
     iconType: 'circle',
     iconFill: color,
     iconStroke: '2 #E1E1E1',
   });
+  var m_label;
+
+  var m_dimension = getDataDimension();
+  if (m_dimension === 'trip') {
+    m_label = "Trips: ";
+  } else if (m_dimension === 'price') {
+    m_label = "Price: ";
+  } else if (m_dimension === 'distance') {
+    m_label = "Distance: ";
+  }
 
   /** Set Tooltip for series */
-  series.tooltip()
+  m_series.tooltip()
     .useHtml(true)
     .padding([8, 13, 10, 13])
     .title(false)
@@ -180,11 +191,11 @@ function createDotSeries(name, data, color) {
     .fontSize(14)
     .format(function () {
       return `&lt;span>${this.getData('name')}&lt;/span>&lt;br />` +
-        `&lt;span style="font-size: 12px; color: #E1E1E1">Trips: ${
+        `&lt;span style="font-size: 12px; color: #E1E1E1">${m_label} ${
         parseInt(this.getData('size')).toLocaleString()}&lt;/span>`;
     });
   /** Set styles for marker */
-  series.selectionMode('none')
+  m_series.selectionMode('none')
     .stroke('2 #757575')
     .hoverStroke('3 #616161')
     .fill(color)
@@ -196,16 +207,16 @@ function createDotSeries(name, data, color) {
     .selectFill('#e74c3c')
     .selectSize(10)
     .type('circle');
-  series.id(name);
-  series.listen('pointClick', (e) => {
-    if (pointClickedViaPath != null) {
-      pointClickedViaPath.selected(false);
+  m_series.id(name);
+  m_series.listen('pointClick', (e) => {
+    if (POINTCLICKED != null) {
+      POINTCLICKED.selected(false);
     }
 
-    pointClickedViaPath = e.point;
-    pointClickedViaPath.selected(true);
+    POINTCLICKED = e.point;
+    POINTCLICKED.selected(true);
     removeMapSeries('connector');
-    map.zoomToFeature(pointClickedViaPath.get('id'));
+    MAP.zoomToFeature(POINTCLICKED.get('id'));
     toggleAnimation(true);
   });
 }
@@ -218,12 +229,12 @@ function createDotSeries(name, data, color) {
  */
 function filterMarkerRange(start, end) {
   if (end) {
-    return function (fieldVal) {
-      return start &lt;= fieldVal &amp;&amp; fieldVal &lt; end;
+    return function (val) {
+      return start &lt;= val &amp;&amp; val &lt; end;
     };
   }
-  return function (fieldVal) {
-    return start &lt;= fieldVal;
+  return function (val) {
+    return start &lt;= val;
   };
 }
 
@@ -236,95 +247,99 @@ function filterMarkerRange(start, end) {
  */
 function getConnector(pointA, pointB) {
   /** get the choropleth series */
-  const series = map.getSeries('choropleth');
+  const m_series = MAP.getSeries('choropleth');
   /** find regions with proper ids */
-  const pointIndex1 = series.data().find('id', pointA);
-  const pointIndex2 = series.data().find('id', pointB);
+  const m_pointIndex1 = m_series.data().find('id', pointA);
+  const m_pointIndex2 = m_series.data().find('id', pointB);
   /** get the bounds of the first region */
-  const point1 = series.getPoint(pointIndex1);
-  const bounds1 = point1.getFeatureBounds();
+  const m_point1 = m_series.getPoint(m_pointIndex1);
+  const m_bounds1 = m_point1.getFeatureBounds();
   /** get the bounds of the second region */
-  const point2 = series.getPoint(pointIndex2);
-  const bounds2 = point2.getFeatureBounds();
+  const m_point2 = m_series.getPoint(m_pointIndex2);
+  const m_bounds2 = m_point2.getFeatureBounds();
 
   /** transformers pixel coordinates to latitude and longitude */
-  const latLong1 = map.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
-  const latLong2 = map.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
+  const m_latLong1 = MAP.inverseTransform(m_bounds1.left + m_bounds1.width / 2, m_bounds1.top + m_bounds1.height / 2);
+  const m_latLong2 = MAP.inverseTransform(m_bounds2.left + m_bounds2.width / 2, m_bounds2.top + m_bounds2.height / 2);
 
   /** return an array to be used in connector series */
-  return [parseFloat((latLong1.lat).toFixed(7)), parseFloat((latLong1.long).toFixed(7)), parseFloat((latLong2.lat).toFixed(7)), parseFloat((latLong2.long).toFixed(7))];
+  return [parseFloat((m_latLong1.lat).toFixed(7)),
+    parseFloat((m_latLong1.long).toFixed(7)),
+    parseFloat((m_latLong2.lat).toFixed(7)),
+    parseFloat((m_latLong2.long).toFixed(7))
+  ];
 }
 
 
 /**
- * Remove a map series with its ID.
+ * Remove a MAP series with its ID.
  * 
  * @param {string} seriesId - The ID of targeted series.
  */
 function removeMapSeries(seriesId) {
-  if (map.getSeries(seriesId) != null) {
-    map.removeSeries(seriesId);
+  if (MAP.getSeries(seriesId) != null) {
+    MAP.removeSeries(seriesId);
   }
 }
 
 
 /**
- * Highlight the corresponding marker of the selected zone on the map.
+ * Highlight the corresponding marker of the selected zone on the MAP.
  * 
  * @param {string} zone - The marker that should be highlighted.
  */
 function highlightPoint(zone) {
-  if (pointClickedViaPath != null) {
-    if (pointClickedViaPath.get('id') != zone.ZoneId) {
-      pointClickedViaPath.selected(false);
+  if (POINTCLICKED != null) {
+    if (POINTCLICKED.get('id') != zone.ZoneId) {
+      POINTCLICKED.selected(false);
     }
   }
-  const seriesId = zone.ZoneName;
-  const targetSeries = map.getSeries(seriesId);
-  const pointIndex = targetSeries.data().find('id', zone.ZoneId);
+  const m_seriesId = zone.ZoneName;
+  const m_targetSeries = MAP.getSeries(m_seriesId);
+  const m_pointIndex = m_targetSeries.data().find('id', zone.ZoneId);
 
-  if (pointClickedViaPath != null) {
-    if (pointClickedViaPath.get('id') != zone.ZoneId) {
-      pointClickedViaPath = targetSeries.getPoint(pointIndex);
-      pointClickedViaPath.selected(true);
-      map.zoomToFeature(zone.ZoneId);
+  if (POINTCLICKED != null) {
+    if (POINTCLICKED.get('id') != zone.ZoneId) {
+      POINTCLICKED = m_targetSeries.getPoint(m_pointIndex);
+      POINTCLICKED.selected(true);
+      MAP.zoomToFeature(zone.ZoneId);
     }
   } else {
-    pointClickedViaPath = targetSeries.getPoint(pointIndex);
-    pointClickedViaPath.selected(true);
-    map.zoomToFeature(zone.ZoneId);
+    POINTCLICKED = m_targetSeries.getPoint(m_pointIndex);
+    POINTCLICKED.selected(true);
+    MAP.zoomToFeature(zone.ZoneId);
   }
 }
 
 /**
- * Highlight the the selected zone on the map.
+ * Highlight the the selected zone on the MAP.
  * 
  * @param {string} zoneId - The ID of the zone that should be highlighted.
  */
 function highlightZone(zoneId) {
   removeMapSeries('highlightZone');
-  const highlightZone = map.choropleth([{
+  const m_highlightZone = MAP.choropleth([{
     id: zoneId,
   }]);
-  highlightZone.id('highlightZone');
-  highlightZone.enabled(true);
-  highlightZone.legendItem().enabled(false);
-  map.zoomToFeature(zoneId);
+  m_highlightZone.id('highlightZone');
+  m_highlightZone.enabled(true);
+  m_highlightZone.legendItem().enabled(false);
+  MAP.zoomToFeature(zoneId);
 }
 
 /**
- * Add a Connector series to the base map.
+ * Add a Connector series to the base MAP.
  * 
- * @param {string} connectorData - The JSON data to be added to the base map as a Connector series.
+ * @param {string} connectorData - The JSON data to be added to the base MAP as a Connector series.
  */
 function addConnectorSeries(connectorData) {
   /** add connector series */
   removeMapSeries('connector');
-  const connectorSeries = map.connector(connectorData);
-  connectorSeries.id('connector');
-  connectorSeries.tooltip().format('{%from} - {%to}');
-  connectorSeries.legendItem().enabled(false);
-  connectorSeries.listen('pointClick', (e) => {
+  const m_connectorSeries = MAP.connector(connectorData);
+  m_connectorSeries.id('connector');
+  m_connectorSeries.tooltip().format('{%from} - {%to}');
+  m_connectorSeries.legendItem().enabled(false);
+  m_connectorSeries.listen('pointClick', (e) => {
     toggleAnimation(true);
   });
 }</pre>

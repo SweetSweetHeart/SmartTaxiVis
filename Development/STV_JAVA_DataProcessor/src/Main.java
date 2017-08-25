@@ -1,27 +1,27 @@
 public class Main {
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
+        long m_startTime = System.currentTimeMillis();
 
-        SQLDataReader dataReader = new SQLDataReader();
+        SQLDataReader m_dataReader = new SQLDataReader();
 
-        dataReader.openConnection();
-        dataReader.setStatement();
+        m_dataReader.openConnection();
+        m_dataReader.setStatement();
 
-        dataReader.getZoneDataByPU();
-        dataReader.getZoneDataByAvgPrice();
-        dataReader.getZoneDataByAvgDistance();
+        m_dataReader.getZoneDataByPU();
+        m_dataReader.getZoneDataByAvgPrice();
+        m_dataReader.getZoneDataByAvgDistance();
 
-        dataReader.getTripMatrix();
-        dataReader.getPriceMatrix();
-        dataReader.getDistanceMatrix();
+        m_dataReader.getTripMatrix();
+        m_dataReader.getPriceMatrix();
+        m_dataReader.getDistanceMatrix();
 
-        dataReader.closeConnection();
+        m_dataReader.closeConnection();
 
-        JsonWriter jsonWriter = new JsonWriter();
-        jsonWriter.writeJsonFile(dataReader.getResult());
+        JsonWriter m_jsonWriter = new JsonWriter();
+        m_jsonWriter.writeJsonFile(m_dataReader.getResult());
 
-        long totalTime = System.currentTimeMillis() - startTime;
-        
-        System.out.println("Total time taken: " + totalTime + "ms");
+        long m_totalTime = System.currentTimeMillis() - m_startTime;
+
+        System.out.println("Total time taken: " + m_totalTime + "ms");
     }
 }

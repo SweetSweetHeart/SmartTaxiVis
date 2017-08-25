@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" target="_blank" href="../../index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
 		alt="logo"/>Smart Taxi Vis</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -34,7 +34,7 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-Initialiser.html">Initialiser</a></li><li><a href="module-Vis_ChordDiagram.html">Vis/ChordDiagram</a></li><li><a href="module-Vis_Histogram.html">Vis/Histogram</a></li><li><a href="module-Vis_MapView.html">Vis/MapView</a></li>
+					<li><a href="module-Helper.html">Helper</a></li><li><a href="module-Vis_ChordDiagram.html">Vis/ChordDiagram</a></li><li><a href="module-Vis_Histogram.html">Vis/Histogram</a></li><li><a href="module-Vis_MapView.html">Vis/MapView</a></li>
 				</ul>
 			</li>
 			
@@ -146,7 +146,7 @@
         <h3 class="subsection-title">Requires</h3>
 
         <ul>
-            <li><a href="module-Initialiser.html">module:Initialiser</a></li>
+            <li><a href="module-Helper.html">module:Helper</a></li>
         </ul>
     
 
@@ -220,7 +220,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-140">line 140</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-108">line 108</a>
 			</li>
 		</ul>
 	</dd>
@@ -308,7 +308,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-122">line 122</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-90">line 90</a>
 			</li>
 		</ul>
 	</dd>
@@ -470,7 +470,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-410">line 410</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-294">line 294</a>
 			</li>
 		</ul>
 	</dd>
@@ -584,7 +584,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-46">line 46</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-41">line 41</a>
 			</li>
 		</ul>
 	</dd>
@@ -746,7 +746,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-363">line 363</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-238">line 238</a>
 			</li>
 		</ul>
 	</dd>
@@ -869,7 +869,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-233">line 233</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-151">line 151</a>
 			</li>
 		</ul>
 	</dd>
@@ -894,404 +894,6 @@
     
 
     
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~generateColorForZone"><span class="type-signature">&lt;inner> </span>generateColorForZone<span class="signature">(zones, maxCount, minCount)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Based on the largest and the smallest data count for all zones, generate a set of colors for zones on the Chord Diagram.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>zones</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;string></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A matrix that contains input taxi zones.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>maxCount</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The largest data count for all zones.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>minCount</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The smallest data count for all zones.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-202">line 202</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~generateRainBowColorMap"><span class="type-signature">&lt;inner> </span>generateRainBowColorMap<span class="signature">(data, max, min)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Generate a rainbow color map based on the ratio of data count and the min/max data count.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Data count of one zone as the dividend.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>max</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Max data count in the selected dataset.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>min</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Min data count in the selected dataset.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-217">line 217</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li>A HSL color.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -1355,7 +957,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-170">line 170</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-138">line 138</a>
 			</li>
 		</ul>
 	</dd>
@@ -1421,335 +1023,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="~getIndividualDataCount"><span class="type-signature">&lt;inner> </span>getIndividualDataCount<span class="signature">(data)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Calculate the given data count.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The input data count data in JSON.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-183">line 183</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li>The total data count.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;number></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~getTotalDataCount"><span class="type-signature">&lt;inner> </span>getTotalDataCount<span class="signature">(data)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Iterate the input matrix and sum up all count. Also calcualte the largest and the smallest values in the input data.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Array.&lt;number>></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A matrix that contains the input data</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-68">line 68</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li>An array with total data count, the largest and the smallest values in the input data.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;number></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~highlightColormap"><span class="type-signature">&lt;inner> </span>highlightColormap<span class="signature">(low, high)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~highlightColormapLegend"><span class="type-signature">&lt;inner> </span>highlightColormapLegend<span class="signature">(low, high)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1861,6 +1135,15 @@
     
 
 	
+	<dt class="important tag-deprecated method-doc-label method-doc-details-label">Deprecated:</dt>
+	
+    <dd>
+        <ul class="dummy">
+            <li>since issue #12 Dynamic ranged colormap.</li>
+        </ul>
+    </dd>
+    
+    
 
 	
 
@@ -1878,7 +1161,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-94">line 94</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-64">line 64</a>
 			</li>
 		</ul>
 	</dd>
@@ -1966,7 +1249,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-299">line 299</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-174">line 174</a>
 			</li>
 		</ul>
 	</dd>
@@ -1991,340 +1274,6 @@
     
 
     
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~spliceMatrix"><span class="type-signature">&lt;inner> </span>spliceMatrix<span class="signature">(matrix)</span><span class="type-signature"> &rarr; {Array.&lt;number>|Array.&lt;string>}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Splice the input array based on the zones selected.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>matrix</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;number></span>
-|
-
-<span class="param-type">Array.&lt;string></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A matrix that contains the input data.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-275">line 275</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li>The spliced array with the selected zones only.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;number></span>
-|
-
-<span class="param-type">Array.&lt;string></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~spliceSubTripMatrix"><span class="type-signature">&lt;inner> </span>spliceSubTripMatrix<span class="signature">(matrix)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Splice the input nested array based on the zones selected, for data count matrix.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>matrix</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;number></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A matrix that contains the input data.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-288">line 288</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li>The spliced array with the selected zones only.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;number></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -2438,154 +1387,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-151">line 151</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="~toggleNoMatchMessage"><span class="type-signature">&lt;inner> </span>toggleNoMatchMessage<span class="signature">(toggle)</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Toggle the display of 'No Match' message, visulisations and controls.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>toggle</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>If True: displays the message.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-	<dt class="important tag-deprecated method-doc-label method-doc-details-label">Deprecated:</dt>
-	
-    <dd>
-        <ul class="dummy">
-            <li>since issue #12 Dynamic ranged colormap.</li>
-        </ul>
-    </dd>
-    
-    
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-256">line 256</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-119">line 119</a>
 			</li>
 		</ul>
 	</dd>
@@ -2723,7 +1525,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="chordDiagram.js.html">chordDiagram.js</a>,
-				 <a href="chordDiagram.js.html#sunlight-1-line-438">line 438</a>
+				 <a href="chordDiagram.js.html#sunlight-1-line-323">line 323</a>
 			</li>
 		</ul>
 	</dd>
