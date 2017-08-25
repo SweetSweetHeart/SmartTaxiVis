@@ -29,13 +29,8 @@ function generateChordDiagram() {
   spliceMatrix(zones);
   spliceMatrix(data);
   spliceSubTripMatrix(data);
-
   var counts = getTotalDataCount(data);
-
-
   $('#dataCount').html(counts[0]);
-
-
   generateColorForZone(zones, counts[1], counts[2]);
 }
 

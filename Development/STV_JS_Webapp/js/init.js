@@ -29,6 +29,8 @@ $(() => {
     toggleAnimation(true);
   });
 
+
+
   chordAnimation();
 });
 
@@ -88,6 +90,8 @@ function initGlobalVariables() {
   // Some default values to play with, before the server returns actual data
 
   zones = null;
+  data = $.extend(true, [], tripT[TIME1]);
+  zoneT = zonePUT;
 
   lowerColor = 100;
   higherColor = 0;

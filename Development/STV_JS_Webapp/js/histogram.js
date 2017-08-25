@@ -12,10 +12,10 @@
  */
 function generateHistogram() {
   if ($('#histogramZone').is(':checked')) {
-    generateHistogramDataZone();
+    generateZoneHistogramData();
   }
   if ($('#histogramHour').is(':checked')) {
-    generateHistogramDataHour();
+    generateHourHistogramData();
   }
 }
 
@@ -24,7 +24,7 @@ function generateHistogram() {
  * Generate data for Hour Histogram.
  * 
  */
-function generateHistogramDataHour() {
+function generateHourHistogramData() {
   const histogramData = [];
   for (let i = 0; i < tripT.length; i++) {
     const data = $.extend(true, [], tripT[i]);
@@ -47,12 +47,14 @@ function generateHistogramDataHour() {
  * Generate data for Zone Histogram.
  * 
  */
-function generateHistogramDataZone() {
+function generateZoneHistogramData() {
   const histogramData = [];
-  const data = $.extend(true, [], zoneT[TIME1]);
-  spliceMatrix(data);
-  jQuery.each(data, (i, val) => {
-    histogramData.push([val.ZoneName, val.Data]);
+  const zoneData = $.extend(true, [], zoneT[TIME1]);
+  spliceMatrix(zoneData);
+  var counts = getTotalDataCount(data);
+  generateColorForZone(zoneData, counts[1], counts[2]);
+  jQuery.each(zoneData, (i, val) => {
+    histogramData.push([val.ZoneName, val.Data, val.color]);
   });
   renderHistogram(histogramData, 'zone');
 }
@@ -66,7 +68,6 @@ function generateHistogramDataZone() {
 function renderHistogram(input, type) {
   $('#histogram').empty();
   const data = anychart.data.set(input);
-
   // create a chart
   histogramChart = anychart.column();
 
