@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
+		<a class="navbar-brand" target="_blank" href="../../index.html"><img class="branding-logo" src="img/swansea-university-logo-white.png"
 		alt="logo"/>Smart Taxi Vis</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -79,14 +79,14 @@
  */
 function generateChordDiagram() {
   if ($('#chordTrip').is(':checked')) {
-    data = $.extend(true, [], TRIPMATRIX[TIME1]);
-    zoneT = $.extend(true, [], ZONE_PUMATRIX);
+    data = $.extend(true, [], TRIP_MATRIX[TIME1]);
+    zoneT = $.extend(true, [], ZONE_PU_MATRIX);
   } else if ($('#chordPrice').is(':checked')) {
-    data = $.extend(true, [], PRICEMATRIX[TIME1]);
-    zoneT = $.extend(true, [], ZONE_AVG_PRICEMATRIX);
+    data = $.extend(true, [], PRICE_MATRIX[TIME1]);
+    zoneT = $.extend(true, [], ZONE_AVG_PRICE_MATRIX);
   } else if ($('#chordDistance').is(':checked')) {
-    data = $.extend(true, [], DISTANCEMATRIX[TIME1]);
-    zoneT = $.extend(true, [], ZONE_AVG_DISTANCEMATRIX);
+    data = $.extend(true, [], DISTANCE_MATRIX[TIME1]);
+    zoneT = $.extend(true, [], ZONE_AVG_DISTANCE_MATRIX);
   }
 
   TOTALZONENUM = data.length;
@@ -222,20 +222,26 @@ function getDefaultLayout() {
  * @deprecated since issue #13 Dynamically update zoneSlider's range. 
  */
 function generateChordColorLegend() {
+  var text = "";
+  for (var index = 0; index &lt; 20; index++) {
+    text += `&lt;font id="color${index}" style="color:hsl(${index*11},90%,53%)">█&lt;/font>`;
+  }
+  console.log(text);
+
   $('#chordColorLegend').empty();
   $('#chordColorLegend').append('Legend: &amp;nbsp; &amp;nbsp; &amp;nbsp; Max ');
 
-  m_chordLegendColor = Array.from(new Set(m_chordLegendColor));
-  m_chordLegendColor.sort((a, b) => a - b);
-  let m_last;
-  jQuery.each(m_chordLegendColor, (i, val) => {
-    if ((m_last == null) || (m_last != null &amp;&amp; val > (m_last + 1))) {
+  chordLegendColor = Array.from(new Set(chordLegendColor));
+  chordLegendColor.sort((a, b) => a - b);
+  let last;
+  jQuery.each(chordLegendColor, (i, val) => {
+    if ((last == null) || (last != null &amp;&amp; val > (last + 1))) {
       $('#chordColorLegend').append(`&lt;font style=color:hsl(${val},90%,53%)>█&lt;/font>`);
     }
-    m_last = val;
+    last = val;
   });
   $('#chordColorLegend').append(' Min');
-  m_chordLegendColor = [];
+  chordLegendColor = [];
 }
 
 
@@ -245,15 +251,15 @@ function generateChordColorLegend() {
  * 
  */
 function initChordDiagram() {
-  const m_targetSize = $('#chordDiagram').width() * 0.85;
-  const m_marginSide = $('#chordDiagram').width() * 0.075;
+  const targetSize = $('#chordDiagram').width() * 0.85;
+  const marginSide = $('#chordDiagram').width() * 0.075;
 
   $(window).resize(() => {
     const svg = d3.select('#chordDiagram')
-      .attr('width', m_targetSize)
-      .attr('height', m_targetSize);
+      .attr('width', targetSize)
+      .attr('height', targetSize);
 
-    outerRadius = Math.min(m_targetSize, m_targetSize) / 2 - 50;
+    outerRadius = Math.min(targetSize, targetSize) / 2 - 50;
     innerRadius = outerRadius - 18;
 
     arc = d3.svg.arc()
@@ -267,10 +273,10 @@ function initChordDiagram() {
     $('[data-toggle="popover"]').popover('show');
   });
 
-  outerRadius = Math.min(m_targetSize, m_targetSize) / 2 - 50;
+  outerRadius = Math.min(targetSize, targetSize) / 2 - 50;
   innerRadius = outerRadius - 18;
 
-  viewBoxDimensions = `0 0 ${m_targetSize} ${m_targetSize}`;
+  viewBoxDimensions = `0 0 ${targetSize} ${targetSize}`;
 
   // Create the arc path data generator for the groups
   arc = d3.svg.arc()
@@ -283,10 +289,6 @@ function initChordDiagram() {
 
   LASTLAYOUT = getDefaultLayout(); // store layout between updates
 
-  // Create number formatting functions
-  const formatPercent = d3.format('%');
-  numberWithCommas = d3.format('0,f');
-
   // Initialize the visualization
   g = d3.select('#chordDiagram').append('svg')
     .attr('viewBox', viewBoxDimensions)
@@ -295,7 +297,7 @@ function initChordDiagram() {
     .attr('id', 'circle')
     .attr('overflow-x', 'visible')
     .attr('transform',
-      `translate(${m_targetSize / 2},${m_targetSize / 2})`);
+      `translate(${targetSize / 2},${targetSize / 2})`);
 
   g.append('circle')
     .attr('r', outerRadius);
@@ -308,51 +310,52 @@ function initChordDiagram() {
  * @param {boolean} innerZone - If the path if representing the inner zone trips. 
  * @returns {string} - THe text appeared when mouse hover the path. 
  */
-function formatPathTitle(path, innerZone) {
-  var m_label = "";
-  var m_prefix = "";
-  var m_suffix = "";
-  var m_dataFixer = 100;
-  var m_formatNumber = d3.format('.2f');
-  var m_dimension = getDataDimension();
+function formatPathTitle(path) {
+  var label = "";
+  var prefix = "";
+  var suffix = "";
+  var dataFixer = 100;
+  var formatNumber = d3.format('.2f');
+  var dimension = getDataDimension();
+  var innerZone = ZONES[path.target.index].ZoneName === ZONES[path.source.index].ZoneName;
 
   /** For inner zone trip, source and target are referenced, multiply by 100 to avoid double division later */
-  if (innerZone &amp;&amp; m_dimension !== 'trip')
-    path.source.value = path.source.value * m_dataFixer;
+  if (innerZone &amp;&amp; dimension !== 'trip')
+    path.source.value = path.source.value * dataFixer;
 
-  if (m_dimension === 'trip') {
-    m_formatNumber = d3.format('2,f');
-    path.source.value = m_formatNumber(path.source.value);
-    path.target.value = m_formatNumber(path.target.value);
-    m_label = " trips from ";
-  } else if (m_dimension === 'price') {
-    path.source.value = m_formatNumber(path.source.value / m_dataFixer);
-    path.target.value = m_formatNumber(path.target.value / m_dataFixer);
-    m_label = " from ";
-    m_prefix = "$";
-    m_suffix = " for ";
-  } else if (m_dimension === 'distance') {
-    path.source.value = m_formatNumber(path.source.value / m_dataFixer);
-    path.target.value = m_formatNumber(path.target.value / m_dataFixer);
-    m_label = " km from ";
-    m_suffix = " km for ";
+  if (dimension === 'trip') {
+    formatNumber = d3.format('2,f');
+    path.source.value = formatNumber(path.source.value);
+    path.target.value = formatNumber(path.target.value);
+    label = " trips from ";
+  } else if (dimension === 'price') {
+    path.source.value = formatNumber(path.source.value / dataFixer);
+    path.target.value = formatNumber(path.target.value / dataFixer);
+    label = " from ";
+    prefix = "$";
+    suffix = " for ";
+  } else if (dimension === 'distance') {
+    path.source.value = formatNumber(path.source.value / dataFixer);
+    path.target.value = formatNumber(path.target.value / dataFixer);
+    label = " km from ";
+    suffix = " km for ";
   }
   if (!innerZone) {
-    return [m_prefix, path.source.value,
-      m_label,
+    return [prefix, path.source.value,
+      label,
       ZONES[path.source.index].ZoneName,
       ' to ',
       ZONES[path.target.index].ZoneName,
       '\n',
-      m_prefix, path.target.value,
-      m_label,
+      prefix, path.target.value,
+      label,
       ZONES[path.target.index].ZoneName,
       ' to ',
       ZONES[path.source.index].ZoneName,
     ].join('');
   } else {
-    return m_prefix + path.source.value +
-      m_suffix + " inner zone trips within " +
+    return prefix + path.source.value +
+      suffix + " inner zone trips within " +
       ZONES[path.source.index].ZoneName;
   }
 }
@@ -361,31 +364,30 @@ function formatPathTitle(path, innerZone) {
  * Format the text appeared when mouse hover the chord. 
  *  
  * @param {string} chord - A JSON string that contains the chord. 
- * @param {any} index - The index of the taxi zone represented by the chord. 
+ * @param {number} index - The index of the taxi zone represented by the chord. 
  * @returns {string} - The text appeared when mouse hover the chord. 
  */
 function formatChordTitle(chord, index) {
-  var m_label = "";
-  var m_prefix = "";
-  var m_formatNumber = d3.format('.2f');
-  var m_dataFixer = 100;
+  var label = "";
+  var prefix = "";
+  var formatNumber = d3.format('.2f');
+  var dataFixer = 100;
 
-  var m_dimension = getDataDimension();
-  if (m_dimension === 'trip') {
-    m_formatNumber = d3.format('2,f');
-    chord.value = m_formatNumber(chord.value);
-    m_label = " trips ";
-  } else if (m_dimension === 'price') {
-    chord.value = m_formatNumber(chord.value / m_dataFixer);
-    m_label = " sum of average fare ";
-    m_prefix = "$";
-  } else if (m_dimension === 'distance') {
-    chord.value = m_formatNumber(chord.value / m_dataFixer);
-    m_label = " sum of average distance ";
+  var dimension = getDataDimension();
+  if (dimension === 'trip') {
+    formatNumber = d3.format('2,f');
+    chord.value = formatNumber(chord.value);
+    label = " trips ";
+    return prefix + chord.value + label + `for ${ZONES[index].ZoneName}`;
   }
-
-  return m_prefix + chord.value + m_label + `for ${
-    ZONES[index].ZoneName}`;
+  // else if (dimension === 'price') {
+  //   chord.value = formatNumber(chord.value / dataFixer);
+  //   label = " sum of average fare ";
+  //   prefix = "$";
+  // } else if (dimension === 'distance') {
+  //   chord.value = formatNumber(chord.value / dataFixer);
+  //   label = " sum of average distance ";
+  // }
 }
 
 /**
@@ -395,9 +397,9 @@ function formatChordTitle(chord, index) {
  */
 function updateChordDiagram(matrix) {
 
-  var m_durationLong = 800;
-  var m_durationShort = 10;
-  var m_opacity = .5;
+  var durationLong = 800;
+  var durationShort = 10;
+  var opacity = .5;
   // Remove empty svg generated by animation loop.
   $('svg[width=0]').remove();
   layout = getDefaultLayout();
@@ -407,15 +409,13 @@ function updateChordDiagram(matrix) {
   const groupG = g.selectAll('g.group')
     .data(layout.groups(), d =>
       d.index
-
-      // use a key function in case the
-      // groups are sorted differently between updates
+      // use the groups function in case the groups are sorted differently between updates
     );
 
   groupG.exit()
     .transition()
-    .duration(m_durationLong)
-    .attr('opacity', m_opacity)
+    .duration(durationLong)
+    .attr('opacity', opacity)
     .remove(); // Remove after transitions are complete
 
   const newGroups = groupG.enter().append('g')
@@ -440,12 +440,12 @@ function updateChordDiagram(matrix) {
   // Update the paths to match the layout and color
   groupG.select('path')
     .transition()
-    .duration(m_durationLong)
-    .attr('opacity', m_opacity)
+    .duration(durationLong)
+    .attr('opacity', opacity)
     .attr('d', arc)
     .attrTween('d', arcTween(LASTLAYOUT))
     .style('fill', d => ZONES[d.index].color)
-    .transition().duration(m_durationShort).attr('opacity', 1) // reset opacity
+    .transition().duration(durationShort).attr('opacity', 1) // reset opacity
   ;
 
   newGroups.append('svg:text')
@@ -457,18 +457,13 @@ function updateChordDiagram(matrix) {
   // Position group labels to match layout
   groupG.select('text')
     .transition()
-    .duration(m_durationLong)
+    .duration(durationLong)
     .text(d => ZONES[d.index].ZoneName)
     .attr('transform', (d) => {
       d.angle = (d.startAngle + d.endAngle) / 2;
-
-      // Store the midpoint angle in the data object
-
       return `rotate(${d.angle * 180 / Math.PI - 90})` +
         ` translate(${innerRadius + 26})${
         d.angle > Math.PI ? ' rotate(180)' : ' rotate(0)'}`;
-
-      // Include the rotate zero so that transforms can be interpolated
     })
     .attr('text-anchor', d => (d.angle > Math.PI ? 'end' : 'begin'));
 
@@ -483,24 +478,21 @@ function updateChordDiagram(matrix) {
 
   chordPaths.select('title')
     .text((d) => {
-      if (ZONES[d.target.index].ZoneName !== ZONES[d.source.index].ZoneName)
-        return formatPathTitle(d, false);
-      else
-        return formatPathTitle(d, true);
+      return formatPathTitle(d);
     });
 
   chordPaths.exit().transition()
-    .duration(m_durationLong)
+    .duration(durationLong)
     .attr('opacity', 0)
     .remove();
 
   chordPaths.transition()
-    .duration(m_durationLong)
-    .attr('opacity', m_opacity)
+    .duration(durationLong)
+    .attr('opacity', opacity)
     .style('fill', d => ZONES[d.source.index].color)
     .attrTween('d', chordTween(LASTLAYOUT))
     .attr('d', path)
-    .transition().duration(m_durationShort).attr('opacity', 1);
+    .transition().duration(durationShort).attr('opacity', 1);
 
   groupG.on('mouseover', (d) => {
     toggleAnimation(true);
@@ -513,29 +505,16 @@ function updateChordDiagram(matrix) {
     $(this).attr('opacity', 1);
   });
 
-  chordPaths.on('click', (d) => {
-    const pointData = getConnector(ZONES[d.source.index].ZoneId, ZONES[d.target.index].ZoneId);
-    if (ZONES[d.source.index].ZoneId != ZONES[d.target.index].ZoneId) {
-      /** 
-       * Connector dataset for AnyMap.
-       * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
-       * @type {anychart.data.Set} 
-       */
-      const connectorData = [{
-        points: pointData,
-        from: ZONES[d.source.index].ZoneName,
-        to: ZONES[d.target.index].ZoneName,
-      }];
-      addConnectorSeries(connectorData);
-      highlightPoint(ZONES[d.source.index]);
-    } else {
-      removeMapSeries('connector');
-      highlightPoint(ZONES[d.source.index]);
-    }
-    toggleAnimation(true);
+  groupG.on('click', (d) => {
+    console.log(ZONES[d.index]);
   });
+
+  chordPaths.on('click', (d) => {
+    pathToConnector(ZONES[d.source.index], ZONES[d.target.index]);
+  });
+
   chordPaths.on('mouseout', () => {
-    chordPaths.attr('opacity', m_opacity);
+    chordPaths.attr('opacity', opacity);
 
     // toggleAnimation(false);
   });
@@ -546,6 +525,34 @@ function updateChordDiagram(matrix) {
     }
   });
   LASTLAYOUT = layout;
+}
+
+/**
+ * Format the data from the clicked paht on Chord Diagram, and display the connector on Map.
+ * 
+ * @param {string} source - The origination taxi zone.
+ * @param {string} target - The destination taxi zone.
+ */
+function pathToConnector(source, target) {
+  const pointData = getConnector(source.ZoneId, target.ZoneId);
+  if (source.ZoneId != target.ZoneId) {
+    /** 
+     * Connector dataset for AnyMap.
+     * @see {@link https://docs.anychart.com/7.14.3/Maps/Connector_Maps}
+     * @type {anychart.data.Set} 
+     */
+    const connectorData = [{
+      points: pointData,
+      from: source.ZoneName,
+      to: target.ZoneName,
+    }];
+    addConnectorSeries(connectorData);
+    highlightPoint(source);
+  } else {
+    removeMapSeries('connector');
+    highlightPoint(source);
+  }
+  toggleAnimation(true);
 }
 
 function arcTween(oldLayout) {
@@ -661,7 +668,7 @@ function chordTween(oldLayout) {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
 	
-		on Fri Aug 25th 2017
+		on Sat Aug 26th 2017
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

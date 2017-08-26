@@ -5,6 +5,7 @@
  */
 
 $(() => {
+  // generateChordColorLegend();
   initGlobalVariables();
   initSliders();
   initChordDiagram();
@@ -290,7 +291,8 @@ function generateColorForZone(zone, maxCount, minCount) {
  * @returns {string} - A HSL color. 
  */
 function generateRainBowColorMap(data, maxCount, minCount) {
-  const i = Math.abs(((data - minCount) / (maxCount - minCount)) * 100 - 100);
+  const maxHue = 220;
+  const i = Math.abs(((data - minCount) / (maxCount - minCount)) * maxHue - maxHue);
 
   // if (lowerColor > i)
   //   lowerColor = i;
@@ -298,5 +300,5 @@ function generateRainBowColorMap(data, maxCount, minCount) {
   // if (higherColor < i)
   //   higherColor = i;
 
-  return `hsl(${i},83%,50%)`;
+  return `hsl(${i},90%,50%)`;
 }
