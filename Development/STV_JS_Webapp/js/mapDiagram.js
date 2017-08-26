@@ -18,8 +18,8 @@ function generateMap() {
   $('#anymap').empty();
   MAP = anychart.map();
 
-  const m_credits = MAP.credits();
-  m_credits.enabled(false);
+  const credits = MAP.credits();
+  credits.enabled(false);
 
   /** Create a AnyMap base MAP */
   MAP.unboundRegions()
@@ -33,24 +33,24 @@ function generateMap() {
   /** IMPORTANT!!! MAP ID field to geojson ID field */
   MAP.geoIdField('LocationID');
 
-  const m_choroplethSeries = MAP.choropleth(connectorBase);
-  m_choroplethSeries.id('choropleth');
-  m_choroplethSeries.enabled(false);
-  m_choroplethSeries.legendItem().enabled(false);
+  const choroplethSeries = MAP.choropleth(connectorBase);
+  choroplethSeries.id('choropleth');
+  choroplethSeries.enabled(false);
+  choroplethSeries.legendItem().enabled(false);
 
   jQuery.each(ZONES, (i, val) => {
-    const m_dataLoop = anychart.data.set([val]);
+    const dataLoop = anychart.data.set([val]);
     /** Map data attributes. 
      * @type {anychart.data.Mapping}
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
-    const m_loopSeries = m_dataLoop.mapAs(null, {
+    const loopSeries = dataLoop.mapAs(null, {
       name: 'ZoneName',
       id: 'ZoneId',
       size: 'Data',
       color: 'color',
     });
-    createDotSeries(val.ZoneName, m_loopSeries, val.color);
+    createDotSeries(val.ZoneName, loopSeries, val.color);
   });
 
   /** Disable MAP legend */
@@ -61,8 +61,8 @@ function generateMap() {
    * @type {anychart.ui.Zoom}
    * @see {@link https://api.anychart.com/7.14.3/anychart.ui#zoom}
    */
-  const m_zoomController = anychart.ui.zoom();
-  m_zoomController.render(MAP);
+  const zoomController = anychart.ui.zoom();
+  zoomController.render(MAP);
 
   /** Disable context menu */
   MAP.contextMenu(false);
@@ -92,25 +92,25 @@ function createDotSeries(name, input, color) {
    * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
    * @type {anychart.core.MAP.series.Marker}
    */
-  const m_series = MAP.marker(input).name(name);
-  m_series.legendItem({
+  const series = MAP.marker(input).name(name);
+  series.legendItem({
     iconType: 'circle',
     iconFill: color,
     iconStroke: '2 #E1E1E1',
   });
-  var m_label;
+  var label;
 
-  var m_dimension = getDataDimension();
-  if (m_dimension === 'trip') {
-    m_label = "Trips: ";
-  } else if (m_dimension === 'price') {
-    m_label = "Price: ";
-  } else if (m_dimension === 'distance') {
-    m_label = "Distance: ";
+  var dimension = getDataDimension();
+  if (dimension === 'trip') {
+    label = "Trips: ";
+  } else if (dimension === 'price') {
+    label = "Price: ";
+  } else if (dimension === 'distance') {
+    label = "Distance: ";
   }
 
   /** Set Tooltip for series */
-  m_series.tooltip()
+  series.tooltip()
     .useHtml(true)
     .padding([8, 13, 10, 13])
     .title(false)
@@ -118,11 +118,11 @@ function createDotSeries(name, input, color) {
     .fontSize(14)
     .format(function () {
       return `<span>${this.getData('name')}</span><br />` +
-        `<span style="font-size: 12px; color: #E1E1E1">${m_label} ${
+        `<span style="font-size: 12px; color: #E1E1E1">${label} ${
         parseInt(this.getData('size')).toLocaleString()}</span>`;
     });
   /** Set styles for marker */
-  m_series.selectionMode('none')
+  series.selectionMode('none')
     .stroke('2 #757575')
     .hoverStroke('3 #616161')
     .fill(color)
@@ -134,8 +134,8 @@ function createDotSeries(name, input, color) {
     .selectFill('#e74c3c')
     .selectSize(10)
     .type('circle');
-  m_series.id(name);
-  m_series.listen('pointClick', (e) => {
+  series.id(name);
+  series.listen('pointClick', (e) => {
     if (POINTCLICKED != null) {
       POINTCLICKED.selected(false);
     }
@@ -174,26 +174,26 @@ function filterMarkerRange(start, end) {
  */
 function getConnector(pointA, pointB) {
   /** get the choropleth series */
-  const m_series = MAP.getSeries('choropleth');
+  const series = MAP.getSeries('choropleth');
   /** find regions with proper ids */
-  const m_pointIndex1 = m_series.data().find('id', pointA);
-  const m_pointIndex2 = m_series.data().find('id', pointB);
+  const pointIndex1 = series.data().find('id', pointA);
+  const pointIndex2 = series.data().find('id', pointB);
   /** get the bounds of the first region */
-  const m_point1 = m_series.getPoint(m_pointIndex1);
-  const m_bounds1 = m_point1.getFeatureBounds();
+  const point1 = series.getPoint(pointIndex1);
+  const bounds1 = point1.getFeatureBounds();
   /** get the bounds of the second region */
-  const m_point2 = m_series.getPoint(m_pointIndex2);
-  const m_bounds2 = m_point2.getFeatureBounds();
+  const point2 = series.getPoint(pointIndex2);
+  const bounds2 = point2.getFeatureBounds();
 
   /** transformers pixel coordinates to latitude and longitude */
-  const m_latLong1 = MAP.inverseTransform(m_bounds1.left + m_bounds1.width / 2, m_bounds1.top + m_bounds1.height / 2);
-  const m_latLong2 = MAP.inverseTransform(m_bounds2.left + m_bounds2.width / 2, m_bounds2.top + m_bounds2.height / 2);
+  const latLong1 = MAP.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
+  const latLong2 = MAP.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
 
   /** return an array to be used in connector series */
-  return [parseFloat((m_latLong1.lat).toFixed(7)),
-    parseFloat((m_latLong1.long).toFixed(7)),
-    parseFloat((m_latLong2.lat).toFixed(7)),
-    parseFloat((m_latLong2.long).toFixed(7))
+  return [parseFloat((latLong1.lat).toFixed(7)),
+    parseFloat((latLong1.long).toFixed(7)),
+    parseFloat((latLong2.lat).toFixed(7)),
+    parseFloat((latLong2.long).toFixed(7))
   ];
 }
 
@@ -221,18 +221,18 @@ function highlightPoint(zone) {
       POINTCLICKED.selected(false);
     }
   }
-  const m_seriesId = zone.ZoneName;
-  const m_targetSeries = MAP.getSeries(m_seriesId);
-  const m_pointIndex = m_targetSeries.data().find('id', zone.ZoneId);
+  const seriesId = zone.ZoneName;
+  const targetSeries = MAP.getSeries(seriesId);
+  const pointIndex = targetSeries.data().find('id', zone.ZoneId);
 
   if (POINTCLICKED != null) {
     if (POINTCLICKED.get('id') != zone.ZoneId) {
-      POINTCLICKED = m_targetSeries.getPoint(m_pointIndex);
+      POINTCLICKED = targetSeries.getPoint(pointIndex);
       POINTCLICKED.selected(true);
       MAP.zoomToFeature(zone.ZoneId);
     }
   } else {
-    POINTCLICKED = m_targetSeries.getPoint(m_pointIndex);
+    POINTCLICKED = targetSeries.getPoint(pointIndex);
     POINTCLICKED.selected(true);
     MAP.zoomToFeature(zone.ZoneId);
   }
@@ -245,12 +245,12 @@ function highlightPoint(zone) {
  */
 function highlightZone(zoneId) {
   removeMapSeries('highlightZone');
-  const m_highlightZone = MAP.choropleth([{
+  const highlightZone = MAP.choropleth([{
     id: zoneId,
   }]);
-  m_highlightZone.id('highlightZone');
-  m_highlightZone.enabled(true);
-  m_highlightZone.legendItem().enabled(false);
+  highlightZone.id('highlightZone');
+  highlightZone.enabled(true);
+  highlightZone.legendItem().enabled(false);
   MAP.zoomToFeature(zoneId);
 }
 
@@ -262,11 +262,11 @@ function highlightZone(zoneId) {
 function addConnectorSeries(connectorData) {
   /** add connector series */
   removeMapSeries('connector');
-  const m_connectorSeries = MAP.connector(connectorData);
-  m_connectorSeries.id('connector');
-  m_connectorSeries.tooltip().format('{%from} - {%to}');
-  m_connectorSeries.legendItem().enabled(false);
-  m_connectorSeries.listen('pointClick', (e) => {
+  const connectorSeries = MAP.connector(connectorData);
+  connectorSeries.id('connector');
+  connectorSeries.tooltip().format('{%from} - {%to}');
+  connectorSeries.legendItem().enabled(false);
+  connectorSeries.listen('pointClick', (e) => {
     toggleAnimation(true);
   });
 }

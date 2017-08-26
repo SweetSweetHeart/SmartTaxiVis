@@ -231,22 +231,22 @@ function toggleNoMatchMessage(toggle) {
  * @returns {number[]} - An array with total data count, the largest and the smallest values in the input data.
  */
 function getTotalDataCount(data) {
-  let m_dataCount = 0;
-  let m_maxCount = 0;
-  let m_minCount = 0;
+  let dataCount = 0;
+  let maxCount = 0;
+  let minCount = 0;
 
   jQuery.each(data, (i, val) => {
-    var m_count = getIndividualDataCount(val);
-    m_dataCount += m_count;
+    var count = getIndividualDataCount(val);
+    dataCount += count;
 
-    if (m_count > m_maxCount)
-      m_maxCount = m_count;
+    if (count > maxCount)
+      maxCount = count;
 
-    if (m_count < m_minCount)
-      m_minCount = m_count;
+    if (count < minCount)
+      minCount = count;
   });
 
-  return [m_dataCount, m_maxCount, m_minCount];
+  return [dataCount, maxCount, minCount];
 }
 
 
@@ -257,11 +257,11 @@ function getTotalDataCount(data) {
  * @returns {number[]} - The total data count.
  */
 function getIndividualDataCount(data) {
-  let m_count = 0;
+  let count = 0;
   jQuery.each(data, (i, val) => {
-    m_count += parseInt(val);
+    count += parseInt(val);
   });
-  return m_count;
+  return count;
 }
 
 

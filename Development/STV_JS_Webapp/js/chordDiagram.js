@@ -6,14 +6,14 @@
  */
 function generateChordDiagram() {
   if ($('#chordTrip').is(':checked')) {
-    data = $.extend(true, [], TRIPMATRIX[TIME1]);
-    zoneT = $.extend(true, [], ZONE_PUMATRIX);
+    data = $.extend(true, [], TRIP_MATRIX[TIME1]);
+    zoneT = $.extend(true, [], ZONE_PU_MATRIX);
   } else if ($('#chordPrice').is(':checked')) {
-    data = $.extend(true, [], PRICEMATRIX[TIME1]);
-    zoneT = $.extend(true, [], ZONE_AVG_PRICEMATRIX);
+    data = $.extend(true, [], PRICE_MATRIX[TIME1]);
+    zoneT = $.extend(true, [], ZONE_AVG_PRICE_MATRIX);
   } else if ($('#chordDistance').is(':checked')) {
-    data = $.extend(true, [], DISTANCEMATRIX[TIME1]);
-    zoneT = $.extend(true, [], ZONE_AVG_DISTANCEMATRIX);
+    data = $.extend(true, [], DISTANCE_MATRIX[TIME1]);
+    zoneT = $.extend(true, [], ZONE_AVG_DISTANCE_MATRIX);
   }
 
   TOTALZONENUM = data.length;
@@ -152,17 +152,17 @@ function generateChordColorLegend() {
   $('#chordColorLegend').empty();
   $('#chordColorLegend').append('Legend: &nbsp; &nbsp; &nbsp; Max ');
 
-  m_chordLegendColor = Array.from(new Set(m_chordLegendColor));
-  m_chordLegendColor.sort((a, b) => a - b);
-  let m_last;
-  jQuery.each(m_chordLegendColor, (i, val) => {
-    if ((m_last == null) || (m_last != null && val > (m_last + 1))) {
+  chordLegendColor = Array.from(new Set(chordLegendColor));
+  chordLegendColor.sort((a, b) => a - b);
+  let last;
+  jQuery.each(chordLegendColor, (i, val) => {
+    if ((last == null) || (last != null && val > (last + 1))) {
       $('#chordColorLegend').append(`<font style=color:hsl(${val},90%,53%)>█</font>`);
     }
-    m_last = val;
+    last = val;
   });
   $('#chordColorLegend').append(' Min');
-  m_chordLegendColor = [];
+  chordLegendColor = [];
 }
 
 
@@ -172,15 +172,15 @@ function generateChordColorLegend() {
  * 
  */
 function initChordDiagram() {
-  const m_targetSize = $('#chordDiagram').width() * 0.85;
-  const m_marginSide = $('#chordDiagram').width() * 0.075;
+  const targetSize = $('#chordDiagram').width() * 0.85;
+  const marginSide = $('#chordDiagram').width() * 0.075;
 
   $(window).resize(() => {
     const svg = d3.select('#chordDiagram')
-      .attr('width', m_targetSize)
-      .attr('height', m_targetSize);
+      .attr('width', targetSize)
+      .attr('height', targetSize);
 
-    outerRadius = Math.min(m_targetSize, m_targetSize) / 2 - 50;
+    outerRadius = Math.min(targetSize, targetSize) / 2 - 50;
     innerRadius = outerRadius - 18;
 
     arc = d3.svg.arc()
@@ -194,10 +194,10 @@ function initChordDiagram() {
     $('[data-toggle="popover"]').popover('show');
   });
 
-  outerRadius = Math.min(m_targetSize, m_targetSize) / 2 - 50;
+  outerRadius = Math.min(targetSize, targetSize) / 2 - 50;
   innerRadius = outerRadius - 18;
 
-  viewBoxDimensions = `0 0 ${m_targetSize} ${m_targetSize}`;
+  viewBoxDimensions = `0 0 ${targetSize} ${targetSize}`;
 
   // Create the arc path data generator for the groups
   arc = d3.svg.arc()
@@ -222,7 +222,7 @@ function initChordDiagram() {
     .attr('id', 'circle')
     .attr('overflow-x', 'visible')
     .attr('transform',
-      `translate(${m_targetSize / 2},${m_targetSize / 2})`);
+      `translate(${targetSize / 2},${targetSize / 2})`);
 
   g.append('circle')
     .attr('r', outerRadius);
@@ -236,50 +236,50 @@ function initChordDiagram() {
  * @returns {string} - THe text appeared when mouse hover the path. 
  */
 function formatPathTitle(path, innerZone) {
-  var m_label = "";
-  var m_prefix = "";
-  var m_suffix = "";
-  var m_dataFixer = 100;
-  var m_formatNumber = d3.format('.2f');
-  var m_dimension = getDataDimension();
+  var label = "";
+  var prefix = "";
+  var suffix = "";
+  var dataFixer = 100;
+  var formatNumber = d3.format('.2f');
+  var dimension = getDataDimension();
 
   /** For inner zone trip, source and target are referenced, multiply by 100 to avoid double division later */
-  if (innerZone && m_dimension !== 'trip')
-    path.source.value = path.source.value * m_dataFixer;
+  if (innerZone && dimension !== 'trip')
+    path.source.value = path.source.value * dataFixer;
 
-  if (m_dimension === 'trip') {
-    m_formatNumber = d3.format('2,f');
-    path.source.value = m_formatNumber(path.source.value);
-    path.target.value = m_formatNumber(path.target.value);
-    m_label = " trips from ";
-  } else if (m_dimension === 'price') {
-    path.source.value = m_formatNumber(path.source.value / m_dataFixer);
-    path.target.value = m_formatNumber(path.target.value / m_dataFixer);
-    m_label = " from ";
-    m_prefix = "$";
-    m_suffix = " for ";
-  } else if (m_dimension === 'distance') {
-    path.source.value = m_formatNumber(path.source.value / m_dataFixer);
-    path.target.value = m_formatNumber(path.target.value / m_dataFixer);
-    m_label = " km from ";
-    m_suffix = " km for ";
+  if (dimension === 'trip') {
+    formatNumber = d3.format('2,f');
+    path.source.value = formatNumber(path.source.value);
+    path.target.value = formatNumber(path.target.value);
+    label = " trips from ";
+  } else if (dimension === 'price') {
+    path.source.value = formatNumber(path.source.value / dataFixer);
+    path.target.value = formatNumber(path.target.value / dataFixer);
+    label = " from ";
+    prefix = "$";
+    suffix = " for ";
+  } else if (dimension === 'distance') {
+    path.source.value = formatNumber(path.source.value / dataFixer);
+    path.target.value = formatNumber(path.target.value / dataFixer);
+    label = " km from ";
+    suffix = " km for ";
   }
   if (!innerZone) {
-    return [m_prefix, path.source.value,
-      m_label,
+    return [prefix, path.source.value,
+      label,
       ZONES[path.source.index].ZoneName,
       ' to ',
       ZONES[path.target.index].ZoneName,
       '\n',
-      m_prefix, path.target.value,
-      m_label,
+      prefix, path.target.value,
+      label,
       ZONES[path.target.index].ZoneName,
       ' to ',
       ZONES[path.source.index].ZoneName,
     ].join('');
   } else {
-    return m_prefix + path.source.value +
-      m_suffix + " inner zone trips within " +
+    return prefix + path.source.value +
+      suffix + " inner zone trips within " +
       ZONES[path.source.index].ZoneName;
   }
 }
@@ -292,26 +292,26 @@ function formatPathTitle(path, innerZone) {
  * @returns {string} - The text appeared when mouse hover the chord. 
  */
 function formatChordTitle(chord, index) {
-  var m_label = "";
-  var m_prefix = "";
-  var m_formatNumber = d3.format('.2f');
-  var m_dataFixer = 100;
+  var label = "";
+  var prefix = "";
+  var formatNumber = d3.format('.2f');
+  var dataFixer = 100;
 
-  var m_dimension = getDataDimension();
-  if (m_dimension === 'trip') {
-    m_formatNumber = d3.format('2,f');
-    chord.value = m_formatNumber(chord.value);
-    m_label = " trips ";
-  } else if (m_dimension === 'price') {
-    chord.value = m_formatNumber(chord.value / m_dataFixer);
-    m_label = " sum of average fare ";
-    m_prefix = "$";
-  } else if (m_dimension === 'distance') {
-    chord.value = m_formatNumber(chord.value / m_dataFixer);
-    m_label = " sum of average distance ";
+  var dimension = getDataDimension();
+  if (dimension === 'trip') {
+    formatNumber = d3.format('2,f');
+    chord.value = formatNumber(chord.value);
+    label = " trips ";
+  } else if (dimension === 'price') {
+    chord.value = formatNumber(chord.value / dataFixer);
+    label = " sum of average fare ";
+    prefix = "$";
+  } else if (dimension === 'distance') {
+    chord.value = formatNumber(chord.value / dataFixer);
+    label = " sum of average distance ";
   }
 
-  return m_prefix + chord.value + m_label + `for ${
+  return prefix + chord.value + label + `for ${
     ZONES[index].ZoneName}`;
 }
 
@@ -322,9 +322,9 @@ function formatChordTitle(chord, index) {
  */
 function updateChordDiagram(matrix) {
 
-  var m_durationLong = 800;
-  var m_durationShort = 10;
-  var m_opacity = .5;
+  var durationLong = 800;
+  var durationShort = 10;
+  var opacity = .5;
   // Remove empty svg generated by animation loop.
   $('svg[width=0]').remove();
   layout = getDefaultLayout();
@@ -341,8 +341,8 @@ function updateChordDiagram(matrix) {
 
   groupG.exit()
     .transition()
-    .duration(m_durationLong)
-    .attr('opacity', m_opacity)
+    .duration(durationLong)
+    .attr('opacity', opacity)
     .remove(); // Remove after transitions are complete
 
   const newGroups = groupG.enter().append('g')
@@ -367,12 +367,12 @@ function updateChordDiagram(matrix) {
   // Update the paths to match the layout and color
   groupG.select('path')
     .transition()
-    .duration(m_durationLong)
-    .attr('opacity', m_opacity)
+    .duration(durationLong)
+    .attr('opacity', opacity)
     .attr('d', arc)
     .attrTween('d', arcTween(LASTLAYOUT))
     .style('fill', d => ZONES[d.index].color)
-    .transition().duration(m_durationShort).attr('opacity', 1) // reset opacity
+    .transition().duration(durationShort).attr('opacity', 1) // reset opacity
   ;
 
   newGroups.append('svg:text')
@@ -384,7 +384,7 @@ function updateChordDiagram(matrix) {
   // Position group labels to match layout
   groupG.select('text')
     .transition()
-    .duration(m_durationLong)
+    .duration(durationLong)
     .text(d => ZONES[d.index].ZoneName)
     .attr('transform', (d) => {
       d.angle = (d.startAngle + d.endAngle) / 2;
@@ -417,17 +417,17 @@ function updateChordDiagram(matrix) {
     });
 
   chordPaths.exit().transition()
-    .duration(m_durationLong)
+    .duration(durationLong)
     .attr('opacity', 0)
     .remove();
 
   chordPaths.transition()
-    .duration(m_durationLong)
-    .attr('opacity', m_opacity)
+    .duration(durationLong)
+    .attr('opacity', opacity)
     .style('fill', d => ZONES[d.source.index].color)
     .attrTween('d', chordTween(LASTLAYOUT))
     .attr('d', path)
-    .transition().duration(m_durationShort).attr('opacity', 1);
+    .transition().duration(durationShort).attr('opacity', 1);
 
   groupG.on('mouseover', (d) => {
     toggleAnimation(true);
@@ -462,7 +462,7 @@ function updateChordDiagram(matrix) {
     toggleAnimation(true);
   });
   chordPaths.on('mouseout', () => {
-    chordPaths.attr('opacity', m_opacity);
+    chordPaths.attr('opacity', opacity);
 
     // toggleAnimation(false);
   });
