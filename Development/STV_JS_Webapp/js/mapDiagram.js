@@ -38,7 +38,7 @@ function generateMap() {
   choroplethSeries.enabled(false);
   choroplethSeries.legendItem().enabled(false);
 
-  jQuery.each(ZONES, (i, val) => {
+  jQuery.each(ZONE_HOLDER, (i, val) => {
     const dataLoop = anychart.data.set([val]);
     /** Map data attributes. 
      * @type {anychart.data.Mapping}
@@ -96,7 +96,7 @@ function createDotSeries(name, input, color) {
   series.legendItem({
     iconType: 'circle',
     iconFill: color,
-    iconStroke: '2 #E1E1E1',
+    iconStroke: '2 #E1E1E1'
   });
   var label;
 
@@ -185,15 +185,18 @@ function getConnector(pointA, pointB) {
   const point2 = series.getPoint(pointIndex2);
   const bounds2 = point2.getFeatureBounds();
 
-  /** transformers pixel coordinates to latitude and longitude */
-  const latLong1 = MAP.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
-  const latLong2 = MAP.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
+  var half = 2;
 
+  /** transformers pixel coordinates to latitude and longitude */
+  const latLong1 = MAP.inverseTransform(bounds1.left + bounds1.width / half, bounds1.top + bounds1.height / half);
+  const latLong2 = MAP.inverseTransform(bounds2.left + bounds2.width / half, bounds2.top + bounds2.height / half);
+
+  var floatPrecision = 7;
   /** return an array to be used in connector series */
-  return [parseFloat((latLong1.lat).toFixed(7)),
-    parseFloat((latLong1.long).toFixed(7)),
-    parseFloat((latLong2.lat).toFixed(7)),
-    parseFloat((latLong2.long).toFixed(7))
+  return [parseFloat((latLong1.lat).toFixed(floatPrecision)),
+    parseFloat((latLong1.long).toFixed(floatPrecision)),
+    parseFloat((latLong2.lat).toFixed(floatPrecision)),
+    parseFloat((latLong2.long).toFixed(floatPrecision))
   ];
 }
 
@@ -246,7 +249,7 @@ function highlightPoint(zone) {
 function highlightZone(zoneId) {
   removeMapSeries('highlightZone');
   const highlightZone = MAP.choropleth([{
-    id: zoneId,
+    id: zoneId
   }]);
   highlightZone.id('highlightZone');
   highlightZone.enabled(true);
@@ -260,13 +263,27 @@ function highlightZone(zoneId) {
  * @param {string} connectorData - The JSON data to be added to the base MAP as a Connector series.
  */
 function addConnectorSeries(connectorData) {
-  /** add connector series */
-  removeMapSeries('connector');
-  const connectorSeries = MAP.connector(connectorData);
-  connectorSeries.id('connector');
-  connectorSeries.tooltip().format('{%from} - {%to}');
-  connectorSeries.legendItem().enabled(false);
-  connectorSeries.listen('pointClick', (e) => {
-    toggleAnimation(true);
+  for (var index = 0; index < ZONE2; index++) {
+    removeMapSeries('connector' + index);
+  }
+
+
+  jQuery.each(connectorData, (i, val) => {
+    var connectorSeries = MAP.connector([val]);
+    connectorSeries.id('connector' + i);
+    connectorSeries.fill(val.color).hoverFill(val.color).stroke(val.color).hoverStroke(val.color);
+
+    var weightMultiplier = 50;
+    if (val.weight !== 0) {
+      connectorSeries.endSize(val.weight * weightMultiplier + 1);
+    }
+    connectorSeries.markers().size(0);
+    connectorSeries.hoverMarkers().size(0);
+
+    connectorSeries.tooltip().format(val.data + ' trips from ' + val.from + ' to ' + val.to);
+    connectorSeries.legendItem().enabled(false);
+    connectorSeries.listen('pointClick', (e) => {
+      toggleAnimation(true);
+    });
   });
 }

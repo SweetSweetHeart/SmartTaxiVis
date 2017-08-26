@@ -6,32 +6,32 @@
  */
 function generateChordDiagram() {
   if ($('#chordTrip').is(':checked')) {
-    data = $.extend(true, [], TRIP_MATRIX[TIME1]);
+    DATA_HOLDER = $.extend(true, [], TRIP_MATRIX[TIME1]);
     zoneT = $.extend(true, [], ZONE_PU_MATRIX);
   } else if ($('#chordPrice').is(':checked')) {
-    data = $.extend(true, [], PRICE_MATRIX[TIME1]);
+    DATA_HOLDER = $.extend(true, [], PRICE_MATRIX[TIME1]);
     zoneT = $.extend(true, [], ZONE_AVG_PRICE_MATRIX);
   } else if ($('#chordDistance').is(':checked')) {
-    data = $.extend(true, [], DISTANCE_MATRIX[TIME1]);
+    DATA_HOLDER = $.extend(true, [], DISTANCE_MATRIX[TIME1]);
     zoneT = $.extend(true, [], ZONE_AVG_DISTANCE_MATRIX);
   }
 
-  TOTALZONENUM = data.length;
+  TOTALZONENUM = DATA_HOLDER.length;
 
   ZONESLIDER.noUiSlider.updateOptions({
     range: {
       'min': 1,
-      'max': data.length
+      'max': DATA_HOLDER.length
     }
   });
 
-  ZONES = $.extend(true, [], zoneT[TIME1]);
-  spliceMatrix(ZONES);
-  spliceMatrix(data);
-  spliceSubTripMatrix(data);
-  var counts = getTotalDataCount(data);
+  ZONE_HOLDER = $.extend(true, [], zoneT[TIME1]);
+  spliceMatrix(ZONE_HOLDER);
+  spliceMatrix(DATA_HOLDER);
+  spliceSubTripMatrix(DATA_HOLDER);
+  var counts = getTotalDataCount(DATA_HOLDER);
   $('#dataCount').html(counts[0]);
-  generateColorForZone(ZONES, counts[1], counts[2]);
+  generateColorForZone(ZONE_HOLDER, counts[1], counts[2]);
 }
 
 /**
@@ -47,10 +47,10 @@ function formatJSON() {
    * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set} 
    * @type {anychart.data.Set} 
    */
-  const dataSet = anychart.data.set(ZONES);
+  const dataSet = anychart.data.set(ZONE_HOLDER);
   connectorData = null;
 
-  updateChordDiagram(data);
+  updateChordDiagram(DATA_HOLDER);
 
 }
 
@@ -244,7 +244,7 @@ function formatPathTitle(path) {
   var dataFixer = 100;
   var formatNumber = d3.format('.2f');
   var dimension = getDataDimension();
-  var innerZone = ZONES[path.target.index].ZoneName === ZONES[path.source.index].ZoneName;
+  var innerZone = ZONE_HOLDER[path.target.index].ZoneName === ZONE_HOLDER[path.source.index].ZoneName;
 
   /** For inner zone trip, source and target are referenced, multiply by 100 to avoid double division later */
   if (innerZone && dimension !== 'trip')
@@ -270,20 +270,20 @@ function formatPathTitle(path) {
   if (!innerZone) {
     return [prefix, path.source.value,
       label,
-      ZONES[path.source.index].ZoneName,
+      ZONE_HOLDER[path.source.index].ZoneName,
       ' to ',
-      ZONES[path.target.index].ZoneName,
+      ZONE_HOLDER[path.target.index].ZoneName,
       '\n',
       prefix, path.target.value,
       label,
-      ZONES[path.target.index].ZoneName,
+      ZONE_HOLDER[path.target.index].ZoneName,
       ' to ',
-      ZONES[path.source.index].ZoneName,
+      ZONE_HOLDER[path.source.index].ZoneName,
     ].join('');
   } else {
     return prefix + path.source.value +
       suffix + " inner zone trips within " +
-      ZONES[path.source.index].ZoneName;
+      ZONE_HOLDER[path.source.index].ZoneName;
   }
 }
 
@@ -305,7 +305,7 @@ function formatChordTitle(chord, index) {
     formatNumber = d3.format('2,f');
     chord.value = formatNumber(chord.value);
     label = " trips ";
-    return prefix + chord.value + label + `for ${ZONES[index].ZoneName}`;
+    return prefix + chord.value + label + `for ${ZONE_HOLDER[index].ZoneName}`;
   }
   // else if (dimension === 'price') {
   //   chord.value = formatNumber(chord.value / dataFixer);
@@ -362,7 +362,7 @@ function updateChordDiagram(matrix) {
   // (those based on the group index, not on the value)
   newGroups.append('path')
     .attr('id', d => `group${d.index}`)
-    .style('fill', d => ZONES[d.index].color);
+    .style('fill', d => ZONE_HOLDER[d.index].color);
 
   // Update the paths to match the layout and color
   groupG.select('path')
@@ -371,7 +371,7 @@ function updateChordDiagram(matrix) {
     .attr('opacity', opacity)
     .attr('d', arc)
     .attrTween('d', arcTween(LASTLAYOUT))
-    .style('fill', d => ZONES[d.index].color)
+    .style('fill', d => ZONE_HOLDER[d.index].color)
     .transition().duration(durationShort).attr('opacity', 1) // reset opacity
   ;
 
@@ -379,13 +379,13 @@ function updateChordDiagram(matrix) {
     .attr('xlink:href', d => `#group${d.index}`)
     .attr('dy', '.35em')
     .attr('color', '#fff')
-    .text(d => ZONES[d.index].ZoneName);
+    .text(d => ZONE_HOLDER[d.index].ZoneName);
 
   // Position group labels to match layout
   groupG.select('text')
     .transition()
     .duration(durationLong)
-    .text(d => ZONES[d.index].ZoneName)
+    .text(d => ZONE_HOLDER[d.index].ZoneName)
     .attr('transform', (d) => {
       d.angle = (d.startAngle + d.endAngle) / 2;
       return `rotate(${d.angle * 180 / Math.PI - 90})` +
@@ -416,7 +416,7 @@ function updateChordDiagram(matrix) {
   chordPaths.transition()
     .duration(durationLong)
     .attr('opacity', opacity)
-    .style('fill', d => ZONES[d.source.index].color)
+    .style('fill', d => ZONE_HOLDER[d.source.index].color)
     .attrTween('d', chordTween(LASTLAYOUT))
     .attr('d', path)
     .transition().duration(durationShort).attr('opacity', 1);
@@ -433,11 +433,11 @@ function updateChordDiagram(matrix) {
   });
 
   groupG.on('click', (d) => {
-    console.log(ZONES[d.index]);
+    chordToConnector(d.index);
   });
 
   chordPaths.on('click', (d) => {
-    pathToConnector(ZONES[d.source.index], ZONES[d.target.index]);
+    pathToConnector(ZONE_HOLDER[d.source.index], ZONE_HOLDER[d.target.index]);
   });
 
   chordPaths.on('mouseout', () => {
@@ -472,6 +472,9 @@ function pathToConnector(source, target) {
       points: pointData,
       from: source.ZoneName,
       to: target.ZoneName,
+      data: source.Data,
+      color: source.color,
+      weight: 0
     }];
     addConnectorSeries(connectorData);
     highlightPoint(source);
@@ -480,6 +483,26 @@ function pathToConnector(source, target) {
     highlightPoint(source);
   }
   toggleAnimation(true);
+}
+
+function chordToConnector(index) {
+  var source = ZONE_HOLDER[index];
+  var connectorData = [];
+  jQuery.each(DATA_HOLDER[index], (i, val) => {
+    if (index !== i && val !== 0) {
+      var pointData = getConnector(source.ZoneId, ZONE_HOLDER[i].ZoneId);
+      var connector = {};
+      connector.points = pointData;
+      connector.from = source.ZoneName;
+      connector.to = ZONE_HOLDER[i].ZoneName;
+      connector.data = val;
+      connector.weight = val / source.Data;
+      connector.color = ZONE_HOLDER[i].color;
+      connectorData.push(connector);
+    }
+  });
+  addConnectorSeries(connectorData);
+  highlightPoint(source);
 }
 
 function arcTween(oldLayout) {
