@@ -143,7 +143,7 @@ function createDotSeries(name, input, color) {
     POINTCLICKED = e.point;
     POINTCLICKED.selected(true);
     removeMapSeries('connector');
-    MAP.zoomToFeature(POINTCLICKED.get('id'));
+    //MAP.zoomToFeature(POINTCLICKED.get('id'));
     toggleAnimation(true);
   });
 }
@@ -216,9 +216,10 @@ function removeMapSeries(seriesId) {
 /**
  * Highlight the corresponding marker of the selected zone on the MAP.
  * 
- * @param {string} zone - The marker that should be highlighted.
+ * @param {string} zone - The marker that should be highlighted. 
+ * @param {boolean} zoom - Decide whether should zoom in onto the zone.
  */
-function highlightPoint(zone) {
+function highlightPoint(zone, zoom) {
   if (POINTCLICKED != null) {
     if (POINTCLICKED.get('id') != zone.ZoneId) {
       POINTCLICKED.selected(false);
@@ -232,12 +233,18 @@ function highlightPoint(zone) {
     if (POINTCLICKED.get('id') != zone.ZoneId) {
       POINTCLICKED = targetSeries.getPoint(pointIndex);
       POINTCLICKED.selected(true);
-      MAP.zoomToFeature(zone.ZoneId);
+      if (zoom)
+        MAP.zoomToFeature(zone.ZoneId);
+      else
+        $('.anychart-zoom-zoomFitAll').click();
     }
   } else {
     POINTCLICKED = targetSeries.getPoint(pointIndex);
     POINTCLICKED.selected(true);
-    MAP.zoomToFeature(zone.ZoneId);
+    if (zoom)
+      MAP.zoomToFeature(zone.ZoneId);
+    else
+      $('.anychart-zoom-zoomFitAll').click();
   }
 }
 

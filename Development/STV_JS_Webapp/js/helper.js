@@ -314,3 +314,19 @@ function generateRainBowColorMap(data, maxCount, minCount) {
 
   return `hsl(${i},90%,50%)`;
 }
+
+
+function setHourHTML(hour) {
+  $('#hour').html(hour);
+}
+
+function setDataCountHTML(count) {
+  console.log(count);
+  const dimension = getDataDimension();
+  if (dimension === 'trip') {
+    $('#dataCount').html(count);
+    $('#dataCountLabel').show();
+  } else {
+    $('#dataCountLabel').hide();
+  }
+}

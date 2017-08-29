@@ -30,7 +30,7 @@ function generateChordDiagram() {
   spliceMatrix(DATA_HOLDER);
   spliceSubTripMatrix(DATA_HOLDER);
   var counts = getTotalDataCount(DATA_HOLDER);
-  $('#dataCount').html(counts[0]);
+  setDataCountHTML(counts[0]);
   generateColorForZone(ZONE_HOLDER, counts[1], counts[2]);
 }
 
@@ -62,20 +62,22 @@ function formatJSON() {
  * @param {number} high - The hud of the color for the smallest data value.
  */
 function highlightColormapLegend(low, high) {
+  const colorInterval = 3;
+
   $('#chordColorLegend font').css({
     "border-style": "none ",
     "border-width": "7px"
   });
 
-  $('#color' + Math.ceil(low / 3) * 3).css({
+  $('#color' + Math.ceil(low / colorInterval) * colorInterval).css({
     "border-style": "solid none solid solid"
   });
 
-  $('#color' + Math.ceil((high / 3) - 1) * 3).css({
+  $('#color' + Math.ceil((high / colorInterval) - 1) * colorInterval).css({
     "border-style": "solid solid solid none"
   });
 
-  for (var index = (Math.ceil(low / 3) + 1) * 3; index < Math.ceil((high / 3) - 1) * 3; index += 3) {
+  for (var index = (Math.ceil(low / colorInterval) + 1) * colorInterval; index < Math.ceil((high / colorInterval) - 1) * colorInterval; index += colorInterval) {
     $('#color' + index).css({
       "border-style": "solid none solid none"
     });
@@ -88,16 +90,18 @@ function highlightColormapLegend(low, high) {
  * 
  */
 function chordAnimation() {
+  const lastHour = 23;
+  const animationInterval = 3000;
   isPaused = false;
   interval = setInterval(() => {
     if (!isPaused) {
       TIME1++;
-      if (TIME1 > 23) {
+      if (TIME1 > lastHour) {
         TIME1 = 0;
       }
       animationSetData();
     }
-  }, 3000);
+  }, animationInterval);
 }
 
 
@@ -107,7 +111,7 @@ function chordAnimation() {
  */
 function animationSetData() {
   hourSlider.noUiSlider.set(TIME1);
-  $('#hour').html(TIME1);
+  setHourHTML(TIME1);
   formatJSON();
 }
 
@@ -181,13 +185,17 @@ function initChordDiagram() {
   const targetSize = $('#chordDiagram').width() * 0.85;
   const marginSide = $('#chordDiagram').width() * 0.075;
 
+  const marginBetweenLabelAndChord = 50;
+  const chordRadiusWidth = 18;
+  const half = 2;
+
   $(window).resize(() => {
     const svg = d3.select('#chordDiagram')
       .attr('width', targetSize)
       .attr('height', targetSize);
 
-    outerRadius = Math.min(targetSize, targetSize) / 2 - 50;
-    innerRadius = outerRadius - 18;
+    outerRadius = Math.min(targetSize, targetSize) / half - marginBetweenLabelAndChord;
+    innerRadius = outerRadius - chordRadiusWidth;
 
     arc = d3.svg.arc()
       .innerRadius(innerRadius)
@@ -200,8 +208,8 @@ function initChordDiagram() {
     $('[data-toggle="popover"]').popover('show');
   });
 
-  outerRadius = Math.min(targetSize, targetSize) / 2 - 50;
-  innerRadius = outerRadius - 18;
+  outerRadius = Math.min(targetSize, targetSize) / half - marginBetweenLabelAndChord;
+  innerRadius = outerRadius - chordRadiusWidth;
 
   viewBoxDimensions = `0 0 ${targetSize} ${targetSize}`;
 
@@ -216,6 +224,7 @@ function initChordDiagram() {
 
   LASTLAYOUT = getDefaultLayout(); // store layout between updates
 
+
   // Initialize the visualization
   g = d3.select('#chordDiagram').append('svg')
     .attr('viewBox', viewBoxDimensions)
@@ -224,7 +233,7 @@ function initChordDiagram() {
     .attr('id', 'circle')
     .attr('overflow-x', 'visible')
     .attr('transform',
-      `translate(${targetSize / 2},${targetSize / 2})`);
+      `translate(${targetSize / half},${targetSize / half})`);
 
   g.append('circle')
     .attr('r', outerRadius);
@@ -334,63 +343,41 @@ function updateChordDiagram(matrix) {
 
   // Create/update "group" elements
   const groupG = g.selectAll('g.group')
-    .data(layout.groups(), d =>
-      d.index
-      // use the groups function in case the groups are sorted differently between updates
-    );
+    .data(layout.groups(), d => d.index);
 
-  groupG.exit()
-    .transition()
-    .duration(durationLong)
-    .attr('opacity', opacity)
-    .remove(); // Remove after transitions are complete
+  groupG.exit().transition().duration(durationLong)
+    .attr('opacity', opacity).remove(); // Remove after transitions are complete
 
-  const newGroups = groupG.enter().append('g')
-    .attr('class', 'group');
-
-  // The enter selection is stored in a variable so we can
-  // Enter the <path>, <text>, and <title> elements as well
+  const newGroups = groupG.enter().append('g').attr('class', 'group');
 
   // Create the title tooltip for the new groups
   newGroups.append('title');
 
   // Update the (tooltip) title text based on the data
-  groupG.select('title')
-    .text((d, i) => formatChordTitle(d, i));
+  groupG.select('title').text((d, i) => formatChordTitle(d, i));
 
   // create the arc paths and set the constant attributes
   // (those based on the group index, not on the value)
-  newGroups.append('path')
-    .attr('id', d => `group${d.index}`)
+  newGroups.append('path').attr('id', d => `group${d.index}`)
     .style('fill', d => ZONE_HOLDER[d.index].color);
 
   // Update the paths to match the layout and color
-  groupG.select('path')
-    .transition()
-    .duration(durationLong)
-    .attr('opacity', opacity)
-    .attr('d', arc)
+  groupG.select('path').transition().duration(durationLong)
+    .attr('opacity', opacity).attr('d', arc)
     .attrTween('d', arcTween(LASTLAYOUT))
     .style('fill', d => ZONE_HOLDER[d.index].color)
     .transition().duration(durationShort).attr('opacity', 1) // reset opacity
   ;
 
-  newGroups.append('svg:text')
-    .attr('xlink:href', d => `#group${d.index}`)
-    .attr('dy', '.35em')
-    .attr('color', '#fff')
+  newGroups.append('svg:text').attr('xlink:href', d => `#group${d.index}`)
+    .attr('dy', '.35em').attr('color', '#fff')
     .text(d => ZONE_HOLDER[d.index].ZoneName);
 
   // Position group labels to match layout
-  groupG.select('text')
-    .transition()
-    .duration(durationLong)
+  groupG.select('text').transition().duration(durationLong)
     .text(d => ZONE_HOLDER[d.index].ZoneName)
     .attr('transform', (d) => {
-      d.angle = (d.startAngle + d.endAngle) / 2;
-      return `rotate(${d.angle * 180 / Math.PI - 90})` +
-        ` translate(${innerRadius + 26})${
-        d.angle > Math.PI ? ' rotate(180)' : ' rotate(0)'}`;
+      return calculateLabelRotation(d);
     })
     .attr('text-anchor', d => (d.angle > Math.PI ? 'end' : 'begin'));
 
@@ -398,8 +385,7 @@ function updateChordDiagram(matrix) {
     .data(layout.chords(), chordKey);
 
   const newChords = chordPaths.enter()
-    .append('path')
-    .attr('class', 'chord');
+    .append('path').attr('class', 'chord');
 
   newChords.append('title');
 
@@ -410,15 +396,12 @@ function updateChordDiagram(matrix) {
 
   chordPaths.exit().transition()
     .duration(durationLong)
-    .attr('opacity', 0)
-    .remove();
+    .attr('opacity', 0).remove();
 
-  chordPaths.transition()
-    .duration(durationLong)
+  chordPaths.transition().duration(durationLong)
     .attr('opacity', opacity)
     .style('fill', d => ZONE_HOLDER[d.source.index].color)
-    .attrTween('d', chordTween(LASTLAYOUT))
-    .attr('d', path)
+    .attrTween('d', chordTween(LASTLAYOUT)).attr('d', path)
     .transition().duration(durationShort).attr('opacity', 1);
 
   groupG.on('mouseover', (d) => {
@@ -442,8 +425,6 @@ function updateChordDiagram(matrix) {
 
   chordPaths.on('mouseout', () => {
     chordPaths.attr('opacity', opacity);
-
-    // toggleAnimation(false);
   });
   g.on('mouseout', function () {
     if (this == g.node()) {
@@ -452,6 +433,19 @@ function updateChordDiagram(matrix) {
     }
   });
   LASTLAYOUT = layout;
+}
+
+/**
+ * Calculate the rotation angle for label of the chord.
+ * 
+ * @param {string} input - Contains the JSON data for a chord
+ * @returns The rotation and translation angles for the label.
+ */
+function calculateLabelRotation(input) {
+  input.angle = (input.startAngle + input.endAngle) / 2;
+  return `rotate(${input.angle * 180 / Math.PI - 90})` +
+    ` translate(${innerRadius + 26})${
+      input.angle > Math.PI ? ' rotate(180)' : ' rotate(0)'}`;
 }
 
 /**
@@ -477,11 +471,11 @@ function pathToConnector(source, target) {
       weight: 0
     }];
     addConnectorSeries(connectorData);
-    highlightPoint(source);
   } else {
     removeMapSeries('connector');
-    highlightPoint(source);
   }
+
+  highlightPoint(source, true);
   toggleAnimation(true);
 }
 
@@ -502,7 +496,7 @@ function chordToConnector(index) {
     }
   });
   addConnectorSeries(connectorData);
-  highlightPoint(source);
+  highlightPoint(source, false);
 }
 
 function arcTween(oldLayout) {

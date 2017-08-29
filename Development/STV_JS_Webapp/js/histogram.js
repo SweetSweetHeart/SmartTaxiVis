@@ -115,7 +115,7 @@ function renderHistogram(input, type) {
   } else {
     var xAxis = histogramChart.xAxis().title('Zone');
     histogramChart.listen('pointClick', (e) => {
-      highlightZone(ZONE_HOLDER[e.pointIndex].ZoneId);
+      highlightZone(ZONE_HOLDER[e.pointIndex].ZoneId, true);
       toggleAnimation(true);
     });
   }
