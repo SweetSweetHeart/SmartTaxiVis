@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta name="viewport" content="width=device-width">
-    <title>Home Page - Smart City Vis - Qiru Wang</title>
+    <title>Home Page - Smart Taxi Vis - Qiru Wang</title>
     <link href="css/Site.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
@@ -53,70 +53,63 @@
     </nav>
     <div class="container-fluid">
         <div class="body-content">
-            <div id="nomatch" style="display: none;">
-                <h1>
-                    <i class="fa fa-meh-o fa-2x fa-fw"></i> No trips matched for the conditions defined.
-                </h1>
+            <div class="row text-center">
+                <div class="col-sm-6 col-xs-12">
+                    <p id="chordColorLegend">
+                        <button id="btn_pause" type="button" class="btn btn-danger">
+                                        <i class="fa fa-pause" aria-hidden="true"></i>
+                                    &nbsp;&nbsp;Animation
+                                    </button> <code>Legend: Max
+                        <font id="color0" style="color:hsl(0,90%,53%)">█</font><font id="color1" style="color:hsl(11,90%,53%)">█</font><font id="color2" style="color:hsl(22,90%,53%)">█</font><font id="color3" style="color:hsl(33,90%,53%)">█</font><font id="color4" style="color:hsl(44,90%,53%)">█</font><font id="color5" style="color:hsl(55,90%,53%)">█</font><font id="color6" style="color:hsl(66,90%,53%)">█</font><font id="color7" style="color:hsl(77,90%,53%)">█</font><font id="color8" style="color:hsl(88,90%,53%)">█</font><font id="color9" style="color:hsl(99,90%,53%)">█</font><font id="color10" style="color:hsl(110,90%,53%)">█</font><font id="color11" style="color:hsl(121,90%,53%)">█</font><font id="color12" style="color:hsl(132,90%,53%)">█</font><font id="color13" style="color:hsl(143,90%,53%)">█</font><font id="color14" style="color:hsl(154,90%,53%)">█</font><font id="color15" style="color:hsl(165,90%,53%)">█</font><font id="color16" style="color:hsl(176,90%,53%)">█</font><font id="color17" style="color:hsl(187,90%,53%)">█</font><font id="color18" style="color:hsl(198,90%,53%)">█</font><font id="color19" style="color:hsl(209,90%,53%)">█</font> Min</code></p>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <strong>Colour Dimension</strong>:
+                    <label class="radio-inline"> 
+                        <input type="radio" name="colorRadioGroup" id="chordTrip" value="trip" checked> Number of Trips 
+                    </label>
+                    <label class="radio-inline"> 
+                            <input type="radio" name="colorRadioGroup" id="chordPrice" value="price"> Avg.Price 
+                        </label>
+                    <label class="radio-inline"> 
+                                <input type="radio" name="colorRadioGroup" id="chordDistance" value="distance"> Avg.Distance 
+                            </label>
+                </div>
+            </div>
+            <div class="row sliderRow">
+                <div class="col-md-7 col-xs-10 slider" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
+                <div class="col-md-4 col-xs-10 slider" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
             </div>
             <div class="row visualisationRow">
                 <div class="row chordRow col-sm-6 col-xs-12">
-                    <div class="text-center">
-                        <p id="chordColorLegend"><code>Legend: Max
-                            <font id="color0" style="color:hsl(0,90%,53%)">█</font><font id="color1" style="color:hsl(11,90%,53%)">█</font><font id="color2" style="color:hsl(22,90%,53%)">█</font><font id="color3" style="color:hsl(33,90%,53%)">█</font><font id="color4" style="color:hsl(44,90%,53%)">█</font><font id="color5" style="color:hsl(55,90%,53%)">█</font><font id="color6" style="color:hsl(66,90%,53%)">█</font><font id="color7" style="color:hsl(77,90%,53%)">█</font><font id="color8" style="color:hsl(88,90%,53%)">█</font><font id="color9" style="color:hsl(99,90%,53%)">█</font><font id="color10" style="color:hsl(110,90%,53%)">█</font><font id="color11" style="color:hsl(121,90%,53%)">█</font><font id="color12" style="color:hsl(132,90%,53%)">█</font><font id="color13" style="color:hsl(143,90%,53%)">█</font><font id="color14" style="color:hsl(154,90%,53%)">█</font><font id="color15" style="color:hsl(165,90%,53%)">█</font><font id="color16" style="color:hsl(176,90%,53%)">█</font><font id="color17" style="color:hsl(187,90%,53%)">█</font><font id="color18" style="color:hsl(198,90%,53%)">█</font><font id="color19" style="color:hsl(209,90%,53%)">█</font> Min</code></p>
-                        <strong>Colour Dimension</strong>:
-                        <label class="radio-inline"> 
-                            <input type="radio" name="colorRadioGroup" id="chordTrip" value="trip" checked> Number of Trips 
-                        </label>
-                        <label class="radio-inline"> 
-                                <input type="radio" name="colorRadioGroup" id="chordPrice" value="price"> Avg.Price 
-                            </label>
-                        <label class="radio-inline"> 
-                                    <input type="radio" name="colorRadioGroup" id="chordDistance" value="distance"> Avg.Distance 
-                                </label>
-                    </div>
-
                     <div id="chordDiagram"></div>
                 </div>
                 <div class="row mapRow col-sm-6 col-xs-12">
                     <div id="anymap"></div>
                 </div>
             </div>
-            <div class="row controlRow vertical-align">
-                <div class="col-xs-4">
-                    <div class="row buttonRow">
-                        <div class="col-sm-5 col-xs-12">
-                            <button id="btn_pause" type="button" class="btn btn-danger">
-                                <i class="fa fa-pause" aria-hidden="true"></i>
-                            &nbsp;&nbsp;Animation
-                            </button>
-                        </div>
-                        <div class="col-sm-7 col-xs-12">
-                            <label class="radio-inline">
+            <div class="row controlRow vertical-align text-center">
+
+                <div class="col-xs-4 col-md-6">
+                    <label class="radio-inline">
                                     <strong>Hour</strong>: <span id="hour"></span>
                                  </label>
-                            <label class="radio-inline" id="dataCountLabel">
+                    <label class="radio-inline" id="dataCountLabel">
                                     <strong>Trips</strong>: <span id="dataCount"></span>
                                 </label>
-                        </div>
-                    </div>
-
                 </div>
-                <div class="col-xs-8 pull-right">
-                    <div class="text-center">
-                        <strong>Histogram visualises</strong>:
-                        <label class="radio-inline">
+                <div class="col-xs-8 col-md-6">
+                    <strong>Histogram visualises</strong>:
+                    <label class="radio-inline">
                                     <input type="radio" name="radioGroup" id="histogramZone" value="zone"> Zones
                                 </label>
-                        <label class="radio-inline">
+                    <label class="radio-inline">
                                     <input type="radio" name="radioGroup" id="histogramHour" value="hour" checked> Hours
                                 </label>
-                    </div>
-                    <div id='histogram'></div>
                 </div>
             </div>
-            <div class="row sliderRow">
-                <div class="col-md-7 col-xs-10 slider" id="zoneSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust taxizones"></div>
-                <div class="col-md-4 col-xs-10 slider" id="hourSlider" data-toggle="popover" data-placement="bottom" data-content="Adjust hour"></div>
+
+            <div class="row">
+                <div class="col-xs-11" id='histogram'></div>
             </div>
         </div>
 

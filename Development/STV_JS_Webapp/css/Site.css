@@ -1,8 +1,8 @@
 ﻿img.branding-logo {
-  max-height: 30px;
-  display: inline-block !important;
-  padding: 0px;
-  margin: -3px 5px 0 0;
+    max-height: 30px;
+    display: inline-block !important;
+    padding: 0px;
+    margin: -3px 5px 0 0;
 }
 
 #chart {
@@ -31,7 +31,7 @@ svg {
     font-family: 'Exo 2', sans-serif;
 }
 
-#chordColorLegend {
+#chordColorLegend font {
     opacity: 0.6;
 }
 
@@ -41,6 +41,7 @@ svg {
 #anymap {
     height: 700px;
 }
+
 
 /* .anychart-credits {
     display: none;
@@ -61,57 +62,6 @@ svg {
 
 footer p {
     text-align: center;
-}
-
-@media(min-width: 1920px) {
-    .buttonRow div:nth-child(2) {
-        margin: -3em 0em 0em 15em;
-    }
-    .buttonRow h4:nth-child(2) {
-        margin: -1.6em 0em 0em 10em;
-    }
-    #btn_pause {
-        margin-left: 1em;
-    }
-}
-
-@media(min-width: 1440px) and (max-width: 1919px) {
-    .buttonRow div:nth-child(2) {
-        margin: -3em 0em 0em 12em;
-    }
-    .buttonRow h4:nth-child(2) {
-        margin: -1.6em 0em 0em 8em;
-    }
-    /* .buttonRow {
-        margin: 3.7em 0em 0em 0em;
-    } */
-}
-
-@media(min-width: 960px) and (max-width: 1439px) {
-    .buttonRow div:nth-child(2) {
-        margin: -3em 0em 0em 9em;
-    }
-    .buttonRow h4:nth-child(2) {
-        margin: -1.6em 0em 0em 6em;
-    }
-    /* .buttonRow {
-        margin: 3.7em 0em 0em 0em;
-    } */
-}
-
-@media(min-width: 768px) and (max-width: 959px) {
-    .buttonRow div:nth-child(2) {
-        margin: -3em 0em 0em 9em;
-    }
-    .buttonRow h4 {
-        margin: 0.2em 0em 0em 4.5em;
-    }
-}
-
-@media(min-width: 425px) and (max-width: 767px) {
-    .buttonRow {
-        margin: 0em 0em 0em 0em;
-    }
 }
 
 .vertical-align {

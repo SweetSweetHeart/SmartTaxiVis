@@ -119,7 +119,7 @@ function renderHistogram(input, type) {
       toggleAnimation(true);
     });
   }
-  const yAxis = histogramChart.yAxis().title('Trips').orientation('right');
+  const yAxis = histogramChart.yAxis().title('Trips').orientation('left');
 
   histogramChart.contextMenu(false);
   histogramChart.barGroupsPadding(0);

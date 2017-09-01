@@ -316,12 +316,21 @@ function generateRainBowColorMap(data, maxCount, minCount) {
 }
 
 
+/**
+ * Update the hour for the HTML element.
+ * 
+ * @param {number} hour - The hour used.
+ */
 function setHourHTML(hour) {
   $('#hour').html(hour);
 }
 
+/**
+ * Update the data count for the HTML element.
+ * 
+ * @param {number} count - The data count used.
+ */
 function setDataCountHTML(count) {
-  console.log(count);
   const dimension = getDataDimension();
   if (dimension === 'trip') {
     $('#dataCount').html(count);
