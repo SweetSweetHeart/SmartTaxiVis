@@ -262,6 +262,7 @@ function highlightZone(zoneId) {
   highlightZone.enabled(true);
   highlightZone.legendItem().enabled(false);
   MAP.zoomToFeature(zoneId);
+  highlightZone.tooltip().enabled(false);
 }
 
 /**
