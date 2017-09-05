@@ -44,6 +44,7 @@ function generateMap() {
      * @type {anychart.data.Mapping}
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
+
     const loopSeries = dataLoop.mapAs(null, {
       name: 'ZoneName',
       id: 'ZoneId',
@@ -98,16 +99,8 @@ function createDotSeries(name, input, color) {
     iconFill: color,
     iconStroke: '2 #E1E1E1'
   });
-  var label;
 
   var dimension = getDataDimension();
-  if (dimension === 'trip') {
-    label = "Trips: ";
-  } else if (dimension === 'price') {
-    label = "Price: ";
-  } else if (dimension === 'distance') {
-    label = "Distance: ";
-  }
 
   /** Set Tooltip for series */
   series.tooltip()
@@ -117,9 +110,13 @@ function createDotSeries(name, input, color) {
     .separator(false)
     .fontSize(14)
     .format(function () {
-      return `<span>${this.getData('name')}</span><br />` +
-        `<span style="font-size: 12px; color: #E1E1E1">${label} ${
+      if (dimension === 'trip') {
+        return `<span>${this.getData('name')}</span><br>` +
+          `<span style="font-size: 12px; color: #E1E1E1">Trips: ${
         parseInt(this.getData('size')).toLocaleString()}</span>`;
+      } else {
+        return `<span>${this.getData('name')}</span>`;
+      }
     });
   /** Set styles for marker */
   series.selectionMode('none')

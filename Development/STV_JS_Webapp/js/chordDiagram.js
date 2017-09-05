@@ -183,7 +183,6 @@ function generateChordColorLegend() {
  */
 function initChordDiagram() {
   const targetSize = $('#chordDiagram').width() * 0.85;
-  const marginSide = $('#chordDiagram').width() * 0.075;
 
   const marginBetweenLabelAndChord = 50;
   const chordRadiusWidth = 18;
@@ -194,7 +193,7 @@ function initChordDiagram() {
       .attr('width', targetSize)
       .attr('height', targetSize);
 
-    outerRadius = Math.min(targetSize, targetSize) / half - marginBetweenLabelAndChord;
+    outerRadius = targetSize / half - marginBetweenLabelAndChord;
     innerRadius = outerRadius - chordRadiusWidth;
 
     arc = d3.svg.arc()
@@ -208,7 +207,7 @@ function initChordDiagram() {
     $('[data-toggle="popover"]').popover('show');
   });
 
-  outerRadius = Math.min(targetSize, targetSize) / half - marginBetweenLabelAndChord;
+  outerRadius = targetSize / half - marginBetweenLabelAndChord;
   innerRadius = outerRadius - chordRadiusWidth;
 
   viewBoxDimensions = `0 0 ${targetSize} ${targetSize}`;

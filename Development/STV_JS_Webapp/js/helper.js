@@ -297,14 +297,15 @@ function generateColorForZone(zone, maxCount, minCount) {
 /**
  * Generate a rainbow color map based on the ratio of data count and the min/max data count.
  * 
- * @param {number} data  - Data count of one zone as the dividend.
+ * @param {number} count  - Data count of one zone as the dividend.
  * @param {number} max - Max data count in the selected dataset.
  * @param {number} min - Min data count in the selected dataset.
  * @returns {string} - A HSL color. 
  */
-function generateRainBowColorMap(data, maxCount, minCount) {
+function generateRainBowColorMap(count, maxCount, minCount) {
   const maxHue = 220;
-  const i = Math.abs(((data - minCount) / (maxCount - minCount)) * maxHue - maxHue);
+  let hue = (count - minCount) / (maxCount - minCount);
+  hue = (maxHue - hue * maxHue);
 
   // if (lowerColor > i)
   //   lowerColor = i;
@@ -312,7 +313,7 @@ function generateRainBowColorMap(data, maxCount, minCount) {
   // if (higherColor < i)
   //   higherColor = i;
 
-  return `hsl(${i},90%,50%)`;
+  return `hsl(${hue},90%,50%)`;
 }
 
 
