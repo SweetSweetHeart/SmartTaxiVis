@@ -39,19 +39,19 @@ function generateMap() {
   choroplethSeries.legendItem().enabled(false);
 
   jQuery.each(ZONE_HOLDER, (i, val) => {
-    const dataLoop = anychart.data.set([val]);
+    const seriesData = anychart.data.set([val]);
+
     /** Map data attributes. 
      * @type {anychart.data.Mapping}
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
-
-    const loopSeries = dataLoop.mapAs(null, {
+    const newSeries = seriesData.mapAs(null, {
       name: 'ZoneName',
       id: 'ZoneId',
       size: 'Data',
       color: 'color',
     });
-    createDotSeries(val.ZoneName, loopSeries, val.color);
+    createMarkerSeries(val.ZoneName, newSeries, val.color);
   });
 
   /** Disable MAP legend */
@@ -88,7 +88,7 @@ function generateMap() {
  * @param {string} color - Color of the marker series.
  * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
  */
-function createDotSeries(name, input, color) {
+function createMarkerSeries(name, input, color) {
   /** Set marker series.
    * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
    * @type {anychart.core.MAP.series.Marker}
@@ -272,6 +272,7 @@ function addConnectorSeries(connectorData) {
     removeMapSeries('connector' + index);
   }
 
+  console.log();
 
   jQuery.each(connectorData, (i, val) => {
     var connectorSeries = MAP.connector([val]);
@@ -282,8 +283,12 @@ function addConnectorSeries(connectorData) {
     if (val.weight !== 0) {
       connectorSeries.endSize(val.weight * weightMultiplier + 1);
     }
-    connectorSeries.markers().size(0);
-    connectorSeries.hoverMarkers().size(0);
+
+    var markerSize = 20;
+    var markerHoverSize = 25;
+
+    connectorSeries.markers().position('95%').size(markerSize);
+    connectorSeries.hoverMarkers().size(markerHoverSize);
 
     connectorSeries.tooltip().format(val.data + ' trips from ' + val.from + ' to ' + val.to);
     connectorSeries.legendItem().enabled(false);
