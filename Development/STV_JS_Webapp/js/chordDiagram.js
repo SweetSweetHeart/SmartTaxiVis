@@ -262,6 +262,7 @@ function formatPathTitle(path) {
     formatNumber = d3.format('2,f');
     path.source.value = formatNumber(path.source.value);
     path.target.value = formatNumber(path.target.value);
+    suffix = " ";
     label = " trips from ";
   } else if (dimension === 'price') {
     path.source.value = formatNumber(path.source.value / dataFixer);
@@ -290,7 +291,7 @@ function formatPathTitle(path) {
     ].join('');
   } else {
     return prefix + path.source.value +
-      suffix + " inner zone trips within " +
+      suffix + "inner zone trips within " +
       ZONE_HOLDER[path.source.index].ZoneName;
   }
 }
