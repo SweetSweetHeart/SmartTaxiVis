@@ -51,7 +51,7 @@ function generateZoneHistogramData() {
   const histogramData = [];
   const zoneData = $.extend(true, [], zoneT[TIME1]);
   spliceMatrix(zoneData);
-  var counts = getTotalDataCount(data);
+  var counts = getTotalDataCount(DATA_HOLDER);
   generateColorForZone(zoneData, counts[1], counts[2]);
   jQuery.each(zoneData, (i, val) => {
     histogramData.push([val.ZoneName, val.Data, val.color]);
@@ -79,7 +79,7 @@ function renderHistogram(input, type) {
     x: [0],
     value: [1],
     fill: [2],
-    stroke: [2],
+    stroke: [2]
   });
 
   const series = histogramChart.column(dataMap);
@@ -115,11 +115,11 @@ function renderHistogram(input, type) {
   } else {
     var xAxis = histogramChart.xAxis().title('Zone');
     histogramChart.listen('pointClick', (e) => {
-      highlightZone(ZONES[e.pointIndex].ZoneId);
+      highlightZone(ZONE_HOLDER[e.pointIndex].ZoneId);
       toggleAnimation(true);
     });
   }
-  const yAxis = histogramChart.yAxis().title('Trips').orientation('right');
+  const yAxis = histogramChart.yAxis().title('Trips').orientation('left');
 
   histogramChart.contextMenu(false);
   histogramChart.barGroupsPadding(0);

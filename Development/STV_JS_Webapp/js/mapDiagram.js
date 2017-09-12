@@ -38,19 +38,20 @@ function generateMap() {
   choroplethSeries.enabled(false);
   choroplethSeries.legendItem().enabled(false);
 
-  jQuery.each(ZONES, (i, val) => {
-    const dataLoop = anychart.data.set([val]);
+  jQuery.each(ZONE_HOLDER, (i, val) => {
+    const seriesData = anychart.data.set([val]);
+
     /** Map data attributes. 
      * @type {anychart.data.Mapping}
      * @see {@link https://api.anychart.com/7.14.3/anychart.data.Set#mapAs}
      */
-    const loopSeries = dataLoop.mapAs(null, {
+    const newSeries = seriesData.mapAs(null, {
       name: 'ZoneName',
       id: 'ZoneId',
       size: 'Data',
       color: 'color',
     });
-    createDotSeries(val.ZoneName, loopSeries, val.color);
+    createMarkerSeries(val.ZoneName, newSeries, val.color);
   });
 
   /** Disable MAP legend */
@@ -87,7 +88,7 @@ function generateMap() {
  * @param {string} color - Color of the marker series.
  * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
  */
-function createDotSeries(name, input, color) {
+function createMarkerSeries(name, input, color) {
   /** Set marker series.
    * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map#marker}
    * @type {anychart.core.MAP.series.Marker}
@@ -96,18 +97,10 @@ function createDotSeries(name, input, color) {
   series.legendItem({
     iconType: 'circle',
     iconFill: color,
-    iconStroke: '2 #E1E1E1',
+    iconStroke: '2 #E1E1E1'
   });
-  var label;
 
   var dimension = getDataDimension();
-  if (dimension === 'trip') {
-    label = "Trips: ";
-  } else if (dimension === 'price') {
-    label = "Price: ";
-  } else if (dimension === 'distance') {
-    label = "Distance: ";
-  }
 
   /** Set Tooltip for series */
   series.tooltip()
@@ -117,9 +110,13 @@ function createDotSeries(name, input, color) {
     .separator(false)
     .fontSize(14)
     .format(function () {
-      return `<span>${this.getData('name')}</span><br />` +
-        `<span style="font-size: 12px; color: #E1E1E1">${label} ${
+      if (dimension === 'trip') {
+        return `<span>${this.getData('name')}</span><br>` +
+          `<span style="font-size: 12px; color: #E1E1E1">Total trips: ${
         parseInt(this.getData('size')).toLocaleString()}</span>`;
+      } else {
+        return `<span>${this.getData('name')}</span>`;
+      }
     });
   /** Set styles for marker */
   series.selectionMode('none')
@@ -143,7 +140,7 @@ function createDotSeries(name, input, color) {
     POINTCLICKED = e.point;
     POINTCLICKED.selected(true);
     removeMapSeries('connector');
-    MAP.zoomToFeature(POINTCLICKED.get('id'));
+    //MAP.zoomToFeature(POINTCLICKED.get('id'));
     toggleAnimation(true);
   });
 }
@@ -185,15 +182,18 @@ function getConnector(pointA, pointB) {
   const point2 = series.getPoint(pointIndex2);
   const bounds2 = point2.getFeatureBounds();
 
-  /** transformers pixel coordinates to latitude and longitude */
-  const latLong1 = MAP.inverseTransform(bounds1.left + bounds1.width / 2, bounds1.top + bounds1.height / 2);
-  const latLong2 = MAP.inverseTransform(bounds2.left + bounds2.width / 2, bounds2.top + bounds2.height / 2);
+  var half = 2;
 
+  /** transformers pixel coordinates to latitude and longitude */
+  const latLong1 = MAP.inverseTransform(bounds1.left + bounds1.width / half, bounds1.top + bounds1.height / half);
+  const latLong2 = MAP.inverseTransform(bounds2.left + bounds2.width / half, bounds2.top + bounds2.height / half);
+
+  var floatPrecision = 7;
   /** return an array to be used in connector series */
-  return [parseFloat((latLong1.lat).toFixed(7)),
-    parseFloat((latLong1.long).toFixed(7)),
-    parseFloat((latLong2.lat).toFixed(7)),
-    parseFloat((latLong2.long).toFixed(7))
+  return [parseFloat((latLong1.lat).toFixed(floatPrecision)),
+    parseFloat((latLong1.long).toFixed(floatPrecision)),
+    parseFloat((latLong2.lat).toFixed(floatPrecision)),
+    parseFloat((latLong2.long).toFixed(floatPrecision))
   ];
 }
 
@@ -213,9 +213,10 @@ function removeMapSeries(seriesId) {
 /**
  * Highlight the corresponding marker of the selected zone on the MAP.
  * 
- * @param {string} zone - The marker that should be highlighted.
+ * @param {string} zone - The marker that should be highlighted. 
+ * @param {boolean} zoom - Decide whether should zoom in onto the zone.
  */
-function highlightPoint(zone) {
+function highlightPoint(zone, zoom) {
   if (POINTCLICKED != null) {
     if (POINTCLICKED.get('id') != zone.ZoneId) {
       POINTCLICKED.selected(false);
@@ -229,12 +230,18 @@ function highlightPoint(zone) {
     if (POINTCLICKED.get('id') != zone.ZoneId) {
       POINTCLICKED = targetSeries.getPoint(pointIndex);
       POINTCLICKED.selected(true);
-      MAP.zoomToFeature(zone.ZoneId);
+      if (zoom)
+        MAP.zoomToFeature(zone.ZoneId);
+      else
+        $('.anychart-zoom-zoomFitAll').click();
     }
   } else {
     POINTCLICKED = targetSeries.getPoint(pointIndex);
     POINTCLICKED.selected(true);
-    MAP.zoomToFeature(zone.ZoneId);
+    if (zoom)
+      MAP.zoomToFeature(zone.ZoneId);
+    else
+      $('.anychart-zoom-zoomFitAll').click();
   }
 }
 
@@ -246,12 +253,13 @@ function highlightPoint(zone) {
 function highlightZone(zoneId) {
   removeMapSeries('highlightZone');
   const highlightZone = MAP.choropleth([{
-    id: zoneId,
+    id: zoneId
   }]);
   highlightZone.id('highlightZone');
   highlightZone.enabled(true);
   highlightZone.legendItem().enabled(false);
   MAP.zoomToFeature(zoneId);
+  highlightZone.tooltip().enabled(false);
 }
 
 /**
@@ -260,13 +268,30 @@ function highlightZone(zoneId) {
  * @param {string} connectorData - The JSON data to be added to the base MAP as a Connector series.
  */
 function addConnectorSeries(connectorData) {
-  /** add connector series */
-  removeMapSeries('connector');
-  const connectorSeries = MAP.connector(connectorData);
-  connectorSeries.id('connector');
-  connectorSeries.tooltip().format('{%from} - {%to}');
-  connectorSeries.legendItem().enabled(false);
-  connectorSeries.listen('pointClick', (e) => {
-    toggleAnimation(true);
+  for (var index = 0; index < ZONE2; index++) {
+    removeMapSeries('connector' + index);
+  }
+
+  jQuery.each(connectorData, (i, val) => {
+    var connectorSeries = MAP.connector([val]);
+    connectorSeries.id('connector' + i);
+    connectorSeries.fill(val.color).hoverFill(val.color).stroke(val.color).hoverStroke(val.color);
+
+    var weightMultiplier = 50;
+    if (val.weight !== 0) {
+      connectorSeries.endSize(val.weight * weightMultiplier + 1);
+    }
+
+    var markerSize = 20;
+    var markerHoverSize = 25;
+
+    connectorSeries.markers().position('95%').size(markerSize);
+    connectorSeries.hoverMarkers().size(markerHoverSize);
+
+    connectorSeries.tooltip().format(val.data + ' trips from ' + val.from + ' to ' + val.to);
+    connectorSeries.legendItem().enabled(false);
+    connectorSeries.listen('pointClick', (e) => {
+      toggleAnimation(true);
+    });
   });
 }

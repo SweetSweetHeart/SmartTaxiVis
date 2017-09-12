@@ -5,6 +5,7 @@
  */
 
 $(() => {
+  // generateChordColorLegend();
   initGlobalVariables();
   initSliders();
   initChordDiagram();
@@ -65,6 +66,7 @@ function initGlobalVariables() {
   TIME1 = 9;
 
   $('#hour').html(TIME1);
+
   /**
    * Starting index of hours selected.
    * @type {number}
@@ -87,8 +89,6 @@ function initGlobalVariables() {
 
   // Some default values to play with, before the server returns actual data
 
-
-
   /**
    * The point that represents a taxizone, corresponding to the clicked path on Chord Diagram.
    * @type {anychart.core.SeriesPoint}
@@ -108,6 +108,19 @@ function initGlobalVariables() {
    * @see {@link https://api.anychart.com/7.14.3/anychart.charts.Map}
    */
   MAP = null;
+
+  /**
+   * Store the current taxi zones.
+   * @type {string}
+   */
+  ZONE_HOLDER = null;
+
+
+  /**
+   * Store the current taxi zone data.
+   * @type {string}
+   */
+  DATA_HOLDER = null;
 
 }
 
@@ -179,10 +192,10 @@ function getDataDimension() {
 
 
 /**
- * Splice the input array based on the ZONES selected.
+ * Splice the input array based on the ZONE_HOLDER selected.
  * 
  * @param {number[]|string[]} matrix - A matrix that contains the input data.
- * @returns {number[]|string[]} - The spliced array with the selected ZONES only.
+ * @returns {number[]|string[]} - The spliced array with the selected ZONE_HOLDER only.
  */
 function spliceMatrix(matrix) {
   matrix.splice(0, ZONE1 - 1);
@@ -192,10 +205,10 @@ function spliceMatrix(matrix) {
 
 
 /**
- * Splice the input nested array based on the ZONES selected, for data count matrix.
+ * Splice the input nested array based on the ZONE_HOLDER selected, for data count matrix.
  * 
  * @param {number[]} matrix - A matrix that contains the input data.
- * @returns  {number[]} - The spliced array with the selected ZONES only.
+ * @returns  {number[]} - The spliced array with the selected ZONE_HOLDER only.
  */
 
 function spliceSubTripMatrix(matrix) {
@@ -267,15 +280,15 @@ function getIndividualDataCount(data) {
 
 
 /**
- * Based on the largest and the smallest data count for all ZONES, generate a set of colors for ZONES on the Chord Diagram.
+ * Based on the largest and the smallest data count for all ZONE_HOLDER, generate a set of colors for ZONE_HOLDER on the Chord Diagram.
  * 
- * @param {string[]} zone - A matrix that contains input taxi ZONES.
- * @param {number} maxCount - The largest data count for all ZONES.
- * @param {number} minCount - The smallest data count for all ZONES.
+ * @param {string[]} zone - A matrix that contains input taxi ZONE_HOLDER.
+ * @param {number} maxCount - The largest data count for all ZONE_HOLDER.
+ * @param {number} minCount - The smallest data count for all ZONE_HOLDER.
  */
 function generateColorForZone(zone, maxCount, minCount) {
   jQuery.each(zone, (i, val) => {
-    val.color = generateRainBowColorMap(getIndividualDataCount(data[i]), maxCount, minCount);
+    val.color = generateRainBowColorMap(getIndividualDataCount(DATA_HOLDER[i]), maxCount, minCount);
   });
 }
 
@@ -284,13 +297,15 @@ function generateColorForZone(zone, maxCount, minCount) {
 /**
  * Generate a rainbow color map based on the ratio of data count and the min/max data count.
  * 
- * @param {number} data  - Data count of one zone as the dividend.
+ * @param {number} count  - Data count of one zone as the dividend.
  * @param {number} max - Max data count in the selected dataset.
  * @param {number} min - Min data count in the selected dataset.
  * @returns {string} - A HSL color. 
  */
-function generateRainBowColorMap(data, maxCount, minCount) {
-  const i = Math.abs(((data - minCount) / (maxCount - minCount)) * 100 - 100);
+function generateRainBowColorMap(count, maxCount, minCount) {
+  const maxHue = 220;
+  let hue = (count - minCount) / (maxCount - minCount);
+  hue = (maxHue - hue * maxHue);
 
   // if (lowerColor > i)
   //   lowerColor = i;
@@ -298,5 +313,30 @@ function generateRainBowColorMap(data, maxCount, minCount) {
   // if (higherColor < i)
   //   higherColor = i;
 
-  return `hsl(${i},83%,50%)`;
+  return `hsl(${hue},90%,50%)`;
+}
+
+
+/**
+ * Update the hour for the HTML element.
+ * 
+ * @param {number} hour - The hour used.
+ */
+function setHourHTML(hour) {
+  $('#hour').html(hour);
+}
+
+/**
+ * Update the data count for the HTML element.
+ * 
+ * @param {number} count - The data count used.
+ */
+function setDataCountHTML(count) {
+  const dimension = getDataDimension();
+  if (dimension === 'trip') {
+    $('#dataCount').html(count);
+    $('#dataCountLabel').show();
+  } else {
+    $('#dataCountLabel').hide();
+  }
 }
