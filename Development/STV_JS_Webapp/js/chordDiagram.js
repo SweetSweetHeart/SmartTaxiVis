@@ -419,7 +419,7 @@ function updateChordDiagram(matrix) {
   });
 
   chordPaths.on('click', (d) => {
-    pathToConnector(ZONE_HOLDER[d.source.index], ZONE_HOLDER[d.target.index]);
+    pathToConnector(ZONE_HOLDER[d.source.index], ZONE_HOLDER[d.target.index], d.source.value);
   });
 
   chordPaths.on('mouseout', () => {
@@ -452,8 +452,9 @@ function calculateLabelRotation(input) {
  * 
  * @param {string} source - The origination taxi zone.
  * @param {string} target - The destination taxi zone.
+ * @param {string} value  - The number of trips.
  */
-function pathToConnector(source, target) {
+function pathToConnector(source, target, value) {
   const pointData = getConnector(source.ZoneId, target.ZoneId);
   if (source.ZoneId != target.ZoneId) {
     /** 
@@ -465,7 +466,7 @@ function pathToConnector(source, target) {
       points: pointData,
       from: source.ZoneName,
       to: target.ZoneName,
-      data: source.Data,
+      data: value,
       color: source.color,
       weight: 0
     }];

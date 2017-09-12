@@ -112,7 +112,7 @@ function createMarkerSeries(name, input, color) {
     .format(function () {
       if (dimension === 'trip') {
         return `<span>${this.getData('name')}</span><br>` +
-          `<span style="font-size: 12px; color: #E1E1E1">Trips: ${
+          `<span style="font-size: 12px; color: #E1E1E1">Total trips: ${
         parseInt(this.getData('size')).toLocaleString()}</span>`;
       } else {
         return `<span>${this.getData('name')}</span>`;
@@ -271,8 +271,6 @@ function addConnectorSeries(connectorData) {
   for (var index = 0; index < ZONE2; index++) {
     removeMapSeries('connector' + index);
   }
-
-  console.log();
 
   jQuery.each(connectorData, (i, val) => {
     var connectorSeries = MAP.connector([val]);
