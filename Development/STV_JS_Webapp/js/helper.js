@@ -121,7 +121,6 @@ function initGlobalVariables() {
    * @type {string}
    */
   DATA_HOLDER = null;
-
 }
 
 
@@ -219,7 +218,6 @@ function spliceSubTripMatrix(matrix) {
 }
 
 
-
 /**
  * Toggle the display of 'No Match' message, visulisations and controls.
  * @deprecated since issue #12 Dynamic ranged colormap.
@@ -249,14 +247,16 @@ function getTotalDataCount(data) {
   let minCount = 0;
 
   jQuery.each(data, (i, val) => {
-    var count = getIndividualDataCount(val);
+    const count = getIndividualDataCount(val);
     dataCount += count;
 
-    if (count > maxCount)
+    if (count > maxCount) {
       maxCount = count;
+    }
 
-    if (count < minCount)
+    if (count < minCount) {
       minCount = count;
+    }
   });
 
   return [dataCount, maxCount, minCount];
@@ -278,7 +278,6 @@ function getIndividualDataCount(data) {
 }
 
 
-
 /**
  * Based on the largest and the smallest data count for all ZONE_HOLDER, generate a set of colors for ZONE_HOLDER on the Chord Diagram.
  * 
@@ -291,7 +290,6 @@ function generateColorForZone(zone, maxCount, minCount) {
     val.color = generateRainBowColorMap(getIndividualDataCount(DATA_HOLDER[i]), maxCount, minCount);
   });
 }
-
 
 
 /**

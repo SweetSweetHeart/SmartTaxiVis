@@ -51,7 +51,7 @@ function generateZoneHistogramData() {
   const histogramData = [];
   const zoneData = $.extend(true, [], zoneT[TIME1]);
   spliceMatrix(zoneData);
-  var counts = getTotalDataCount(DATA_HOLDER);
+  const counts = getTotalDataCount(DATA_HOLDER);
   generateColorForZone(zoneData, counts[1], counts[2]);
   jQuery.each(zoneData, (i, val) => {
     histogramData.push([val.ZoneName, val.Data, val.color]);
@@ -79,18 +79,18 @@ function renderHistogram(input, type) {
     x: [0],
     value: [1],
     fill: [2],
-    stroke: [2]
+    stroke: [2],
   });
 
   const series = histogramChart.column(dataMap);
-  var label;
-  var dimension = getDataDimension();
+  let label;
+  const dimension = getDataDimension();
   if (dimension === 'trip') {
-    label = "Trips: ";
+    label = 'Trips: ';
   } else if (dimension === 'price') {
-    label = "Price: ";
+    label = 'Price: ';
   } else if (dimension === 'distance') {
-    label = "Distance: ";
+    label = 'Distance: ';
   }
 
   series.tooltip()
@@ -100,9 +100,9 @@ function renderHistogram(input, type) {
     .fontSize(14)
     .format(function () {
       if (type === 'hour') {
-        return `<span>Hour: ${this.getData('x')} to ${parseInt(this.getData('x')) + 1} <br/>` + label + `${this.getData('value')}</span>`;
+        return `<span>Hour: ${this.getData('x')} to ${parseInt(this.getData('x')) + 1} <br/>${label}${this.getData('value')}</span>`;
       }
-      return `<span>Taxizone: ${this.getData('x')} <br/>` + label + `${this.getData('value')}</span>`;
+      return `<span>Taxizone: ${this.getData('x')} <br/>${label}${this.getData('value')}</span>`;
     });
 
   if (type === 'hour') {

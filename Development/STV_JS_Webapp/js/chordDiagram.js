@@ -20,16 +20,16 @@ function generateChordDiagram() {
 
   ZONESLIDER.noUiSlider.updateOptions({
     range: {
-      'min': 1,
-      'max': DATA_HOLDER.length
-    }
+      min: 1,
+      max: DATA_HOLDER.length,
+    },
   });
 
   ZONE_HOLDER = $.extend(true, [], zoneT[TIME1]);
   spliceMatrix(ZONE_HOLDER);
   spliceMatrix(DATA_HOLDER);
   spliceSubTripMatrix(DATA_HOLDER);
-  var counts = getTotalDataCount(DATA_HOLDER);
+  const counts = getTotalDataCount(DATA_HOLDER);
   setDataCountHTML(counts[0]);
   generateColorForZone(ZONE_HOLDER, counts[1], counts[2]);
 }
@@ -51,7 +51,6 @@ function formatJSON() {
   connectorData = null;
 
   updateChordDiagram(DATA_HOLDER);
-
 }
 
 
@@ -65,21 +64,21 @@ function highlightColormapLegend(low, high) {
   const colorInterval = 3;
 
   $('#chordColorLegend font').css({
-    "border-style": "none ",
-    "border-width": "7px"
+    'border-style': 'none ',
+    'border-width': '7px',
   });
 
-  $('#color' + Math.ceil(low / colorInterval) * colorInterval).css({
-    "border-style": "solid none solid solid"
+  $(`#color${Math.ceil(low / colorInterval) * colorInterval}`).css({
+    'border-style': 'solid none solid solid',
   });
 
-  $('#color' + Math.ceil((high / colorInterval) - 1) * colorInterval).css({
-    "border-style": "solid solid solid none"
+  $(`#color${Math.ceil((high / colorInterval) - 1) * colorInterval}`).css({
+    'border-style': 'solid solid solid none',
   });
 
-  for (var index = (Math.ceil(low / colorInterval) + 1) * colorInterval; index < Math.ceil((high / colorInterval) - 1) * colorInterval; index += colorInterval) {
-    $('#color' + index).css({
-      "border-style": "solid none solid none"
+  for (let index = (Math.ceil(low / colorInterval) + 1) * colorInterval; index < Math.ceil((high / colorInterval) - 1) * colorInterval; index += colorInterval) {
+    $(`#color${index}`).css({
+      'border-style': 'solid none solid none',
     });
   }
 }
@@ -147,15 +146,14 @@ function getDefaultLayout() {
 }
 
 
-
 /**
  * Generate a legend for Chord Diagram based on the color map used.
  * @deprecated since issue #13 Dynamically update zoneSlider's range. 
  */
 function generateChordColorLegend() {
-  var text = "";
-  for (var index = 0; index < 20; index++) {
-    text += `<font id="color${index}" style="color:hsl(${index*11},90%,53%)">█</font>`;
+  let text = '';
+  for (let index = 0; index < 20; index++) {
+    text += `<font id="color${index}" style="color:hsl(${index * 11},90%,53%)">█</font>`;
   }
   console.log(text);
 
@@ -174,7 +172,6 @@ function generateChordColorLegend() {
   $('#chordColorLegend').append(' Min');
   chordLegendColor = [];
 }
-
 
 
 /**
@@ -246,35 +243,36 @@ function initChordDiagram() {
  * @returns {string} - THe text appeared when mouse hover the path. 
  */
 function formatPathTitle(path) {
-  var label = "";
-  var prefix = "";
-  var suffix = "";
-  var dataFixer = 100;
-  var formatNumber = d3.format('.2f');
-  var dimension = getDataDimension();
-  var innerZone = ZONE_HOLDER[path.target.index].ZoneName === ZONE_HOLDER[path.source.index].ZoneName;
+  let label = '';
+  let prefix = '';
+  let suffix = '';
+  const dataFixer = 100;
+  let formatNumber = d3.format('.2f');
+  const dimension = getDataDimension();
+  const innerZone = ZONE_HOLDER[path.target.index].ZoneName === ZONE_HOLDER[path.source.index].ZoneName;
 
   /** For inner zone trip, source and target are referenced, multiply by 100 to avoid double division later */
-  if (innerZone && dimension !== 'trip')
+  if (innerZone && dimension !== 'trip') {
     path.source.value = path.source.value * dataFixer;
+  }
 
   if (dimension === 'trip') {
     formatNumber = d3.format('2,f');
     path.source.value = formatNumber(path.source.value);
     path.target.value = formatNumber(path.target.value);
-    suffix = " ";
-    label = " trips from ";
+    suffix = ' ';
+    label = ' trips from ';
   } else if (dimension === 'price') {
     path.source.value = formatNumber(path.source.value / dataFixer);
     path.target.value = formatNumber(path.target.value / dataFixer);
-    label = " from ";
-    prefix = "$";
-    suffix = " for ";
+    label = ' from ';
+    prefix = '$';
+    suffix = ' for ';
   } else if (dimension === 'distance') {
     path.source.value = formatNumber(path.source.value / dataFixer);
     path.target.value = formatNumber(path.target.value / dataFixer);
-    label = " km from ";
-    suffix = " km for ";
+    label = ' km from ';
+    suffix = ' km for ';
   }
   if (!innerZone) {
     return [prefix, path.source.value,
@@ -289,11 +287,10 @@ function formatPathTitle(path) {
       ' to ',
       ZONE_HOLDER[path.source.index].ZoneName,
     ].join('');
-  } else {
-    return prefix + path.source.value +
-      suffix + "inner zone trips within " +
-      ZONE_HOLDER[path.source.index].ZoneName;
   }
+  return `${prefix + path.source.value +
+      suffix}inner zone trips within ${
+    ZONE_HOLDER[path.source.index].ZoneName}`;
 }
 
 /** 
@@ -304,17 +301,17 @@ function formatPathTitle(path) {
  * @returns {string} - The text appeared when mouse hover the chord. 
  */
 function formatChordTitle(chord, index) {
-  var label = "";
-  var prefix = "";
-  var formatNumber = d3.format('.2f');
-  var dataFixer = 100;
+  let label = '';
+  const prefix = '';
+  let formatNumber = d3.format('.2f');
+  const dataFixer = 100;
 
-  var dimension = getDataDimension();
+  const dimension = getDataDimension();
   if (dimension === 'trip') {
     formatNumber = d3.format('2,f');
     chord.value = formatNumber(chord.value);
-    label = " trips ";
-    return prefix + chord.value + label + `for ${ZONE_HOLDER[index].ZoneName}`;
+    label = ' trips ';
+    return `${prefix + chord.value + label}for ${ZONE_HOLDER[index].ZoneName}`;
   }
   // else if (dimension === 'price') {
   //   chord.value = formatNumber(chord.value / dataFixer);
@@ -332,10 +329,9 @@ function formatChordTitle(chord, index) {
  * @param {Array.<number[]>} matrix - A matrix that contains the input data.
  */
 function updateChordDiagram(matrix) {
-
-  var durationLong = 800;
-  var durationShort = 10;
-  var opacity = .5;
+  const durationLong = 800;
+  const durationShort = 10;
+  const opacity = 0.5;
   // Remove empty svg generated by animation loop.
   $('svg[width=0]').remove();
   layout = getDefaultLayout();
@@ -374,11 +370,8 @@ function updateChordDiagram(matrix) {
     .text(d => ZONE_HOLDER[d.index].ZoneName);
 
   // Position group labels to match layout
-  groupG.select('text').transition().duration(durationLong)
-    .text(d => ZONE_HOLDER[d.index].ZoneName)
-    .attr('transform', (d) => {
-      return calculateLabelRotation(d);
-    })
+  groupG.select('text').text(d => ZONE_HOLDER[d.index].ZoneName)
+    .attr('transform', d => calculateLabelRotation(d))
     .attr('text-anchor', d => (d.angle > Math.PI ? 'end' : 'begin'));
 
   const chordPaths = g.selectAll('path.chord')
@@ -390,9 +383,7 @@ function updateChordDiagram(matrix) {
   newChords.append('title');
 
   chordPaths.select('title')
-    .text((d) => {
-      return formatPathTitle(d);
-    });
+    .text(d => formatPathTitle(d));
 
   chordPaths.exit().transition()
     .duration(durationLong)
@@ -469,7 +460,7 @@ function pathToConnector(source, target, value) {
       to: target.ZoneName,
       data: value,
       color: source.color,
-      weight: 0
+      weight: 0,
     }];
     addConnectorSeries(connectorData);
   } else {
@@ -481,12 +472,12 @@ function pathToConnector(source, target, value) {
 }
 
 function chordToConnector(index) {
-  var source = ZONE_HOLDER[index];
-  var connectorData = [];
+  const source = ZONE_HOLDER[index];
+  const connectorData = [];
   jQuery.each(DATA_HOLDER[index], (i, val) => {
     if (index !== i && val !== 0) {
-      var pointData = getConnector(source.ZoneId, ZONE_HOLDER[i].ZoneId);
-      var connector = {};
+      const pointData = getConnector(source.ZoneId, ZONE_HOLDER[i].ZoneId);
+      const connector = {};
       connector.points = pointData;
       connector.from = source.ZoneName;
       connector.to = ZONE_HOLDER[i].ZoneName;

@@ -97,10 +97,10 @@ function createMarkerSeries(name, input, color) {
   series.legendItem({
     iconType: 'circle',
     iconFill: color,
-    iconStroke: '2 #E1E1E1'
+    iconStroke: '2 #E1E1E1',
   });
 
-  var dimension = getDataDimension();
+  const dimension = getDataDimension();
 
   /** Set Tooltip for series */
   series.tooltip()
@@ -113,10 +113,9 @@ function createMarkerSeries(name, input, color) {
       if (dimension === 'trip') {
         return `<span>${this.getData('name')}</span><br>` +
           `<span style="font-size: 12px; color: #E1E1E1">Total trips: ${
-        parseInt(this.getData('size')).toLocaleString()}</span>`;
-      } else {
-        return `<span>${this.getData('name')}</span>`;
+            parseInt(this.getData('size')).toLocaleString()}</span>`;
       }
+      return `<span>${this.getData('name')}</span>`;
     });
   /** Set styles for marker */
   series.selectionMode('none')
@@ -140,7 +139,7 @@ function createMarkerSeries(name, input, color) {
     POINTCLICKED = e.point;
     POINTCLICKED.selected(true);
     removeMapSeries('connector');
-    //MAP.zoomToFeature(POINTCLICKED.get('id'));
+    // MAP.zoomToFeature(POINTCLICKED.get('id'));
     toggleAnimation(true);
   });
 }
@@ -182,18 +181,18 @@ function getConnector(pointA, pointB) {
   const point2 = series.getPoint(pointIndex2);
   const bounds2 = point2.getFeatureBounds();
 
-  var half = 2;
+  const half = 2;
 
   /** transformers pixel coordinates to latitude and longitude */
   const latLong1 = MAP.inverseTransform(bounds1.left + bounds1.width / half, bounds1.top + bounds1.height / half);
   const latLong2 = MAP.inverseTransform(bounds2.left + bounds2.width / half, bounds2.top + bounds2.height / half);
 
-  var floatPrecision = 7;
+  const floatPrecision = 7;
   /** return an array to be used in connector series */
   return [parseFloat((latLong1.lat).toFixed(floatPrecision)),
     parseFloat((latLong1.long).toFixed(floatPrecision)),
     parseFloat((latLong2.lat).toFixed(floatPrecision)),
-    parseFloat((latLong2.long).toFixed(floatPrecision))
+    parseFloat((latLong2.long).toFixed(floatPrecision)),
   ];
 }
 
@@ -230,18 +229,20 @@ function highlightPoint(zone, zoom) {
     if (POINTCLICKED.get('id') != zone.ZoneId) {
       POINTCLICKED = targetSeries.getPoint(pointIndex);
       POINTCLICKED.selected(true);
-      if (zoom)
+      if (zoom) {
         MAP.zoomToFeature(zone.ZoneId);
-      else
+      } else {
         $('.anychart-zoom-zoomFitAll').click();
+      }
     }
   } else {
     POINTCLICKED = targetSeries.getPoint(pointIndex);
     POINTCLICKED.selected(true);
-    if (zoom)
+    if (zoom) {
       MAP.zoomToFeature(zone.ZoneId);
-    else
+    } else {
       $('.anychart-zoom-zoomFitAll').click();
+    }
   }
 }
 
@@ -253,7 +254,7 @@ function highlightPoint(zone, zoom) {
 function highlightZone(zoneId) {
   removeMapSeries('highlightZone');
   const highlightZone = MAP.choropleth([{
-    id: zoneId
+    id: zoneId,
   }]);
   highlightZone.id('highlightZone');
   highlightZone.enabled(true);
@@ -268,27 +269,27 @@ function highlightZone(zoneId) {
  * @param {string} connectorData - The JSON data to be added to the base MAP as a Connector series.
  */
 function addConnectorSeries(connectorData) {
-  for (var index = 0; index < ZONE2; index++) {
-    removeMapSeries('connector' + index);
+  for (let index = 0; index < ZONE2; index++) {
+    removeMapSeries(`connector${index}`);
   }
 
   jQuery.each(connectorData, (i, val) => {
-    var connectorSeries = MAP.connector([val]);
-    connectorSeries.id('connector' + i);
+    const connectorSeries = MAP.connector([val]);
+    connectorSeries.id(`connector${i}`);
     connectorSeries.fill(val.color).hoverFill(val.color).stroke(val.color).hoverStroke(val.color);
 
-    var weightMultiplier = 50;
+    const weightMultiplier = 50;
     if (val.weight !== 0) {
       connectorSeries.endSize(val.weight * weightMultiplier + 1);
     }
 
-    var markerSize = 20;
-    var markerHoverSize = 25;
+    const markerSize = 20;
+    const markerHoverSize = 25;
 
     connectorSeries.markers().position('95%').size(markerSize);
     connectorSeries.hoverMarkers().size(markerHoverSize);
 
-    connectorSeries.tooltip().format(val.data + ' trips from ' + val.from + ' to ' + val.to);
+    connectorSeries.tooltip().format(`${val.data} trips from ${val.from} to ${val.to}`);
     connectorSeries.legendItem().enabled(false);
     connectorSeries.listen('pointClick', (e) => {
       toggleAnimation(true);
