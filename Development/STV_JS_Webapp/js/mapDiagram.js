@@ -69,9 +69,9 @@ function generateMap() {
   MAP.contextMenu(false);
 
   /** Set MAP inteactions */
-  // var interactivity = MAP.interactivity();
-  // interactivity.zoomOnMouseWheel(false);
-  // interactivity.zoomOnDoubleClick(false);
+  const interactivity = MAP.interactivity();
+  interactivity.zoomOnMouseWheel(true);
+  interactivity.zoomOnDoubleClick(true);
 
   /** Initiates the drawing into the div with id anymap */
   MAP.container('anymap').draw();
@@ -269,9 +269,7 @@ function highlightZone(zoneId) {
  * @param {string} connectorData - The JSON data to be added to the base MAP as a Connector series.
  */
 function addConnectorSeries(connectorData) {
-  for (let index = 0; index < ZONE2; index++) {
-    removeMapSeries(`connector${index}`);
-  }
+  removeConnectorSeries();
 
   jQuery.each(connectorData, (i, val) => {
     const connectorSeries = MAP.connector([val]);
@@ -291,8 +289,18 @@ function addConnectorSeries(connectorData) {
 
     connectorSeries.tooltip().format(`${val.data} trips from ${val.from} to ${val.to}`);
     connectorSeries.legendItem().enabled(false);
-    connectorSeries.listen('pointClick', (e) => {
+    connectorSeries.listen('pointClick', () => {
       toggleAnimation(true);
     });
   });
+}
+
+/**
+ * Remove all connector series on the base map.
+ * 
+ */
+function removeConnectorSeries() {
+  for (let index = 0; index < ZONE2; index++) {
+    removeMapSeries(`connector${index}`);
+  }
 }

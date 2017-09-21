@@ -1,4 +1,3 @@
-
 /**
  * Created by Henry on 20/08/2017.
  */
@@ -17,9 +16,9 @@ import java.util.ArrayList;
 public class SQLDataReader {
     //    private final String URL = "jdbc:mysql://45.76.131.144:3306/TaxiData";
     // ssh -L 3306:45.76.131.144:3306 rss
-    private final String URL = "jdbc:mysql://localhost:3306/TaxiData";
-    private final String USERNAME = "taxi";
-    private final String PASSWORD = "taxidb";
+    private final String URL = "jdbc:mysql://212.47.229.69:3306/TaxiData";
+    private final String USERNAME = "root";
+    private final String PASSWORD = "root";
 
     private final int TOTALZONE = 263;
     //private final int HOUR1 = 0;
@@ -34,6 +33,35 @@ public class SQLDataReader {
     private ResultSet m_ResultSet;
     private ArrayList<ArrayList<TaxiZone>> m_Zone_ResultList = new ArrayList<>();
     private ArrayList<ArrayList<int[]>> m_Data_ResultList = new ArrayList<>();
+
+    public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
+
+        SQLDataReader dataReader = new SQLDataReader();
+
+        dataReader.openConnection();
+        dataReader.setStatement();
+
+
+        dataReader.getZoneDataByDO();
+        dataReader.getZoneDataByPU();
+        dataReader.getZoneDataByAvgPrice();
+        dataReader.getZoneDataByAvgDistance();
+
+        dataReader.getPUTripMatrix();
+        dataReader.getDOTripMatrix();
+        dataReader.getPriceMatrix();
+        dataReader.getDistanceMatrix();
+
+        dataReader.closeConnection();
+
+        JsonWriter jsonWriter = new JsonWriter();
+        jsonWriter.writeJsonFile(dataReader.getResult());
+
+        long totalTime = System.currentTimeMillis() - startTime;
+
+        System.out.println("Total time taken: " + totalTime + "ms");
+    }
 
     public String getResult() {
         return m_Result;
@@ -94,10 +122,26 @@ public class SQLDataReader {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call getZoneByPU(" + m_Procedure + ")");
             convertZoneToList(true);
+
+            System.out.println("getZoneDataByPU() " + (i + 1) + "th loop");
         }
 
         Gson gson = new Gson();
-        m_Result += "var ZONE_PUMATRIX = " + gson.toJson(m_Zone_ResultList) + ";\n\n\n\n\n\n";
+        m_Result += "var ZONE_PU_MATRIX = " + gson.toJson(m_Zone_ResultList) + ";\n\n\n\n\n\n";
+        m_Zone_ResultList.clear();
+    }
+
+    public void getZoneDataByDO() {
+        for (int i = 0; i < HOUR2; i++) {
+            m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call getZoneByDO(" + m_Procedure + ")");
+            convertZoneToList(true);
+
+            System.out.println("getZoneDataByDO() " + (i + 1) + "th loop");
+        }
+
+        Gson gson = new Gson();
+        m_Result += "var ZONE_DO_MATRIX = " + gson.toJson(m_Zone_ResultList) + ";\n\n\n\n\n\n";
         m_Zone_ResultList.clear();
     }
 
@@ -106,6 +150,8 @@ public class SQLDataReader {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call getZoneByAvgPrice(" + m_Procedure + ")");
             convertZoneToList(false);
+
+            System.out.println("getZoneDataByAvgPrice() " + (i + 1) + "th loop");
         }
 
         Gson gson = new Gson();
@@ -118,6 +164,8 @@ public class SQLDataReader {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call getZoneByAvgDistance(" + m_Procedure + ")");
             convertZoneToList(false);
+
+            System.out.println("getZoneDataByAvgDistance() " + (i + 1) + "th loop");
         }
 
         Gson gson = new Gson();
@@ -125,18 +173,33 @@ public class SQLDataReader {
         m_Zone_ResultList.clear();
     }
 
-    public void getTripMatrix() {
+    public void getPUTripMatrix() {
 
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call first_cursor_PU_time(" + m_Procedure + ")");
-            convertMatrixToList();
+            convertMatrixToList(false);
 
-            System.out.println("getTripMatrix() " + (i + 1) + "th loop");
+            System.out.println("getPUTripMatrix() " + (i + 1) + "th loop");
         }
 
         Gson gson = new Gson();
-        m_Result += "var TRIPMATRIX = " + gson.toJson(m_Data_ResultList) + ";\n\n\n\n\n\n";
+        m_Result += "var PU_MATRIX = " + gson.toJson(m_Data_ResultList) + ";\n\n\n\n\n\n";
+        m_Data_ResultList.clear();
+    }
+
+    public void getDOTripMatrix() {
+
+        for (int i = 0; i < HOUR2; i++) {
+            m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
+            setResultSet("call first_cursor_DO_time(" + m_Procedure + ")");
+            convertMatrixToList(false);
+
+            System.out.println("getDOTripMatrix() " + (i + 1) + "th loop");
+        }
+
+        Gson gson = new Gson();
+        m_Result += "var DO_MATRIX = " + gson.toJson(m_Data_ResultList) + ";\n\n\n\n\n\n";
         m_Data_ResultList.clear();
     }
 
@@ -146,13 +209,13 @@ public class SQLDataReader {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call first_cursor_Price_time(" + m_Procedure + ")");
 
-            convertMatrixToList();
+            convertMatrixToList(true);
 
             System.out.println("getPriceMatrix() " + (i + 1) + "th loop");
         }
 
         Gson gson = new Gson();
-        m_Result += "var PRICEMATRIX = " + gson.toJson(m_Data_ResultList) + ";\n\n\n\n\n\n";
+        m_Result += "var PRICE_MATRIX = " + gson.toJson(m_Data_ResultList) + ";\n\n\n\n\n\n";
         m_Data_ResultList.clear();
     }
 
@@ -161,13 +224,13 @@ public class SQLDataReader {
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call first_cursor_Distance_time(" + m_Procedure + ")");
-            convertMatrixToList();
+            convertMatrixToList(true);
 
             System.out.println("getDistanceMatrix() " + (i + 1) + "th loop");
         }
 
         Gson gson = new Gson();
-        m_Result += "var DISTANCEMATRIX = " + gson.toJson(m_Data_ResultList) + ";\n\n\n\n\n\n";
+        m_Result += "var DISTANCE_MATRIX = " + gson.toJson(m_Data_ResultList) + ";\n\n\n\n\n\n";
         m_Data_ResultList.clear();
     }
 
@@ -183,7 +246,8 @@ public class SQLDataReader {
                     t.setData(m_ResultSet.getInt(3));
                     zoneList.add(t);
                 }
-            } else {
+            }
+            else {
                 while (getResultSet().next()) {
                     TaxiZoneFloat t = new TaxiZoneFloat();
                     t.setZoneId(m_ResultSet.getInt(1));
@@ -200,14 +264,21 @@ public class SQLDataReader {
         }
     }
 
-    public void convertMatrixToList() {
+    public void convertMatrixToList(boolean dataFixer) {
         try {
             ArrayList<int[]> eachZone = new ArrayList<>();
             while (getResultSet().next()) {
                 String[] data = m_ResultSet.getString(2).split(",");
                 int[] dataInt = new int[data.length];
-                for (int i = 0; i < data.length; i++) {
-                    dataInt[i] = (int) (Double.parseDouble(data[i]) * 100);
+                if (dataFixer) {
+                    for (int i = 0; i < data.length; i++) {
+                        dataInt[i] = (int) (Double.parseDouble(data[i]) * 100);
+                    }
+                }
+                else {
+                    for (int i = 0; i < data.length; i++) {
+                        dataInt[i] = Integer.parseInt(data[i]);
+                    }
                 }
                 eachZone.add(dataInt);
             }
@@ -215,32 +286,6 @@ public class SQLDataReader {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-    
-    public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
-
-        SQLDataReader dataReader = new SQLDataReader();
-
-        dataReader.openConnection();
-        dataReader.setStatement();
-
-        dataReader.getZoneDataByPU();
-        dataReader.getZoneDataByAvgPrice();
-        dataReader.getZoneDataByAvgDistance();
-
-        dataReader.getTripMatrix();
-        dataReader.getPriceMatrix();
-        dataReader.getDistanceMatrix();
-
-        dataReader.closeConnection();
-
-        JsonWriter jsonWriter = new JsonWriter();
-        jsonWriter.writeJsonFile(dataReader.getResult());
-
-        long totalTime = System.currentTimeMillis() - startTime;
-
-        System.out.println("Total time taken: " + totalTime + "ms");
     }
 
 }

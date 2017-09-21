@@ -25,7 +25,7 @@ $(() => {
     toggleAnimation(true);
   });
 
-  $('#chordTrip, #chordPrice,#chordDistance').change(() => {
+  $('#chordTripPU,#chordTripDO,#chordPrice,#chordDistance').change(() => {
     formatJSON();
     toggleAnimation(true);
   });
@@ -180,7 +180,7 @@ function initSliders() {
  * @returns {string} - The current data dimension being visualised.
  */
 function getDataDimension() {
-  if ($('#chordTrip').is(':checked')) {
+  if ($('#chordTripPU').is(':checked') || $('#chordTripDO').is(':checked')) {
     return 'trip';
   } else if ($('#chordPrice').is(':checked')) {
     return 'price';

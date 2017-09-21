@@ -26,8 +26,15 @@ function generateHistogram() {
  */
 function generateHourHistogramData() {
   const histogramData = [];
-  for (let i = 0; i < TRIP_MATRIX.length; i++) {
-    const data = $.extend(true, [], TRIP_MATRIX[i]);
+  let dataMatrix = PU_MATRIX;
+  if ($('#chordTripPU').is(':checked')) {
+    dataMatrix = PU_MATRIX;
+  } else if ($('#chordTripDO').is(':checked')) {
+    dataMatrix = DO_MATRIX;
+  }
+
+  for (let i = 0; i < dataMatrix.length; i++) {
+    const data = $.extend(true, [], dataMatrix[i]);
     spliceMatrix(data);
     spliceSubTripMatrix(data);
     var dataCount = 0;

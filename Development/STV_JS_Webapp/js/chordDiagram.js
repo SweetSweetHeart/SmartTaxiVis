@@ -5,13 +5,20 @@
  * @requires Helper
  */
 function generateChordDiagram() {
-  if ($('#chordTrip').is(':checked')) {
-    DATA_HOLDER = $.extend(true, [], TRIP_MATRIX[TIME1]);
-    zoneT = $.extend(true, [], ZONE_PU_MATRIX);
-  } else if ($('#chordPrice').is(':checked')) {
+
+  const dimension = getDataDimension();
+  if (dimension === 'trip') {
+    if ($('#chordTripPU').is(':checked')) {
+      DATA_HOLDER = $.extend(true, [], PU_MATRIX[TIME1]);
+      zoneT = $.extend(true, [], ZONE_PU_MATRIX);
+    } else if ($('#chordTripDO').is(':checked')) {
+      DATA_HOLDER = $.extend(true, [], DO_MATRIX[TIME1]);
+      zoneT = $.extend(true, [], ZONE_DO_MATRIX);
+    }
+  } else if (dimension === 'price') {
     DATA_HOLDER = $.extend(true, [], PRICE_MATRIX[TIME1]);
     zoneT = $.extend(true, [], ZONE_AVG_PRICE_MATRIX);
-  } else if ($('#chordDistance').is(':checked')) {
+  } else if (dimension === 'distance') {
     DATA_HOLDER = $.extend(true, [], DISTANCE_MATRIX[TIME1]);
     zoneT = $.extend(true, [], ZONE_AVG_DISTANCE_MATRIX);
   }
@@ -464,7 +471,7 @@ function pathToConnector(source, target, value) {
     }];
     addConnectorSeries(connectorData);
   } else {
-    removeMapSeries('connector');
+    removeConnectorSeries();
   }
 
   highlightPoint(source, true);
