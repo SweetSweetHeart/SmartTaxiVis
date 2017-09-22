@@ -155,7 +155,7 @@ public class SQLDataReader {
         }
 
         Gson gson = new Gson();
-        m_Result += "var ZONE_AVG_PRICEMATRIX = " + gson.toJson(m_Zone_ResultList) + ";\n\n\n\n\n\n";
+        m_Result += "var ZONE_AVG_PRICE_MATRIX = " + gson.toJson(m_Zone_ResultList) + ";\n\n\n\n\n\n";
         m_Zone_ResultList.clear();
     }
 
@@ -169,7 +169,7 @@ public class SQLDataReader {
         }
 
         Gson gson = new Gson();
-        m_Result += "var ZONE_AVG_DISTANCEMATRIX = " + gson.toJson(m_Zone_ResultList) + ";\n\n\n\n\n\n";
+        m_Result += "var ZONE_AVG_DISTANCE_MATRIX = " + gson.toJson(m_Zone_ResultList) + ";\n\n\n\n\n\n";
         m_Zone_ResultList.clear();
     }
 

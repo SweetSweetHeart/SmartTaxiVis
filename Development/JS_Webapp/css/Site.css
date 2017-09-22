@@ -39,7 +39,7 @@ svg {
 /*css for anymap*/
 
 #anymap {
-    height: 700px;
+    border-style: solid;
 }
 
 
