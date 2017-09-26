@@ -5,7 +5,6 @@
  * @requires Helper
  */
 function generateChordDiagram() {
-
   const dimension = getDataDimension();
   if (dimension === 'trip') {
     if ($('#chordTripPU').is(':checked')) {
@@ -447,7 +446,8 @@ function calculateLabelRotation(input) {
 }
 
 /**
- * Format the data from the clicked paht on Chord Diagram, and display the connector on Map.
+ * Format the connector data from the clicked path on Chord Diagram, 
+ * and display the connector on Map.
  * 
  * @param {string} source - The origination taxi zone.
  * @param {string} target - The destination taxi zone.
@@ -478,6 +478,12 @@ function pathToConnector(source, target, value) {
   toggleAnimation(true);
 }
 
+/**
+ * Format the connector data from the clicked chord on Chord Diagram, 
+ * and display the connectors on Map.
+ * 
+ * @param {number} index - The index of the taxi zone represented by the chord. 
+ */
 function chordToConnector(index) {
   const source = ZONE_HOLDER[index];
   const connectorData = [];
