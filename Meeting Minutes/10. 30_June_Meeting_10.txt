@@ -1,0 +1,25 @@
+Minutes of Meeting: Bob, Elif, Xiaoxiao, Wang.
+----------------------------------------------
+Date:       30 June 2017
+Start time: 13:20
+End time:   14:20
+
+Date and time of next meeting: 7 July 2017 13:00
+
+Topics discussed:
+    --  Tasks for each projects
+
+
+Progress:
+    --  Wang: Chord Diagram
+    --  Xiaoxiao: Print 50 top words, created framework
+    --  Elif: Bar Chart- Pie Chart and Treemap Library
+
+
+TODO:
+    --  Wang: Check different size of dataset, add slider which has two properties (day- arrange of time), change the labels, another slider(10 zones, 20 zones)
+              Slider- display taxi number- filter by time of the day- filter by date
+    --  Xiaoxiao: show top 50 words on visualization for each word and its frequency (http://cs.swan.ac.uk/~csbob/research/star/mdv/sos/alharbi17parallelCoords.html )
+    --  Elif + Wang: Check the video ( https://youtu.be/EOieJLjVxUA?list=PLZo40sVmw_4NyCRaBvIAWt2V5DoZLZlrN )
+    --  Elif: Show 50 states on treemap with number of cases (each square should be represented by a state)
+   

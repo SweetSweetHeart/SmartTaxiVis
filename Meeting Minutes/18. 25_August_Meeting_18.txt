@@ -1,0 +1,104 @@
+Minutes of Meeting: Bob, Wang, Elif, Xiaoxiao
+----------------------------------------------
+Date:       25 August 2017
+Start time: 15:00
+End time:   17:10
+
+Date and time of next meeting: 31 August 2017 13:00
+
+Topics discussed: 
+    -- Intellij by JetBraws
+    -- Bob is awy 1st week of september
+
+
+Progress:
+    --  Elif: Watched first five lectures until end
+    --  Elif: Re-structered code
+    --  Xiaoxiao: Class version
+    --  Xiaoxiao: Next version
+    --  Wang: Read taxi cost distance read abd stored
+    --  Wang: Read next version of color map
+
+TODO:
+    --  For future reference pseudo code in minutes should like pseudo code when type up
+    --  Elif+Xiaoxiao: Keep watching software engineering lectures
+    --  Elif: Introduce a class called tuple that contains information about 1 week- ArrayList<tuple>
+    --  Elif: State object contains information about 1 state-Arraylist<state>
+    --  Elif: Introduce a region object that contains information about 1 week- ArrayList<region>
+    --  Elif: Render regions+state in treemap-see pseudo code
+    --  Xiaoxiao: No magic numbers
+    --  Xiaoxiao: Change TopWords to Concordance
+    --  Xiaoxiao: Next version of
+    --  Qiru: Try adding blue to color legends
+    --  Qiru: Click on chord and highlight zones on map
+    --  Qiru: Find out what's going on with Corona zone
+    --  Qiru: Update on-mouse-over labels to reflect current user option selection 
+    --  Qiru: User option-user clicks on zones and sees arrow to all obstinations
+    --  Elif + Xiaoxiao: Continue watching software engineering lectures
+
+    --  Elif (pseudocode):
+      Treemapper: ReadData()
+         while reading each line
+         Tuple  tuple= new Tuple();
+         Set Tuple Value
+         Sort Tuple By State Name
+         Compute totals Per State()
+         Compute Totals per Region()
+     //End Read Data()
+    
+       Render()
+    ---------------------
+         Draw Region()  // easy
+         Draw State() 
+
+         DrawRegion()
+           For each region
+            DrawRegion
+           End for
+        EndDrawRegion()
+
+        
+         DrawRegion()
+           Draw Outer Rectangle
+           For each state in region
+              DrawState()
+           End for
+         End Draw Region() 
+        
+
+    
+     
+
+    --  Xiaoxiao (pseudocode):
+
+        TranslationVisualization //visualization--name of program
+
+        List<version> m_Versions //an array of version objects
+
+        main method{
+		newProgram();
+		readData();
+		newFame();
+		newPanel();
+		new versions();
+	}
+
+	Object:
+	Version  // stores information about one version/translation
+		<String> m_words  //new array of words
+		m_concordance aconcordance object
+
+	Object:
+	Concordance  //store information about one concordance
+		<String> m_Topwords //new array of topwords
+
+
+	Procedure:
+	ReadData(){
+		for each file
+			v= new version(); //16 versions
+	  		 //store new words to version
+	   		 //compute concordance
+ 	}
+
+     

@@ -1,0 +1,36 @@
+Minutes of Meeting: Bob, Wang, Elif, Xiaoxiao (Zincos)
+----------------------------------------------
+Date:       8 September 2017
+Start time: 13:00
+End time:   15:40
+
+Date and time of next meeting: 22 September 2017, visible lunch this Tuesday (12 September 2017)
+
+Topics discussed: 
+    -- Elif: Vegan pastry
+    -- Thank you Liam
+    -- Bob's master's thesis is on his web page
+    -- Demo Video
+    -- Xiaoxiao: Min Chen-Oxford University, Kai Xu-Middlesex University, Cagatay Turkey-City University
+
+Progress:
+    --  Xiaoxiao: Tried German lemmatizaton
+    --  Elif: Added margins between rectangles, added labels for regions, sorted regions, split draw methods
+    --  Wang: Writing, very good
+
+
+TODO:
+    --  All: Start writing thesis--see Bob's project guidelines
+    --  Elif: Update related work section to include treemaps visualization. Ask Dylan Rees for books on this topic
+    --  Elif: User option: Show full state names
+    --  Elif: Choose one: color mapping of rectangles, on-mouse-curser, showing weeks
+    --  Elif: Add slice&dice algorithm + paper to implementation section
+    --  Wang: Update related work section to include web-based
+    --  Wang: Writing
+    --  Wang: Think about an observations section in results on thesis
+    --  Wang: Add a sub-section called coordinated, multiple, views
+    --  Xiaoxiao: User option to change size of window
+    --  Xiaoxiao: Add lemmatization implements to thesis and you found out that it's not very important
+    --  Xiaoxiao: Color map the bars the same as the edges--user option
+    --  Xiaoxiao: A color legend frequency-to-color
+    --  Xiaoxiao: Try google "Digital Humanities uk", also look at jobs.ac.uk

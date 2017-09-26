@@ -1,0 +1,31 @@
+Minutes of Meeting: Bob,Xiaoxiao, Elif, Wang.
+----------------------------------------------
+Date:       20 July 2017
+Start time: 13:15
+End time:   14:20
+
+Date and time of next meeting: 28 July 2017 13:00
+
+Topics discussed:
+    -- Tycho Project: 90838 rows/state and 52 weeks
+    -- 35 years worth data: 1966,02->2011,52 time frame
+
+
+
+Progress:
+    --  Elif:Computed incidence per state
+    --  Elif: Read "Tree Maps: a Space Filling Approach to the visualization of hiearcical information structures"
+    --  Xiaoxiao: Working on resit coursework
+    --  Xiaoxiao: Added heading for each axes
+    --  Xiaoxiao: 16 concordances all together + scroll bar
+    --  Wang: Map of taxi zones added
+
+TODO:
+    --  Elif: User option: Show incidence rate inside each block for each state
+    --  Elif: Show also normalized incidence rate
+    --  Xiaoxiao: See meeting minutes from 14th July 2017
+    --  Xiaoxiao: Colored edge connecting same words in each concordance color representing words
+    --  Wang: Each eclipse firs inside its own zone
+    --  Wang: Show total number of taxi rides currently shown
+    --  Wang + Xiaoxiao: Read section 5.1 of Alex ? book "Data Visualization Principles and Practice"
+   

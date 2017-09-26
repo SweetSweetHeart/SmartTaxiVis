@@ -1,0 +1,29 @@
+Minutes of Meeting: Bob, Wang, Elif, Xiaoxiao
+----------------------------------------------
+Date:       31 August 2017
+Start time: 13:00
+End time:   15:40
+
+Date and time of next meeting: if(not Rain){7th September 13:00 at Zincos}
+                               else    {8th Sebtember 13:00 at Zincos}
+
+Topics discussed: 
+    -- Bob away 13-15th September at CGVC 2017 Conference
+    -- "What the health", documentary
+
+
+Progress:
+    --  Xiaoxiao: Searched for lemmatization tools
+    --  Elif: Moved
+    --  Elif: Names of regions, padding between rectangles
+    --  Wang: Moved
+
+
+TODO:
+    --  Xiaoxiao: Forward email from Tom Cheesman to Bob
+    --  Xiaoxiao: User-option: scaling down by 50%
+    --  Xiaoxiao: this.getVersion(i).getConcordance()
+    --  Xiaoxiao: 1 version contains 1 concordance. 1 concordance contains 50 tokens(words, strings)
+    --  Xiaoxiao&Elif: Read book chapter on Java Swing for graphical user ? options
+    --  Elif: Scale states ? then all fit inside regions
+    --  Elif: See todo list from 29th August 2017

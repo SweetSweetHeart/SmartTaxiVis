@@ -1,0 +1,25 @@
+Minutes of Meeting: Bob, Elif, Xiaoxiao, Wang.
+----------------------------------------------
+Date:       12 May 2017
+Start time: 13:30
+End time:   14:50
+
+Date and time of next meeting: Optional, TBA
+
+Topics discussed:
+    --  Exam 22 May - 9 June
+    --  Syria
+
+
+
+Progress:
+    --  Submitted initial project specification
+    --  Wang's first Turkish coffee
+
+
+
+TODO:
+    --  Study for exam
+    --  Write a program to read data and print it out in the console
+
+A scanned version for this meeting minutes can be found at (http://share.wangqiru.com/G17sC)

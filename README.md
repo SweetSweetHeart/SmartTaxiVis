@@ -1,4 +1,4 @@
-# Smart City Visualisation
+# Smart Taxi Vis
 
 Interactive Data Visualisation for New York Taxi Operational Data
 

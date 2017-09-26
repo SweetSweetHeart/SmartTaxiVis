@@ -1,0 +1,35 @@
+Minutes of Meeting: Bob, Elif, Xiaoxiao, Wang.
+----------------------------------------------
+Date:       24 Feb 2017
+Start time: 14:15
+End time:   15:10
+
+Date and time of next meeting: 3 Mar 2017 14:15
+
+Topics discussed:
+    --  Xiaoxiao : Interactive Visualization of Shakespeare's Othello
+
+    --  Elif     : Still choosing
+
+    --  Wang     : Smart City Visualization 
+
+
+Progress:
+    --  First meeting
+
+
+TODO:
+    --  Xiaoxiao : Watch visulization lectures 1-6
+                   Look at Majedah Alrehiely's thesis
+
+        Elif     : choose a project direction
+                   Look at the given datavis books for an interesting topic
+
+        Wang     : Look for some data sets for smart city
+                   Look at smart city wikipedia page
+                   Meeting minutes
+
+        Everyone - Look at Bob's visualization book (http://cs.swan.ac.uk/~csbob/book/), especially Interactive Data Visualization (http://cs.swan.ac.uk/~csbob/book/ward15interactive.pdf)
+
+
+A scanned version for this meeting minutes can be found at (http://share.wangqiru.com/auDd)

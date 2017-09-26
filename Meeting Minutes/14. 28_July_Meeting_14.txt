@@ -1,0 +1,37 @@
+
+Minutes of Meeting: Bob,Xiaoxiao, Elif, Wang.
+----------------------------------------------
+Date:       28 July 2017
+Start time: 13:45
+End time:   15:20
+
+Date and time of next meeting: 4 August 2017 13:00
+
+Topics discussed:
+    -- Turkish coffee
+    -- Any map Library
+
+
+
+Progress:
+    --  Elif:Showing incidence rate inside each block for each state
+    --  Elif: First attempt at showing normalized incidence rates per state
+    --  Xiaoxiao: First attempt at drawing concordance edges between some works in each concordance 
+    --  Wang: Added animation button
+    --  Wang: Added a cache for data access
+    --  Wang: Arrow between taxi zones;
+    --  Wang: Small ellipse in each taxi zone
+
+TODO:
+    --  Elif: No magic numbers in code
+    --  Elif: show only 2 decimal places of accuracy on the screen, eg. 10.12
+    --  Elif: look at ColorDemo.java, ColorPanel.java, shapesDemo.java, ShapesJpanel.java
+    --  Elif: Add a region to each of state: West, Midwest, Northeast, Southwest, Southeast
+    --  Elif: Show each of state as a , with 2 letter abbreviation, incidence rate, normalized incidence rate
+    --  Xiaoxiao+Elif: run Bob's demo programs, read the corresponding book chapters in the Java book by Dietel and Dietel
+    --  Xiaoxiao: No magic numbers in code
+    --  Xiaoxiao: Look at ColorDemo.java, ColorPanel.java, shapesDemo.java, ShapesJpanel.java, Painter.java, PaintPanel.java
+    --  Xiaoxiao: Colored edge connecting same words in each concordance color representing words
+    --  Wang: Place map next to chord diagram, add scale user option to chord diagram
+    --  Wang: Handle within zone trips
+    --  Wang: Add indicator for current visible hour

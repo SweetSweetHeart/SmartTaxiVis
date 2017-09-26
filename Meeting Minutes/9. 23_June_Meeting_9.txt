@@ -1,0 +1,29 @@
+Minutes of Meeting: Bob, Elif, Xiaoxiao, Wang.
+----------------------------------------------
+Date:       23 June 2017
+Start time: 12:30
+End time:   13:50
+
+Date and time of next meeting: 30 June 2017 13:00
+
+Topics discussed:
+    --  Draft of project specification
+
+
+
+Progress:
+    --  Bob: upload some talks on DataVis youtube channel from EuroVis 2017
+    --  Wang: read/print data, display a map
+    --  Elif: read/print data
+    --  Xiaoxiao: read/print data
+
+
+
+TODO:
+    --  Wang: show all starting points on map (upload screenshots)
+    --  Xiaoxiao: display a occurrence of the top 50 words of the base text
+    --  Elif + Wang: upload a sample of your data to CS web server
+    --  Elif: bar chart of state vs incidence rate
+    --  Xiaoxiao + Elif: look at Bob CS235 software engineering II webpage for Java visulisation librareis
+
+A scanned version for this meeting minutes can be found at (http://share.wangqiru.com/vpsErQ)

@@ -1,0 +1,46 @@
+Minutes of Meeting: Bob, Xiaoxiao, Elif, Wang.
+----------------------------------------------
+Date:       4 August 2017
+Start time: 13:00
+End time:   15:00
+
+Date and time of next meeting: 11 August 2017 13:00
+
+Topics discussed: 
+    -- Xiaoxiao: Working on coursework
+    -- Wang: Today it's officially a nice project
+    -- Bob is away 17 August, 22-24 August, 1 September (PhD Viva, Middlesex University)
+    -- PhD requirements  
+
+
+Progress:
+    --  Elif: Looked the example programs of Bob
+    --  Elif: Showed each state as a rectangle with 2 letter abbreviation, incidence rate + normalized the incidence rate
+    --  Elif: Added region to each state
+    --  Xiaoxiao: Looked at example programs of Bob
+    --  Xiaoxiao: Working on coursework
+    --  Wang: Map next to chord diagram
+    --  Wang: Within zone trips indicated on map
+    --  Wang: All taxi zones includes in visualization(Nice)
+
+TODO:
+    08 August 2017
+    --  Elif: Draw a rectengular for each region: Same height, width is pr? to normalized incidence rate
+    --  Elif: Draw a rectengular for each state: Same width, width is to normalized incidence rate (Next step)
+    -------- 
+    --  Elif: No magic numbers
+    --  Elif: Add 1 more digit of precision to normalized incidence rate exp. 0.02->0.021
+    --  Elif: Order rectangular by region: West, Midwest,Southwest,Southeast,Northeast
+    --  Elif: Color each rectengular according to region
+    --  Elif: Compute normalized incidence rate per region
+   
+
+    --  Xiaoxiao: No magic numbers
+    --  Xiaoxiao: Write program by hand from strach without and GUI builder programs-No automatically generated code
+    --  Xiaoxiao: Re-organize code to look more like Bob's color.java example
+
+    --  Wang: Have a look at"A Survey of Surveys(SOS): Having the landscape of survey papers in information visualization"
+    --  Wang: Add a small histogram above sliders
+    --  Wang: Have a look at"A survey of traffic data visualization"
+    --  Wang: Color map based on number of trips
+   

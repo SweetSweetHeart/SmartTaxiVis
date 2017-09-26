@@ -1,0 +1,36 @@
+Minutes of Meeting: Bob, Wang, Elif, Xiaoxiao
+----------------------------------------------
+Date:       29 August 2017
+Start time: 13:00
+End time:   15:10
+
+Date and time of next meeting: 31 August 2017 13:00
+
+Topics discussed: 
+    -- Magic numbers
+    -- All objects are nouns
+    -- Phd studies
+
+
+Progress:
+    --  Wang: Blue color
+    --  Wang: Arrow glyphs added to map
+    --  Wang: Color map added to histogram
+    --  Elif: Tuple, state, Region objects
+    --  Elif: TreeMap with two levels-region-state
+    --  Xiaoxiao: Concordance for each translation version
+
+TODO:
+    --  Qiru: Turn off zooming into map when clicking on chord diagram or histogram
+    --  Qiru: remove magic numbers
+    --  Qiru: think about possible ways to shorten update methos
+    --  Qiru: user-option-choosing a offering ? month of data--show day of week
+    --  Elif: Add a margin between rectangles
+    --  Elif: Add labels for regions
+    --  Elif: split up draw method into multiple methods: drawRegions();
+    --  Elif: Continued on reverse side
+    --  Elif: Pass the information call method nees as an input parameter, e.g.: drawRegions(graphics Q), drawStates(Graphics Q)
+    --  Elif: User option: show all state name
+    --  Elif: Places regions in order: west, northwest, southwest, southeast
+    --  Xiaoxiao: Compute top 50 most frequent words for each translation
+    --  Xiaoxiao: Look up what lemmatization means--ask Mohammed Alhdrbe or Zhao Geng how they performmed lemmatization

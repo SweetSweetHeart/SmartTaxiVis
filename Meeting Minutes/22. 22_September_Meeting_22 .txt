@@ -1,0 +1,44 @@
+Minutes of Meeting: Bob, Wang, Elif, Xiaoxiao 
+----------------------------------------------
+Date:       22 September 2017
+Start time: 13:00
+End time:   16:30
+
+Date and time of next meeting: 29 September 2017 14:00 Elif Viva
+
+Topics discussed: 
+    -- 11:00 - 29th Sep,2017 Deadline
+    -- Mike Edwards--Elif's 2nd supervisor
+    -- Wang--Oliver Kullman 2nd supervisor
+    -- Bob away 25-26th Sep,2017 at SFTC OTC Kick-off Event
+    -- Bob in Birmingham 27th Sep, 2017
+
+Progress:
+    --  Wang: More writing
+    --  Wang: Bug fixes
+    --  Xiaoxiao: Color legend
+    --  Xiaoxiao: Scaling
+    --  Elif: Writing
+    --  Elif: User-option: state name on abbriviation
+    --  Elif: Color legend
+
+TODO:
+    --  Wang: Add least-ser regions
+    --  Wang: Add javadoc to appendix
+    --  Wang: Ask Oliver if he is ? : 29 Sept, 2017 in afternoon
+    --  Elif: Add either javadoc or doxygen to appendix
+    --  Elif: 14:00, 29th Sept,2017 Elif's Viva, Room 508 Faraday Tower
+    --  Elif: Add table of contents
+    --  Elif: Add pseudo code prestrition of layour algorithm
+    --  Elif: Add survey papers of related work
+    --  Elif: Color the Rectangle ? filled and leave the text as a dark gray color
+    --  Elif: Change background to white
+    --  Elif: Look at painter example to see how to obtain mouse  coordinates
+    --  Elif: Add week data
+    --  Elif: add on-move-over interior
+    --  Xiaoxiao: Scaling even smaller (user option to change size) See how smaller you can get it
+    --  Xiaoxiao: Scaling slider vertical orientation
+    --  Xiaoxiao: Add Jcheckbox to turn translations on and off
+    --  Xiaoxiao: Add connection between english and German words
+    --  Xiaoxiao: Update edge colors to map to word frequency of feature word
+    --  Xiaoxiao: Investigate ways to switch position of concordances

@@ -1,0 +1,42 @@
+Minutes of Meeting: Bob, Xiaoxiao, Wang.
+----------------------------------------------
+Date:       24 Feb 2017
+Start time: 14:10
+End time:   14:53
+
+Date and time of next meeting: 17 Mar 2017 13:00
+
+Topics discussed:
+    --  The 17 Mar is the deadline for presentation slides
+
+    --  10-12 slides should be enough
+
+    1.  Motivation : 1-3 slides - what’s the topic and why it’s important
+
+    2.  Challenges presented by the topic : 1-2 slides - big, complicated data
+
+    3.  Introduction to visualisation : 1-2 slides
+
+    4.  New data visualisation : 1-3 slides - address one challenge 
+
+    5.  Related literatures : 1-3 slides
+
+    6.  Plans : Use existing software, find out limitations, propose better software
+
+    --  1 day per week for the project - 10 hours per 15 weeks
+
+Progress:
+
+
+TODO:
+    --  Xiaoxiao : Look for book chapters on text visualisation 
+		 : Lecture slides from Bob’s module - add “/lecture” to the module URL
+
+        Wang     : Look for book chapters on multi-variance visualisation 
+                   Look at smart city wikipedia page
+                   Meeting minutes
+
+        Everyone : Start preparing for the presentation
+
+
+A scanned version for this meeting minutes can be found at (http://share.wangqiru.com/hoDP)

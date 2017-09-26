@@ -1,0 +1,42 @@
+Minutes of Meeting: Bob, Wang, Elif, Xiaoxiao
+----------------------------------------------
+Date:       16 August 2017
+Start time: 13:00
+End time:   15:10
+
+Date and time of next meeting: 25 August 2017 13:00
+
+Topics discussed: 
+    -- Smart Taxi Visualization,Taxi Trip Cost, Number of passangers,
+       Distance, Taxi Trip Duration, Color Legend 
+
+
+Progress:
+    --  Elif: Next version of program
+    --  Xiaoxiao: Next version of program
+    --  Xiaoxiao: Coursework submission
+    --  Wang: Color legend added
+    --  Wang: Color-mapped Eclipses
+    --  Wang: User option histogram
+
+
+TODO:
+    --  Elif+ Xiaoxiao: Run Bob's Csv2xml and painter examples
+    --  Elif+ Xiaoxiao: Follow Bob's coding conventions
+    --  Elif+ Xiaoxiao: Watch the software engineering lectures
+
+    --  Elif: Follow rule #4 Treemapper
+    --  Elif: Add method Openfile()
+    --  Elif: Follow Csv2xml example as closely as possible
+    --  Elif: Add method treemapper.ReadData()
+    --  Elif: Add an array of state-case tuples  m_StateCaseTuple stores state+number of cases in each row of spreadsheet
+    --  Elif: Populate m_StateCaseTuple array in Treemapper ReadData()(Populate m_StateCaseWeekTuple[]), OpenFile(), SortbyState(), 
+              ComputeNormalizeIncidenceByState() (Populate m_State[]),CloseInputFile(), PrintNormalizeIncidenceByState()
+    --  Elif: m_State[] (m_name, m_abbrevation,m_totalcase, m_normalizedincidincerate), m_StateCaseWeekTuple[] (m_week,m_cases,m_state)
+
+    --  Xiaoxiao: Follow rules #2 and #10
+    --  Xiaoxiao: Add CountupWords() Method
+
+    --  Wang: Showed fixed scale color legend wirh a recgtangle around current colors (User option)
+    --  Wang: Map color to average trip(cost per zone, duration, distance)
+ 
