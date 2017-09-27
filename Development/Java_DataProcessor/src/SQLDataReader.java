@@ -1,6 +1,4 @@
-/**
- * Created by Henry on 20/08/2017.
- */
+
 
 import Bobject.TaxiZone;
 import Bobject.TaxiZoneFloat;
@@ -14,8 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SQLDataReader {
-    //    private final String URL = "jdbc:mysql://45.76.131.144:3306/TaxiData";
-    // ssh -L 3306:45.76.131.144:3306 rss
+
+    /* Target MySQL database */
     private final String URL = "jdbc:mysql://212.47.229.69:3306/TaxiData";
     private final String USERNAME = "root";
     private final String PASSWORD = "root";
@@ -63,10 +61,18 @@ public class SQLDataReader {
         System.out.println("Total time taken: " + totalTime + "ms");
     }
 
+    /* Get m_Result
+    *
+    *  @return m_Result
+    */
     public String getResult() {
         return m_Result;
     }
 
+    /* Open database connection
+    *
+    *  @return if the connection is successfully opened
+    */
     public boolean openConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -78,6 +84,10 @@ public class SQLDataReader {
         }
     }
 
+    /* Close database connection
+    *
+    *  @return if the connection is successfully closed
+    */
     public boolean closeConnection() {
         try {
             m_Connection.close();
@@ -88,6 +98,10 @@ public class SQLDataReader {
         }
     }
 
+    /* Set SQL statement
+    *
+    *  @return if the statement is successfully set
+    */
     public boolean setStatement() {
         try {
             m_Statement = m_Connection.createStatement();
@@ -99,10 +113,15 @@ public class SQLDataReader {
         }
     }
 
+    /* Get SQL statement
+    *
+    *  @return m_Statement
+    */
     public Statement getStatement() {
         return m_Statement;
     }
 
+    /* Set SQL result set */
     public boolean setResultSet(String SQL) {
         try {
             m_ResultSet = getStatement().executeQuery(SQL);
@@ -113,10 +132,15 @@ public class SQLDataReader {
         }
     }
 
+    /* Get SQL result set
+    *
+    *  @return m_ResultSet
+    */
     public ResultSet getResultSet() {
         return m_ResultSet;
     }
 
+    /* Get taxi zone data ordered by pickups */
     public void getZoneDataByPU() {
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
@@ -131,6 +155,7 @@ public class SQLDataReader {
         m_Zone_ResultList.clear();
     }
 
+    /* Get taxi zone data ordered by dropoffs */
     public void getZoneDataByDO() {
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
@@ -145,6 +170,7 @@ public class SQLDataReader {
         m_Zone_ResultList.clear();
     }
 
+    /* Get taxi zone data ordered by average taxi fare */
     public void getZoneDataByAvgPrice() {
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
@@ -159,6 +185,7 @@ public class SQLDataReader {
         m_Zone_ResultList.clear();
     }
 
+    /* Get taxi zone data ordered by average distance */
     public void getZoneDataByAvgDistance() {
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
@@ -173,8 +200,9 @@ public class SQLDataReader {
         m_Zone_ResultList.clear();
     }
 
-    public void getPUTripMatrix() {
 
+    /* Get taxi zone data matrix ordered by pickups */
+    public void getPUTripMatrix() {
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call first_cursor_PU_time(" + m_Procedure + ")");
@@ -188,8 +216,8 @@ public class SQLDataReader {
         m_Data_ResultList.clear();
     }
 
+    /* Get taxi zone data matrix ordered by dropoffs */
     public void getDOTripMatrix() {
-
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call first_cursor_DO_time(" + m_Procedure + ")");
@@ -203,8 +231,8 @@ public class SQLDataReader {
         m_Data_ResultList.clear();
     }
 
+    /* Get taxi zone data matrix ordered by average taxi fare */
     public void getPriceMatrix() {
-
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call first_cursor_Price_time(" + m_Procedure + ")");
@@ -219,8 +247,8 @@ public class SQLDataReader {
         m_Data_ResultList.clear();
     }
 
+    /* Get taxi zone data matrix ordered by average distance */
     public void getDistanceMatrix() {
-
         for (int i = 0; i < HOUR2; i++) {
             m_Procedure = TOTALZONE + "," + i + "," + (i + 1);
             setResultSet("call first_cursor_Distance_time(" + m_Procedure + ")");
@@ -234,9 +262,12 @@ public class SQLDataReader {
         m_Data_ResultList.clear();
     }
 
+    /* Convert zone data result set into a list
+    *
+    *  @param type if the taxi zone carries int data or float data.
+    */
     public void convertZoneToList(boolean type) {
         ArrayList<TaxiZone> zoneList = new ArrayList<>();
-
         try {
             if (type) {
                 while (getResultSet().next()) {
@@ -264,6 +295,10 @@ public class SQLDataReader {
         }
     }
 
+    /* Convert zone data matrix result set into a list
+    *
+    *  @param dataFixer if the data needs to be multiplied by 100, to suit the need to chord diagram.
+    */
     public void convertMatrixToList(boolean dataFixer) {
         try {
             ArrayList<int[]> eachZone = new ArrayList<>();

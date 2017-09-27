@@ -1,8 +1,6 @@
 package Bobject;
 
-/**
- * Created by Henry on 22/08/2017.
- */
+
 public class TaxiZoneInt extends TaxiZone {
 
     public int Data;

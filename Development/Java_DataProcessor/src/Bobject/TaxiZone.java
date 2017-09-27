@@ -1,8 +1,6 @@
 package Bobject;
 
-/**
- * Created by Henry on 20/08/2017.
- */
+
 public class TaxiZone {
     public int ZoneId;
     public String ZoneName;
