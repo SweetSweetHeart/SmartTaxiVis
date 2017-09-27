@@ -1,0 +1,6 @@
+To launch Smart Taxi Vis, open /Development/JS_Webapp/index.html.
+
+All the data and SQL stored procedures are contained in /Development/MySQL_StoreProcedures/TaxiData.sql, which can be imported into a MySQL database.
+
+/Development/Java_DataProcessor contains the java program to invoke SQL stored procedures and retrieve the data. A set of processed data is contained in /Development/Java_DataProcessor/data.js, which is identical to /Development/JS_Webapp/js/data/taxiData.js.
+
