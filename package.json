@@ -4,7 +4,7 @@
   "description": "npm packages for Smart City Vis.",
   "main": "index.js",
   "dependencies": {
-    "eslint": "^4.4.1",
+    "eslint": "^5.0.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.2.1",
